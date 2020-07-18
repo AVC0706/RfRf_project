@@ -15,11 +15,10 @@ app.use(cors());
 // });
 
 
-
 //Defined Routes
 
 //----------Authentication--------------
-// app.use("/api/authenticate", require(""));
+app.use("/api/auth", require("./routes/auth"));
 
 
 
