@@ -1,40 +1,23 @@
 var express = require("express");
 var User = require("../models/user");
-var bcrypt = require("bcryptjs");
-var jwt = require("jsonwebtoken");
-const config = require("config");
+const Auth = require("../middleware/auth")
 
 var router = express.Router();
 
 
 
 //Register
-router.post("/register", /* "Add HandleRecaptha here" */  async (req, res) => {
+router.post("/isAuth", Auth , async (req, res) => {
   //start
-
-  const { name, email, password } = req.body;
-
-  try {
-    let user = await User.findOne({ email });
-
-    if (user) {
-      return res.status(409).json({ msg: "User Already Exists" });
-    }
-    user = new User({
-      name,
-      email,
-      password,
-    });
-
-    await user.save();
-
-    res.status(200).send({ msg: "Registration Successfull  !!" })
-
-    //end
-  } catch (e) {
-    console.error(e.message);
-    res.status(500).send("Server Error");
+  console.log("This is isAuth");
+  const user = {
+    id: req.user.id,
+    name: req.user.name,
+    email: req.user.email,
+    mobile: req.user.mobile
   }
+  res.json({ isAuth: true ,  msg: "Principal User" , user});
+  //end
 });
 
 

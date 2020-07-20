@@ -20,6 +20,8 @@ app.use(cors());
 //----------Authentication--------------
 app.use("/api/auth", require("./routes/auth"));
 
+//----------User--------------
+app.use("/api/user", require("./routes/user"));
 
 
 

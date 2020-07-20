@@ -16,6 +16,10 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    mobile: {
+        type: String,
+        required: true,
+    },
     city: {
         type: String,
     },
