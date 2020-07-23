@@ -18,7 +18,7 @@ const UserState = (props) => {
   const initialState = {
     token: null,
     user: null,
-    isAuth: false,  
+    isAuth: false,
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -123,7 +123,7 @@ const UserState = (props) => {
         logout,
       }}
     >
-     
+
       {props.children}
     </UserContext.Provider>
   );

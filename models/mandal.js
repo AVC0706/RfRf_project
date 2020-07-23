@@ -9,7 +9,10 @@ const MandalSchema = new mongoose.Schema({
     state: String,
     country: String,
     member_count: Number,
-    approved: Boolean,
+    approved: {
+        type: Boolean,
+        default: false,
+    },
     created_at: {
         type: Date,
         default: Date.now,

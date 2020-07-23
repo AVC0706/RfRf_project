@@ -25,7 +25,7 @@ export default (state, action) => {
       return {
         ...state,
         ...action.payload,
-          isAuth: true,
+        isAuth: true,
       };
 
     case LOGIN_FAIL:
@@ -47,19 +47,19 @@ export default (state, action) => {
         user: null,
       };
 
-    
+
 
     case REGISTER_SUCCESS:
       return {
         ...state,
       };
-      
+
     case REGISTER_FAIL:
       return {
         ...state,
       };
 
- 
+
     default:
       return state;
   }
