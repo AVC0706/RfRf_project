@@ -23,7 +23,8 @@ app.use("/api/auth", require("./routes/auth"));
 //----------User--------------
 app.use("/api/user", require("./routes/user"));
 
-
+//----------Admin--------------
+app.use("/api/admin", require("./routes/admin"));
 
 // Serve static assets in production
 // if (process.env.NODE_ENV === "production") {
