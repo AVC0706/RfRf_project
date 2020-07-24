@@ -11,7 +11,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-} from "../types";
+} from "../type";
 import setAuthToken from "../../utils/setAuthToken";
 
 const UserState = (props) => {

@@ -1,4 +1,5 @@
-import mongoose from 'mongoose';
+const mongoose = require("mongoose");
+
 
 const MandalSchema = new mongoose.Schema({
     mandal_name: String,
@@ -20,4 +21,4 @@ const MandalSchema = new mongoose.Schema({
 });
 
 const Mandal = mongoose.model('Mandal', MandalSchema);
-export default Mandal
+module.export = Mandal
