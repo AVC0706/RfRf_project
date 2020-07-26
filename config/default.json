@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb://localhost/RF-RFmandal",
+  "mongoURI": "mongodb://mongo:27017/RF-RFmandal",
   "jwtSecret": "loveyou3000"
 }
