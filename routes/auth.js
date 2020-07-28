@@ -26,11 +26,7 @@ router.post("/register", /* "Add HandleRecaptha here" */  async (req, res) => {
     if (user) {
       return res.status(409).json({ msg: "User Already Exists" });
     }
-    user = new User({
-      name,
-      email,
-      password,
-    });
+    user = new User(req.body);
 
     await user.save();
 
@@ -94,7 +90,7 @@ router.post("/login", async (req, res) => {
 
 
 //isAuth
-router.post("/isAuth", isAuth, async (req, res) => {
+router.get("/isAuth", isAuth, async (req, res) => {
   //start
   console.log("This is isAuth");
   const user = {
@@ -110,7 +106,7 @@ router.post("/isAuth", isAuth, async (req, res) => {
 
 
 //isAdmin
-router.post("/isAdmin", isAdmin, async (req, res) => {
+router.get("/isAdmin", isAdmin, async (req, res) => {
   //start
 
   console.log("This is isAuth");

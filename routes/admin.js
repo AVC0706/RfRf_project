@@ -1,7 +1,7 @@
 const express = require("express");
 const User = require("../models/user");
 const Mandal = require("../models/mandal")
-const { isAdmin, isAuth } = require("../middleware/auth")
+const { isAdmin } = require("../middleware/auth")
 
 
 const router = express.Router();
@@ -265,15 +265,16 @@ router.get("/getAllIndiaUser", isAdmin, async (req, res) => {
 //Make user BSM member
 router.put("/makeBsmMember/:id", isAdmin, async (req, res) => {
     //start
-    
+
     try {
-        const user = await User.findById( req.param.id )  
+        const user = await User.findOne({_id: req.params.id })  
 
         if (!user) {
-            return res.status(204).json({ msg: "No data found" })
+            return res.status(203).json({ msg: "No data found" })
         }
 
-        user[bsm_member] = true
+        user.bsm_member = true
+
         await user.save()
 
 
