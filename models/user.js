@@ -41,6 +41,10 @@ const UserSchema = mongoose.Schema({
     admin: {
         type: String,
         default: "0"
+    },
+    bsm_member: {
+        type: Boolean,
+        default: false
     }
 });
 

@@ -1,13 +1,13 @@
-var express = require("express");
-var User = require("../models/user");
-var bcrypt = require("bcryptjs");
-var jwt = require("jsonwebtoken");
+const express = require("express");
+const User = require("../models/user");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const config = require("config");
 const { isAdmin, isAuth } = require("../middleware/auth")
 
 
 
-var router = express.Router();
+const router = express.Router();
 
 
 //******Funtions here :
