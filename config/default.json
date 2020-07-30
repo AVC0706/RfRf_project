@@ -1,10 +1,7 @@
 {
-<<<<<<< HEAD
-  "mongoURI": "mongodb://localhost:27017/RF-RFmandal",
-=======
+
   "mongoURI": "mongodb+srv://RfRf:BsmPuneRfrf@1@cluster0.xv7vw.mongodb.net/RFRF_mandal?retryWrites=true&w=majority",
 
->>>>>>> d4c9395a42101d6cd28dc93bd5bcc069509b578d
   "jwtSecret": "loveyou3000"
 }
 
