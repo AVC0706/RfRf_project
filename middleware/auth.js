@@ -52,7 +52,7 @@ const isAdmin = async (req, res, next) => {
       return res.status(401).json({ msg: "Authentication Error" });
     }
 
-    if (user.admin === "0") {
+    if (user.admin === "null") {
 
      return res.status(401).json({ msg: "Not Authorised" });
     }
