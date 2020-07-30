@@ -10,7 +10,11 @@ const MandalSchema = new mongoose.Schema({
     state: String,
     country: String,
     member_count: Number,
-    approved: {
+    cityApproved: {
+        type: Boolean,
+        default: false,
+    },
+    districtApproved: {
         type: Boolean,
         default: false,
     },

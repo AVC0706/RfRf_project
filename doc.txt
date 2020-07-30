@@ -1,0 +1,32 @@
+
+There will be 4 types of users
+1- State co-ordinator
+2- District co-ordinator
+3- City-ordinator
+4- Mandal Co- ordinator
+5- No individual register can register on his own on the portal.
+
+State Co-ordinator
+*  He will add Distrct Co- ordinator as per requirement.
+* will be able to view meeting reports,  details uploaded by mandal co-ordinator of all mandals in different districts.( complete state) 
+ • will be able to view the details of complete list of different district coordinators , City coordinators , Mandal coordinators, mandal members 
+
+
+2- District co-ordinator-
+ • He will approve ( level 2 & final ) the mandal formed by mandal coordinator , approved ( level1)  by City coordinator.
+ • will be able to view meeting details uploaded by mandal co-ordinators of his district only.
+* He can view  all mandal details   formed in his district only.
+* He will  add (New City) coordinator as per requirement.
+ 
+3. City co-ordinator
+ • He will approve ( level1) the mandal created by Mandal Co-ordinator (Max 12 members can be approved , exception can be made in specific case ) in his city.
+* He will view & approve the changes made in various mandals such as Mandal coordinator , mandal members etc. in his city.
+ • will be able to view mandal reports uploaded by Mandal co- coordinator in his city.
+
+4- Mandal Co-ordinator 
+• Will be able to form a mandal   registering through the portal. He will add members with all necessary details ( max.12 members ) , give a specific name ( identificatin ) to the mandal.
+    He may add or delete member as per the present situation.
+* He will upload the mandal report after every mandal meeting.
+* Can view the mandal reports uploaded by him earlier.
+
+There will be different team & approval process for the changes to be made in basic structure & design of the website. State coordinator will only suggest based on the inputs received from Mandal , City , District coordinators.
