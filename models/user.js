@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const Member = require("./member");
+const User_Aoi = require("./user_aoi");
 const UserSchema = mongoose.Schema({
     name: {
         type: String,
@@ -55,5 +56,12 @@ UserSchema.pre("save", async function (next) {
     }
     next();
 });
+
+UserSchema.pre("remove",async function(next){
+    const user = this
+    await Member.findByIdAndDelete({user_id: user._id});
+    await User_Aoi.findByIdAndDelete({user_id: user._id});
+    next();
+})
 
 module.exports = mongoose.model("user", UserSchema);
