@@ -1,13 +1,13 @@
-var express = require("express");
-var User = require("../models/user");
-var bcrypt = require("bcryptjs");
-var jwt = require("jsonwebtoken");
+const express = require("express");
+const User = require("../models/user");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const config = require("config");
 const { isAdmin, isAuth } = require("../middleware/auth")
 
 
 
-var router = express.Router();
+const router = express.Router();
 
 
 //******Funtions here :
@@ -26,11 +26,7 @@ router.post("/register", /* "Add HandleRecaptha here" */  async (req, res) => {
     if (user) {
       return res.status(409).json({ msg: "User Already Exists" });
     }
-    user = new User({
-      name,
-      email,
-      password,
-    });
+    user = new User(req.body);
 
     await user.save();
 
@@ -66,11 +62,12 @@ router.post("/login", async (req, res) => {
 
     const payload = {
       user: {
-        id: user.id,
-        name: user.name,
-        email: user.email
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          admin: user.admin,
       },
-    };
+  };
 
     jwt.sign(
       payload,
@@ -94,7 +91,7 @@ router.post("/login", async (req, res) => {
 
 
 //isAuth
-router.post("/isAuth", isAuth, async (req, res) => {
+router.get("/isAuth", isAuth, async (req, res) => {
   //start
   console.log("This is isAuth");
   const user = {
@@ -110,7 +107,7 @@ router.post("/isAuth", isAuth, async (req, res) => {
 
 
 //isAdmin
-router.post("/isAdmin", isAdmin, async (req, res) => {
+router.get("/isAdmin", isAdmin, async (req, res) => {
   //start
 
   console.log("This is isAuth");

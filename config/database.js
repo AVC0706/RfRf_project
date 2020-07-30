@@ -18,3 +18,5 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
+
+  // "mongoURI": "mongodb://localhost:27017/RF-RFmandal",

@@ -19,7 +19,6 @@ const UserSchema = mongoose.Schema({
     },
     mobile: {
         type: String,
-        required: true,
     },
     city: {
         type: String,
@@ -42,7 +41,11 @@ const UserSchema = mongoose.Schema({
     },
     admin: {
         type: String,
-        default: "0"
+        default: "null"  // null , mandal , city , district , state 
+    },
+    bsm_member: {
+        type: Boolean,
+        default: false
     }
 });
 

@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const User = require("../models/user")
 
 const isAuth = async (req, res, next) => {
   //start  
@@ -20,7 +21,7 @@ const isAuth = async (req, res, next) => {
     }
 
     req.token = token;
-    req.user = { user };
+    req.user = user;
 
     next();
 
@@ -41,19 +42,23 @@ const isAdmin = async (req, res, next) => {
   }
 
   try {
+
     const decoded = jwt.verify(token, config.get("jwtSecret"));
+
     const user = await User.findById(decoded.user.id);
 
     if (!user) {
-      res.status(401).json({ msg: "Authentication Error" });
+
+      return res.status(401).json({ msg: "Authentication Error" });
     }
 
-    if (user.admin !== "0") {
-      res.status(401).json({ msg: "Not Authorised" });
+    if (user.admin === "null") {
+
+     return res.status(401).json({ msg: "Not Authorised" });
     }
 
     req.token = token;
-    req.user = { user };
+    req.user = user ;
 
     next();
 
