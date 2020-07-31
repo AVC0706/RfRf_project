@@ -30,3 +30,15 @@ State Co-ordinator
 * Can view the mandal reports uploaded by him earlier.
 
 There will be different team & approval process for the changes to be made in basic structure & design of the website. State coordinator will only suggest based on the inputs received from Mandal , City , District coordinators.
+
+
+State Admin routes :
+
+- /getAlldistrictadmins
+- /makeDistrictadmin
+- /getAllcityadmins
+- /getallmandaladmins
+- /getallstatemandals
+- /getcityamdin/:district
+- /mandaadimmin/:district
+- /delete for all above fields
