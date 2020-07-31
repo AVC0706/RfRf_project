@@ -1,7 +1,7 @@
 const express = require("express");
 const User = require("../models/user");
 const user_aoi = require("../models/user_aoi")
-const isAuth = require("../middleware/auth"); 
+const {isAuth} = require("../middleware/auth"); 
 const Mandal = require("../models/mandal")
 const Member = require("../models/member");
 const router = express.Router();
@@ -11,7 +11,6 @@ const router = express.Router();
 
 router.get("/profile",isAuth,async (req,res) => {
     try {
-        const user = req.user;
         const member = await Member.findById({user_id: req.user._id})
         const mandal = await Mandal.findById({_id: member.mandal_id});
         console.log(mandal);

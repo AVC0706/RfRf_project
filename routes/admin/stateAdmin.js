@@ -64,8 +64,6 @@ router.get("/getDistrictMandals/:district", isAdmin, async (req, res) => {
         return res.status(401).send( { msg : "Not Authorised" } )
     }
 
-    const { city , district }
-
     try {
 
 
