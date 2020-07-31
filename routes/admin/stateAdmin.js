@@ -10,10 +10,8 @@ const router = express.Router();
 //-----Routes---------
 
 /* Get ::   /getMandals
-            /getDistrictMandals
-            /getCityAdmins      
-            /getDistrictAdmins
-            /getMandalAdmins
+            /getDistrictMandals/:distriict
+            /getAdmins/:admin     
 
 
 // Post ::
@@ -59,7 +57,7 @@ router.get("/getMandals", isAdmin, async (req, res) => {
 
 
 //Get all district mandal for State Admin 
-router.get("/getDistrictMandals", isAdmin, async (req, res) => {
+router.get("/getDistrictMandals/:district", isAdmin, async (req, res) => {
     //start
 
     if( req.user.admin !== 'state' ){
@@ -95,7 +93,7 @@ router.get("/getDistrictMandals", isAdmin, async (req, res) => {
 
 
 //Get all city user  
-router.get("/getCityAdmins", isAdmin, async (req, res) => {
+router.get("/getAdmins/:admin", isAdmin, async (req, res) => {
     //start
 
     if( req.user.admin !== 'state' ){
@@ -103,7 +101,7 @@ router.get("/getCityAdmins", isAdmin, async (req, res) => {
     }
 
     try {
-        const users = await User.find({ state: req.user.state , admin: "city"});
+        const users = await User.find({ state: req.user.state , admin: req.params.admin});
 
         if (!users) {
             return res.status(204).json({ msg: "No data found"})
@@ -120,58 +118,6 @@ router.get("/getCityAdmins", isAdmin, async (req, res) => {
 });
 
 
-
-//Get all district admins 
-router.get("/getDistrictAdmins", isAdmin, async (req, res) => {
-    //start
-
-    if( req.user.admin !== 'state' ){
-        return res.status(401).send( { msg : "Not Authorised" } )
-    }
-
-    try {
-        const users = await User.find({ state: req.user.state , admin: "district"});
-
-        if (!users) {
-            return res.status(204).json({ msg: "No data found"})
-        }
-
-        res.status(200).send({ users, msg: "All state user data" });
-
-        //end
-    } catch (e) {
-        console.error(e.message);
-        res.status(500).send("Server Error");
-    }
-    //end
-});
-
-
-
-//Get all mandal admins 
-router.get("/getMandalAdmins", isAdmin, async (req, res) => {
-    //start
-
-    if( req.user.admin !== 'state' ){
-        return res.status(401).send( { msg : "Not Authorised" } )
-    }
-
-    try {
-        const users = await User.find({ state: req.user.state , admin: "mandal"});
-
-        if (!users) {
-            return res.status(204).json({ msg: "No data found"})
-        }
-
-        res.status(200).send({ users, msg: "All state user data" });
-
-        //end
-    } catch (e) {
-        console.error(e.message);
-        res.status(500).send("Server Error");
-    }
-    //end
-});
 
 
 
