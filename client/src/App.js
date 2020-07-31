@@ -1,9 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 //import UserState from './context/user/UserState';
-import Login from './views/Auth/Login/Login';
-import Register from './views/Auth/Register/Register';
+import Login from "./views/Auth/Login/Login";
+import Register from "./views/Auth/Register/Register";
+import Navbar from "./views/Auth/Navbar";
+import MandalRegister from "./views/Auth/Register/MandalRegister";
 
 function App() {
   return (
@@ -25,13 +27,13 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    
+
     // </UserState>
     <>
+      <Navbar />
       <Login />
-      <Register />
+      <MandalRegister />
     </>
-    
   );
 }
 
