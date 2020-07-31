@@ -67,7 +67,7 @@ router.get("/getDistrictMandals/:district", isAdmin, async (req, res) => {
     try {
 
 
-        const mandals = await Mandal.find({ cityApproved: true , districtApproved: true , district: req.params.district});
+        const mandals = await Mandal.find({ cityApproved: true , districtApproved: true , district: req.params.district });
 
         if (!mandals) {
             return res.status(204).json({ msg: "No data found" })
