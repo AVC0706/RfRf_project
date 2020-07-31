@@ -1,39 +1,31 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 //import UserState from './context/user/UserState';
 import Login from "./views/Auth/Login/Login";
 import Register from "./views/Auth/Register/Register";
-import Navbar from "./views/Auth/Navbar";
+import Navbar from "./components/navbars/header/header";
 import MandalRegister from "./views/Auth/Register/MandalRegister";
+import StateAdmin from "./views/StateAdmin/StateAdmin";
+import UserState from "./context/user/UserState";
+import UserContext from "./context/user/userContext";
 
 function App() {
+  const userContext = useContext(UserContext);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      userContext.loadUser();
+    }
+  });
+
   return (
-    // <UserState>
-
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
-
-    // </UserState>
-    <>
+    <div>
       <Navbar />
       <Login />
       <MandalRegister />
-    </>
+      <StateAdmin />
+    </div>
   );
 }
 

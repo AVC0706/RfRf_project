@@ -1,5 +1,15 @@
 import React, { Component, useState } from "react";
-import { Form, Input, Button, Checkbox, Row, Col, Card , Layout,Menu} from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Checkbox,
+  Row,
+  Col,
+  Card,
+  Layout,
+  Menu,
+} from "antd";
 import styles from "./Login.module.css";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
@@ -13,6 +23,7 @@ const layout = {
   },
 };
 const Login = () => {
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -20,24 +31,30 @@ const Login = () => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
   const [user, setuser] = useState({
     email: "",
     password: "",
   });
+
   const { email, password } = user;
+
   const onChange = (e) => {
     setuser({
       ...user,
       [e.target.name]: e.target.value,
     });
   };
+
   const handleSubmit = () => {
     console.log(user);
   };
+
   const cardStyle = {
     width: "80%",
     margin: "auto",
   };
+
   return (
     <>
       <Layout style={{ padding: "0 24px 24px" }}>
@@ -89,9 +106,9 @@ const Login = () => {
                     type="password"
                   />
                 </Form.Item>
-                <Form.Item name="remember" valuePropName="checked">
+                {/* <Form.Item name="remember" valuePropName="checked">
                   <Checkbox>Remember me</Checkbox>
-                </Form.Item>
+                </Form.Item> */}
                 <a href="">Forgot password</a>
                 <Form.Item>
                   <Button
