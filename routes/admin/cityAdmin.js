@@ -1,6 +1,7 @@
 const express = require("express");
 const User = require("../../models/user");
 const Mandal = require("../../models/mandal")
+const AOI = require("../../models/aoi")
 const { isAdmin } = require("../../middleware/auth")
 
 
@@ -25,6 +26,66 @@ const router = express.Router();
 */
 
 //------Functions------
+
+
+
+//------AOI--------
+
+//Add AOI 
+router.post("/addAoi", isAdmin , async (req, res) => {
+    //start
+
+    if( req.user.admin !== 'city' ){
+        return res.status(401).send( { msg : "Not Authorised" } )
+    }
+
+    try {
+        const aoi = await AOI.find({ name : req.body.name });
+
+        if (aoi) {
+            return res.status(409).json({ msg: "Already Exist" })
+        }
+
+        aoi = new AOI({ name : req.body.name })
+
+        res.status(200).send({ aoi , msg: "Area of interest Added" });
+
+        //end
+    } catch (e) {
+        console.error(e.message);
+        res.status(500).send("Server Error");
+    }
+    //end
+});
+
+
+
+//Get all mandal for City Admin { approve : True }
+router.get("/getMandals", isAdmin, async (req, res) => {
+    //start
+
+    if( req.user.admin !== 'city' ){
+        return res.status(401).send( { msg : "Not Authorised" } )
+    }
+
+    try {
+        const mandals = await Mandal.find({ cityApproved: true , city: req.user.city});
+
+        if (!mandals) {
+            return res.status(204).json({ msg: "No data found" })
+        }
+
+        res.status(200).send({ mandals, msg: "All state mandal data" });
+
+        //end
+    } catch (e) {
+        console.error(e.message);
+        res.status(500).send("Server Error");
+    }
+    //end
+});
+
+
 
 
 //-------Mandal----------

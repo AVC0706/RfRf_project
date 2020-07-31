@@ -32,6 +32,8 @@ function App() {
     <>
       <Navbar />
       <Login />
+      <Register/>
+      <br></br>
       <MandalRegister />
     </>
   );

@@ -23,6 +23,8 @@ router.post("/register", /* "Add HandleRecaptha here" */  async (req, res) => {
   try {
     let user = await User.findOne({ email });
 
+    console.log(user)
+
     if (user) {
       return res.status(409).json({ msg: "User Already Exists" });
     }
@@ -48,7 +50,7 @@ router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    let user = await User.findOne({ email });
+    let user = await User.find({ email });
 
     if (!user) {
       return res.status(400).json({ msg: "Invalid Email or Password" });
@@ -98,7 +100,8 @@ router.get("/isAuth", isAuth, async (req, res) => {
     id: req.user.id,
     name: req.user.name,
     email: req.user.email,
-    mobile: req.user.mobile
+    mobile: req.user.mobile,
+    admin: req.user.admin
   }
   res.json({ isAuth: true, msg: "Auth User", user });
   //end

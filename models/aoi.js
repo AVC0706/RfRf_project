@@ -1,4 +1,4 @@
-const mongoose = reequire("mongoose")
+const mongoose = require("mongoose")
 
 const areaofintSchema = mongoose.Schema({
     name: {
