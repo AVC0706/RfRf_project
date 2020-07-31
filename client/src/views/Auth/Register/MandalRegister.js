@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React ,{useState}from "react";
 import "antd/dist/antd.css";
 import { Form, Input, Button, Row, Col, Card, message, Select } from "antd";
-function Register() {
+function MandalRegister() {
   const layout = {
     labelCol: {
       span: 7,
@@ -25,117 +25,70 @@ function Register() {
     },
   };
   const onChange = (e) => {
-    setuser({
-      ...user,
+    setmandal({
+      ...mandal,
       [e.target.name]: e.target.value,
     });
   };
   const onChangeAOI = (e) => {
-    setuser({
-      ...user,
+    setmandal({
+      ...mandal,
       aoi: e,
     });
   };
-  const [user, setuser] = useState({
+  const [mandal, setmandal] = useState({
     name: "",
-    email: "",
-    password: "",
     qualification: "",
     city: "",
     state: "",
     country: "",
     aoi: [],
   });
+  const temp = mandal;
   const {
     name,
-    email,
-    password,
     qualification,
     city,
     state,
     country,
     aoi,
-  } = user;
+  } = mandal;
+
+  const onSubmit = () =>
+  {
+    if(temp === mandal)
+    {
+      message.error("Dont go!");
+    }
+  };
   return (
     <Row>
-      <Col span={8}></Col>
+      <Col span={8} />
       <Col span={8}>
-        <Card title="Register" style={cardStyle}>
+        <Card title="Register a Mandal" style={cardStyle}>
           <br></br>
           <Form
-            name="login"
+            name="mandal_register"
+            validateMessages={validateMessages}
             {...layout}
             initialValues={{
               remember: true,
             }}
-            validateMessages={validateMessages}
           >
             <Form.Item
               name="name-item"
-              label="Name"
+              label="Mandal Name"
               rules={[
                 {
                   required: true,
-                  message: "Please input your name!",
+                  message: "Please input Mandal name!",
                 },
               ]}
             >
               <Input name="name" value={name} onChange={onChange} />
             </Form.Item>
             <Form.Item
-              name="email id"
-              label="E-mail ID"
-              rules={[
-                {
-                  type: "email",
-                  required: true,
-                  message: "Please input your Email ID!",
-                },
-              ]}
-            >
-              <Input name="email" value={email} onChange={onChange} />
-            </Form.Item>
-            <Form.Item
-              name="pass"
-              label="Password"
-              hasFeedback
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your password!",
-                },
-              ]}
-            >
-              <Input.Password
-                name="password"
-                value={password}
-                onChange={onChange}
-              />
-            </Form.Item>
-            <Form.Item
-              name="confirm"
-              label="Confirm Password"
-              hasFeedback
-              rules={[
-                {
-                  required: true,
-                  message: "Please confirm your password!",
-                },
-                () => ({
-                  validator(rule, value) {
-                    if (!value || password === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(
-                      "The two passwords that you entered do not match!"
-                    );
-                  },
-                }),
-              ]}
-            >
-              <Input.Password onChange={onChange} />
-            </Form.Item>
-            <Form.Item
+            name = "qualif-input"
               rules={[
                 {
                   required: true,
@@ -151,6 +104,7 @@ function Register() {
               />
             </Form.Item>
             <Form.Item
+              name = "city-input"
               rules={[
                 {
                   required: true,
@@ -167,6 +121,7 @@ function Register() {
               />
             </Form.Item>
             <Form.Item
+            name = "state-input"
               rules={[
                 {
                   required: true,
@@ -178,6 +133,7 @@ function Register() {
               <Input name="state" value={state} onChange={onChange} />
             </Form.Item>
             <Form.Item
+            name = "country-input"
               rules={[
                 {
                   required: true,
@@ -225,4 +181,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default MandalRegister;
