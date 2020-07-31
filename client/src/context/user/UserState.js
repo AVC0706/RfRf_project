@@ -34,7 +34,7 @@ const UserState = (props) => {
     }
 
     try {
-      const res = await axios.get("/api/user/isAuth");
+      const res = await axios.get("http://localhost:5000/api/auth/isAuth");
       dispatch({
         type: USER_LOADED,
         payload: res.data,
@@ -79,14 +79,14 @@ const UserState = (props) => {
 
 
   //--------Login----------
-  const login = async (formData) => {
+  const login = async (formData,router) => {
     const config = {
       header: {
         "Content-Type": "application/json",
       },
     };
     try {
-      const res = await axios.post("/api/auth/login", formData, config);
+      const res = await axios.post("http://localhost:5000/api/auth/login", formData, config);
       // console.log("this is admin status:" + res.data.superadmin.admin);
 
       dispatch({
@@ -94,7 +94,11 @@ const UserState = (props) => {
         payload: res.data,
       });
       console.log("login success");
+      
       loadUser();
+      // router.push({
+      //   path:
+      // })
     } catch (e) {
       dispatch({
         type: LOGIN_FAIL,

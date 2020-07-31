@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useContext } from "react";
 import {
   Form,
   Input,
@@ -12,6 +12,7 @@ import {
 } from "antd";
 import styles from "./Login.module.css";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import UserContext from "../../../context/user/userContext";
 
 const { Sider } = Layout;
 const layout = {
@@ -22,7 +23,8 @@ const layout = {
     span: 26,
   },
 };
-const Login = () => {
+const Login = (props) => {
+  const userContext = useContext(UserContext);
 
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -47,6 +49,7 @@ const Login = () => {
   };
 
   const handleSubmit = () => {
+    userContext.login(user, props.history);
     console.log(user);
   };
 

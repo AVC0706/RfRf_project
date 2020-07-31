@@ -9,6 +9,7 @@ import MandalRegister from "./views/Auth/Register/MandalRegister";
 import StateAdmin from "./views/StateAdmin/StateAdmin";
 import UserState from "./context/user/UserState";
 import UserContext from "./context/user/userContext";
+import Routes from "./routes";
 
 function App() {
   const userContext = useContext(UserContext);
@@ -17,14 +18,12 @@ function App() {
     if (localStorage.getItem("token")) {
       userContext.loadUser();
     }
-  });
+  },[]);
 
   return (
     <div>
       <Navbar />
-      <Login />
-      <MandalRegister />
-      <StateAdmin />
+      <Routes />
     </div>
   );
 }
