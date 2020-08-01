@@ -10,6 +10,7 @@ import StateAdmin from "./views/StateAdmin/StateAdmin";
 import UserState from "./context/user/UserState";
 import UserContext from "./context/user/userContext";
 import Routes from "./routes";
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   const userContext = useContext(UserContext);
@@ -18,13 +19,15 @@ function App() {
     if (localStorage.getItem("token")) {
       userContext.loadUser();
     }
-  },[]);
+  }, []);
 
   return (
     <div>
-      <Navbar />
+      <Router>
+        <Navbar />
 
-      <Routes />
+        <Routes />
+      </Router>
     </div>
   );
 }

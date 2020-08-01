@@ -9,15 +9,13 @@ import StateAdmin from "./views/StateAdmin/StateAdmin";
 class Routes extends React.Component {
   render() {
     return (
-      <Router>
-        <Switch>
-          {/* <Route path="/" exact component={HomePage} /> */}
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/mandalregister" component={MandalRegister} />
-          <Route path="/stateAdmin" component={StateAdmin} />
-        </Switch>
-      </Router>
+      <Switch>
+        {/* <Route path="/" exact component={HomePage} /> */}
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/mandalregister" component={MandalRegister} />
+        <Route path="/stateAdmin" component={StateAdmin} />
+      </Switch>
     );
   }
 }
