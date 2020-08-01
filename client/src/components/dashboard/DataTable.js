@@ -1,7 +1,7 @@
 import React from 'react'
 import 'antd/dist/antd.css';
 import {Button ,Table,Space} from "antd";
-function DataTable() {
+function DataTable(props) {
     const data = [];
     const coloumns = [
         {
@@ -43,7 +43,7 @@ function DataTable() {
         }
     ];
     return (
-        <><Table columns = {coloumns} dataSource = {data}></Table></>
+        <><Table columns = {coloumns} dataSource = {props.users}></Table></>
         
     )
 }

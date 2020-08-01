@@ -46,11 +46,12 @@ router.post("/register", /* "Add HandleRecaptha here" */  async (req, res) => {
 //Login
 router.post("/login", async (req, res) => {
   //start
+  console.log(req.body)
 
   const { email, password } = req.body;
 
   try {
-    let user = await User.find({ email });
+    let user = await User.findOne({ email });
 
     if (!user) {
       return res.status(400).json({ msg: "Invalid Email or Password" });
