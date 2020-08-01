@@ -39,5 +39,4 @@ const MandalSchema = new mongoose.Schema({
   },
 });
 
-const Mandal = mongoose.model("Mandal", MandalSchema);
-module.export = Mandal;
+module.exports = mongoose.model("Mandal", MandalSchema);
