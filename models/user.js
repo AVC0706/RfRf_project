@@ -21,10 +21,7 @@ const UserSchema = mongoose.Schema({
         type: String,
     },
     city: {
-        type: String,
-    },
-    district: {
-        type: String,
+       type: String,
     },
     state: {
         type: String,
@@ -47,7 +44,7 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         default: false
     }
-});
+    })
 
 
 UserSchema.pre("save", async function (next) {
