@@ -91,15 +91,25 @@ router.put("/approveMandal/:id", isAdmin, async (req, res) => {
     }
 
     try {
-        const mandal = await Mandal.findById( req.param.id )  
+        const mandal = await Mandal.findById( req.params.id )  
 
         if (!mandal) {
             return res.status(204).json({ msg: "No data found" })
         }
 
+        const user = await User.findById( mandal.leader_id )  
+
+        if(!user){
+            return res.status(204).json({ msg: "No user found" })
+        }
+
+        user.admin = "mandal"
+
         mandal.districtApproved = true
 
         await mandal.save()
+        await user.save
+        
         
         res.status(200).send({ mandal , msg: "Mandal Approved by districtAdmin" });
 
