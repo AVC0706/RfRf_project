@@ -1,20 +1,40 @@
 const express = require("express");
-const User = require("../models/user"); 
-const {isAuth,isAdmin} = require("../middleware/auth");
-const Mandal = require("../models/mandal");
+const User = require("../models/user");
+const { isAuth, isAdmin } = require("../middleware/auth");
 const router = express.Router();
 const Mandal_aoi = require("../models/mandal_aoi");
 const Members = require("../models/member");
+const Mandal = require("../models/mandal");
+// Create Mandal
+// POST
 
-router.delete("/deleteMandal",isAdmin, async (req,res)=> {
-    try {
-        const mandal_aoi = await Mandal_aoi.findByIdAndDelete({mandal_id:req.params._id})
-        const members = await Members.findByIdAndDelete({mandal_id:req.params._id})
-        const mandal = await Mandal.findByIdAndDelete({_id:req.params._id});
+router.post("/createMandal", async (req, res) => {
+  //   const { mandal_name, city, district, state, country } = req.body;
+  try {
+    let mandal = new Mandal(req.body);
+    await mandal.save();
+    res.status(200).send({ msg: "Mandal Registration Successful  !!" });
+  } catch (e) {
+    console.error(e.message);
+    res.status(500).send("Server Error");
+  }
+});
 
-        res.send({mandal_aoi,members,mandal});
+// detele mandal
+router.delete("/deleteMandal", isAdmin, async (req, res) => {
+  try {
+    const mandal_aoi = await Mandal_aoi.findByIdAndDelete({
+      mandal_id: req.params._id,
+    });
+    const members = await Members.findByIdAndDelete({
+      mandal_id: req.params._id,
+    });
+    const mandal = await Mandal.findByIdAndDelete({ _id: req.params._id });
 
-    } catch(e) {
-        res.status(400).send(e)
-    }
-})
+    res.send({ mandal_aoi, members, mandal });
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+module.exports = router;
