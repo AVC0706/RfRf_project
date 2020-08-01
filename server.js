@@ -17,12 +17,20 @@ app.use(cors());
 
 //Defined Routes
 
+
 //----------Authentication--------------
 app.use("/api/auth", require("./routes/auth"));
+
 
 //----------User--------------
 app.use("/api/user", require("./routes/user"));
 
+
+//----------Admin--------------
+app.use("/api/mandalAdmin", require("./routes/admin/mandalAdmin"));
+app.use("/api/cityAdmin", require("./routes/admin/cityAdmin"));
+app.use("/api/districtAdmin", require("./routes/admin/districtAdmin"));
+app.use("/api/stateAdmin", require("./routes/admin/stateAdmin"));
 
 
 // Serve static assets in production

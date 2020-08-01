@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const Mandal_aoiSchema = mongoose.Schema({
     mandal_id: {
@@ -7,15 +8,6 @@ const Mandal_aoiSchema = mongoose.Schema({
     },
     aoi_id: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
-    },
-    aoi_name: {
-        type: String,
-        required: true
-    },
-    created_at: {
-        type: Date,
-        default: Date.now,
         required: true
     }
 })

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const bcrypt = require("bcryptjs")
 
 const User_aoiSchema = mongoose.Schema({
     user_id: {
@@ -9,11 +10,7 @@ const User_aoiSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    aoi_name: {
-        type: String,
-        required: true
-    },
-    created_at: {
+    createdAt: {
         type: Date,
         default: Date.now,
         required: true

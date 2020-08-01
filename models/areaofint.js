@@ -1,11 +1,13 @@
-const mongoose = require("mongoose")
+const mongoose = reequire("mongoose")
+const bcrypt = require("bcryptjs");
 
 const areaofintSchema = mongoose.Schema({
+
     name: {
         type: String,
         required: true
     },
-    created_at: {
+    createdAt: {
         type: Date,
         default: Date.now,
         required: true
