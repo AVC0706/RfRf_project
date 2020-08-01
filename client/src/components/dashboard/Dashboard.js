@@ -34,7 +34,6 @@ function Dashboard() {
             {tab === "Admins" && <AdminTab></AdminTab>}
             {tab === "Settings" && <div>Settings</div>}
           </Content>
-          <Footer></Footer>
         </Layout>
       </Layout>
     </Layout>
