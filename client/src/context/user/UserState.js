@@ -19,6 +19,8 @@ const UserState = (props) => {
     token: null,
     user: null,
     isAuth: false,
+    allusers: null,
+    user: null,
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
@@ -112,8 +114,6 @@ const UserState = (props) => {
 
   //-----------Logout----------
   const logout = () => dispatch({ type: LOGOUT });
-
-
 
   return (
     <UserContext.Provider
