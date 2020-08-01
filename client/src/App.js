@@ -6,6 +6,7 @@ import Login from "./views/Auth/Login/Login";
 import Register from "./views/Auth/Register/Register";
 import Navbar from "./views/Auth/Navbar";
 import MandalRegister from "./views/Auth/Register/MandalRegister";
+import Dashboard from "./components/dashboard/Dashboard";
 
 function App() {
   return (
@@ -30,9 +31,7 @@ function App() {
 
     // </UserState>
     <>
-      <Navbar />
-      <Login />
-      <MandalRegister />
+      <Dashboard></Dashboard>
     </>
   );
 }
