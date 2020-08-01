@@ -9,7 +9,7 @@ RUN npm run-script build
 # Stage 2 - Deploy with NGNIX
 FROM nginx
 
-COPY --from=react-build /usr/src/app/build /var/www
+COPY --from=react-build /usr/src/app/build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
