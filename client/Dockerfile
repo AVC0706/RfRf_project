@@ -1,15 +1,17 @@
-FROM node:13.3.0-alpine
+FROM node:14.7.0-alpine3.10 as react-build
+
 # Create app directory
-WORKDIR /usr/app
-# Install app dependencies
-COPY package*.json ./
+WORKDIR /usr/src/app
+COPY . ./
+RUN npm install
+RUN npm run-script build
 
-RUN npm install 
-RUN npm install react-scripts@3.4.1 -g --silent
+# Stage 2 - Deploy with NGNIX
+FROM nginx
 
-# Copy app source code
-COPY . .
+COPY --from=react-build /usr/src/app/build /var/www
+COPY nginx.conf /etc/nginx/nginx.conf
 
-#Expose port and start application
-EXPOSE 3000
-# CMD ["npm", "start"]
+EXPOSE 80
+
+ENTRYPOINT ["nginx","-g","daemon off;"]
