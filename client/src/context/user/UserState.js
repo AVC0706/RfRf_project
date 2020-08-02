@@ -96,11 +96,11 @@ const UserState = (props) => {
         payload: res.data,
       });
       console.log("login success");
-      
+      router.push({
+        path:"http://localhost:3000/stateAdmin"
+      })
       loadUser();
-      // router.push({
-      //   path:
-      // })
+    
     } catch (e) {
       dispatch({
         type: LOGIN_FAIL,
