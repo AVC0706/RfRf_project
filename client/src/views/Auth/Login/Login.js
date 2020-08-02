@@ -51,6 +51,7 @@ const Login = (props) => {
   const handleSubmit = () => {
     userContext.login(user, props.history);
     console.log(user);
+    props.history.push('/stateAdmin')
   };
 
   const cardStyle = {
