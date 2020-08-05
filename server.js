@@ -27,7 +27,7 @@ app.use("/api/mandalAdmin", require("./routes/admin/mandalAdmin"));
 app.use("/api/cityAdmin", require("./routes/admin/cityAdmin"));
 app.use("/api/districtAdmin", require("./routes/admin/districtAdmin"));
 app.use("/api/stateAdmin", require("./routes/admin/stateAdmin"));
-app.use("/api/countryAdmin", require("./routes/admin"));
+app.use("/api/admin", require("./routes/admin/admin"));
 //----------Mandal-------------
 app.use("/api/mandal", require("./routes/mandal"));
 

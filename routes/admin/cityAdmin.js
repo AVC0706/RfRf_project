@@ -10,8 +10,9 @@ const router = express.Router();
 
 //-----Routes---------
 
-/* Get ::   /getMandals
-            /getFalseMandals
+/* Get ::   /getMandals:approve
+            
+            /getUsers/:admin"
                   
 
 
@@ -56,38 +57,12 @@ router.post("/addAoi", isAdmin, async (req, res) => {
   //end
 });
 
-//Get all mandal for City Admin { approve : True }
-router.get("/getMandals", isAdmin, async (req, res) => {
-  //start
 
-  if (req.user.admin !== "city") {
-    return res.status(401).send({ msg: "Not Authorised" });
-  }
-
-  try {
-    const mandals = await Mandal.find({
-      cityApproved: true,
-      city: req.user.city,
-    });
-
-    if (!mandals) {
-      return res.status(204).json({ msg: "No data found" });
-    }
-
-    res.status(200).send({ mandals, msg: "All state mandal data" });
-
-    //end
-  } catch (e) {
-    console.error(e.message);
-    res.status(500).send("Server Error");
-  }
-  //end
-});
 
 //-------Mandal----------
 
 //Get all mandal for City Admin { approve : True }
-router.get("/getMandals", isAdmin, async (req, res) => {
+router.get("/getMandals/:approve", isAdmin, async (req, res) => {
   //start
 
   if (req.user.admin !== "city") {
@@ -96,7 +71,7 @@ router.get("/getMandals", isAdmin, async (req, res) => {
 
   try {
     const mandals = await Mandal.find({
-      cityApproved: true,
+      cityApproved: req.params.approve,
       city: req.user.city,
     });
 
@@ -114,33 +89,6 @@ router.get("/getMandals", isAdmin, async (req, res) => {
   //end
 });
 
-//Get all mandal for City Admin { approve : false }
-router.get("/getFalseMandals", isAdmin, async (req, res) => {
-  //start
-
-  if (req.user.admin !== "city") {
-    return res.status(401).send({ msg: "Not Authorised" });
-  }
-
-  try {
-    const mandals = await Mandal.find({
-      cityApproved: false,
-      city: req.user.city,
-    });
-
-    if (!mandals) {
-      return res.status(204).json({ msg: "No data found" });
-    }
-
-    res.status(200).send({ mandals, msg: "All state mandal data" });
-
-    //end
-  } catch (e) {
-    console.error(e.message);
-    res.status(500).send("Server Error");
-  }
-  //end
-});
 
 //Approve Mandal
 router.put("/approveMandal/:id", isAdmin, async (req, res) => {
@@ -171,10 +119,12 @@ router.put("/approveMandal/:id", isAdmin, async (req, res) => {
   }
 });
 
+
+
 //-------User----------
 
-//Get all user for Prant Admin
-router.get("/getCityUsers", isAdmin, async (req, res) => {
+//Get all user for City Admin
+router.get("/getUsers/:admin", isAdmin, async (req, res) => {
   //start
 
   if (req.user.admin !== "city") {
@@ -182,7 +132,7 @@ router.get("/getCityUsers", isAdmin, async (req, res) => {
   }
 
   try {
-    const users = await User.find({ city: req.user.city });
+    const users = await User.find({ city: req.user.city , admin: req.params.admin});
 
     if (!users) {
       return res.status(204).json({ msg: "No data found" });
@@ -197,6 +147,8 @@ router.get("/getCityUsers", isAdmin, async (req, res) => {
   }
   //end
 });
+
+
 
 //Make user BSM member
 router.put("/makeBsmMember/:id", isAdmin, async (req, res) => {
