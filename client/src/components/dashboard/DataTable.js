@@ -1,7 +1,18 @@
 import React from 'react'
 import 'antd/dist/antd.css';
 import {Button ,Table,Space} from "antd";
-function DataTable(props) {
+import { Popconfirm } from 'antd';
+import { QuestionCircleOutlined } from '@ant-design/icons';
+
+
+const DataTable = (props) => {
+
+    const onClick = ( e , text , record ) => {
+        // e.preventDefault();
+        console.log( record )
+        props.deleteUser( record._id , record.admin)
+    }
+
     const data = [];
     const coloumns = [
         {
@@ -34,10 +45,14 @@ function DataTable(props) {
         {
             title: "Actions",
             key:"actions",
-            render: () => (
+            render: (text , record) => (
                 <Space size="middle">
-                    <Button type = "primary">Update</Button>
-                    <Button type = "primary" danger>Delete</Button>
+                    <Button type = "primary">View</Button>
+
+                    <Popconfirm title="Are you sure？" icon={<QuestionCircleOutlined style={{ color: 'red' }} />}  onConfirm={(e)=> onClick(e , text , record) }>
+                        <Button type = "primary" danger >Delete</Button>
+                    </Popconfirm>
+
                 </Space>
             )
         }

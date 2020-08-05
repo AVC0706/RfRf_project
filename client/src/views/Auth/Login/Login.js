@@ -1,4 +1,4 @@
-import React, { Component, useState, useContext } from "react";
+import React, { Component, useState, useContext , useEffect } from "react";
 import {
   Form,
   Input,
@@ -26,6 +26,22 @@ const layout = {
 const Login = (props) => {
   const userContext = useContext(UserContext);
 
+  const { isAuth  } = userContext
+
+
+  //Route User according to Admin Status
+  useEffect(() => {
+    if (isAuth && userContext.user !== null) {
+
+      if(userContext.user.admin === "state"){
+        props.history.push('/stateAdmin')
+      }
+
+    }
+    // eslint-disable-next-line
+  }, [isAuth , userContext.user]);
+
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -51,7 +67,7 @@ const Login = (props) => {
   const handleSubmit = () => {
     userContext.login(user, props.history);
     console.log(user);
-    props.history.push('/stateAdmin')
+    // props.history.push('/stateAdmin')
   };
 
   const cardStyle = {
@@ -64,7 +80,7 @@ const Login = (props) => {
       <Layout style={{ padding: "0 24px 24px" }}>
         <Row>
           <Col span={8}></Col>
-          <Col span={8}>
+          <Col span={8} >
             <Card title="Login" style={cardStyle} className={styles.card}>
               <Form
                 name="login"

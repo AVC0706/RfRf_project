@@ -59,8 +59,8 @@ UserSchema.pre("save", async function (next) {
 
 UserSchema.pre("remove",async function(next){
     const user = this
-    await Member.findByIdAndDelete({user_id: user._id});
-    await User_Aoi.findByIdAndDelete({user_id: user._id});
+    await Member.deleteMany({user_id: user._id});
+    await User_Aoi.deleteMany({user_id: user._id});
     next();
 })
 
