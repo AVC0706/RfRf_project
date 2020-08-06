@@ -64,7 +64,7 @@ const Login = (props) => {
       <Layout style={{ padding: "0 24px 24px" }}>
         <Row>
           <Col span={8}></Col>
-          <Col span={8}>
+          <Col >
             <Card title="Login" style={cardStyle} className={styles.card}>
               <Form
                 name="login"
