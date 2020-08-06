@@ -46,7 +46,7 @@ const UserState = (props) => {
     } catch (e) {
       dispatch({
         type: AUTH_ERROR,
-        payload: e.response.data.msg,
+        payload: e.response.data,
       });
     }
   };
@@ -102,9 +102,10 @@ const UserState = (props) => {
       loadUser();
     
     } catch (e) {
+      console.log(e.response , 'dasda')
       dispatch({
         type: LOGIN_FAIL,
-        payload: e.response.data.msg,
+        payload: e.response,
       });
       console.log("login fail");
     }

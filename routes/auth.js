@@ -54,13 +54,13 @@ router.post("/login", async (req, res) => {
     let user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ msg: "Invalid Email or Password" });
+      return res.json({ msg: "Invalid Email or Password" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.status(400).json({ msg: "Invalid Email or Password" });
+      return res.json({ msg: "Invalid Email or Password" });
     }
 
     const payload = {
@@ -86,7 +86,7 @@ router.post("/login", async (req, res) => {
   } catch (e) {
     //start
     console.error(e.message);
-    res.status(500).send("Server Error");
+    res.status(500).send({msg:"Server Error"});
   }
 
   //end

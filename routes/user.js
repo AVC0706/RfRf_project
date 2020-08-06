@@ -15,9 +15,9 @@ router.get("/profile",isAuth,async (req,res) => {
         const mandal = await Mandal.findById({_id: member.mandal_id});
         console.log(mandal);
         console.log(user)
-        res.json({user,mandal})
+        res.status(200).json({user,mandal})
     } catch(e) {
-        res.status(404).send(e)
+        res.status(500).send(e)
     }
 })
 
@@ -35,14 +35,15 @@ router.patch("/updateprofile",isAuth, async(req,res)=> {
         await req.user.save()
     }
     catch(e) {
-        res.status(400).send(e)
+        res.status(500).send(e)
     }
 })
 
 router.delete("/deleteprofile",isAuth, async (req,res)=> {
     try {
-        await req.user.remove()
-        res.json({msg: "deleted successfully"})
+        var user = await User.findOneAndDelete({_id : req.user._id})
+        await user.remove()
+        res.send(200).json({msg: "deleted successfully"})
 
     }
     catch(e) {
