@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Tabs } from "antd";
-import DataTable from "./DataTable";
+import MandalTable from "./MandalTable";
 const { TabPane } = Tabs;
 
 function MandalTab() {
@@ -11,7 +11,7 @@ function MandalTab() {
   return (
     <Tabs defaultActiveKey={tab}>
       <TabPane tab="Mandal" key="Mandal">
-        <DataTable></DataTable>
+        <MandalTable></MandalTable>
       </TabPane>
     </Tabs>
   );
