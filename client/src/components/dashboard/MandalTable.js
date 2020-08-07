@@ -5,7 +5,7 @@ import { Popconfirm } from 'antd';
 import { QuestionCircleOutlined, SearchOutlined } from '@ant-design/icons';
 
 
-const DataTable = (props) => {
+const MandalTable = (props) => {
   console.log(props.users);
   const baseColumns = [
     {
@@ -17,9 +17,9 @@ const DataTable = (props) => {
       render: text => <a>{text}</a>
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
+      title: "Admin",
+      dataIndex: "admin",
+      key: "admin",
       render: text => <a>{text}</a>
     },
     {
@@ -98,4 +98,4 @@ const DataTable = (props) => {
 
   )
 }
-export default DataTable
+export default MandalTable
