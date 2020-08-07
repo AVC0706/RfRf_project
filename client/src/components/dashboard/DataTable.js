@@ -13,13 +13,16 @@ const DataTable = (props) => {
       dataIndex: "name",
       key: "name",
       defaultSortOrder: 'descend',
-      sorter: (a, b) => a.name.length - b.name.length,
+      sorter: (a, b) =>{ return a.name.localeCompare(b.name)},
+      sortDirections: ['descend', 'ascend', 'descend'],
       render: text => <a>{text}</a>
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
+      sorter: (a, b) =>{ return a.email.localeCompare(b.email)},
+      sortDirections: ['descend', 'ascend', 'descend'],
       render: text => <a>{text}</a>
     },
     {

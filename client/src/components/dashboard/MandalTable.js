@@ -13,13 +13,16 @@ const MandalTable = (props) => {
       dataIndex: "name",
       key: "name",
       defaultSortOrder: 'descend',
-      sorter: (a, b) => a.name.length - b.name.length,
+      sorter: (a, b) =>{ return a.name.localeCompare(b.name)},
+      sortDirections: ['descend', 'ascend', 'descend'],
       render: text => <a>{text}</a>
     },
     {
       title: "Admin",
       dataIndex: "admin",
       key: "admin",
+      sorter: (a, b) =>{ return a.admin.localeCompare(b.admin)},
+      sortDirections: ['descend', 'ascend', 'descend'],
       render: text => <a>{text}</a>
     },
     {
