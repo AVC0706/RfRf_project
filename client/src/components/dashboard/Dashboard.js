@@ -3,7 +3,7 @@ import { Layout, Menu } from "antd";
 import MandalTab from "./MandalTab.js";
 import AdminTab from "./AdminTab.js";
 import axios from "axios";
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 function Dashboard() {
   const [dashBoard, setdashBoard] = useState({
