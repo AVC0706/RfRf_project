@@ -55,4 +55,31 @@ router.delete("/deleteUser/:id", isAdmin, async (req, res) => {
 });
 
 
+
+//Get all city user  
+router.get("/getAdmins/:admin", isAdmin, async (req, res) => {
+  //start
+
+  if( req.user.admin === 'null' ){
+      return res.status(401).send( { msg : "Not Authorised" } )
+  }
+
+  try {
+      const users = await User.find({ state: req.user.state , admin: req.params.admin});
+
+      if (!users) {
+          return res.status(204).json({ msg: "No data found"})
+      }
+
+      res.status(200).send({ users, msg: "All state user data" });
+
+      //end
+  } catch (e) {
+      console.error(e.message);
+      res.status(500).send("Server Error");
+  }
+  //end
+});
+
+
 module.exports = router;
