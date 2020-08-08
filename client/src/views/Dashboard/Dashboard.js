@@ -9,7 +9,7 @@ const Dashboard = (props) => {
     <div>
       {userContext.user && userContext.user.admin.toLowerCase() !== "null" ? (
         <DashboardView />
-      ) : null}
+      ) : <p>You are not a admin.</p>}
     </div>
   );
 };
