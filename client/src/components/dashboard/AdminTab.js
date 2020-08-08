@@ -25,7 +25,7 @@ function AdminTab() {
 
   const getDistrictAdmin = () => {
     axios
-      .get("http://localhost:5000/api/stateAdmin/getAdmins/district")
+      .get("http://localhost:5000/api/admin/getAdmins/district")
       .then((res) => {
         if (res.status === 200) {
           setDistrictAdmins(res.data.users);
@@ -40,7 +40,7 @@ function AdminTab() {
 
   const getCityAdmin = () => {
     axios
-      .get("http://localhost:5000/api/stateAdmin/getAdmins/city")
+      .get("http://localhost:5000/api/admin/getAdmins/city")
       .then((res) => {
         if (res.status === 200) {
           setCityAdmins(res.data.users);
@@ -55,7 +55,7 @@ function AdminTab() {
 
   const getNormalUsers = () => {
     axios
-      .get("http://localhost:5000/api/stateAdmin/getAdmins/null")
+      .get("http://localhost:5000/api/admin/getAdmins/null")
       .then((res) => {
         if (res.status === 200) {
           setNormalUsers(res.data.users);

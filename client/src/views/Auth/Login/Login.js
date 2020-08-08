@@ -22,8 +22,8 @@ const Login = (props) => {
   useEffect(() => {
     if (isAuth && userContext.user !== null) {
 
-      if (userContext.user.admin === "state") {
-        props.history.push('/stateAdmin')
+      if (userContext.user.admin.toLowerCase() !== 'null') {
+        props.history.push('/dashboard')
       }
 
     }
