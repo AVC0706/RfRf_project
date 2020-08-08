@@ -1,6 +1,6 @@
 import React ,{useState}from "react";
 import "antd/dist/antd.css";
-import { Form, Input, Button, Row, Col, Card, message, Select } from "antd";
+import { Form, Input, Button, Row, Col, Card, message, Select,Divider } from "antd";
 function MandalRegister() {
   const layout = {
     labelCol: {
@@ -63,9 +63,9 @@ function MandalRegister() {
   };
   return (
     <Row>
-      <Col span={8} />
-      <Col span={8}>
-        <Card title="Register a Mandal" style={cardStyle}>
+      <Col lg={8} md={2} sm={1} />
+      <Col lg={8} md={10} sm={12} >
+        <Card title="Register" className="register-card">
           <br></br>
           <Form
             name="mandal_register"
@@ -171,12 +171,17 @@ function MandalRegister() {
               </Select>
             </Form.Item>
           </Form>
-          <Button type="primary" htmlType="submit">
-            Next
+          <Button type="primary" htmlType="submit" className="register-form-button">
+            Register
           </Button>
+          <center>
+            <Divider plain>OR</Divider>
+                    Already have an account?
+                    <a >  Sign In</a>
+          </center>
         </Card>
       </Col>
-      <Col span={8}></Col>
+      <Col lg={8} md={2} sm={1} />
     </Row>
   );
 }
