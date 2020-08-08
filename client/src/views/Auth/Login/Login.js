@@ -36,6 +36,9 @@ const Login = (props) => {
       if(userContext.user.admin === "state"){
         props.history.push('/stateAdmin')
       }
+      else {
+        props.history.push('/')
+      }
 
     }
     // eslint-disable-next-line
