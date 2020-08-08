@@ -22,13 +22,7 @@ const Login = (props) => {
   useEffect(() => {
     if (isAuth && userContext.user !== null) {
 
-      if (userContext.user.admin === "state") {
-        props.history.push('/stateAdmin')
-      }
-      else {
-        props.history.push('/')
-      }
-
+  
     }
     // eslint-disable-next-line
   }, [isAuth, userContext.user]);
