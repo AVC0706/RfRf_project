@@ -11,7 +11,6 @@ import UserState from "./context/user/UserState";
 import UserContext from "./context/user/userContext";
 import Routes from "./routes";
 import { BrowserRouter as Router } from "react-router-dom";
-import MandalProfile from "./views/Profiles/MandalProfile";
 
 function App() {
   const userContext = useContext(UserContext);
@@ -29,7 +28,6 @@ function App() {
 
         <Routes />
       </Router>
-      <MandalProfile></MandalProfile>
     </div>
   );
 }

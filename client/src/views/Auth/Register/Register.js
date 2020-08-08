@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
-import { Form, Input, Button, Row, Col, Card, message, Select } from "antd";
+import { Form, Input, Button, Row, Col, Card, message, Select, Divider } from "antd";
+import "./Register.css";
 function Register() {
   const layout = {
     labelCol: {
@@ -10,10 +11,7 @@ function Register() {
       span: 26,
     },
   };
-  const cardStyle = {
-    width: "80%",
-    margin: "auto",
-  };
+
   const validateMessages = {
     required: "${label} is required!",
     types: {
@@ -56,11 +54,14 @@ function Register() {
     country,
     aoi,
   } = user;
+  const grid = {
+
+  }
   return (
     <Row>
-      <Col span={8}></Col>
-      <Col span={8}>
-        <Card title="Register" style={cardStyle}>
+      <Col lg={8} md={2} sm={1} />
+      <Col lg={8} md={10} sm={12} >
+        <Card title="Register" className="register-card">
           <br></br>
           <Form
             name="login"
@@ -136,6 +137,7 @@ function Register() {
               <Input.Password onChange={onChange} />
             </Form.Item>
             <Form.Item
+              name="qualif"
               rules={[
                 {
                   required: true,
@@ -151,6 +153,7 @@ function Register() {
               />
             </Form.Item>
             <Form.Item
+              name="city_name"
               rules={[
                 {
                   required: true,
@@ -167,6 +170,7 @@ function Register() {
               />
             </Form.Item>
             <Form.Item
+              name="state_name"
               rules={[
                 {
                   required: true,
@@ -178,6 +182,7 @@ function Register() {
               <Input name="state" value={state} onChange={onChange} />
             </Form.Item>
             <Form.Item
+              name="country_name"
               rules={[
                 {
                   required: true,
@@ -215,12 +220,17 @@ function Register() {
               </Select>
             </Form.Item>
           </Form>
-          <Button type="primary" htmlType="submit">
-            Next
+          <Button type="primary" htmlType="submit" className="register-form-button">
+            Register
           </Button>
+          <center>
+            <Divider plain>OR</Divider>
+                    Already have an account?
+                    <a >  Sign In</a>
+          </center>
         </Card>
       </Col>
-      <Col span={8}></Col>
+      <Col lg={8} md={2} sm={1} />
     </Row>
   );
 }

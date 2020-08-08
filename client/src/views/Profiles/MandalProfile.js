@@ -61,7 +61,7 @@ function MandalProfile() {
                         </Row>
                     </Card>
                 </Col>
-                <Col md={4} />
+                <Col md={4} xs = {2}/>
             </Row>
 
         </>
