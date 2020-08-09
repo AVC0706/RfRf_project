@@ -65,6 +65,7 @@ router.get("/getAdmins/:admin", isAdmin, async (req, res) => {
   }
 
   try {
+    
       const users = await User.find({ state: req.user.state , admin: req.params.admin});
 
       if (!users) {
