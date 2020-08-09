@@ -59,12 +59,12 @@ const DataTable = (props) => {
       key: "actions",
       render: (text, record) => (
         <Space size="middle">
-          <Button type="primary">View</Button>
+          <Button type="primary" onClick= { (e) => onViewButton(e , record)  } >View</Button>
 
           <Popconfirm
             title="Are you sure？"
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}
-            onConfirm={(e) => onClick(e, text, record)}
+            onConfirm={(e) => onDeleteButton(e, text, record)}
           >
             <Button type="primary" danger>
               Delete
@@ -93,8 +93,8 @@ const DataTable = (props) => {
       ),
     });
   };
-  const onClick = (e, text, record) => {
-    // e.preventDefault();
+  const onDeleteButton = (e, text, record) => {
+    e.preventDefault();
     console.log(record);
     props.deleteUser(record._id, record.admin);
 
@@ -102,6 +102,14 @@ const DataTable = (props) => {
       console.log("params", pagination, filters, sorter, extra);
     }
   };
+
+  const onViewButton = (e, record) => {
+    e.preventDefault();
+    // props.history.push('/userProfile')
+  }
+
+
+
   const onChange = (e) => {
     // if (e.value === "") {
     //   setstate({ ...state, filterTable: null });
