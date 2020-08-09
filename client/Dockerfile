@@ -1,17 +1,17 @@
-FROM node:14.7.0-alpine3.10 as build
+FROM node:14.7.0-alpine3.10 as react-build
 
-RUN mkdir -p /usr/src/app
+# Create app directory
 WORKDIR /usr/src/app
-COPY package.json /usr/src/app
-
+COPY . ./
 RUN npm install
+RUN npm run-script build
 
-COPY . /usr/src/app
-RUN npm run build
+# Stage 2 - Deploy with NGNIX
+FROM nginx
 
-FROM nginx:alpine
-COPY --from=build /usr/src/app/build /usr/share/nginx/html
+COPY --from=react-build /usr/src/app/build /var/www
 COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 443
+ENTRYPOINT ["nginx","-g","daemon off;"]

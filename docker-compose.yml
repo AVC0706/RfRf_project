@@ -1,19 +1,15 @@
 version: '3'
 services:
-  frontend:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
+  ui:
+    build: ./client
     image: react-app
     ports:
       - '80:80'
       - '443:443'
-    volumes:
-      - ../ssl:/etc/nginx/certs
     depends_on:
-      - backend
-  backend:
+      - api
+  api:
     build: .
     image: node-app
     ports:
-      - '5000:5000' 
+      - '5000:5000'
