@@ -22,7 +22,10 @@ const Login = (props) => {
   useEffect(() => {
     if (isAuth && userContext.user !== null) {
 
-  
+      if (userContext.user.admin.toLowerCase() !== 'null') {
+        props.history.push('/dashboard')
+      }
+
     }
     // eslint-disable-next-line
   }, [isAuth, userContext.user]);
