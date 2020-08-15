@@ -1,8 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "antd/dist/antd.css";
-import { Form, Input, Button, Row, Col, Card, message, Select, Divider } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Row,
+  Col,
+  Card,
+  message,
+  Select,
+  Divider,
+} from "antd";
 import "./Register.css";
+import UserContext from "../../../context/user/userContext";
+
 function Register() {
+
+  const userContext = useContext(UserContext)
+
+  const { Aoi , Register, getAllAoi } = userContext
+
+  useEffect(() => {
+    getAllAoi();
+    
+    // eslint-disable-next-line
+  }, []);
+
   const layout = {
     labelCol: {
       span: 7,
@@ -54,13 +77,11 @@ function Register() {
     country,
     aoi,
   } = user;
-  const grid = {
-
-  }
+  const grid = {};
   return (
     <Row>
       <Col lg={8} md={2} sm={1} />
-      <Col lg={8} md={10} sm={12} >
+      <Col lg={8} md={10} sm={12}>
         <Card title="Register" className="register-card">
           <br></br>
           <Form
@@ -220,13 +241,17 @@ function Register() {
               </Select>
             </Form.Item>
           </Form>
-          <Button type="primary" htmlType="submit" className="register-form-button">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="register-form-button"
+          >
             Register
           </Button>
           <center>
             <Divider plain>OR</Divider>
-                    Already have an account?
-                    <a >  Sign In</a>
+            Already have an account?
+            <a> Sign In</a>
           </center>
         </Card>
       </Col>

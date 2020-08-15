@@ -19,6 +19,9 @@ app.use(cors());
 //----------Authentication--------------
 app.use("/api/auth", require("./routes/auth"));
 
+//-----------AOI--------------
+app.use("/api/aoi", require("./routes/aoi"));
+
 //----------User--------------
 app.use("/api/user", require("./routes/user"));
 
