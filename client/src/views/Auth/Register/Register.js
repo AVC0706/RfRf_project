@@ -22,7 +22,8 @@ function Register() {
 
   useEffect(() => {
     getAllAoi();
-    
+    console.log(Aoi)
+
     // eslint-disable-next-line
   }, []);
 
