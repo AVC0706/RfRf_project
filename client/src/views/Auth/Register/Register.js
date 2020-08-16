@@ -55,7 +55,7 @@ function Register() {
     aoi,
   } = user;
   const grid = {
-
+    
   }
   return (
     <Row>
@@ -193,46 +193,15 @@ function Register() {
             >
               <Input name="country" value={country} onChange={onChange} />
             </Form.Item>
-            <Form.Item label="Area of Interest">
-              <Select mode="multiple" onChange={onChangeAOI}>
-                <Select.Option value="engineering">Engineering</Select.Option>
-                <Select.Option value="archeology">Archeology</Select.Option>
-                <Select.Option value="medicine">Medicine</Select.Option>
-                <Select.Option value="law">Law</Select.Option>
-                <Select.Option value="history">History</Select.Option>
-                <Select.Option value="languages">Languages</Select.Option>
-                <Select.Option value="education">Education</Select.Option>
-                <Select.Option value="entrepreneurship">
-                  Entrepreneurship
-                </Select.Option>
-                <Select.Option value="farming">Farming</Select.Option>
-                <Select.Option value="socialscience">
-                  Social Science
-                </Select.Option>
-                <Select.Option value="economics">Economics</Select.Option>
-                <Select.Option value="physicaleducation ">
-                  Physical education
-                </Select.Option>
-                <Select.Option value="art">Art</Select.Option>
-                <Select.Option value="ancientscience">
-                  Ancient Science
-                </Select.Option>
-              </Select>
-            </Form.Item>
+            
           </Form>
           <Button type="primary" htmlType="submit" className="register-form-button">
             Register
           </Button>
-          <center>
-            <Divider plain>OR</Divider>
-                    Already have an account?
-                    <a >  Sign In</a>
-          </center>
         </Card>
       </Col>
       <Col lg={8} md={2} sm={1} />
     </Row>
   );
 }
-
 export default Register;

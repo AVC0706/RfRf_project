@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Row, Col, Button, Badge, Tabs, Descriptions } from 'antd';
+import {AiOutlineUserAdd} from 'react-icons/ai';
 import DataTable from '../../components/dashboard/DataTable';
 const { TabPane } = Tabs;
 function MandalProfile() {
@@ -17,7 +18,7 @@ function MandalProfile() {
         approved: "",
         members: 0,
     });
-    const {name,image,city,admin,district,state,country,approved,members} = mandal;
+    const { name, image, city, admin, district, state, country, approved, members } = mandal;
 
     return (
         <>
@@ -55,13 +56,14 @@ function MandalProfile() {
                                 <Tabs>
                                     <TabPane tab="Members" key="Members">
                                         <DataTable></DataTable>
+                                        <Button type="primary" shape="round" size="large" icon ={<AiOutlineUserAdd></AiOutlineUserAdd>}>Add Members</Button>
                                     </TabPane>
                                 </Tabs>
                             </Col>
                         </Row>
                     </Card>
                 </Col>
-                <Col md={4} xs = {2}/>
+                <Col md={4} xs={2} />
             </Row>
 
         </>
