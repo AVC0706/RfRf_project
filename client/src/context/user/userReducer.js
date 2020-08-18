@@ -6,12 +6,12 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-
+  AOI_SUCCESS,
+  AOI_FAIL,
 } from "../type";
 
 export default (state, action) => {
   switch (action.type) {
-
     case USER_LOADED:
       return {
         ...state,
@@ -26,6 +26,19 @@ export default (state, action) => {
         ...state,
         ...action.payload,
         isAuth: true,
+      };
+      
+    case AOI_SUCCESS:
+      console.log(action.payload)
+      return {
+        ...state,
+        Aoi: action.payload,
+
+      };
+    case AOI_FAIL:
+      return {
+        ...state,
+        Aoi: []
       };
 
     case LOGIN_FAIL:
@@ -46,8 +59,6 @@ export default (state, action) => {
         isAuth: false,
         user: null,
       };
-
-
 
     case REGISTER_SUCCESS:
       return {

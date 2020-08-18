@@ -59,7 +59,9 @@ const DataTable = (props) => {
       key: "actions",
       render: (text, record) => (
         <Space size="middle">
-          <Button type="primary" onClick= { (e) => onViewButton(e , record)  } >View</Button>
+          <Button type="primary" onClick={(e) => onViewButton(e, record)}>
+            View
+          </Button>
 
           <Popconfirm
             title="Are you sure？"
@@ -106,9 +108,7 @@ const DataTable = (props) => {
   const onViewButton = (e, record) => {
     e.preventDefault();
     // props.history.push('/userProfile')
-  }
-
-
+  };
 
   const onChange = (e) => {
     // if (e.value === "") {

@@ -16,7 +16,7 @@ function Dashboard() {
   };
 
   return (
-    <Layout style={{minHeight:"92vh"}}>     
+    <Layout style={{ minHeight: "92vh" }}>
       <Layout>
         <Sider>
           <Menu defaultSelectedKeys={[tab]} mode="inline" onClick={onChange}>

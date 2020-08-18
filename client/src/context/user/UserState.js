@@ -10,6 +10,8 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  AOI_SUCCESS,
+  AOI_FAIL,
   LOGOUT,
 } from "../type";
 import setAuthToken from "../../utils/setAuthToken";
@@ -21,10 +23,10 @@ const UserState = (props) => {
     isAuth: false,
     allusers: null,
     user: null,
+    Aoi: []
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
-
 
   // Load User
   const loadUser = async () => {
@@ -50,7 +52,6 @@ const UserState = (props) => {
       });
     }
   };
-
 
   //--------Register----------
   const register = async (formData) => {
@@ -78,17 +79,19 @@ const UserState = (props) => {
     }
   };
 
-
-
   //--------Login----------
-  const login = async (formData,router) => {
+  const login = async (formData, router) => {
     const config = {
       header: {
         "Content-Type": "application/json",
       },
     };
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", formData, config);
+      const res = await axios.post(
+        "/api/auth/login",
+        formData,
+        config
+      );
       // console.log("this is admin status:" + res.data.superadmin.admin);
 
       dispatch({
@@ -96,13 +99,12 @@ const UserState = (props) => {
         payload: res.data,
       });
       console.log("login success");
-      router.push({
-        path:"http://localhost:3000/stateAdmin"
-      })
+      // router.push({
+      //   path: "http://localhost:3000/stateAdmin",
+      // });
       loadUser();
-    
     } catch (e) {
-      console.log(e.response , 'dasda')
+      console.log(e.response, "dasda");
       dispatch({
         type: LOGIN_FAIL,
         payload: e.response,
@@ -111,10 +113,37 @@ const UserState = (props) => {
     }
   };
 
-
-
   //-----------Logout----------
   const logout = () => dispatch({ type: LOGOUT });
+
+
+//-----GetAllAoi------
+  const getAllAoi = async () => {
+    // const config = {
+    //   header: {
+    //     "Content-Type": "application/json",
+    //   },
+    // };
+    try {
+      const res = await axios.get("http://localhost:5000/api/aoi/getAllAoi");
+      // console.log("this is admin status:" + res.data.superadmin.admin);
+
+      dispatch({
+        type: AOI_SUCCESS,
+        payload: res.data,
+      });
+
+      console.log("getAoi success" , state.Aoi , res.data);
+      
+    } catch (e) {
+      dispatch({
+        type: AOI_FAIL,
+        payload: e.response.data.msg,
+      });
+      console.log("AOI fail");
+    }
+  };
+
 
   return (
     <UserContext.Provider
@@ -122,13 +151,14 @@ const UserState = (props) => {
         token: state.token,
         user: state.user,
         isAuth: state.isAuth,
+        Aoi: state.Aoi,
         login,
         register,
         loadUser,
         logout,
+        getAllAoi
       }}
     >
-
       {props.children}
     </UserContext.Provider>
   );

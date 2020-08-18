@@ -1,6 +1,6 @@
 const express = require("express");
-const AOI = require("../../models/aoi")
-const { isAdmin } = require("../../middleware/auth")
+const AOI = require("../models/aoi")
+const { isAdmin, isAuth } = require("../middleware/auth")
 
 
 const router = express.Router();
@@ -30,13 +30,15 @@ router.post("/addAoi", isAdmin , async (req, res) => {
 
 
     try {
-        const aoi = await AOI.find({ name : req.body.name });
+        let aoi = await AOI.findOne({ name : req.body.name });
 
         if (aoi) {
             return res.status(409).json({ msg: "Already Exist" })
         }
 
         aoi = new AOI({ name : req.body.name })
+
+        await aoi.save()
 
         res.status(200).send({ aoi , msg: "Area of interest Added" });
 
@@ -51,14 +53,15 @@ router.post("/addAoi", isAdmin , async (req, res) => {
 
 
 //Get all AOI
-router.get("/getAoi", isAdmin, async (req, res) => {
+router.get("/getAllAoi", async (req, res) => {
+
     //start
 
 
     try {
         const aoi = await AOI.find({});
 
-        res.status(200).send({ aoi, msg: "All AOI data" });
+        res.status(200).send(aoi);
 
         //end
     } catch (e) {
@@ -69,9 +72,8 @@ router.get("/getAoi", isAdmin, async (req, res) => {
 });
 
 
-
 //Update Aoi 
-router.update("/updateAoi/:id", isAdmin, async (req, res) => {
+router.put("/updateAoi/:id", isAdmin, async (req, res) => {
     //start
 
 
