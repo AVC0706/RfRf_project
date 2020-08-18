@@ -37,6 +37,8 @@ const MandalSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  aoi: [String],
+
 });
 
 module.exports = mongoose.model("Mandal", MandalSchema);

@@ -1,7 +1,34 @@
-import React ,{useState}from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "antd/dist/antd.css";
-import { Form, Input, Button, Row, Col, Card, message, Select,Divider } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Row,
+  Col,
+  Card,
+  message,
+  Select,
+  Divider,
+} from "antd";
+
+import UserContext from "../../../context/user/userContext";
+import MandalContext from "../../../context/mandal/mandalContext";
+const { Option } = Select;
+
 function MandalRegister() {
+  const userContext = useContext(UserContext);
+  const mandalContext = useContext(MandalContext)
+
+  const { Aoi, getAllAoi } = userContext;
+
+  useEffect(() => {
+    getAllAoi();
+    children = [];
+
+    // eslint-disable-next-line
+  }, []);
+
   const layout = {
     labelCol: {
       span: 7,
@@ -36,6 +63,12 @@ function MandalRegister() {
       aoi: e,
     });
   };
+
+  const onSubmit = () => {
+    mandalContext.addMandal(mandal);
+    console.log(mandal);
+  };
+
   const [mandal, setmandal] = useState({
     name: "",
     qualification: "",
@@ -44,27 +77,19 @@ function MandalRegister() {
     country: "",
     aoi: [],
   });
-  const temp = mandal;
-  const {
-    name,
-    qualification,
-    city,
-    state,
-    country,
-    aoi,
-  } = mandal;
+  const { name, qualification, city, state, country, aoi } = mandal;
 
-  const onSubmit = () =>
-  {
-    if(temp === mandal)
-    {
-      message.error("Dont go!");
+  let children = [];
+  if (Aoi !== undefined) {
+    for (let i = 0; i < Aoi.length; i++) {
+      children.push(<Option key={Aoi[i].name}>{Aoi[i].name}</Option>);
     }
-  };
+  }
+
   return (
     <Row>
       <Col lg={8} md={2} sm={1} />
-      <Col lg={8} md={10} sm={12} >
+      <Col lg={8} md={10} sm={12}>
         <Card title="Register" className="register-card">
           <br></br>
           <Form
@@ -88,7 +113,7 @@ function MandalRegister() {
               <Input name="name" value={name} onChange={onChange} />
             </Form.Item>
             <Form.Item
-            name = "qualif-input"
+              name="qualif-input"
               rules={[
                 {
                   required: true,
@@ -104,7 +129,7 @@ function MandalRegister() {
               />
             </Form.Item>
             <Form.Item
-              name = "city-input"
+              name="city-input"
               rules={[
                 {
                   required: true,
@@ -121,7 +146,7 @@ function MandalRegister() {
               />
             </Form.Item>
             <Form.Item
-            name = "state-input"
+              name="state-input"
               rules={[
                 {
                   required: true,
@@ -133,7 +158,7 @@ function MandalRegister() {
               <Input name="state" value={state} onChange={onChange} />
             </Form.Item>
             <Form.Item
-            name = "country-input"
+              name="country-input"
               rules={[
                 {
                   required: true,
@@ -145,40 +170,25 @@ function MandalRegister() {
               <Input name="country" value={country} onChange={onChange} />
             </Form.Item>
             <Form.Item label="Area of Interest">
-              <Select mode="multiple" onChange={onChangeAOI}>
-                <Select.Option value="engineering">Engineering</Select.Option>
-                <Select.Option value="archeology">Archeology</Select.Option>
-                <Select.Option value="medicine">Medicine</Select.Option>
-                <Select.Option value="law">Law</Select.Option>
-                <Select.Option value="history">History</Select.Option>
-                <Select.Option value="languages">Languages</Select.Option>
-                <Select.Option value="education">Education</Select.Option>
-                <Select.Option value="entrepreneurship">
-                  Entrepreneurship
-                </Select.Option>
-                <Select.Option value="farming">Farming</Select.Option>
-                <Select.Option value="socialscience">
-                  Social Science
-                </Select.Option>
-                <Select.Option value="economics">Economics</Select.Option>
-                <Select.Option value="physicaleducation ">
-                  Physical education
-                </Select.Option>
-                <Select.Option value="art">Art</Select.Option>
-                <Select.Option value="ancientscience">
-                  Ancient Science
-                </Select.Option>
+              <Select
+                mode="multiple"
+                style={{ width: "100%" }}
+                placeholder="Please select"
+                onChange={onChangeAOI}
+                required
+              >
+                {children}
               </Select>
             </Form.Item>
           </Form>
-          <Button type="primary" htmlType="submit" className="register-form-button">
+          <Button
+            type="primary"
+            htmlType="submit"
+            className="register-form-button"
+            onClick = {onSubmit}
+          >
             Register
           </Button>
-          <center>
-            <Divider plain>OR</Divider>
-                    Already have an account?
-                    <a >  Sign In</a>
-          </center>
         </Card>
       </Col>
       <Col lg={8} md={2} sm={1} />

@@ -37,8 +37,7 @@ export default (state, action) => {
       };
     case AOI_FAIL:
       return {
-        ...state,
-        Aoi: []
+    
       };
 
     case LOGIN_FAIL:

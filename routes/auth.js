@@ -17,7 +17,7 @@ const router = express.Router();
 //Register
 router.post("/register", /* "Add HandleRecaptha here" */  async (req, res) => {
   //start
-
+  console.log(req.body)
   const { name, email, password } = req.body;
 
   try {

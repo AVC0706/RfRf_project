@@ -48,7 +48,6 @@ const UserState = (props) => {
     } catch (e) {
       dispatch({
         type: AUTH_ERROR,
-        payload: e.response.data,
       });
     }
   };
@@ -61,15 +60,13 @@ const UserState = (props) => {
       },
     };
     try {
-      const res = await axios.post("/api/auth/register", formData, config);
+      const res = await axios.post("http://localhost:5000/api/auth/register", formData, config);
       // console.log("this is admin status:" + res.data.superadmin.admin);
 
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: res.data,
       });
       console.log("login success");
-      loadUser();
     } catch (e) {
       dispatch({
         type: REGISTER_FAIL,
@@ -133,12 +130,11 @@ const UserState = (props) => {
         payload: res.data,
       });
 
-      console.log("getAoi success" , state.Aoi , res.data);
+      console.log("getAoi success" , state.Aoi );
       
     } catch (e) {
       dispatch({
         type: AOI_FAIL,
-        payload: e.response.data.msg,
       });
       console.log("AOI fail");
     }

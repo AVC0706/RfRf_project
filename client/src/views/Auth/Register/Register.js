@@ -13,16 +13,16 @@ import {
 } from "antd";
 import "./Register.css";
 import UserContext from "../../../context/user/userContext";
+const { Option } = Select;
 
 function Register() {
+  const userContext = useContext(UserContext);
 
-  const userContext = useContext(UserContext)
-
-  const { Aoi , Register, getAllAoi } = userContext
+  const { Aoi, getAllAoi } = userContext;
 
   useEffect(() => {
     getAllAoi();
-    console.log(Aoi)
+    children = []
 
     // eslint-disable-next-line
   }, []);
@@ -46,18 +46,29 @@ function Register() {
       range: "${label} must be between ${min} and ${max}",
     },
   };
+  
   const onChange = (e) => {
     setuser({
       ...user,
       [e.target.name]: e.target.value,
     });
   };
+  
   const onChangeAOI = (e) => {
+    console.log(e)
     setuser({
       ...user,
       aoi: e,
     });
   };
+
+  const onSubmit = () => {
+    userContext.register(user)
+    console.log(user)
+
+  }
+
+
   const [user, setuser] = useState({
     name: "",
     email: "",
@@ -80,6 +91,13 @@ function Register() {
   } = user;
 
   const grid = {};
+
+  let children = [];
+  if(Aoi !== undefined){
+    for (let i = 0 ; i < Aoi.length ; i++) {
+      children.push(<Option key={Aoi[i].name}>{Aoi[i].name}</Option>);
+    }
+  }
 
   return (
     <Row>
@@ -217,21 +235,33 @@ function Register() {
             >
               <Input name="country" value={country} onChange={onChange} />
             </Form.Item>
-            
+
+            <Form.Item label="Area of Interest">
+              <Select
+                mode="multiple"
+                style={{ width: "100%" }}
+                placeholder="Please select"
+                onChange={onChangeAOI}
+                required
+              >
+                {children}
+              </Select>
+            </Form.Item>
           </Form>
           <Button
             type="primary"
             htmlType="submit"
             className="register-form-button"
+            onClick={onSubmit}
           >
             Register
           </Button>
 
-          <center>
+          {/* <center>
             <Divider plain>OR</Divider>
             Already have an account?
             <a> Sign In</a>
-          </center>
+          </center> */}
         </Card>
       </Col>
       <Col lg={8} md={2} sm={1} />
