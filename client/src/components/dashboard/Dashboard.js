@@ -3,6 +3,7 @@ import { Layout, Menu } from "antd";
 import MandalTab from "./MandalTab.js";
 import AdminTab from "./AdminTab.js";
 import axios from "axios";
+import MandalAdminTab from "./MandalAdminTab.js";
 const { Sider, Content } = Layout;
 
 function Dashboard() {
@@ -21,6 +22,7 @@ function Dashboard() {
           <Menu defaultSelectedKeys={[tab]} mode="inline" onClick={onChange}>
             <Menu.Item key="Admins">Admins</Menu.Item>
             <Menu.Item key="Mandals">Mandals</Menu.Item>
+            <Menu.Item key="Mandal Admins">Mandal Admins</Menu.Item>
             <Menu.Item key="Settings">Settings</Menu.Item>
           </Menu>
         </Sider>
@@ -28,6 +30,7 @@ function Dashboard() {
           <Content>
             {tab === "Mandals" && <MandalTab></MandalTab>}
             {tab === "Admins" && <AdminTab></AdminTab>}
+            {tab === "Mandal Admins" && <MandalAdminTab></MandalAdminTab> }
             {tab === "Settings" && <div>Settings</div>}
           </Content>
         </Layout>
