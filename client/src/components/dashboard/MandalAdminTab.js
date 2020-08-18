@@ -14,7 +14,7 @@ function MandalAdminTab() {
         <Tabs defaultActiveKey={tab}>
             <TabPane tab="Existing Admins" key="Existing"><MandalTable></MandalTable></TabPane>
             <TabPane tab="Add New Mandal Admin" key="New">
-            <Register></Register>
+            <Register adminType={ "mandal" }></Register>
             <center><Divider plain>MAKE A USER AN ADMIN</Divider><MandalAdminsTable></MandalAdminsTable></center>
             </TabPane>
         </Tabs>

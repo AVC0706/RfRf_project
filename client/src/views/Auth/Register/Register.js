@@ -15,15 +15,19 @@ import "./Register.css";
 import UserContext from "../../../context/user/userContext";
 const { Option } = Select;
 
-function Register() {
+function Register(props) {
   const userContext = useContext(UserContext);
 
   const { Aoi, getAllAoi } = userContext;
 
   useEffect(() => {
     getAllAoi();
-    children = []
+    children = [];
 
+    const { adminType } = props;
+    console.log(adminType);
+    setuser({ ...user, admin: adminType });
+    
     // eslint-disable-next-line
   }, []);
 
@@ -46,16 +50,16 @@ function Register() {
       range: "${label} must be between ${min} and ${max}",
     },
   };
-  
+
   const onChange = (e) => {
     setuser({
       ...user,
       [e.target.name]: e.target.value,
     });
   };
-  
+
   const onChangeAOI = (e) => {
-    console.log(e)
+    console.log(e);
     setuser({
       ...user,
       aoi: e,
@@ -63,11 +67,10 @@ function Register() {
   };
 
   const onSubmit = () => {
-    userContext.register(user)
-    console.log(user)
 
-  }
-
+    userContext.register(user);
+    console.log(user);
+  };
 
   const [user, setuser] = useState({
     name: "",
@@ -77,6 +80,7 @@ function Register() {
     city: "",
     state: "",
     country: "",
+    admin: "null",
     aoi: [],
   });
   const {
@@ -93,8 +97,8 @@ function Register() {
   const grid = {};
 
   let children = [];
-  if(Aoi !== undefined){
-    for (let i = 0 ; i < Aoi.length ; i++) {
+  if (Aoi !== undefined) {
+    for (let i = 0; i < Aoi.length; i++) {
       children.push(<Option key={Aoi[i].name}>{Aoi[i].name}</Option>);
     }
   }
