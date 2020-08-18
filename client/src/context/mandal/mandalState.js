@@ -14,8 +14,6 @@ import setAuthToken from "../../utils/setAuthToken";
 
 const MandalState = (props) => {
     const initialState = {
-      token: null,
-      user: null,
       isAuth: false,
       allMandals=[],
       mandal=null,
@@ -46,7 +44,6 @@ const MandalState = (props) => {
       } catch (e) {
         dispatch({
           type: MANDAL_FAIL,
-          payload: e.response.data.msg,
         });
       }
     };

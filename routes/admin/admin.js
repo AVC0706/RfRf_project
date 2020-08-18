@@ -1,7 +1,6 @@
 const express = require("express");
 const User = require("../../models/user");
 const Member = require("../../models/member");
-const User_Aoi = require("../../models/user_aoi");
 const Mandal = require("../../models/mandal");
 const AOI = require("../../models/aoi");
 const { isAdmin } = require("../../middleware/auth");
@@ -37,7 +36,6 @@ router.delete("/deleteUser/:id", isAdmin, async (req, res) => {
     }
 
     // await Member.deleteMany({user_id: user._id});
-    // await User_Aoi.deleteMany({user_id: user._id});
 
     res.status(200).send({ user, msg: "User Deleted" });
 

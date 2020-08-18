@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Member = require("./member");
-const User_Aoi = require("./user_aoi");
+
 const UserSchema = mongoose.Schema({
   name: {
     type: String,
@@ -47,6 +47,8 @@ const UserSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  aoi: [String],
+
 });
 
 UserSchema.pre("save", async function (next) {
@@ -62,7 +64,6 @@ UserSchema.pre("save", async function (next) {
 UserSchema.pre("remove", async function (next) {
   const user = this;
   await Member.deleteMany({ user_id: user._id });
-  await User_Aoi.deleteMany({ user_id: user._id });
   next();
 });
 
