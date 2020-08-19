@@ -33,8 +33,10 @@ app.use("/api/stateAdmin", require("./routes/admin/stateAdmin"));
 app.use("/api/admin", require("./routes/admin/admin"));
 //----------Mandal-------------
 app.use("/api/mandal", require("./routes/mandal"));
+//----------Meeting------------
+app.use("/api/meeting", require("./routes/meeting"))
 
-// Serve static assets in production
+// Serve static assets in production 
 // if (process.env.NODE_ENV === "production") {
 //   // Set static folder
 //   app.use(express.static("client/build"));
