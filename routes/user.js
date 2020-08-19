@@ -2,7 +2,6 @@ const express = require("express");
 const User = require("../models/user");
 const {isAuth} = require("../middleware/auth"); 
 const Mandal = require("../models/mandal")
-const Member = require("../models/member");
 const router = express.Router();
 
 //******Funtions here :

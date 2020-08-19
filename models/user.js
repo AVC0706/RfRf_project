@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const Member = require("./member");
 
 const UserSchema = mongoose.Schema({
   name: {
@@ -11,11 +10,11 @@ const UserSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
+    // unique: true,
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
   },
   mobile: {
     type: String,
@@ -48,6 +47,12 @@ const UserSchema = mongoose.Schema({
     default: false,
   },
   aoi: [String],
+
+  mandals: [{
+    mandal_id: String,
+    role : String
+  }],
+
 
 });
 
