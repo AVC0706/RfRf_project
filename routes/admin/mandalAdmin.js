@@ -6,6 +6,7 @@ const { isAdmin } = require("../../middleware/auth");
 const fs = require("fs");
 const multer = require("multer");
 const excelToJson = require("convert-excel-to-json");
+const user = require("../../models/user");
 
 global.__basedir = __dirname;
 
@@ -113,77 +114,78 @@ router.post("/addMember", isAdmin, async (req, res) => {
   }
 });
 
-// router.post(
-//   "/addMemberExcel",
-//   upload.single("uploadfile"),
-//   /*isAdmin,*/ async (req, res) => {
-//     //start
-//     console.log(req.file);
-//     const excelData = excelMemberUpload(
-//       __basedir + "/uploads/" + req.file.filename
-//     );
-//     console.log(excelData.Members.length);
+router.post(
+  "/addMemberExcel",
+  upload.single("uploadfile"),
+  /*isAdmin,*/ async (req, res) => {
+    //start
+    console.log(req.file);
+    const excelData = excelMemberUpload(
+      __basedir + "/uploads/" + req.file.filename
+    );
+    console.log(excelData.Members.length);
 
-//     try {
-//       //start
-//       let i;
-//       for (i = 0; i < excelData.Members.length; i++) {
+    try {
+      //start
 
-//         let email =  excelData.Members[i].email
-//         let user = await User.findOne({ email });
+      const returns = excelData.Members.map(async (member) => {
+        //start
+        console.log(member.email)
+        let email = member.email
+        let user = await User.findOne({ email });
 
-//         console.log(user);
+        // console.log(user);
 
-//         if (user) {
-//           //start
+        if (user) {
+          //start
 
-//           let userMandal = await User.findOne({
-//             _id: user._id,
-//             "mandals.mandal_id": req.body.mandal,
-//           });
+          let userMandal = await User.findOne({
+            _id: user._id,
+            "mandals.mandal_id": req.body.mandal,
+          });
 
-//           console.log("usermandal", userMandal);
-//           if (userMandal) {
-//             continue;
-//           }
+          console.log("usermandal", userMandal);
 
-//           user.mandals.push({
-//             mandal_id: req.body.mandal,
-//             role: req.body.role,
-//           });
+          if (userMandal) {
+            return userMandal;
+          }
 
-//           console.log("111" , user)
-          
-//           // await user.save();
+          user.mandals.push({
+            mandal_id: req.body.mandal,
+            role: req.body.role,
+          });
+          await user.save();
 
-//           continue;
-//         }
+          return user;
+        }
 
-//         user = new User(req.body);
+        user = new User(member);
 
-//         user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role });
+        user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role });
 
-//         console.log('000',user);
-//         await user.save();
+        console.log(user);
+        await user.save();
 
-//       }
+        return user;
+      });
 
-//       await user.save();
+      const users = await Promise.all(returns);
 
-//       res.status(200).send({ user, msg: "Registration Successfull  !!" });
+      // let users = await User.insertMany(excelData.Members);
+      // users[0].mandals.push({ mandal_id: "test" });
 
+      console.log(users.length);
+      console.log(users);
+      res.status(200).json({users , msg : "Members Added !!"});
 
-//       let users = await User.insertMany(excelData.Members);
-//       users[0].mandals.push({ mandal_id: "test" });
-//       console.log(users.length);
-//       res.send(users);
-//     } catch (e) {
-//       res.send({ msg: "erroe", e });
-//     }
+      //end
+    } catch (e) {
+      res.send({ msg: "erroe", e });
+    }
 
-//     //end
-//   }
-// );
+    //end
+  }
+);
 
 module.exports = router;
 
