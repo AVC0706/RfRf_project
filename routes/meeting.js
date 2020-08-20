@@ -38,9 +38,38 @@ router.put("/updatemeeting/:id",isAdmin, async (req,res)=> {
     } catch(e) {
         res.status(500).send({msg: "Server error"})
     }
-})
+});
 
+//get meeting
+router.get("/getmeeting", async(req,res)=> {
+    
+    try {
+        const meeting = await Meeting.findById(req.params.id);
+        res.status(200).send(meeting);
+    } catch (e) {
+        console.error(e.message);
+        res.status(500).json({msg :"Server Error"});
+    }
 
+});
+
+//delete meeting
+router.delete("/deletemeeting/:id", isAdmin, async(req,res)=> {
+
+    try {
+        const meeting = await Meeting.findOneAndDelete(req.params.id);
+        if (!meeting) {
+            return res.status(204).json({ msg: "No data found" })
+        }
+
+        res.status(200).send({ aoi , msg: "Deleted meeting data" });
+
+    } catch (e) {
+        console.error(e.message);
+        res.status(500).send("Server Error");
+    }
+
+});
 
 
 module.exports = router
