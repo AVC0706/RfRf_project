@@ -62,7 +62,7 @@ router.delete("/deletemeeting/:id", isAdmin, async(req,res)=> {
             return res.status(204).json({ msg: "No data found" })
         }
 
-        res.status(200).send({ aoi , msg: "Deleted meeting data" });
+        res.status(200).send({ meeting , msg: "Deleted meeting data" });
 
     } catch (e) {
         console.error(e.message);
