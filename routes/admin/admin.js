@@ -1,6 +1,5 @@
 const express = require("express");
 const User = require("../../models/user");
-const Member = require("../../models/member");
 const Mandal = require("../../models/mandal");
 const AOI = require("../../models/aoi");
 const { isAdmin } = require("../../middleware/auth");
