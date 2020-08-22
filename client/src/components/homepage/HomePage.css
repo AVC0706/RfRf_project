@@ -1,6 +1,6 @@
-* {
+/* * {
   overflow-x: hidden;
-}
+} */
 
 .updates {
   min-height: 30px;
@@ -67,4 +67,4 @@
   min-height: 100px;
   text-align: center;
   padding: 5%;
-}
+} 

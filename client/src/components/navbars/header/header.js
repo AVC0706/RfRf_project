@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
 import UserContext from "../../../context/user/userContext";
@@ -8,21 +8,19 @@ const { Header } = Layout;
 function Navbar() {
   const userContext = useContext(UserContext);
 
-
-
   const layout = {
-    float: "right", 
+    float: "right",
   };
   return (
     <div>
       <Header>
-  <div className="logo">
-  <img
-    src="assets\images\rfr-logo-e1507472294835.png"
-    width="15%"
-    style={{ position: "fixed" }}
-  />
-</div>
+        <div className="logo">
+          <img
+            src="assets\images\rfr-logo-e1507472294835.png"
+            width="12%"
+            style={{ position: "fixed" }}
+          />
+        </div>
         {userContext.isAuth === true ? (
           <Menu
             style={layout}
@@ -33,10 +31,13 @@ function Navbar() {
             <Menu.Item key="1">
               <Link to="/">Home</Link>
             </Menu.Item>
-            <Menu.Item key="2">
+            {/* <Menu.Item key="2">
+              <Link to={`/userProfile/${userContext.user.id}`}>Mandals</Link>
+            </Menu.Item> */}
+            <Menu.Item key="3">
               <Link to={`/userProfile/${userContext.user.id}`}>Profile</Link>
             </Menu.Item>
-            <Menu.Item key="3">
+            <Menu.Item key="4">
               <Link to="/" onClick={userContext.logout}>
                 Logout
               </Link>
@@ -60,7 +61,6 @@ function Navbar() {
             </Menu.Item>
           </Menu>
         )}
-
       </Header>
     </div>
   );
