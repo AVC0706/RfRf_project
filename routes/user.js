@@ -7,13 +7,14 @@ const router = express.Router();
 //******Funtions here :
 //Update Profile , Delete Profile , reset password
 
-router.get("/profile",isAuth,async (req,res) => {
+router.get("/profile/:id", isAuth ,async (req,res) => {
     try {
-        const member = await Member.findById({user_id: req.user._id})
-        const mandal = await Mandal.findById({_id: member.mandal_id});
-        console.log(mandal);
+
+        const user = await User.findById({_id: req.params.id});
         console.log(user)
-        res.status(200).json({user,mandal})
+        res.status(200).json({ user })
+
+
     } catch(e) {
         res.status(500).send(e)
     }
