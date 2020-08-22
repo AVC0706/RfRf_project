@@ -64,7 +64,7 @@ const router = express.Router();
 
 //------Members----------
 
-router.post("/addMember", isAdmin, async (req, res) => {
+router.post("/addMember", /*isAdmin,*/ async (req, res) => {
   //start
 
   console.log(req.body);
@@ -92,7 +92,7 @@ router.post("/addMember", isAdmin, async (req, res) => {
           .json({ userMandal, msg: "Member Already exist !!" });
       }
 
-      user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role });
+      user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role , name: req.body.mandal_name});
       await user.save();
 
       return res.status(200).json({ user, msg: "Member Added" });
@@ -100,7 +100,7 @@ router.post("/addMember", isAdmin, async (req, res) => {
 
     user = new User(req.body);
 
-    user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role });
+    user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role , name: req.body.mandal_name});
 
     console.log(user);
     await user.save();
@@ -117,7 +117,8 @@ router.post("/addMember", isAdmin, async (req, res) => {
 router.post(
   "/addMemberExcel",
   upload.single("uploadfile"),
-  /*isAdmin,*/ async (req, res) => {
+  isAdmin,
+  async (req, res) => {
     //start
     console.log(req.file);
     const excelData = excelMemberUpload(
@@ -130,8 +131,8 @@ router.post(
 
       const returns = excelData.Members.map(async (member) => {
         //start
-        console.log(member.email)
-        let email = member.email
+        console.log(member.email);
+        let email = member.email;
         let user = await User.findOne({ email });
 
         // console.log(user);
@@ -150,10 +151,8 @@ router.post(
             return userMandal;
           }
 
-          user.mandals.push({
-            mandal_id: req.body.mandal,
-            role: req.body.role,
-          });
+          user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role , name: req.body.mandal_name});
+
           await user.save();
 
           return user;
@@ -161,7 +160,7 @@ router.post(
 
         user = new User(member);
 
-        user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role });
+        user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role , name: req.body.mandal_name});
 
         console.log(user);
         await user.save();
@@ -176,7 +175,7 @@ router.post(
 
       console.log(users.length);
       console.log(users);
-      res.status(200).json({users , msg : "Members Added !!"});
+      res.status(200).json({ users, msg: "Members Added !!" });
 
       //end
     } catch (e) {
