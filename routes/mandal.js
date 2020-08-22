@@ -6,12 +6,38 @@ const Mandal = require("../models/mandal");
 // Create Mandal
 // POST
 
-router.post("/createMandal", isAdmin ,async (req, res) => {
+router.post("/createMandal", isAdmin, async (req, res) => {
   //   const { mandal_name, city, district, state, country } = req.body;
+  console.log(req.body);
+
   try {
     let mandal = new Mandal(req.body);
+
+
+    let user = await User.findOneAndUpdate({ _id: req.user._id } , 
+      { $push: { mandals: {
+        mandal_id: mandal._id,
+        name: mandal.name,
+        role: "admin",
+      } } },
+      );
+
+    // user.mandals.push({
+    //   mandal_id: mandal._id,
+    //   name: mandal.name,
+    //   role: "admin",
+    // });
+    // console.log(user);
+
+    // users= await user.save;
+    // console.log(users)
     await mandal.save();
-    res.status(200).send({ msg: "Mandal Registration Successful  !!" });
+
+
+    res
+      .status(200)
+      .json({ msg: "Mandal Registration Successful  !!", mandal, user });
+    //end
   } catch (e) {
     console.error(e.message);
     res.status(500).send("Server Error");
@@ -21,7 +47,6 @@ router.post("/createMandal", isAdmin ,async (req, res) => {
 // detele mandal
 router.delete("/deleteMandal", isAdmin, async (req, res) => {
   try {
-
     // const members = await Members.findByIdAndDelete({
     //   mandal_id: req.params._id,
     // });

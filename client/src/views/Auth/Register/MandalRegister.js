@@ -12,13 +12,13 @@ import {
   Divider,
 } from "antd";
 
+import axios from "axios";
 import UserContext from "../../../context/user/userContext";
-import MandalContext from "../../../context/mandal/mandalContext";
+
 const { Option } = Select;
 
-function MandalRegister() {
+function MandalRegister(props) {
   const userContext = useContext(UserContext);
-  const mandalContext = useContext(MandalContext)
 
   const { Aoi, getAllAoi } = userContext;
 
@@ -65,19 +65,38 @@ function MandalRegister() {
   };
 
   const onSubmit = () => {
-    mandalContext.addMandal(mandal);
     console.log(mandal);
+
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios.post(
+      "http://localhost:5000/api/mandal/createMandal",
+      mandal,
+      config
+    ).then(res => {
+      console.log(res.data)
+        console.log('success')
+        props.history.push('/')
+
+    }).catch(e =>{
+      console.log(e)
+    })
+
   };
 
   const [mandal, setmandal] = useState({
     name: "",
-    qualification: "",
+    district: "",
     city: "",
     state: "",
     country: "",
     aoi: [],
   });
-  const { name, qualification, city, state, country, aoi } = mandal;
+  const { name, district, city, state, country, aoi } = mandal;
 
   let children = [];
   if (Aoi !== undefined) {
@@ -90,7 +109,7 @@ function MandalRegister() {
     <Row>
       <Col lg={8} md={2} sm={1} />
       <Col lg={8} md={10} sm={12}>
-        <Card title="Register" className="register-card">
+        <Card title="Mandal Register" className="register-card">
           <br></br>
           <Form
             name="mandal_register"
@@ -112,22 +131,7 @@ function MandalRegister() {
             >
               <Input name="name" value={name} onChange={onChange} />
             </Form.Item>
-            <Form.Item
-              name="qualif-input"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your Qualification!",
-                },
-              ]}
-              label="Qualification"
-            >
-              <Input
-                name="qualification"
-                value={qualification}
-                onChange={onChange}
-              />
-            </Form.Item>
+
             <Form.Item
               name="city-input"
               rules={[
@@ -144,6 +148,18 @@ function MandalRegister() {
                 onChange={onChange}
                 label="City"
               />
+            </Form.Item>
+            <Form.Item
+              name="qualif-input"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Distrcit!",
+                },
+              ]}
+              label="Distrcit"
+            >
+              <Input name="district" value={district} onChange={onChange} />
             </Form.Item>
             <Form.Item
               name="state-input"
@@ -185,7 +201,7 @@ function MandalRegister() {
             type="primary"
             htmlType="submit"
             className="register-form-button"
-            onClick = {onSubmit}
+            onClick={onSubmit}
           >
             Register
           </Button>

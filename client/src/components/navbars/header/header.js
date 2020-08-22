@@ -21,7 +21,7 @@ function Navbar() {
             style={{ position: "fixed" }}
           />
         </div>
-        {userContext.isAuth === true ? (
+        {userContext.isAuth === true && userContext.user ? (
           <Menu
             style={layout}
             theme="dark"

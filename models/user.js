@@ -49,7 +49,8 @@ const UserSchema = mongoose.Schema({
   aoi: [String],
 
   mandals: [{
-    mandal_id: String,
+    mandal_id: mongoose.Schema.Types.ObjectId,
+    name: String,
     role : String
   }],
 
