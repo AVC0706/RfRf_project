@@ -1,5 +1,4 @@
 const Meeting = require("../models/meeting");
-
 const Mandal = require("../models/mandal");
 const { isAuth, isAdmin } = require("../middleware/auth");
 

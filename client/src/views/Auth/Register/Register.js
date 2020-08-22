@@ -24,10 +24,10 @@ function Register(props) {
     getAllAoi();
     children = [];
 
-    const { adminType } = props;
-    console.log(adminType);
-    setuser({ ...user, admin: adminType });
-    
+    // const { adminType } = props;
+    // console.log(adminType);
+    // setuser({ ...user, admin: adminType });
+
     // eslint-disable-next-line
   }, []);
 
@@ -67,7 +67,6 @@ function Register(props) {
   };
 
   const onSubmit = () => {
-
     userContext.register(user);
     console.log(user);
   };
@@ -101,6 +100,7 @@ function Register(props) {
     for (let i = 0; i < Aoi.length; i++) {
       children.push(<Option key={Aoi[i].name}>{Aoi[i].name}</Option>);
     }
+    console.log(children);
   }
 
   return (
@@ -243,15 +243,15 @@ function Register(props) {
             <Form.Item label="Area of Interest">
               <Select
                 mode="multiple"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
                 placeholder="Please select"
                 onChange={onChangeAOI}
-                required
               >
                 {children}
               </Select>
             </Form.Item>
           </Form>
+
           <Button
             type="primary"
             htmlType="submit"

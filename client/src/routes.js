@@ -18,8 +18,10 @@ class Routes extends React.Component {
         <Route path="/register" component={Register} />
         <Route path="/mandalregister" component={MandalRegister} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/mandalProfile" component={MandalProfile} />
-        <Route path="/userProfile" component={UserProfile} />
+        <Route path="/mandalProfile" component={ MandalProfile } />
+        <Route path="/userProfile/:id" component={ UserProfile } />
+
+
       </Switch>
     );
   }
