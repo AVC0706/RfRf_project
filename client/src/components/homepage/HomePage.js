@@ -30,8 +30,8 @@ const HomePage = () => {
         </Carousel>
       </div>
       <div className="updates">
-        UPDATES:
-        oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
+        UPDATES: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+        do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </div>
       <div className="VM">
         <Row>
