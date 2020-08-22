@@ -127,5 +127,17 @@ router.get("/isAdmin", isAdmin, async (req, res) => {
   //end
 });
 
+router.put("/forget-password", async (req,res)=> {
+  const {email} = req.body
+  try {
+    const user = User.findOne({email});
+    if(!user) {
+      return res.status(400).send({msg: "user doesnt not exist"})
+    }
+    const token = jwt.sign({_id:user._id},config.get("jwtSecret"))
+  } catch(e) {
+      res.status(500).send({msg: "server error"})
+  }
+})
 
 module.exports = router;
