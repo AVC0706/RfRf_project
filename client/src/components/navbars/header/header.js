@@ -18,7 +18,7 @@ function Navbar() {
           <img
             src="assets\images\rfr-logo-e1507472294835.png"
             width="12%"
-            style={{ position: "fixed" }}
+            style={{ position: "absolute" }}
           />
         </div>
         {userContext.isAuth === true ? (
