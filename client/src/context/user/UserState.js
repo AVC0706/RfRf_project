@@ -85,7 +85,7 @@ const UserState = (props) => {
     };
     try {
       const res = await axios.post(
-        "/api/auth/login",
+        "http://localhost:5000/api/auth//login",
         formData,
         config
       );
@@ -97,7 +97,7 @@ const UserState = (props) => {
       });
       console.log("login success");
       // router.push({
-      //   path: "http://localhost:3000/stateAdmin",
+      //   path: "http://localhost:5000/stateAdmin",
       // });
       loadUser();
     } catch (e) {
