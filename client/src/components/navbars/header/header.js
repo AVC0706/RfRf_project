@@ -10,7 +10,13 @@ function Navbar() {
   return (
     <div>
       <Header>
-        <div className="logo" />
+        <div className="logo">
+          <img
+            src="assets\images\rfr-logo-e1507472294835.png"
+            width="15%"
+            style={{ position: "fixed" }}
+          />
+        </div>
         <Menu
           style={layout}
           theme="dark"

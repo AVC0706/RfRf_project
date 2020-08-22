@@ -7,19 +7,19 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Dashboard from "./views/Dashboard/Dashboard";
 import MandalProfile from "./views/Profiles/MandalProfile";
 import UserProfile from "./views/Profiles/UserProfile";
+import HomePage from "./components/homepage/HomePage";
 
 class Routes extends React.Component {
   render() {
     return (
       <Switch>
-        {/* <Route path="/" exact component={HomePage} /> */}
+        <Route path="/" exact component={HomePage} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/mandalregister" component={MandalRegister} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/mandalProfile" component={ MandalProfile } />
-        <Route path="/userProfile" component={ UserProfile } />
-
+        <Route path="/mandalProfile" component={MandalProfile} />
+        <Route path="/userProfile" component={UserProfile} />
       </Switch>
     );
   }
