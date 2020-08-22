@@ -70,12 +70,6 @@ router.delete("/deletemeeting/:id", isAdmin, async(req,res)=> {
         console.error(e.message);
         res.status(500).send("Server Error");
     }
-
-    res.status(200).send({ meeting, msg: "Deleted meeting data" });
-  } catch (e) {
-    console.error(e.message);
-    res.status(500).send("Server Error");
-  }
 });
 
 
