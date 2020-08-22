@@ -1,5 +1,4 @@
 const Meeting = require("../models/meeting");
-const Member = require("../models/member");
 const Mandal = require("../models/mandal");
 const {isAuth, isAdmin} = require("../middleware/auth");
 
@@ -16,7 +15,7 @@ router.post("/createmeeting",isAdmin,async (req,res)=> {
            user_id: req.user._id
        })
 
-       await meeting.save()
+       await meeting.save()   
         res.status(201).send({meeting});
     } catch(e) {
         res.status(500).send({msg: "Server error"})
@@ -41,10 +40,10 @@ router.put("/updatemeeting/:id",isAdmin, async (req,res)=> {
 });
 
 //get meeting
-router.get("/getmeeting", async(req,res)=> {
+router.get("/getmeeting/:id", async(req,res)=> {
     
     try {
-        const meeting = await Meeting.findById(req.params.id);
+        const meeting = await Meeting.find({mandal_id: req.params.id});
         res.status(200).send(meeting);
     } catch (e) {
         console.error(e.message);
@@ -57,9 +56,9 @@ router.get("/getmeeting", async(req,res)=> {
 router.delete("/deletemeeting/:id", isAdmin, async(req,res)=> {
 
     try {
-        const meeting = await Meeting.findOneAndDelete(req.params.id);
+        const meeting = await Meeting.findOneAndDelete({_id: req.params.id});
         if (!meeting) {
-            return res.status(204).json({ msg: "No data found" })
+            return res.status(204).send({ msg: "No data found" })
         }
 
         res.status(200).send({ meeting , msg: "Deleted meeting data" });
@@ -72,4 +71,24 @@ router.delete("/deletemeeting/:id", isAdmin, async(req,res)=> {
 });
 
 
+router.put("/addmom/:id",isAdmin, async (req,res)=> {
+    try {
+        const meeting = await Meeting.findOne({_id: req.params.id});
+        meeting.mom = req.body.mom;
+        await meeting.save()
+        res.status(201).send({meeting})
+    } catch(e) {
+        res.status(500).send({msg: "server error"});
+    }
+})
+
+router.put("/uploadPDF",isAdmin,async (req,res)=> {
+    try {
+        const meeting = await Meeting.findOne({_id: req.params.id});
+        meeting.pdf_link = req.body.pdf_link;
+        await meeting.save()
+    } catch(e) {
+        res.status(500).send({msg: "server error"});
+    }
+})
 module.exports = router
