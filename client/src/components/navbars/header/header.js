@@ -16,8 +16,9 @@ function Navbar() {
       <Header>
         <div className="logo">
           <img
-            src="assets\images\rfr-logo-e1507472294835.png"
-            width="12%"
+            src="assets\images\bsm.jpeg"
+            
+            height="6%"
             style={{ position: "absolute" }}
           />
         </div>
@@ -31,9 +32,9 @@ function Navbar() {
             <Menu.Item key="1">
               <Link to="/">Home</Link>
             </Menu.Item>
-            {/* <Menu.Item key="2">
-              <Link to={`/userProfile/${userContext.user.id}`}>Mandals</Link>
-            </Menu.Item> */}
+            <Menu.Item key="2">
+              <Link to={"/myMandals"}>My Mandals</Link>
+            </Menu.Item>
             <Menu.Item key="3">
               <Link to={`/userProfile/${userContext.user.id}`}>Profile</Link>
             </Menu.Item>

@@ -8,6 +8,7 @@ import Dashboard from "./views/Dashboard/Dashboard";
 import MandalProfile from "./views/Profiles/MandalProfile";
 import UserProfile from "./views/Profiles/UserProfile";
 import HomePage from "./components/homepage/HomePage";
+import MyMandal from "./views/Home/MyMandals";
 
 class Routes extends React.Component {
   render() {
@@ -18,7 +19,9 @@ class Routes extends React.Component {
         <Route path="/register" component={Register} />
         <Route path="/mandalregister" component={MandalRegister} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/mandalProfile" component={ MandalProfile } />
+        <Route path="/myMandals" component={ MyMandal } />
+
+        <Route path="/mandalProfile/:id" component={ MandalProfile } />
         <Route path="/userProfile/:id" component={ UserProfile } />
 
 

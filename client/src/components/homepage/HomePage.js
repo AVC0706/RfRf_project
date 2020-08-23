@@ -27,6 +27,15 @@ const HomePage = () => {
           <div>
             <img src="assets\images\3-1.jpg" style={contentStyle} />
           </div>
+          <div>
+            <img src="assets\images\h1.jpeg" style={contentStyle} />
+          </div>
+          <div>
+            <img src="assets\images\h2.jpeg" style={contentStyle} />
+          </div>
+          <div>
+            <img src="assets\images\h3.jpeg" style={contentStyle} />
+          </div>
         </Carousel>
       </div>
       <div className="updates">
