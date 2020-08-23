@@ -44,13 +44,25 @@ router.post("/createMandal", isAdmin, async (req, res) => {
   }
 });
 
+
+//mandal/:id
+router.get("/getMandal/:id", isAdmin, async (req, res) => {
+  try {
+    const mandal = await Mandal.findById({ _id: req.params.id });
+
+    res.status(200).json({  mandal });
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
 // detele mandal
-router.delete("/deleteMandal", isAdmin, async (req, res) => {
+router.delete("/deleteMandal/:id", isAdmin, async (req, res) => {
   try {
     // const members = await Members.findByIdAndDelete({
     //   mandal_id: req.params._id,
     // });
-    const mandal = await Mandal.findByIdAndDelete({ _id: req.params._id });
+    const mandal = await Mandal.findByIdAndDelete({ _id: req.params.id });
 
     res.send({ mandal_aoi, members, mandal });
   } catch (e) {

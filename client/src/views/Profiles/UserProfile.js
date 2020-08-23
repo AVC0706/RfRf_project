@@ -13,7 +13,7 @@ function UserProfile(props) {
 
 
   useEffect(() => {
-      if(userContext){
+      if(userContext.user){
     getUser();
 }
   }, [userContext.isAuth]);

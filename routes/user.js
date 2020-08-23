@@ -20,6 +20,15 @@ router.get("/profile/:id", isAuth ,async (req,res) => {
     }
 })
 
+
+router.get("/myMandals", isAuth ,async (req,res) => {
+
+        res.status(200).json({ user :req.user , msg : "All user mandals received !!" })
+
+   
+})
+
+
 router.patch("/updateprofile",isAuth, async(req,res)=> {
     let updates = Object.keys(req.body)
     let allowed = ['name','email','mobile','city','district','state','country','qualification']
