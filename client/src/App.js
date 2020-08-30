@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from "react";
 import "./App.css";
-//import UserState from './context/user/UserState';
 
 import Navbar from "./components/navbars/header/header";
 

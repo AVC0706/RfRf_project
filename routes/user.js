@@ -2,23 +2,32 @@ const express = require("express");
 const User = require("../models/user");
 const {isAuth} = require("../middleware/auth"); 
 const Mandal = require("../models/mandal")
-const Member = require("../models/member");
 const router = express.Router();
 
 //******Funtions here :
 //Update Profile , Delete Profile , reset password
 
-router.get("/profile",isAuth,async (req,res) => {
+router.get("/profile/:id", isAuth ,async (req,res) => {
     try {
-        const member = await Member.findById({user_id: req.user._id})
-        const mandal = await Mandal.findById({_id: member.mandal_id});
-        console.log(mandal);
+
+        const user = await User.findById({_id: req.params.id});
         console.log(user)
-        res.status(200).json({user,mandal})
+        res.status(200).json({ user })
+
+
     } catch(e) {
         res.status(500).send(e)
     }
 })
+
+
+router.get("/myMandals", isAuth ,async (req,res) => {
+
+        res.status(200).json({ user :req.user , msg : "All user mandals received !!" })
+
+   
+})
+
 
 router.patch("/updateprofile",isAuth, async(req,res)=> {
     let updates = Object.keys(req.body)

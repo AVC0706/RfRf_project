@@ -1,13 +1,7 @@
 const mongoose = require("mongoose");
 
 const MandalSchema = new mongoose.Schema({
-  mandal_name: {
-    type: String,
-  },
-  leader_id: {
-    type: String,
-  },
-  leader_name: {
+  name: {
     type: String,
   },
   city: {
@@ -38,6 +32,7 @@ const MandalSchema = new mongoose.Schema({
     default: Date.now,
   },
   aoi: [String],
+  
 
 });
 
