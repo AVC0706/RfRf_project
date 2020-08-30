@@ -4,6 +4,7 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import DataTable from "../../components/dashboard/DataTable";
 import UserContext from "../../context/user/userContext";
 import axios from "axios";
+import MeetingTable from "../../components/dashboard/MeetingTable";
 
 const { TabPane } = Tabs;
 function MandalProfile(props) {
@@ -106,7 +107,7 @@ function MandalProfile(props) {
             <Row>
               <Col md={24}>
                 <Tabs>
-                  <TabPane tab="Members" key="Members">
+                <TabPane tab="Members" key="Members">
                     <DataTable></DataTable>
                     <Button
                       type="primary"
@@ -116,6 +117,18 @@ function MandalProfile(props) {
                     >
                       Add Members
                     </Button>
+                  </TabPane>
+                  <TabPane tab="Meetings" key="Meetings">
+                  <Button
+                      type="primary"
+                      shape="round"
+                      size="large"
+                      icon={<AiOutlineUserAdd></AiOutlineUserAdd>}
+                    >
+                      Add Meeting
+                    </Button>
+                    <MeetingTable></MeetingTable>
+                    
                   </TabPane>
                 </Tabs>
               </Col>
