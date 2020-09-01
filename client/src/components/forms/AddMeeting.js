@@ -27,7 +27,7 @@ function AddMeeting(props) {
                         required: true, message: "Please input meeting name",
                     }]}
                 >
-                    <Input name="name_input" value={name} onChange={onChange}></Input>
+                    <Input name="name" value={name} onChange={onChange}></Input>
                 </Form.Item>
                 <Form.Item
                     name="agenda"
@@ -35,7 +35,7 @@ function AddMeeting(props) {
                     rules={[{
                         required: true, message: "Please input agenda",
                     }]}>
-                    <Input name="agenda_input" value={agenda} onChange={onChange}></Input>
+                    <Input name="agenda" value={agenda} onChange={onChange}></Input>
                 </Form.Item>
                 <Form.Item>
                     <Form.Item label="MOM Tags">
@@ -45,7 +45,7 @@ function AddMeeting(props) {
                             placeholder="Please select"
                             onChange={onChangeMOMTags}
                         >
-                            <Option key = "example">Put tag here</Option>
+                            <Option key = "tags">Put tag here</Option>
                                                          </Select>
                     </Form.Item>
                 </Form.Item>

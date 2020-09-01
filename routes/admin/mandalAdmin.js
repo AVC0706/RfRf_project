@@ -67,22 +67,21 @@ const router = express.Router();
 router.post("/addMember", /*isAdmin,*/ async (req, res) => {
   //start
 
-  console.log(req.body);
-  const { name, email, password } = req.body;
-
+  console.log(req.body.user);
+  const { name, email, password } = req.body.user;
+  
   try {
     //start
-
     let user = await User.findOne({ email });
 
-    console.log(user);
+    console.log(user , 'hererere');
 
     if (user) {
       //start
 
       let userMandal = await User.findOne({
         _id: user._id,
-        "mandals.mandal_id": req.body.mandal,
+        "mandals.mandal_id": req.body.mandal_id,
       });
 
       console.log("usermandal", userMandal);
@@ -92,15 +91,16 @@ router.post("/addMember", /*isAdmin,*/ async (req, res) => {
           .json({ userMandal, msg: "Member Already exist !!" });
       }
 
-      user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role , name: req.body.mandal_name});
+      user.mandals.push({ mandal_id: req.body.mandal_id, role: req.body.role , name: req.body.mandal_name});
       await user.save();
 
       return res.status(200).json({ user, msg: "Member Added" });
     }
 
-    user = new User(req.body);
+    console.log(req.body.user)
+    user = new User(req.body.user);
 
-    user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role , name: req.body.mandal_name});
+    user.mandals.push({ mandal_id: req.body.mandal_id, role: req.body.role , name: req.body.mandal_name});
 
     console.log(user);
     await user.save();
