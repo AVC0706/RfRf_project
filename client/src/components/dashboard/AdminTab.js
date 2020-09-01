@@ -1,0 +1,164 @@
+import React, { useState, useEffect, useContext } from "react";
+import { Tabs, Spin, message } from "antd";
+import DataTable from "./DataTable";
+import axios from "axios";
+import UserContext from "../../context/user/userContext";
+const { TabPane } = Tabs;
+function AdminTab() {
+  const [adminPanel, setadminPanel] = useState({
+    tab: "City",
+  });
+
+  const { tab } = adminPanel;
+
+  const [districtAdmin, setDistrictAdmins] = useState([]);
+  const [cityAdmin, setCityAdmins] = useState([]);
+  const [mandalAdmin, setMandalAdmins] = useState([]);
+  const [normalUsers, setNormalUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const userContext = useContext(UserContext);
+  const { user } = userContext;
+
+  useEffect(() => {
+    getDistrictAdmin();
+    getCityAdmin();
+    getNormalUsers();
+    getMandalAdmin();
+  }, []);
+
+  const getDistrictAdmin = () => {
+    axios
+      .get("http://localhost:5000/api/admin/getAdmins/district")
+      .then((res) => {
+        if (res.status === 200) {
+          setDistrictAdmins(res.data.users);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getCityAdmin = () => {
+    axios
+      .get("http://localhost:5000/api/admin/getAdmins/city")
+      .then((res) => {
+        if (res.status === 200) {
+          setCityAdmins(res.data.users);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getMandalAdmin = () => {
+    axios
+      .get("http://localhost:5000/api/admin/getAdmins/mandal")
+      .then((res) => {
+        if (res.status === 200) {
+          setMandalAdmins(res.data.users);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getNormalUsers = () => {
+    axios
+      .get("http://localhost:5000/api/admin/getAdmins/null")
+      .then((res) => {
+        if (res.status === 200) {
+          setNormalUsers(res.data.users);
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const deleteUser = (id, userType) => {
+    const key = "updatable";
+    message.loading({ content: "Deleting...", key });
+
+    console.log("deleteteD0");
+    setLoading(true);
+
+    axios
+      .delete(`http://localhost:5000/api/admin/deleteUser/${id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          if (userType === "district") {
+            getDistrictAdmin();
+          } else if (userType === "city") {
+            getCityAdmin();
+          }
+          // else if( userType === 'mandal' ){
+          //   getCityAdmin();
+          // }
+          else {
+            getNormalUsers();
+          }
+
+          message.success({ content: "User Deleted !!", key, duration: 3 });
+
+          setLoading(false);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
+  };
+
+  return (
+    <Tabs defaultActiveKey={[tab]}>
+      {user.admin.toLowerCase() === "state" ? (
+        <TabPane tab="District" key="District">
+          {loading ? (
+            <Spin size="large" />
+          ) : (
+            <DataTable users={districtAdmin} deleteUser={deleteUser} />
+          )}
+        </TabPane>
+      ) : null}
+
+      {user.admin.toLowerCase() === "state" ||
+      user.admin.toLowerCase() === "district" ? (
+        <TabPane tab="City" key="City">
+          {loading ? (
+            <Spin size="large" />
+          ) : (
+            <DataTable users={cityAdmin} deleteUser={deleteUser} />
+          )}
+        </TabPane>
+      ) : null}
+
+      {user.admin.toLowerCase() === "state" ||
+      user.admin.toLowerCase() === "district" ||
+      user.admin.toLowerCase() === "city" ? (
+        <TabPane tab="Mandal" key="Mandal">
+          {loading ? (
+            <Spin size="large" />
+          ) : (
+            <DataTable users={mandalAdmin} deleteUser={deleteUser} />
+          )}
+        </TabPane>
+      ) : null}
+
+      <TabPane tab="Users" key="Users">
+        {loading ? (
+          <Spin size="large" />
+        ) : (
+          <DataTable users={normalUsers} deleteUser={deleteUser} />
+        )}
+      </TabPane>
+    </Tabs>
+  );
+}
+
+export default AdminTab;

@@ -1,76 +1,62 @@
-var express = require("express");
-var User = require("../models/user");
-const Auth = require("../middleware/auth")
+const express = require("express");
+const User = require("../models/user");
+const {isAuth} = require("../middleware/auth"); 
+const Mandal = require("../models/mandal")
+const router = express.Router();
 
-var router = express.Router();
+//******Funtions here :
+//Update Profile , Delete Profile , reset password
 
+router.get("/profile/:id", isAuth ,async (req,res) => {
+    try {
 
-
-//Register
-router.post("/isAuth", Auth , async (req, res) => {
-  //start
-  console.log("This is isAuth");
-  const user = {
-    id: req.user.id,
-    name: req.user.name,
-    email: req.user.email,
-    mobile: req.user.mobile
-  }
-  res.json({ isAuth: true ,  msg: "Principal User" , user});
-  //end
-});
+        const user = await User.findById({_id: req.params.id});
+        console.log(user)
+        res.status(200).json({ user })
 
 
-
-//Login
-router.post("/login", async (req, res) => {
-  //start
-
-  const { email, password } = req.body;
-
-  try {
-    let user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(400).json({ msg: "Invalid Email or Password" });
+    } catch(e) {
+        res.status(500).send(e)
     }
+})
 
-    const isMatch = await bcrypt.compare(password, user.password);
 
-    if (!isMatch) {
-      return res.status(400).json({ msg: "Invalid Email or Password" });
+router.get("/myMandals", isAuth ,async (req,res) => {
+
+        res.status(200).json({ user :req.user , msg : "All user mandals received !!" })
+
+   
+})
+
+
+router.patch("/updateprofile",isAuth, async(req,res)=> {
+    let updates = Object.keys(req.body)
+    let allowed = ['name','email','mobile','city','district','state','country','qualification']
+    const isValid = updates.every((update)=> allowed.includes(update))
+    if(!isValid) {
+        return res.status(400).send({
+            error: "not allowed"
+        })
     }
+    try {
+        updates.forEach((update)=>req.user[update]= req.body[update])
+        await req.user.save()
+    }
+    catch(e) {
+        res.status(500).send(e)
+    }
+})
 
-    const payload = {
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email
-      },
-    };
+router.delete("/deleteprofile",isAuth, async (req,res)=> {
+    try {
+        var user = await User.findOneAndDelete({_id : req.user._id})
+        await user.remove()
+        res.send(200).json({msg: "deleted successfully"})
 
-    jwt.sign(
-      payload,
-      config.get("jwtSecret"),
-      {
-        expiresIn: 36000,
-      },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token, payload });
-      }
-    );
-
-    //end
-
-  } catch (e) {
-    //start
-    console.error(e.message);
-    res.status(500).send("Server Error");
-  }
-
-  //end
-});
-
+    }
+    catch(e) {
+        res.status(500).send()
+    }
+})
 
 module.exports = router;

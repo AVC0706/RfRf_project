@@ -1,0 +1,15 @@
+version: '3'
+services:
+  ui:
+    build: ./client
+    image: react-app
+    ports:
+      - '80:80'
+      - '443:443'
+    depends_on:
+      - api
+  api:
+    build: .
+    image: node-app
+    ports:
+      - '5000:5000'

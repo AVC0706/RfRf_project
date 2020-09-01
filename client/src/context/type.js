@@ -1,4 +1,7 @@
 
+//AOI
+export const AOI_SUCCESS = "AOI_SUCCESS";
+export const AOI_FAIL = "AOI_FAIL";
 
 //User
 
@@ -9,3 +12,14 @@ export const LOGOUT = "LOGOUT";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
 export const USER_LOADED = "USER_LOADED";
+
+//mandal
+
+export const GETMANDALS_SUCCESS = "GETMANDALS_SUCCESS";
+export const MANDAL_SUCCESS = "MANDAL_SUCCESS";
+export const UPDATEMANDAL_SUCCESS = "UPADATEMANDAL_SUCCESS";
+//export const DELETEMANDAL_SUCCESS = "DELETEMANDAL_SUCCESS";
+export const MANDAL_FAIL = "MANDAL_FAIL";
+
+
+
