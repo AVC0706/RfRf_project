@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Row, Col, Button, Badge, Tabs, Descriptions } from "antd";
+import { Card, Row, Col, Button, Badge, Tabs, Descriptions, Modal } from "antd";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import DataTable from "../../components/dashboard/DataTable";
 import UserContext from "../../context/user/userContext";
 import axios from "axios";
+import MeetingTable from "../../components/dashboard/MeetingTable";
+import AddMember from "../../components/forms/AddMember";
+import AddMeeting from "../../components/forms/AddMeeting";
 
 const { TabPane } = Tabs;
 function MandalProfile(props) {
@@ -29,6 +32,8 @@ function MandalProfile(props) {
     state: "",
     country: "",
     approved: "",
+    addMembers_visible: false,
+    addMeeting_visible: false,
     members: 0,
   });
   const {
@@ -38,11 +43,18 @@ function MandalProfile(props) {
     admin,
     district,
     state,
+    addMeeting_visible,
+    addMembers_visible,
     country,
     approved,
     members,
   } = mandal;
-
+  const showAddMembers = () => {
+    setmandal({ ...mandal, addMembers_visible: true })
+  }
+  const showAddMeeting = () => {
+    setmandal({ ...mandal, addMeeting_visible: true })
+  }
   const getMandal = () => {
     console.log(props);
     axios
@@ -58,6 +70,21 @@ function MandalProfile(props) {
       .catch((err) => {
         console.log(err);
       });
+  };
+  const hideAddMembers = e => {
+    setmandal({ ...mandal, addMembers_visible: false })
+  };
+  const hideAddMeetings = () =>
+  {
+    setmandal({ ...mandal, addMeeting_visible: false })
+  }
+  const AddMembers = e => {
+    console.log(e);
+    setmandal({ ...mandal, addMembers_visible: false })
+  };
+  const AddMeetings = e => {
+    console.log(e);
+    setmandal({ ...mandal, addMeeting_visible: false })
   };
 
   return (
@@ -107,15 +134,45 @@ function MandalProfile(props) {
               <Col md={24}>
                 <Tabs>
                   <TabPane tab="Members" key="Members">
+                  <Button
+                      type="primary"
+                      shape="round"
+                      size="large"
+                      icon={<AiOutlineUserAdd></AiOutlineUserAdd>}
+                      onClick={showAddMembers}
+                    >
+                      Add Members
+                    </Button>
+                    <Modal
+                      title="Add Members"
+                      visible={addMembers_visible}
+                      footer={null}
+                      onCancel = {hideAddMembers}
+                    >
+                      <AddMember addMember = {AddMembers}></AddMember>
+                    </Modal>
                     <DataTable></DataTable>
+                    
+                  </TabPane>
+                  <TabPane tab="Meetings" key="Meetings">
                     <Button
                       type="primary"
                       shape="round"
                       size="large"
                       icon={<AiOutlineUserAdd></AiOutlineUserAdd>}
+                      onClick={showAddMeeting}
                     >
-                      Add Members
+                      Add Meeting
                     </Button>
+                    <Modal
+                      title="Add Members"
+                      visible={addMeeting_visible}
+                      footer={null}
+                      onCancel = {hideAddMeetings}
+                    >
+                      <AddMeeting addMeeting = {AddMeetings}></AddMeeting>
+                    </Modal>
+                    <MeetingTable></MeetingTable>
                   </TabPane>
                 </Tabs>
               </Col>
