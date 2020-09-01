@@ -13,11 +13,11 @@ const MeetingTable = (props) => {
         return a.name.localeCompare(b.name);
       },
       sortDirections: ["descend", "ascend", "descend"],
-      render: (text) => <a>{text}</a>,
+    render: (text) => <a>{text}</a>,
     },
     {
-      title: "Actions",
-      key: "actions",
+      title: "Agenda",
+      key: "Agenda",
       render: (text, record) => (
         <Space size="middle">
           <Button type="primary" onClick={(e) => onMOMButton(e, record)}>

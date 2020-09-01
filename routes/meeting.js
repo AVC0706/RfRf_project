@@ -5,13 +5,14 @@ const { isAuth, isAdmin } = require("../middleware/auth");
 const express = require("express");
 const router = express.Router();
 
-router.post("/createmeeting", isAdmin, async (req, res) => {
-  const { agenda, mom_tags, mandal_id } = req.body;
+router.post("/createmeeting/:id", isAdmin, async (req, res) => {
+  const {name ,agenda, tags} = req.body;
   try {
     const meeting = new Meeting({
+      name,
       agenda,
-      mom_tags,
-      mandal_id,
+      tags,
+      mandal_id: req.params.id,
       user_id: req.user._id,
     });
 

@@ -91,6 +91,10 @@ const MandalState = (props) => {
     }
   };
 
+  const addMeeting = async (formData) => {
+    
+  }
+
     return (
         <MandalContext.Provider
           value={{

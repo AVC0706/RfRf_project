@@ -4,6 +4,9 @@ const MeetingSchema = mongoose.Schema({
     mandal_id: {
         type: mongoose.Schema.Types.ObjectId
     },
+    name: {
+        type: String,
+    },
     date: {
         type: Date,
         default: Date.now()
@@ -17,7 +20,7 @@ const MeetingSchema = mongoose.Schema({
     agenda: {
         type: String
     },
-    mom_tags: [String],
+    tags: [String],
     pdf_link: {
         type: String
     }

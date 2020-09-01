@@ -11,11 +11,14 @@ import AddMeeting from "../../components/forms/AddMeeting";
 const { TabPane } = Tabs;
 function MandalProfile(props) {
   const userContext = useContext(UserContext);
+  const [meeting, setMeeting] = useState([]);
 
   useEffect(() => {
     if (userContext.user) {
       getMandal();
     }
+    getMeetings();
+
   }, [userContext.isAuth]);
 
   const [mandal, setmandal] = useState({
@@ -82,9 +85,42 @@ function MandalProfile(props) {
     console.log(e);
     setmandal({ ...mandal, addMembers_visible: false })
   };
-  const AddMeetings = e => {
-    console.log(e);
+  const AddMeetings = (meeting) => {
+    console.log(meeting);
+    const config  =  {
+      header: {
+        "Content-Type": "application/json"
+      },
+    };
+
+    axios.post(
+      `http://localhost:5000/api/meeting/createmeeting/${props.match.params.id}`,
+      meeting,
+      config
+    ).then(res => {
+      console.log(res.data)
+        console.log('success')
+        props.history.push('/')
+
+    }).catch(e =>{
+      console.log(e)
+    })
     setmandal({ ...mandal, addMeeting_visible: false })
+  };
+
+  const getMeetings = () => {
+    axios
+      .get(`http://localhost:5000/api/meeting/getmeeting/${props.match.params.id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data);
+          setMeeting(res.data);
+          console.log(meeting);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -172,7 +208,7 @@ function MandalProfile(props) {
                     >
                       <AddMeeting addMeeting = {AddMeetings}></AddMeeting>
                     </Modal>
-                    <MeetingTable></MeetingTable>
+                    <MeetingTable getMeetings={getMeetings} ></MeetingTable>
                   </TabPane>
                 </Tabs>
               </Col>
