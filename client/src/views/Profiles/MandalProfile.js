@@ -50,11 +50,11 @@ function MandalProfile(props) {
     members,
   } = mandal;
   const showAddMembers = () => {
-    setmandal({ ...mandal, addMembers_visible: true })
-  }
+    setmandal({ ...mandal, addMembers_visible: true });
+  };
   const showAddMeeting = () => {
-    setmandal({ ...mandal, addMeeting_visible: true })
-  }
+    setmandal({ ...mandal, addMeeting_visible: true });
+  };
   const getMandal = () => {
     console.log(props);
     axios
@@ -71,20 +71,34 @@ function MandalProfile(props) {
         console.log(err);
       });
   };
-  const hideAddMembers = e => {
-    setmandal({ ...mandal, addMembers_visible: false })
+  const hideAddMembers = (e) => {
+    setmandal({ ...mandal, addMembers_visible: false });
   };
-  const hideAddMeetings = () =>
-  {
-    setmandal({ ...mandal, addMeeting_visible: false })
-  }
-  const AddMembers = e => {
-    console.log(e);
-    setmandal({ ...mandal, addMembers_visible: false })
+  const hideAddMeetings = () => {
+    setmandal({ ...mandal, addMeeting_visible: false });
   };
-  const AddMeetings = e => {
+  const AddMembers = (user) => {
+    console.log(user);
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    axios
+      .post( "http://localhost:5000/api/mandalAdmin/addMember", {user , mandal_id: props.match.params.id , mandal_name : name , role: null }, config)
+      .then((res) => {
+        console.log(res.data);
+        console.log("success");
+        props.history.push("/");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    setmandal({ ...mandal, addMembers_visible: false });
+  };
+  const AddMeetings = (e) => {
     console.log(e);
-    setmandal({ ...mandal, addMeeting_visible: false })
+    setmandal({ ...mandal, addMeeting_visible: false });
   };
 
   return (
@@ -134,7 +148,7 @@ function MandalProfile(props) {
               <Col md={24}>
                 <Tabs>
                   <TabPane tab="Members" key="Members">
-                  <Button
+                    <Button
                       type="primary"
                       shape="round"
                       size="large"
@@ -147,12 +161,11 @@ function MandalProfile(props) {
                       title="Add Members"
                       visible={addMembers_visible}
                       footer={null}
-                      onCancel = {hideAddMembers}
+                      onCancel={hideAddMembers}
                     >
-                      <AddMember addMember = {AddMembers}></AddMember>
+                      <AddMember addMember={AddMembers}></AddMember>
                     </Modal>
                     <DataTable></DataTable>
-                    
                   </TabPane>
                   <TabPane tab="Meetings" key="Meetings">
                     <Button
@@ -168,9 +181,9 @@ function MandalProfile(props) {
                       title="Add Members"
                       visible={addMeeting_visible}
                       footer={null}
-                      onCancel = {hideAddMeetings}
+                      onCancel={hideAddMeetings}
                     >
-                      <AddMeeting addMeeting = {AddMeetings}></AddMeeting>
+                      <AddMeeting addMeeting={AddMeetings}></AddMeeting>
                     </Modal>
                     <MeetingTable></MeetingTable>
                   </TabPane>
