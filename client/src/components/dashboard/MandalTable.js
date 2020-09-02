@@ -5,7 +5,7 @@ import { Popconfirm } from "antd";
 import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
 
 const MandalTable = (props) => {
-  console.log(props.users);
+  console.log(props.mandals);
   const baseColumns = [
     {
       title: "Name",
@@ -28,15 +28,7 @@ const MandalTable = (props) => {
       sortDirections: ["descend", "ascend", "descend"],
       render: (text) => <a>{text}</a>,
     },
-    {
-      title: "State",
-      dataIndex: "state",
-      key: "state",
-      sorter: (a, b) => {
-        return a.state.localeCompare(b.state);
-      },
-      sortDirections: ["descend", "ascend", "descend"],
-    },
+
     {
       title: "District",
       dataIndex: "district",
@@ -46,15 +38,7 @@ const MandalTable = (props) => {
       },
       sortDirections: ["descend", "ascend", "descend"],
     },
-    {
-      title: "City",
-      dataIndex: "city",
-      key: "city",
-      sorter: (a, b) => {
-        return a.city.localeCompare(b.city);
-      },
-      sortDirections: ["descend", "ascend", "descend"],
-    },
+
     {
       title: "Actions",
       key: "actions",
@@ -65,7 +49,7 @@ const MandalTable = (props) => {
           <Popconfirm
             title="Are you sure？"
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}
-            onConfirm={(e) => onClick(e, text, record)}
+            // onConfirm={(e) => onClick(e, text, record)}
           >
             <Button type="primary" danger>
               Delete
@@ -76,11 +60,11 @@ const MandalTable = (props) => {
     },
   ];
   const data = [];
-  const rawData = props.users;
+  const rawData = props.mandals;
   const [state, setstate] = useState({
     filterTable: null,
     columns: baseColumns,
-    baseData: rawData,
+    baseData: props.mandals,
     searchText: "",
   });
   const { baseData, filterTable, columns, searchText } = state;
@@ -106,7 +90,7 @@ const MandalTable = (props) => {
   };
   const onChange = (e) => {
     if (e.value === "") {
-      setstate({ ...state, filterTable: null, baseData: rawData });
+      setstate({ ...state, filterTable: null, baseData: props.mandals});
     }
     setstate({ ...state, searchText: e.value });
   };

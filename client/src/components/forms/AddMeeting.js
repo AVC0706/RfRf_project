@@ -15,7 +15,6 @@ function AddMeeting(props) {
         setmeeting({ ...meeting, tags: e });
     }
     const onAddMeeting = () => {
-        console.log(meeting)
         props.addMeeting(meeting);
     }
     return (

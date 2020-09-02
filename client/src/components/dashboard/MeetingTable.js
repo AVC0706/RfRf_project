@@ -17,14 +17,13 @@ const MeetingTable = (props) => {
     },
     {
       title: "Agenda",
-      key: "Agenda",
-      render: (text, record) => (
-        <Space size="middle">
-          <Button type="primary" onClick={(e) => onMOMButton(e, record)}>
-            Add MOM
-          </Button>
-        </Space>
-      ),
+      dataIndex: "agenda",
+      key: "agenda",
+      sorter: (a, b) => {
+        return a.email.localeCompare(b.email);
+      },
+      sortDirections: ["descend", "ascend", "descend"],
+      render: (text) => <a>{text}</a>,
     },
   ];
   const data = [];
