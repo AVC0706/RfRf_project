@@ -12,14 +12,17 @@ import MandalTable from "../../components/dashboard/MandalTable";
 const { TabPane } = Tabs;
 function MandalProfile(props) {
   const userContext = useContext(UserContext);
+  const [meeting, setMeeting] = useState([]);
 
   useEffect(() => {
     if (userContext.user) {
       getMandal();
       getMembers();
-
+      getMeetings();
 
     }
+    
+
   }, [userContext.isAuth]);
 
   const [mandalMembers, setmembers] = useState([])
@@ -102,7 +105,19 @@ function MandalProfile(props) {
         console.log(err);
       });
   };
-
+const getMeetings = () => {
+    axios
+      .get(`http://localhost:5000/api/meeting/getmeeting/${props.match.params.id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data);
+          setMeeting(res.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const hideAddMembers = (e) => {
     setmandal({ ...mandal, addMembers_visible: false });
@@ -143,13 +158,28 @@ function MandalProfile(props) {
     setmandal({ ...mandal, addMembers_visible: false });
   };
 
+  const AddMeetings = (meeting) => {
+    console.log(meeting);
+    const config  =  {
+      header: {
+        "Content-Type": "application/json"
+      },
+    };
 
-  const AddMeetings = (e) => {
-    console.log(e);
-    setmandal({ ...mandal, addMeeting_visible: false });
+    axios.post(
+      `http://localhost:5000/api/meeting/createmeeting/${props.match.params.id}`,
+      meeting,
+      config
+    ).then(res => {
+      console.log(res.data)
+        console.log('success')
+        props.history.push('/')
+
+    }).catch(e =>{
+      console.log(e)
+    })
+    setmandal({ ...mandal, addMeeting_visible: false })
   };
-
-
   return (
     <>
       <Row>
@@ -240,7 +270,7 @@ function MandalProfile(props) {
                     >
                       <AddMeeting addMeeting={AddMeetings}></AddMeeting>
                     </Modal>
-                    <MeetingTable></MeetingTable>
+                    <MeetingTable meetings={meeting} ></MeetingTable>
                   </TabPane>
                 </Tabs>
               </Col>

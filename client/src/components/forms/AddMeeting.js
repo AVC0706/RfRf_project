@@ -14,12 +14,12 @@ function AddMeeting(props) {
     const onChangeMOMTags = (e) => {
         setmeeting({ ...meeting, tags: e });
     }
-    const onFinish = () => {
-        props.addMeeting();
+    const onAddMeeting = () => {
+        props.addMeeting(meeting);
     }
     return (
         <div>
-            <Form name="addMeeting" onFinish={onFinish}>
+            <Form name="addMeeting">
                 <Form.Item
                     name="name"
                     label="Meeting Name"
@@ -53,6 +53,7 @@ function AddMeeting(props) {
                     type="primary"
                     htmlType="submit"
                     className="register-form-button"
+                    onClick={onAddMeeting}
                 >
                     Add Meeting
           </Button>

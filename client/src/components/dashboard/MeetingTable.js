@@ -13,18 +13,17 @@ const MeetingTable = (props) => {
         return a.name.localeCompare(b.name);
       },
       sortDirections: ["descend", "ascend", "descend"],
-      render: (text) => <a>{text}</a>,
+    render: (text) => <a>{text}</a>,
     },
     {
-      title: "Actions",
-      key: "actions",
-      render: (text, record) => (
-        <Space size="middle">
-          <Button type="primary" onClick={(e) => onMOMButton(e, record)}>
-            Add MOM
-          </Button>
-        </Space>
-      ),
+      title: "Agenda",
+      dataIndex: "agenda",
+      key: "agenda",
+      sorter: (a, b) => {
+        return a.email.localeCompare(b.email);
+      },
+      sortDirections: ["descend", "ascend", "descend"],
+      render: (text) => <a>{text}</a>,
     },
   ];
   const data = [];
