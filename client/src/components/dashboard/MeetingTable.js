@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 import { Button, Table, Space, Input } from "antd";
+import { Popconfirm } from "antd";
+import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
 
 const MeetingTable = (props) => {
   const baseColumns = [
@@ -25,6 +27,27 @@ const MeetingTable = (props) => {
       sortDirections: ["descend", "ascend", "descend"],
       render: (text) => <a>{text}</a>,
     },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (text, record) => (
+        <Space size="middle">
+          <Button type="primary">
+            View
+          </Button>
+
+          <Popconfirm
+            title="Are you sure？"
+            icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+            // onConfirm={(e) => onDeleteButton(e, text, record)}
+          >
+            <Button type="primary" danger>
+              Delete
+            </Button>
+          </Popconfirm>
+        </Space>
+      ),
+    },
   ];
   const data = [];
   const [state, setstate] = useState({
@@ -38,7 +61,7 @@ const MeetingTable = (props) => {
     setstate({
       ...state,
       searchText: value,
-      filterTable: props.users.filter((o) =>
+      filterTable: props.meetings.filter((o) =>
         Object.keys(o).some((k) =>
           String(o[k]).toLowerCase().includes(value.toLowerCase())
         )
@@ -67,7 +90,7 @@ const MeetingTable = (props) => {
       ></Input.Search>
       <Table
         columns={columns}
-        dataSource={filterTable === null ? props.users : filterTable}
+        dataSource={filterTable === null ? props.meetings : filterTable}
       >
         {" "}
       </Table>
