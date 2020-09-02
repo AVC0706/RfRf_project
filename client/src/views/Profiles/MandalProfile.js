@@ -12,6 +12,7 @@ import MandalTable from "../../components/dashboard/MandalTable";
 const { TabPane } = Tabs;
 function MandalProfile(props) {
   const userContext = useContext(UserContext);
+  
 
   useEffect(() => {
     if (userContext.user) {
