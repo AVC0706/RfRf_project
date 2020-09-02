@@ -7,6 +7,7 @@ import axios from "axios";
 import MeetingTable from "../../components/dashboard/MeetingTable";
 import AddMember from "../../components/forms/AddMember";
 import AddMeeting from "../../components/forms/AddMeeting";
+import MandalTable from "../../components/dashboard/MandalTable";
 
 const { TabPane } = Tabs;
 function MandalProfile(props) {
@@ -15,8 +16,14 @@ function MandalProfile(props) {
   useEffect(() => {
     if (userContext.user) {
       getMandal();
+      getMembers();
+
+
     }
   }, [userContext.isAuth]);
+
+  const [mandalMembers, setmembers] = useState([])
+
 
   const [mandal, setmandal] = useState({
     name: "Mandal Name",
@@ -49,12 +56,18 @@ function MandalProfile(props) {
     approved,
     members,
   } = mandal;
+
+
   const showAddMembers = () => {
     setmandal({ ...mandal, addMembers_visible: true });
   };
+
+
   const showAddMeeting = () => {
     setmandal({ ...mandal, addMeeting_visible: true });
   };
+
+
   const getMandal = () => {
     console.log(props);
     axios
@@ -71,12 +84,36 @@ function MandalProfile(props) {
         console.log(err);
       });
   };
+
+
+  const getMembers = () => {
+    console.log(props);
+    axios
+      .get(
+        `http://localhost:5000/api/mandal/getMembers/${props.match.params.id}`
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data);
+          setmembers(res.data.members);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
   const hideAddMembers = (e) => {
     setmandal({ ...mandal, addMembers_visible: false });
   };
+
+
   const hideAddMeetings = () => {
     setmandal({ ...mandal, addMeeting_visible: false });
   };
+
+
   const AddMembers = (user) => {
     console.log(user);
     const config = {
@@ -85,7 +122,16 @@ function MandalProfile(props) {
       },
     };
     axios
-      .post( "http://localhost:5000/api/mandalAdmin/addMember", {user , mandal_id: props.match.params.id , mandal_name : name , role: null }, config)
+      .post(
+        "http://localhost:5000/api/mandalAdmin/addMember",
+        {
+          user,
+          mandal_id: props.match.params.id,
+          mandal_name: name,
+          role: null,
+        },
+        config
+      )
       .then((res) => {
         console.log(res.data);
         console.log("success");
@@ -96,10 +142,13 @@ function MandalProfile(props) {
       });
     setmandal({ ...mandal, addMembers_visible: false });
   };
+
+
   const AddMeetings = (e) => {
     console.log(e);
     setmandal({ ...mandal, addMeeting_visible: false });
   };
+
 
   return (
     <>
@@ -126,6 +175,8 @@ function MandalProfile(props) {
             }
             headStyle={{ fontSize: "250%" }}
           >
+            {/*----------- MEMBERS ---------*/}
+
             <Row>
               <Col md={24}>
                 <Descriptions title="Mandal Info" bordered>
@@ -165,8 +216,12 @@ function MandalProfile(props) {
                     >
                       <AddMember addMember={AddMembers}></AddMember>
                     </Modal>
-                    <DataTable></DataTable>
+
+                    <DataTable users = {mandalMembers}></DataTable>
                   </TabPane>
+
+                  {/*----------- MEETINGS ---------*/}
+
                   <TabPane tab="Meetings" key="Meetings">
                     <Button
                       type="primary"

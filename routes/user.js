@@ -23,7 +23,7 @@ router.get("/profile/:id", isAuth ,async (req,res) => {
 
 router.get("/myMandals", isAuth ,async (req,res) => {
 
-        res.status(200).json({ user :req.user , msg : "All user mandals received !!" })
+    res.status(200).json({ user :req.user , msg : "All user mandals received !!" })
 
    
 })
