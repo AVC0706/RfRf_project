@@ -3,7 +3,7 @@ import { Carousel, Card, Col, Row } from "antd";
 import "./HomePage.css";
 
 const contentStyle = {
-  height: "90vh",
+  height: "75vh",
   width: "100vw",
   color: "#fff",
   lineHeight: "160px",
@@ -15,7 +15,9 @@ const { Meta } = Card;
 
 const HomePage = () => {
   return (
-    <>
+    <Row>
+      <Col span ={2}/>
+      <Col span = {20}>
       <div className="carousel">
         <Carousel autoplay>
           <div>
@@ -185,7 +187,9 @@ const HomePage = () => {
           <Col span={4}>LOGO</Col>
         </Row>
       </div>
-    </>
+      </Col>
+      <Col span = {2}/>
+    </Row>
   );
 };
 

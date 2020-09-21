@@ -7,13 +7,11 @@ function AddMeeting(props) {
         agenda: "",
         tags: []
     });
-    const { name, agenda, tags } = meeting;
+    const { name, agenda} = meeting;
     const onChange = (e) => {
         setmeeting({ ...meeting, [e.target.name]: e.target.value });
     };
-    const onChangeMOMTags = (e) => {
-        setmeeting({ ...meeting, tags: e });
-    }
+    
     const onAddMeeting = () => {
         props.addMeeting(meeting);
     }
@@ -36,18 +34,6 @@ function AddMeeting(props) {
                         required: true, message: "Please input agenda",
                     }]}>
                     <Input name="agenda" value={agenda} onChange={onChange}></Input>
-                </Form.Item>
-                <Form.Item>
-                    <Form.Item label="MOM Tags">
-                        <Select
-                            mode="multiple"
-                            style={{ width: '100%' }}
-                            placeholder="Please select"
-                            onChange={onChangeMOMTags}
-                        >
-                            <Option key = "tags">Put tag here</Option>
-                                                         </Select>
-                    </Form.Item>
                 </Form.Item>
                 <Button
                     type="primary"
