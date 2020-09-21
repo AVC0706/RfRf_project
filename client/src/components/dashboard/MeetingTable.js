@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
-import { Button, Table, Space, Input } from "antd";
+import { Button, Table, Space, Input,Modal } from "antd";
 import { Popconfirm } from "antd";
 import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
+import AddMOM from "../forms/AddMOM";
 
 const MeetingTable = (props) => {
   const baseColumns = [
@@ -32,10 +33,7 @@ const MeetingTable = (props) => {
       key: "actions",
       render: (text, record) => (
         <Space size="middle">
-          <Button type="primary">
-            View
-          </Button>
-
+          <AddMOM></AddMOM>
           <Popconfirm
             title="Are you sure？"
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}
