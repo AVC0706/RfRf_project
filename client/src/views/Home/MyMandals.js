@@ -19,7 +19,7 @@ function MyMandal(props) {
 
   const getMandals = () => {
     axios
-      .get("http://localhost:5000/api/user/myMandals")
+      .get("http://13.232.76.242:5000/api/user/myMandals")
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data.user);

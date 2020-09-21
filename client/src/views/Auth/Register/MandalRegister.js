@@ -74,7 +74,7 @@ function MandalRegister(props) {
     };
 
     axios.post(
-      "http://localhost:5000/api/mandal/createMandal",
+      "http://13.232.76.242:5000/api/mandal/createMandal",
       mandal,
       config
     ).then(res => {
