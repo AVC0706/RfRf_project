@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Form, Select, Upload, Button, message, Tabs, Descriptions, Modal } from "antd";
+import { Form, Select, Upload, Button, message, Input, Descriptions, Modal } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 
 const {Option} = Select;
@@ -10,7 +10,7 @@ export default function AddMOM() {
     tags:[],
     text:"",
     });
-    const {addMOM_visible,tags} = addMOM;
+    const {addMOM_visible,tags,text} = addMOM;
     const hideAddMOM = () =>
     {
         setAddMOM({...addMOM,addMOM_visible:false});
@@ -66,7 +66,7 @@ export default function AddMOM() {
                             mode="multiple"
                             style={{ width: '100%' }}
                             placeholder="Please select"
-                            onChange={onChaIngeMOMTags}
+                            onChange={onChangeMOMTags}
                         >
                             <Option key = "tags">Put tag here</Option>
                                                          </Select>
