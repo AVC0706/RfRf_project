@@ -7,7 +7,8 @@ const { Dragger } = Upload;
 export default function AddMOM() {
     const [addMOM,setAddMOM] = useState({
         addMOM_visible : false,
-    tags:[]
+    tags:[],
+    text:"",
     });
     const {addMOM_visible,tags} = addMOM;
     const hideAddMOM = () =>
@@ -25,6 +26,9 @@ export default function AddMOM() {
     {
         setAddMOM({...addMOM,addMOM_visible:true});
     };
+    const onChange = (e) => {
+      setAddMOM({ ...addMOM, [e.target.name]: e.target.value });
+  };
     const uploader = {
         name: "file",
         multiple: true,
@@ -62,11 +66,18 @@ export default function AddMOM() {
                             mode="multiple"
                             style={{ width: '100%' }}
                             placeholder="Please select"
-                            onChange={onChangeMOMTags}
+                            onChange={onChaIngeMOMTags}
                         >
                             <Option key = "tags">Put tag here</Option>
                                                          </Select>
                     </Form.Item>
+                </Form.Item>
+                <Form.Item>
+                <Form.Item
+            name="Text"
+          >
+            <Input name="text" value={text} onChange={onChange} />
+          </Form.Item>
                 </Form.Item>
                 <Form.Item><br></br>
           <Dragger {...uploader}>
