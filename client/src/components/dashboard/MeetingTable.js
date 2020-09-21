@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
-import { Button, Table, Space, Input } from "antd";
+import { Button, Table, Space, Input,Modal } from "antd";
 import { Popconfirm } from "antd";
 import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
 
@@ -33,9 +33,13 @@ const MeetingTable = (props) => {
       render: (text, record) => (
         <Space size="middle">
           <Button type="primary">
-            View
+            Add MOM
           </Button>
-
+          <Modal
+                      title={props.meetings.name}
+                      visible={true}
+                      footer={null}
+                    ></Modal>
           <Popconfirm
             title="Are you sure？"
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}
