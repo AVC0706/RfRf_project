@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Row, Col, Button, Badge, Tabs, Descriptions, Modal } from "antd";
+import { Card, Row, Col, Button, Badge, Tabs, Descriptions, Modal ,message} from "antd";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import DataTable from "../../components/dashboard/DataTable";
 import UserContext from "../../context/user/userContext";
@@ -12,7 +12,8 @@ import MandalTable from "../../components/dashboard/MandalTable";
 const { TabPane } = Tabs;
 function MandalProfile(props) {
   const userContext = useContext(UserContext);
-  const [meeting, setMeeting] = useState([]);
+  const [meeting, setMeeting] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (userContext.user) {
@@ -180,6 +181,48 @@ const getMeetings = () => {
     })
     setmandal({ ...mandal, addMeeting_visible: false })
   };
+
+  const deleteMeet = (id,name) => {
+    const key = "updatable";
+    message.loading({ content: "Deleting...", key });
+
+    console.log("deleteteD0");
+    setLoading(true);
+
+    axios
+      .delete(`http://localhost:5000/api/meeting/deletemeeting/${id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          getMeetings();
+         }
+          else {
+          getMeetings();
+          }
+
+          message.success({ content: "User Deleted !!", key, duration: 3 });
+
+          setLoading(false);
+        })
+      .catch((err) => {
+        setLoading(false);
+      });
+  };
+  const addmom = (id, meet) => {
+    console.log(meet);
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      }
+    };
+      axios.put(`http://localhost:5000/api/meeting/addmom/${id}`, meet, config)
+      .then(res => {
+        console.log(res.data);
+        console.log('success');
+      }).catch(err => {
+        console.log(err)
+      })
+  
+    };
   return (
     <>
       <Row>
@@ -270,7 +313,7 @@ const getMeetings = () => {
                     >
                       <AddMeeting addMeeting={AddMeetings}></AddMeeting>
                     </Modal>
-                    <MeetingTable meetings={meeting} ></MeetingTable>
+                    <MeetingTable meetings={meeting} deleteMeet = {deleteMeet} addMom = {addmom} ></MeetingTable>
                   </TabPane>
                 </Tabs>
               </Col>

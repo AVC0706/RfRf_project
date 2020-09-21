@@ -3,9 +3,24 @@ import "antd/dist/antd.css";
 import { Button, Table, Space, Input,Modal } from "antd";
 import { Popconfirm } from "antd";
 import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
+import axios from "axios";
 import AddMOM from "../forms/AddMOM";
 
+
 const MeetingTable = (props) => {
+  const addMoM = (id,meet) => {
+    props.addMom(id,meet)
+  }
+
+  const onDeleteButton = (e, text, record) => {
+    e.preventDefault();
+    console.log(record);
+    props.deleteMeet(record._id, record.name);
+
+    function onChange(pagination, filters, sorter, extra) {
+      console.log("params", pagination, filters, sorter, extra);
+    }
+  };
   const baseColumns = [
     {
       title: "Meeting Name",
@@ -33,11 +48,11 @@ const MeetingTable = (props) => {
       key: "actions",
       render: (text, record) => (
         <Space size="middle">
-          <AddMOM></AddMOM>
+          <AddMOM meeting = {record} addMoM = {addMoM}></AddMOM>
           <Popconfirm
             title="Are you sure？"
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}
-            // onConfirm={(e) => onDeleteButton(e, text, record)}
+            onConfirm={(e) => onDeleteButton(e, text, record)}
           >
             <Button type="primary" danger>
               Delete
