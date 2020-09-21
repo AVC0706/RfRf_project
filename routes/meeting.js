@@ -6,12 +6,12 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/createmeeting/:id", isAdmin, async (req, res) => {
-  const {name ,agenda, tags} = req.body;
+  const {name ,agenda, date} = req.body;
   try {
     const meeting = new Meeting({
       name,
+      date,
       agenda,
-      tags,
       mandal_id: req.params.id,
       user_id: req.user._id,
     });
@@ -78,6 +78,7 @@ router.put("/addmom/:id",isAdmin, async (req,res)=> {
     try {
         const meeting = await Meeting.findOne({_id: req.params.id});
         meeting.mom = req.body.mom;
+        meeting.tags = req.body.tags;
         await meeting.save()
         res.status(201).send({meeting})
     } catch(e) {
