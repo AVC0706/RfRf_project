@@ -33,7 +33,7 @@ router.put("/updatemeeting/:id", isAdmin, async (req, res) => {
     }
 
     meeting.agenda = req.body.agenda;
-    meeting.mom_tags = req.body.mom_tags;
+    meeting.tags = req.body.tags;
     await meeting.save();
     res.status(200).send({ meeting });
   } catch (e) {

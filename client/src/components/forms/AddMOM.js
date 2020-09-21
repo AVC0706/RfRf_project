@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Form, Select, Upload, Button, message, Tabs, Descriptions, Modal } from "antd";
+import { Form, Select, Upload, Button, message, Tabs, Descriptions, Modal, Input } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 
 const {Option} = Select;
 const { Dragger } = Upload;
-export default function AddMOM() {
+export default function AddMOM(props) {
     const [addMOM,setAddMOM] = useState({
         addMOM_visible : false,
     tags:[],
-    text:"",
+    mom:"",
     });
-    const {addMOM_visible,tags} = addMOM;
+    const {addMOM_visible,mom,tags} = addMOM;
     const hideAddMOM = () =>
     {
         setAddMOM({...addMOM,addMOM_visible:false});
@@ -18,8 +18,10 @@ export default function AddMOM() {
     const onChangeMOMTags = (e) => {
         setAddMOM({ ...addMOM, tags: e });
     };
-    const onAddMOM = (e) =>
+    const onAddMOM = () =>
     {
+      console.log(props.meeting._id)
+      props.addMoM(props.meeting._id,addMOM);
         setAddMOM({...addMOM,addMOM_visible:false});
     };
     const showAddMOM = () =>
@@ -61,12 +63,12 @@ export default function AddMOM() {
                     >
                         <Form name="addMOM">
                 <Form.Item>
-                    <Form.Item label="MOM Tags">
+                    <Form.Item name="tags" label="MOM Tags">
                         <Select
                             mode="multiple"
                             style={{ width: '100%' }}
                             placeholder="Please select"
-                            onChange={onChaIngeMOMTags}
+                            onChange={onChangeMOMTags}
                         >
                             <Option key = "tags">Put tag here</Option>
                                                          </Select>
@@ -74,9 +76,11 @@ export default function AddMOM() {
                 </Form.Item>
                 <Form.Item>
                 <Form.Item
-            name="Text"
+            name="mom"
+            label="mom"
+            
           >
-            <Input name="text" value={text} onChange={onChange} />
+            <Input name="mom" value={mom} onChange={onChange} />
           </Form.Item>
                 </Form.Item>
                 <Form.Item><br></br>

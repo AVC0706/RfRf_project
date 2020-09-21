@@ -6,7 +6,6 @@ function AddMeeting(props) {
         name: "",
         agenda: "",
         date:"",
-        tags: []
     });
     const { name, agenda ,date} = meeting;
     const onChange = (e) => {
@@ -18,6 +17,7 @@ function AddMeeting(props) {
     };
     const onAddMeeting = () => {
         props.addMeeting(meeting);
+        
     }
     return (
         <div>
