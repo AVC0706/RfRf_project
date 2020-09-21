@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { Form, Input, Button ,Select} from "antd";
-const {Option} = Select;
+import { Form, Input, Button, Select,DatePicker } from "antd";
+const { Option } = Select;
 function AddMeeting(props) {
     const [meeting, setmeeting] = useState({
         name: "",
         agenda: "",
+        date:"",
         tags: []
     });
-    const { name, agenda} = meeting;
+    const { name, agenda ,date} = meeting;
     const onChange = (e) => {
         setmeeting({ ...meeting, [e.target.name]: e.target.value });
     };
-    
+    const onChangeDate = (date,dateString) =>
+    {
+        setmeeting({...meeting,date: dateString});
+    };
     const onAddMeeting = () => {
         props.addMeeting(meeting);
     }
@@ -34,6 +38,10 @@ function AddMeeting(props) {
                         required: true, message: "Please input agenda",
                     }]}>
                     <Input name="agenda" value={agenda} onChange={onChange}></Input>
+                </Form.Item>
+                <Form.Item name="Date"
+                    label="Date">
+                        <DatePicker onChange={onChangeDate} />
                 </Form.Item>
                 <Button
                     type="primary"
