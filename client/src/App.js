@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import "./App.less";
+import "./App.css";
 
 import Navbar from "./components/navbars/header/header";
 
