@@ -4,7 +4,7 @@ FROM node:14.7.0-alpine3.10 as react-build
 WORKDIR /usr/src/app
 COPY . ./
 RUN npm install
-RUN npm run-script build
+RUN npm craco build
 
 # Stage 2 - Deploy with NGNIX
 FROM nginx
