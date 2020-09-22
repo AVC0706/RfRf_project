@@ -2,17 +2,20 @@ import React, { useContext } from "react";
 import classes from "./Dashboard.module.css";
 import UserContext from "../../context/user/userContext";
 import DashboardView from "../../components/dashboard/Dashboard";
+import { Col, Row } from "antd";
 
 const Dashboard = (props) => {
   const userContext = useContext(UserContext);
   return (
-    <div>
-      {userContext.user && userContext.user.admin.toLowerCase() !== "null" ? (
+    <Row>
+      <Col span ={2}/>
+      <Col span = {20}>{userContext.user && userContext.user.admin.toLowerCase() !== "null" ? (
         <DashboardView />
       ) : (
         <p>You are not a admin.</p>
-      )}
-    </div>
+      )}</Col>
+      <Col span = {2}/>
+    </Row>
   );
 };
 

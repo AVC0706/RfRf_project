@@ -10,6 +10,7 @@ function Navbar() {
 
   const layout = {
     float: "right",
+    backgroundColor: "#ffac42",
   };
   const logo_style = {
     padding: "0px 0px 0px 25px",
@@ -39,13 +40,13 @@ function Navbar() {
           </Col>
         </Row>
 
-        <Header style={{ backgroundColor: '#b8b8b8', height: '60px' }}></Header>
-        <Header>
+        <Header style={{ backgroundColor: '#d6d6d6', height: '60px' }}></Header>
+        <Header style={{ backgroundColor: '#ffac42' }}>
           {userContext.isAuth === true && userContext.user ? (
             <Menu
               style={layout}
-              theme="dark"
               mode="horizontal"
+              theme="dark"
               defaultSelectedKeys={["1"]}
             >
               <Menu.Item key="1">
@@ -68,17 +69,32 @@ function Navbar() {
               <>
                 <Menu
                   style={layout}
-                  theme="dark"
                   mode="horizontal"
+                  theme="dark"
                   defaultSelectedKeys={["1"]}
                 >
                   <Menu.Item key="1">
                     <Link to="/">Home</Link>
                   </Menu.Item>
                   <Menu.Item key="2">
-                    <Link to="/register">Register</Link>
+                    <Link to="/">About Us</Link>
                   </Menu.Item>
                   <Menu.Item key="3">
+                    <Link to="/">Organisation Structure</Link>
+                  </Menu.Item>
+                  <Menu.Item key="4">
+                    <Link to="/">Meeting Archives</Link>
+                  </Menu.Item>
+                  <Menu.Item key="5">
+                    <Link to="/">Publications</Link>
+                  </Menu.Item>
+                  <Menu.Item key="6">
+                    <Link to="/">Contact Us</Link>
+                  </Menu.Item>
+                  <Menu.Item key="7">
+                    <Link to="/register">Register</Link>
+                  </Menu.Item>
+                  <Menu.Item key="8">
                     <Link to="/login">Login</Link>
                   </Menu.Item>
                 </Menu>
