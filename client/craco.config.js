@@ -7,7 +7,9 @@ module.exports = {
       options: {
         customizeTheme: {
           "@primary-color": "#FF8F00",
-          "@link-color": "#FF8F00","@menu-dark-color":"#000000",
+          "@link-color": "#FF8F00",
+          "@menu-dark-color":"#000000",
+          "@menu-highlight-color":"#FFFFFF",
         }
       }
     }
