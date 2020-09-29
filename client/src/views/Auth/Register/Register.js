@@ -13,12 +13,20 @@ import {
 } from "antd";
 import "./Register.css";
 import UserContext from "../../../context/user/userContext";
+import axios from "axios"
+import { districts, states } from "./Mock";
+
 const { Option } = Select;
 
 function Register(props) {
   const userContext = useContext(UserContext);
 
   const { Aoi, getAllAoi } = userContext;
+
+  useEffect(() => {
+    console.log(districts)
+    console.log(states)
+  }, [])
 
   useEffect(() => {
     getAllAoi();
