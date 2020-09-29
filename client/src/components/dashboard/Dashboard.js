@@ -19,7 +19,7 @@ function Dashboard() {
     <Layout style={{ minHeight: "92vh" }}>
       <Layout>
         <Sider>
-          <Menu defaultSelectedKeys={[tab]} mode="inline" onClick={onChange}>
+          <Menu theme = 'dark' defaultSelectedKeys={[tab]} mode="inline" onClick={onChange} >
             <Menu.Item key="Admins">Admins</Menu.Item>
             <Menu.Item key="Mandals">Mandals</Menu.Item>
             <Menu.Item key="Mandal Admins">Mandal Admins</Menu.Item>

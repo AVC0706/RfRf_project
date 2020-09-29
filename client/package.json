@@ -18,8 +18,8 @@
     "react-scripts": "^3.4.3"
   },
   "scripts": {
-    "start": "nodemon -w craco.config.js --exec \"craco start\"",
-    "build": "craco build",
+    "start": "craco start",
+    "build": "react-scripts build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },

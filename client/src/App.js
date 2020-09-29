@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import "./App.css";
 
-import Navbar from "./components/navbars/header/header";
+
 
 import UserContext from "./context/user/userContext";
 import Routes from "./routes";
@@ -19,7 +19,7 @@ function App() {
   return (
     <div>
       <Router>
-        <Navbar />
+        
 
         <Routes />
       </Router>

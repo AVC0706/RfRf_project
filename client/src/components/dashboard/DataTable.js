@@ -5,6 +5,11 @@ import { Popconfirm } from "antd";
 import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
 
 const DataTable = (props) => {
+  const style = 
+  {
+    boxShadow: '0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 3px 6px 0 rgba(0, 0, 0, 0.19)',
+    margin: '2em'
+  }
   const baseColumns = [
     {
       title: "Name",
@@ -128,6 +133,7 @@ const DataTable = (props) => {
       <Table
         columns={columns}
         dataSource={filterTable === null ? props.users : filterTable}
+        style = {style}
       >
         {" "}
       </Table>
