@@ -9,6 +9,7 @@ import MandalProfile from "./views/Profiles/MandalProfile";
 import UserProfile from "./views/Profiles/UserProfile";
 import HomePage from "./components/homepage/HomePage";
 import MyMandal from "./views/Home/MyMandals";
+import ForgetPassword from "./views/Auth/ForgetPassword/ForgetPassword";
 
 class Routes extends React.Component {
   render() {
@@ -20,7 +21,7 @@ class Routes extends React.Component {
         <Route path="/mandalregister" component={MandalRegister} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/myMandals" component={ MyMandal } />
-
+        <Route path="/forgetPassword" component={ForgetPassword}/>
         <Route path="/mandalProfile/:id" component={ MandalProfile } />
         <Route path="/userProfile/:id" component={ UserProfile } />
 

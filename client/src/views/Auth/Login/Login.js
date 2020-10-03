@@ -138,7 +138,7 @@ const Login = (props) => {
                     </Form.Item>
                   </Form>
                   <center>
-                    <a href="">Forgot password?</a>
+                    <Link to = "/forgetPassword">Forgot password?</Link>
                     <Divider plain>OR</Divider>
                   Don't have an account?
                   <Link to="/register"> Register</Link>
