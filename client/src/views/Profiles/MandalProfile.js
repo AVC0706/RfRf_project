@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Row, Col, Button, Badge, Tabs, Descriptions, Modal ,message} from "antd";
+import { Card, Row, Col, Button, Badge, Tabs, Descriptions, Modal, message, Layout } from "antd";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import DataTable from "../../components/dashboard/DataTable";
 import UserContext from "../../context/user/userContext";
@@ -8,9 +8,12 @@ import MeetingTable from "../../components/dashboard/MeetingTable";
 import AddMember from "../../components/forms/AddMember";
 import AddMeeting from "../../components/forms/AddMeeting";
 import MandalTable from "../../components/dashboard/MandalTable";
+import Navbar from "../../components/navbars/header/header";
 
+const { Header } = Layout;
 const { TabPane } = Tabs;
 function MandalProfile(props) {
+
   const userContext = useContext(UserContext);
   const [meeting, setMeeting] = useState({});
   const [loading, setLoading] = useState(true);
@@ -22,7 +25,7 @@ function MandalProfile(props) {
       getMeetings();
 
     }
-    
+
 
   }, [userContext.isAuth]);
 
@@ -106,7 +109,7 @@ function MandalProfile(props) {
         console.log(err);
       });
   };
-const getMeetings = () => {
+  const getMeetings = () => {
     axios
       .get(`http://13.232.76.242:5000/api/meeting/getmeeting/${props.match.params.id}`)
       .then((res) => {
@@ -161,7 +164,7 @@ const getMeetings = () => {
 
   const AddMeetings = (meeting) => {
     console.log(meeting);
-    const config  =  {
+    const config = {
       header: {
         "Content-Type": "application/json"
       },
@@ -173,16 +176,16 @@ const getMeetings = () => {
       config
     ).then(res => {
       console.log(res.data)
-        console.log('success')
-        props.history.push('/')
+      console.log('success')
+      props.history.push('/')
 
-    }).catch(e =>{
+    }).catch(e => {
       console.log(e)
     })
     setmandal({ ...mandal, addMeeting_visible: false })
   };
 
-  const deleteMeet = (id,name) => {
+  const deleteMeet = (id, name) => {
     const key = "updatable";
     message.loading({ content: "Deleting...", key });
 
@@ -194,15 +197,15 @@ const getMeetings = () => {
       .then((res) => {
         if (res.status === 200) {
           getMeetings();
-         }
-          else {
+        }
+        else {
           getMeetings();
-          }
+        }
 
-          message.success({ content: "User Deleted !!", key, duration: 3 });
+        message.success({ content: "User Deleted !!", key, duration: 3 });
 
-          setLoading(false);
-        })
+        setLoading(false);
+      })
       .catch((err) => {
         setLoading(false);
       });
@@ -214,28 +217,21 @@ const getMeetings = () => {
         "Content-Type": "application/json",
       }
     };
-      axios.put(`http://13.232.76.242:5000/api/meeting/addmom/${id}`, meet, config)
+    axios.put(`http://localhost:5000/api/meeting/addmom/${id}`, meet, config)
       .then(res => {
         console.log(res.data);
         console.log('success');
       }).catch(err => {
         console.log(err)
       })
-  
-    };
+
+  };
   return (
     <>
+      <Navbar></Navbar>
       <Row>
-        <Col md={4}>
-          <Card style={{ padding: "2em", margin: "2em" }} cover={image}>
-            <div>
-              <p>Area of interests</p>
-              Education
-              {/* Put all interests here */}
-            </div>
-          </Card>
-        </Col>
-        <Col md={16} style={{ margin: "3em" }}>
+        <Col span = {2} />
+        <Col span = {20}>
           <Card
             title={name}
             extra={
@@ -290,7 +286,7 @@ const getMeetings = () => {
                       <AddMember addMember={AddMembers}></AddMember>
                     </Modal>
 
-                    <DataTable users = {mandalMembers}></DataTable>
+                    <DataTable users={mandalMembers}></DataTable>
                   </TabPane>
 
                   {/*----------- MEETINGS ---------*/}
@@ -313,14 +309,14 @@ const getMeetings = () => {
                     >
                       <AddMeeting addMeeting={AddMeetings}></AddMeeting>
                     </Modal>
-                    <MeetingTable meetings={meeting} deleteMeet = {deleteMeet} addMom = {addmom} ></MeetingTable>
+                    <MeetingTable meetings={meeting} deleteMeet={deleteMeet} addMom={addmom} ></MeetingTable>
                   </TabPane>
                 </Tabs>
               </Col>
             </Row>
           </Card>
         </Col>
-        <Col md={4} xs={2} />
+        <Col span = {2} />
       </Row>
     </>
   );

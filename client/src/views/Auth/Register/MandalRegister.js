@@ -14,6 +14,7 @@ import {
 
 import axios from "axios";
 import UserContext from "../../../context/user/userContext";
+import SecondNav from "../../../components/navbars/header/altHeader";
 
 const { Option } = Select;
 
@@ -79,10 +80,10 @@ function MandalRegister(props) {
       config
     ).then(res => {
       console.log(res.data)
-        console.log('success')
-        props.history.push('/')
+      console.log('success')
+      props.history.push('/')
 
-    }).catch(e =>{
+    }).catch(e => {
       console.log(e)
     })
 
@@ -106,109 +107,123 @@ function MandalRegister(props) {
   }
 
   return (
-    <Row>
-      <Col lg={8} md={2} sm={1} />
-      <Col lg={8} md={10} sm={12}>
-        <Card title="Mandal Register" className="register-card">
-          <br></br>
-          <Form
-            name="mandal_register"
-            validateMessages={validateMessages}
-            {...layout}
-            initialValues={{
-              remember: true,
-            }}
-          >
-            <Form.Item
-              name="name-item"
-              label="Mandal Name"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input Mandal name!",
-                },
-              ]}
-            >
-              <Input name="name" value={name} onChange={onChange} />
-            </Form.Item>
+    <>
+      <SecondNav></SecondNav>
+      <Row>
+        <Col span={2} />
+        <Col span={20}>
+          <div style={{ backgroundColor: '#fcac44', height: '100vh' }}>
+            <Row>
+              <Col lg={8} md={2} sm={1} />
+              <Col lg={8} md={10} sm={12}>
+                <Card title="Mandal Register" className="register-card">
+                  <br></br>
+                  <Form
+                    name="mandal_register"
+                    validateMessages={validateMessages}
+                    {...layout}
+                    initialValues={{
+                      remember: true,
+                    }}
+                  >
+                    <Form.Item
+                      name="name-item"
+                      label="Mandal Name"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input Mandal name!",
+                        },
+                      ]}
+                    >
+                      <Input name="name" value={name} onChange={onChange} />
+                    </Form.Item>
 
-            <Form.Item
-              name="city-input"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your city!",
-                },
-              ]}
-              label="City"
-            >
-              <Input
-                name="city"
-                value={city}
-                onChange={onChange}
-                label="City"
-              />
-            </Form.Item>
-            <Form.Item
-              name="qualif-input"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your Distrcit!",
-                },
-              ]}
-              label="Distrcit"
-            >
-              <Input name="district" value={district} onChange={onChange} />
-            </Form.Item>
-            <Form.Item
-              name="state-input"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your State!",
-                },
-              ]}
-              label="State"
-            >
-              <Input name="state" value={state} onChange={onChange} />
-            </Form.Item>
-            <Form.Item
-              name="country-input"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your Country!",
-                },
-              ]}
-              label="Country"
-            >
-              <Input name="country" value={country} onChange={onChange} />
-            </Form.Item>
-            <Form.Item label="Area of Interest">
-              <Select
-                mode="multiple"
-                style={{ width: "100%" }}
-                placeholder="Please select"
-                onChange={onChangeAOI}
-                required
-              >
-                {children}
-              </Select>
-            </Form.Item>
-          </Form>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="register-form-button"
-            onClick={onSubmit}
-          >
-            Register
+                    <Form.Item
+                      name="city-input"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your city!",
+                        },
+                      ]}
+                      label="City"
+                    >
+                      <Input
+                        name="city"
+                        value={city}
+                        onChange={onChange}
+                        label="City"
+                      />
+                    </Form.Item>
+                    <Form.Item
+                      name="qualif-input"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your Distrcit!",
+                        },
+                      ]}
+                      label="District"
+                    >
+                      <Input name="district" value={district} onChange={onChange} />
+                    </Form.Item>
+                    <Form.Item
+                      name="state-input"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your State!",
+                        },
+                      ]}
+                      label="State"
+                    >
+                      <Input name="state" value={state} onChange={onChange} />
+                    </Form.Item>
+                    <Form.Item
+                      name="country-input"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your Country!",
+                        },
+                      ]}
+                      label="Country"
+                    >
+                      <Input name="country" value={country} onChange={onChange} />
+                    </Form.Item>
+                    <Form.Item label="Area of Interest">
+                      <Select
+                        mode="multiple"
+                        style={{ width: "100%" }}
+                        placeholder="Please select"
+                        onChange={onChangeAOI}
+                        required
+                      >
+                        {children}
+                      </Select>
+                    </Form.Item>
+                  </Form>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="register-form-button"
+                    onClick={onSubmit}
+                  >
+                    Register
           </Button>
-        </Card>
-      </Col>
-      <Col lg={8} md={2} sm={1} />
-    </Row>
+                </Card>
+              </Col>
+              <Col lg={8} md={2} sm={1} />
+            </Row>
+          </div>
+
+        </Col>
+        <Col span={2}></Col>
+
+      </Row>
+    </>
+
   );
 }
 
