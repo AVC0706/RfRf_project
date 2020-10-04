@@ -38,7 +38,7 @@ const UserState = (props) => {
     }
 
     try {
-      const res = await axios.get("http://13.232.76.242:5000/api/auth/isAuth");
+      const res = await axios.get("http://localhost:5000/api/auth/isAuth");
       dispatch({
         type: USER_LOADED,
         payload: res.data,
@@ -60,7 +60,7 @@ const UserState = (props) => {
       },
     };
     try {
-      const res = await axios.post("http://13.232.76.242:5000/api/auth/register", formData, config);
+      const res = await axios.post("http://localhost:5000/api/auth/register", formData, config);
       // console.log("this is admin status:" + res.data.superadmin.admin);
 
       dispatch({
@@ -85,7 +85,7 @@ const UserState = (props) => {
     };
     try {
       const res = await axios.post(
-        "http://13.232.76.242:5000/api/auth/login",
+        "http://localhost:5000/api/auth/login",
         formData,
         config
       );
@@ -97,7 +97,7 @@ const UserState = (props) => {
       });
       console.log("login success");
       // router.push({
-      //   path: "http://13.232.76.242:5000/stateAdmin",
+      //   path: "http://localhost:5000/stateAdmin",
       // });
       loadUser();
     } catch (e) {
@@ -122,7 +122,7 @@ const UserState = (props) => {
     //   },
     // };
     try {
-      const res = await axios.get("http://13.232.76.242:5000/api/aoi/getAllAoi");
+      const res = await axios.get("http://localhost:5000/api/aoi/getAllAoi");
       // console.log("this is admin status:" + res.data.superadmin.admin);
 
       dispatch({
