@@ -28,7 +28,7 @@ function AdminTab() {
 
   const getDistrictAdmin = () => {
     axios
-      .get("http://localhost:5000/api/admin/getAdmins/district")
+      .get("http://13.232.76.242:5000/api/admin/getAdmins/district")
       .then((res) => {
         if (res.status === 200) {
           setDistrictAdmins(res.data.users);
@@ -42,7 +42,7 @@ function AdminTab() {
 
   const getCityAdmin = () => {
     axios
-      .get("http://localhost:5000/api/admin/getAdmins/city")
+      .get("http://13.232.76.242:5000/api/admin/getAdmins/city")
       .then((res) => {
         if (res.status === 200) {
           setCityAdmins(res.data.users);
@@ -56,7 +56,7 @@ function AdminTab() {
 
   const getMandalAdmin = () => {
     axios
-      .get("http://localhost:5000/api/admin/getAdmins/mandal")
+      .get("http://13.232.76.242:5000/api/admin/getAdmins/mandal")
       .then((res) => {
         if (res.status === 200) {
           setMandalAdmins(res.data.users);
@@ -70,7 +70,7 @@ function AdminTab() {
 
   const getNormalUsers = () => {
     axios
-      .get("http://localhost:5000/api/admin/getAdmins/null")
+      .get("http://13.232.76.242:5000/api/admin/getAdmins/null")
       .then((res) => {
         if (res.status === 200) {
           setNormalUsers(res.data.users);
@@ -90,7 +90,7 @@ function AdminTab() {
     setLoading(true);
 
     axios
-      .delete(`http://localhost:5000/api/admin/deleteUser/${id}`)
+      .delete(`http://13.232.76.242:5000/api/admin/deleteUser/${id}`)
       .then((res) => {
         if (res.status === 200) {
           if (userType === "district") {
