@@ -81,7 +81,7 @@ function MandalProfile(props) {
     console.log(props);
     axios
       .get(
-        `http://localhost:5000/api/mandal/getMandal/${props.match.params.id}`
+        `http://13.232.76.242:5000/api/mandal/getMandal/${props.match.params.id}`
       )
       .then((res) => {
         if (res.status === 200) {
@@ -99,7 +99,7 @@ function MandalProfile(props) {
     console.log(props);
     axios
       .get(
-        `http://localhost:5000/api/mandal/getMembers/${props.match.params.id}`
+        `http://13.232.76.242:5000/api/mandal/getMembers/${props.match.params.id}`
       )
       .then((res) => {
         if (res.status === 200) {
@@ -113,7 +113,7 @@ function MandalProfile(props) {
   };
   const getMeetings = () => {
     axios
-      .get(`http://localhost:5000/api/meeting/getmeeting/${props.match.params.id}`)
+      .get(`http://13.232.76.242:5000/api/meeting/getmeeting/${props.match.params.id}`)
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data);
@@ -144,7 +144,7 @@ function MandalProfile(props) {
     };
     axios
       .post(
-        "http://localhost:5000/api/mandalAdmin/addMember",
+        "http://13.232.76.242:5000/api/mandalAdmin/addMember",
         {
           user,
           mandal_id: props.match.params.id,
@@ -173,7 +173,7 @@ function MandalProfile(props) {
     };
 
     axios.post(
-      `http://localhost:5000/api/meeting/createmeeting/${props.match.params.id}`,
+      `http://13.232.76.242:5000/api/meeting/createmeeting/${props.match.params.id}`,
       meeting,
       config
     ).then(res => {
@@ -194,7 +194,7 @@ function MandalProfile(props) {
     setLoading(true);
 
     axios
-      .delete(`http://localhost:5000/api/meeting/deletemeeting/${id}`)
+      .delete(`http://13.232.76.242:5000/api/meeting/deletemeeting/${id}`)
       .then((res) => {
         if (res.status === 200) {
           getMeetings();
