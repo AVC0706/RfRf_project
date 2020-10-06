@@ -8,7 +8,7 @@ import Navbar from "../../components/navbars/header/header";
 const Dashboard = (props) => {
   const userContext = useContext(UserContext);
   return (
-    <><Navbar></Navbar><Row>
+    <><Row>
       <Col span={2} />
       <Col span={20}>{userContext.user && userContext.user.admin.toLowerCase() !== "null" ? (
         <DashboardView />

@@ -108,7 +108,7 @@ function MandalRegister(props) {
 
   return (
     <>
-      <SecondNav></SecondNav>
+      {/* <SecondNav></SecondNav> */}
       <Row>
         <Col span={2} />
         <Col span={20}>

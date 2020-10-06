@@ -228,7 +228,7 @@ function MandalProfile(props) {
   };
   return (
     <>
-      <Navbar></Navbar>
+      {/* <Navbar></Navbar> */}
       <Row>
         <Col span = {2} />
         <Col span = {20}>
