@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Row, Col, Button, Badge, Tabs, Descriptions, Modal, message, Layout } from "antd";
+import { Card, Row, Col, Button, Badge, Tabs, Descriptions, Statistic, Modal, message, Layout } from "antd";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import DataTable from "../../components/dashboard/DataTable";
 import UserContext from "../../context/user/userContext";
@@ -9,6 +9,8 @@ import AddMember from "../../components/forms/AddMember";
 import AddMeeting from "../../components/forms/AddMeeting";
 import MandalTable from "../../components/dashboard/MandalTable";
 import Navbar from "../../components/navbars/header/header";
+import MemberList from "../../components/profiles/MemberList";
+import MeetingDetails from "../../components/profiles/MeetingDetails";
 
 const { Header } = Layout;
 const { TabPane } = Tabs;
@@ -177,7 +179,6 @@ function MandalProfile(props) {
     ).then(res => {
       console.log(res.data)
       console.log('success')
-      props.history.push('/')
 
     }).catch(e => {
       console.log(e)
@@ -230,93 +231,105 @@ function MandalProfile(props) {
     <>
       <Navbar></Navbar>
       <Row>
-        <Col span = {2} />
-        <Col span = {20}>
-          <Card
-            title={name}
-            extra={
+        <Col span={2} />
+        <Col span={20} style={{ backgroundColor: '#fcac44' }}>
+          <div >
+            <Card
+              title={name}
+              style={{ margin: "10px" }}
+              extra={<><br></br><Statistic title="Next Scheduled Meeting" value="10th Feb 2020"></Statistic>
+              </>
+
+              }
+              headStyle={{ fontSize: "250%" }}
+            >
               <Button
                 style={{ marginTop: "0px", float: "right" }}
                 type="primary"
               >
                 Edit Profile
-              </Button>
-            }
-            headStyle={{ fontSize: "250%" }}
-          >
-            {/*----------- MEMBERS ---------*/}
+            </Button>
+              {/*----------- MEMBERS ---------*/}
+              <Tabs>
+                <TabPane tab="Mandal Information" key="mandalInfo">
+                  <Row>
+                    <Col span={16}>
+                      <Descriptions title="Mandal Info" bordered>
+                        <Descriptions.Item label="Pramukh">{admin}</Descriptions.Item>
+                        <Descriptions.Item label="City">{city}</Descriptions.Item>
+                        <Descriptions.Item label="State">{state}</Descriptions.Item>
+                        <Descriptions.Item label="District">
+                          {district}
+                        </Descriptions.Item>
+                        <Descriptions.Item label="Members">
+                          {members}
+                        </Descriptions.Item>
+                        <Descriptions.Item label="Approval">
+                          <Badge status="success" text="Approved" />
+                        </Descriptions.Item>
+                      </Descriptions>
+                      <Card>
 
-            <Row>
-              <Col md={24}>
-                <Descriptions title="Mandal Info" bordered>
-                  <Descriptions.Item label="Admin">{admin}</Descriptions.Item>
-                  <Descriptions.Item label="City">{city}</Descriptions.Item>
-                  <Descriptions.Item label="State">{state}</Descriptions.Item>
-                  <Descriptions.Item label="District">
-                    {district}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Members">
-                    {members}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Approval">
-                    <Badge status="success" text="Approved" />
-                  </Descriptions.Item>
-                </Descriptions>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={24}>
-                <Tabs>
-                  <TabPane tab="Members" key="Members">
-                    <Button
-                      type="primary"
-                      shape="round"
-                      size="large"
-                      icon={<AiOutlineUserAdd></AiOutlineUserAdd>}
-                      onClick={showAddMembers}
-                    >
-                      Add Members
+                      </Card>
+
+                    </Col>
+                    <Col span={2}></Col>
+                    <Col span={6}>
+                      <MemberList></MemberList>
+                      <Button
+                        type="primary"
+                        shape="round"
+                        size="large"
+                        icon={<AiOutlineUserAdd></AiOutlineUserAdd>}
+                        onClick={showAddMembers}
+                      >
+                        Add Members
                     </Button>
-                    <Modal
-                      title="Add Members"
-                      visible={addMembers_visible}
-                      footer={null}
-                      onCancel={hideAddMembers}
-                    >
-                      <AddMember addMember={AddMembers}></AddMember>
-                    </Modal>
+                      <Modal
+                        title="Add Members"
+                        visible={addMembers_visible}
+                        footer={null}
+                        onCancel={hideAddMembers}
+                      >
+                        <AddMember addMember={AddMembers}></AddMember>
+                      </Modal>
+                    </Col>
+                  </Row>
 
-                    <DataTable users={mandalMembers}></DataTable>
-                  </TabPane>
-
-                  {/*----------- MEETINGS ---------*/}
-
-                  <TabPane tab="Meetings" key="Meetings">
-                    <Button
-                      type="primary"
-                      shape="round"
-                      size="large"
-                      icon={<AiOutlineUserAdd></AiOutlineUserAdd>}
-                      onClick={showAddMeeting}
-                    >
-                      Add Meeting
+                </TabPane>
+                <TabPane tab="Meeting Information" key="meetingInfo">
+                  <Card>
+                    <h1>Past Meeting Details</h1>
+                  </Card>
+                  <Button
+                    type="primary"
+                    shape="round"
+                    size="large"
+                    icon={<AiOutlineUserAdd></AiOutlineUserAdd>}
+                    onClick={showAddMeeting}
+                  >
+                    Add Meeting
                     </Button>
-                    <Modal
-                      title="Add Members"
-                      visible={addMeeting_visible}
-                      footer={null}
-                      onCancel={hideAddMeetings}
-                    >
-                      <AddMeeting addMeeting={AddMeetings}></AddMeeting>
-                    </Modal>
-                    <MeetingTable meetings={meeting} deleteMeet={deleteMeet} addMom={addmom} ></MeetingTable>
-                  </TabPane>
-                </Tabs>
-              </Col>
-            </Row>
-          </Card>
+                  <Modal
+                    title="Add Members"
+                    visible={addMeeting_visible}
+                    footer={null}
+                    onCancel={hideAddMeetings}
+                  >
+                    <AddMeeting addMeeting={AddMeetings}></AddMeeting>
+                  </Modal>
+                  <br></br>
+                  <br></br>
+                  <h1>Past Meetings</h1>
+                  <MeetingTable meetings={meeting} deleteMeet={deleteMeet} addMom={addmom} ></MeetingTable>
+                </TabPane>
+              </Tabs>
+
+            </Card>
+          </div>
+
         </Col>
-        <Col span = {2} />
+        <Col span={2} />
       </Row>
     </>
   );

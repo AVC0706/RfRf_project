@@ -118,7 +118,7 @@ function AdminTab() {
   return (
     <Tabs defaultActiveKey={[tab]}>
       {user.admin.toLowerCase() === "state" ? (
-        <TabPane tab="District" key="District">
+        <TabPane tab="District Admins" key="District">
           {loading ? (
             <Spin size="large" />
           ) : (
@@ -129,7 +129,7 @@ function AdminTab() {
 
       {user.admin.toLowerCase() === "state" ||
       user.admin.toLowerCase() === "district" ? (
-        <TabPane tab="City" key="City">
+        <TabPane tab="City Admins" key="City">
           {loading ? (
             <Spin size="large" />
           ) : (
@@ -138,17 +138,7 @@ function AdminTab() {
         </TabPane>
       ) : null}
 
-      {user.admin.toLowerCase() === "state" ||
-      user.admin.toLowerCase() === "district" ||
-      user.admin.toLowerCase() === "city" ? (
-        <TabPane tab="Mandal" key="Mandal">
-          {loading ? (
-            <Spin size="large" />
-          ) : (
-            <DataTable users={mandalAdmin} deleteUser={deleteUser} />
-          )}
-        </TabPane>
-      ) : null}
+      
 
       <TabPane tab="Users" key="Users">
         {loading ? (

@@ -20,7 +20,7 @@ function Dashboard() {
       <Layout>
         <Sider>
           <Menu theme = 'dark' defaultSelectedKeys={[tab]} mode="inline" onClick={onChange} >
-            <Menu.Item key="Admins">Admins</Menu.Item>
+            <Menu.Item key="Admins">User Database</Menu.Item>
             <Menu.Item key="Mandals">Mandals</Menu.Item>
             <Menu.Item key="Mandal Admins">Mandal Admins</Menu.Item>
             <Menu.Item key="Settings">Settings</Menu.Item>
