@@ -3,6 +3,7 @@ const User = require("../models/user");
 const {isAuth} = require("../middleware/auth"); 
 const Mandal = require("../models/mandal")
 const router = express.Router();
+const {sendResetMail,resetPassword} = require("../middleware/resetpass");
 
 //******Funtions here :
 //Update Profile , Delete Profile , reset password
@@ -58,5 +59,8 @@ router.delete("/deleteprofile",isAuth, async (req,res)=> {
         res.status(500).send()
     }
 })
+
+router.put("/forget-pass",sendResetMail );
+router.put("/reset-pass/:id",resetPassword);
 
 module.exports = router;
