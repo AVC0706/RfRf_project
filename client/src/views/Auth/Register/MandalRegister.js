@@ -75,7 +75,7 @@ function MandalRegister(props) {
     };
 
     axios.post(
-      "http://13.232.76.242:5000/api/mandal/createMandal",
+      "http://localhost:5000/api/mandal/createMandal",
       mandal,
       config
     ).then(res => {
@@ -108,7 +108,7 @@ function MandalRegister(props) {
 
   return (
     <>
-      <SecondNav></SecondNav>
+      {/* <SecondNav></SecondNav> */}
       <Row>
         <Col span={2} />
         <Col span={20}>

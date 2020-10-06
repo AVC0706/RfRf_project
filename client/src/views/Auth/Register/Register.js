@@ -89,6 +89,7 @@ function Register(props) {
     city: "",
     state: "",
     country: "",
+    district:"",
     admin: "null",
     aoi: [],
   });
@@ -98,6 +99,7 @@ function Register(props) {
     password,
     qualification,
     city,
+    district,
     state,
     country,
     aoi,
@@ -115,16 +117,17 @@ function Register(props) {
 
   return (
     <>
-      <SecondNav></SecondNav>
       <Row>
         <Col lg={2} md={2} xs={2} />
         <Col lg={20} md={10} xs={20} >
           <div style={{ backgroundColor: '#fcac44', height: '100vh' }}>
             <Row>
               <br></br>
-              <Col lg={8} md={2} sm={1}><Button onClick={()=> props.history.push('/')} size="large" style={{backgroundColor:'',margin:"0px 0px 0px 30px",borderColor:"#fcac44"}}shape="round"><p style={{fontSize:'18px', color:"#fcac44"}}>Home</p></Button></Col>
+              <Col lg={8} md={2} sm={1}>
+                {/* <Button onClick={()=> props.history.push('/')} size="large" style={{backgroundColor:'',margin:"0px 0px 0px 30px",borderColor:"#fcac44"}}shape="round"><p style={{fontSize:'18px', color:"#fcac44"}}>Home</p></Button> */}
+              </Col>
               <Col lg={10} md={10} sm={12}>
-                <Card className="register-card" style={{ backgroundColor: '#f7d3a6' }}>
+                <Card className="register-card" style={{ backgroundColor: '#f7d3a6', marginTop:'10%' }}>
                   <h1 style={{ textAlign: 'center' }}>User Register</h1>
                   <h4 style={{ textAlign: 'center' }}>Please enter your E-mail and Password</h4>
                   <hr>
@@ -220,6 +223,22 @@ function Register(props) {
                         onChange={onChange}
                       />
                     </Form.Item>
+                    <Form.Item
+                      name="district_name"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please input your District!",
+                        },
+                      ]}
+                      label="District"
+                    > <Input
+                    name="district"
+                    value={district}
+                    onChange={onChange}
+                    label="District"
+                  />
+                </Form.Item>
                     <Form.Item
                       name="city_name"
                       rules={[
