@@ -151,7 +151,7 @@ router.post(
             return userMandal;
           }
 
-          user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role , name: req.body.mandal_name});
+          user.mandals.push({ mandal_id: req.body.mandal_id, role: req.body.role , name: req.body.mandal_name});
 
           await user.save();
 
@@ -160,7 +160,7 @@ router.post(
 
         user = new User(member);
 
-        user.mandals.push({ mandal_id: req.body.mandal, role: req.body.role , name: req.body.mandal_name});
+        user.mandals.push({ mandal_id: req.body.mandal_id, role: req.body.role , name: req.body.mandal_name});
 
         console.log(user);
         await user.save();
