@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
-import { Button, Table, Space, Input,Modal } from "antd";
+import { Button, Table, Space, Input, Modal } from "antd";
 import { Popconfirm } from "antd";
 import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
 import axios from "axios";
-import AddMOM from "../forms/AddMOM";
+import MeetingDetails from "../profiles/MeetingDetails";
 
 
 const MeetingTable = (props) => {
-  const addMoM = (id,meet) => {
-    props.addMom(id,meet)
-  }
+  
+  
 
   const onDeleteButton = (e, text, record) => {
     e.preventDefault();
@@ -21,6 +20,7 @@ const MeetingTable = (props) => {
       console.log("params", pagination, filters, sorter, extra);
     }
   };
+  
   const baseColumns = [
     {
       title: "Meeting Name",
@@ -31,7 +31,7 @@ const MeetingTable = (props) => {
         return a.name.localeCompare(b.name);
       },
       sortDirections: ["descend", "ascend", "descend"],
-    render: (text) => <a>{text}</a>,
+      render: (text) => <a>{text}</a>,
     },
     {
       title: "Agenda",
@@ -48,7 +48,8 @@ const MeetingTable = (props) => {
       key: "actions",
       render: (text, record) => (
         <Space size="middle">
-          <AddMOM meeting = {record} addMoM = {addMoM}></AddMOM>
+          
+          <MeetingDetails meeting={record} addMOM={props}></MeetingDetails>
           <Popconfirm
             title="Are you sure？"
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}

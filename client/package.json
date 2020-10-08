@@ -11,6 +11,8 @@
     "axios": "^0.19.2",
     "craco-antd": "^1.18.1",
     "less": "^3.12.2",
+    "primeicons": "^4.0.0",
+    "primereact": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
