@@ -11,6 +11,7 @@ import HomePage from "./components/homepage/HomePage";
 import MyMandal from "./views/Home/MyMandals";
 import ForgetPassword from "./views/Auth/ForgetPassword/ForgetPassword";
 import MandalNetwork from "./views/Home/MandalNetwork";
+import NewPassword from "./views/Auth/ForgetPassword/NewPassword";
 
 class Routes extends React.Component {
   render() {
@@ -26,6 +27,7 @@ class Routes extends React.Component {
         <Route path="/mandalProfile/:id" component={ MandalProfile } />
         <Route path="/userProfile/:id" component={ UserProfile } />
         <Route path="/mandalNetwork" component={MandalNetwork}/>
+        <Route path="/newPassword" component={NewPassword}/>
 
       </Switch>
     );
