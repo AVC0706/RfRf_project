@@ -82,7 +82,7 @@ function Navbar() {
                     <Menu.Item key="a1">
                       <Link to="/">National Executive Committee</Link>
                     </Menu.Item><Menu.Item key="a2">
-                      <Link to="/">Mandal Network Details</Link>
+                      <Link to="/mandalNetwork">Mandal Network Details</Link>
                     </Menu.Item>
                   </SubMenu>
                   <Menu.Item key="4">
@@ -138,7 +138,7 @@ function Navbar() {
                       <Menu.Item key="a1">
                         <Link to="/">National Executive Committee</Link>
                       </Menu.Item><Menu.Item key="a2">
-                        <Link to="/">Mandal Network Details</Link>
+                        <Link to="/mandalNetwork">Mandal Network Details</Link>
                       </Menu.Item>
                     </SubMenu>
                     <Menu.Item key="4">
@@ -149,9 +149,6 @@ function Navbar() {
                     </Menu.Item>
                     <Menu.Item key="6">
                       <Link to="/">Contact Us</Link>
-                    </Menu.Item>
-                    <Menu.Item key="7">
-                      <Link to="/register">Register</Link>
                     </Menu.Item>
                     <Menu.Item key="8">
                       <Link to="/login">Login</Link>

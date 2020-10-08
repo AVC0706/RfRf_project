@@ -69,7 +69,7 @@ const Login = (props) => {
             <br></br>
             <Row>
               <Col lg={8} md={2} xs={2}>
-                <Button onClick={()=> props.history.push('/')} size="large" style={{backgroundColor:'',margin:"0px 0px 0px 30px",borderColor:"#fcac44"}}shape="round"><p style={{fontSize:'18px', color:"#fcac44"}}>Home</p></Button>
+                
               </Col>
               <Col lg={8}
               ><Card className="login-card" style={{ backgroundColor: '#f7d3a6' }}>
@@ -138,9 +138,6 @@ const Login = (props) => {
                   </Form>
                   <center>
                     <Link to = "/forgetPassword">Forgot password?</Link>
-                    <Divider plain>OR</Divider>
-                  Don't have an account?
-                  <Link to="/register"> Register</Link>
                   </center>
                 </Card>
               </Col>

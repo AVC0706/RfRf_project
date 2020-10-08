@@ -1,6 +1,6 @@
 import React from 'react'
 
-function MeetingList() {
+function NewPassword() {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function MeetingList() {
     )
 }
 
-export default MeetingList
+export default NewPassword
