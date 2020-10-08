@@ -15,6 +15,7 @@ import {
 import axios from "axios";
 import UserContext from "../../../context/user/userContext";
 import SecondNav from "../../../components/navbars/header/altHeader";
+import { states, districts } from "./Mock";
 
 const { Option } = Select;
 
@@ -62,6 +63,21 @@ function MandalRegister(props) {
     setmandal({
       ...mandal,
       aoi: e,
+    });
+  };
+
+  const onChangeState = (e) => {
+    setmandal({
+      ...mandal,
+      state: e,
+      district: null
+    });
+  };
+
+  const onChangeDistrict = (e) => {
+    setmandal({
+      ...mandal,
+      district: e,
     });
   };
 
@@ -157,19 +173,7 @@ function MandalRegister(props) {
                       />
                     </Form.Item>
                     <Form.Item
-                      name="qualif-input"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input your Distrcit!",
-                        },
-                      ]}
-                      label="District"
-                    >
-                      <Input name="district" value={district} onChange={onChange} />
-                    </Form.Item>
-                    <Form.Item
-                      name="state-input"
+                      name="state_name"
                       rules={[
                         {
                           required: true,
@@ -178,19 +182,42 @@ function MandalRegister(props) {
                       ]}
                       label="State"
                     >
-                      <Input name="state" value={state} onChange={onChange} />
+                      <Select
+                        mode="single"
+                        style={{ width: '100%' }}
+                        placeholder="Please select state"
+                        onChange={onChangeState}
+                      >
+                        {states.map(state => {
+                          return (
+                            <Option key={state}>{state}</Option>
+                          )
+                        })}
+                      </Select>
+                      {/* <Input name="state" value={state} onChange={onChange} /> */}
                     </Form.Item>
                     <Form.Item
-                      name="country-input"
+                      name="district_name"
                       rules={[
                         {
                           required: true,
-                          message: "Please input your Country!",
+                          message: "Please input your District!",
                         },
                       ]}
-                      label="Country"
+                      label="District"
                     >
-                      <Input name="country" value={country} onChange={onChange} />
+                      <Select
+                        value={mandal.district}
+                        mode="single"
+                        style={{ width: '100%' }}
+                        placeholder="Please select state"
+                        onChange={onChangeDistrict}
+                      >
+                        {mandal.state && districts[mandal.state].map(district => {
+                          return (
+                            <Option key={district}>{district}</Option>
+                          )
+                        })}</Select>
                     </Form.Item>
                     <Form.Item label="Area of Interest">
                       <Select
