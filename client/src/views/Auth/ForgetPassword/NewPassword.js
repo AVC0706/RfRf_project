@@ -17,7 +17,7 @@ function NewPassword(props) {
         email: "",
         password: "",
     })
-    const { email } = user;
+    const { email,password } = user;
     const onChange = (e) => {
         setuser({
             ...user,
