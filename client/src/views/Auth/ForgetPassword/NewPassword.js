@@ -31,7 +31,7 @@ function NewPassword(props) {
     };
     return (
         <>
-            <SecondNav></SecondNav>
+            {/* <SecondNav></SecondNav>
             <Row>
                 <Col lg={2} md={2} xs={2} />
                 <Col lg={20} md={10} xs={20} >
@@ -88,7 +88,7 @@ function NewPassword(props) {
                     </div>
                 </Col>
                 <Col lg={2} md={2} sm={1} xs={2} />
-            </Row>
+            </Row> */}
         </>
     )
 }
