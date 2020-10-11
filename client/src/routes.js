@@ -27,7 +27,7 @@ class Routes extends React.Component {
         <Route path="/mandalProfile/:id" component={ MandalProfile } />
         <Route path="/userProfile/:id" component={ UserProfile } />
         <Route path="/mandalNetwork" component={MandalNetwork}/>
-        <Route path="/newPassword" component={NewPassword}/>
+        <Route path="/newPassword/:id" component={NewPassword}/>
 
       </Switch>
     );

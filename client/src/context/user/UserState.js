@@ -13,6 +13,10 @@ import {
   AOI_SUCCESS,
   AOI_FAIL,
   LOGOUT,
+  EMAIL_SENT,
+  PASSWORD_CHANGED,
+  EMAIL_FAIL,
+  PASSWORD_CHANGED_FAIL
 } from "../type";
 import setAuthToken from "../../utils/setAuthToken";
 
@@ -113,7 +117,56 @@ const UserState = (props) => {
   //-----------Logout----------
   const logout = () => dispatch({ type: LOGOUT });
 
+  //forgot password
+  const forgetPass = async (formData) => {
 
+    const config = {
+      header: {
+        "Content-Type": "application/json"
+      }
+    };
+    try {
+      const res = await axios.put(`http://localhost:5000/api/user/forget-pass`,formData,config)
+      dispatch({
+        type: EMAIL_SENT,
+        payload:res.data
+      })
+
+      console.log("email sent");
+    } catch(e) {
+      dispatch({
+        type: EMAIL_FAIL,
+        payload: e.response
+      });
+      console.log("email sent failed")
+    }
+    
+  }
+
+  const resetPass = async (formData,id) => {
+    console.log(formData);
+    console.log(id);
+    const config = {
+      header: {
+        "Content-Type": "application/json"
+      }
+    };
+
+    try {
+      const res = await axios.put(`http://localhost:5000/api/user/reset-pass/${id}`,formData,config)
+      dispatch({
+        type: PASSWORD_CHANGED,
+        payload: res.data
+      })
+      console.log("password changed");
+    } catch(e) {
+      dispatch ({
+        type: PASSWORD_CHANGED_FAIL,
+        payload: e.response
+      })
+      console.log(e.response)
+    }
+  }
 //-----GetAllAoi------
   const getAllAoi = async () => {
     // const config = {
@@ -152,7 +205,9 @@ const UserState = (props) => {
         register,
         loadUser,
         logout,
-        getAllAoi
+        getAllAoi,
+        forgetPass,
+        resetPass
       }}
     >
       {props.children}

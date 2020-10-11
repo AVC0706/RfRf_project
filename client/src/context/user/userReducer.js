@@ -8,6 +8,10 @@ import {
   LOGOUT,
   AOI_SUCCESS,
   AOI_FAIL,
+  EMAIL_SENT,
+  PASSWORD_CHANGED,
+  EMAIL_FAIL,
+  PASSWORD_CHANGED_FAIL
 } from "../type";
 
 export default (state, action) => {
@@ -68,6 +72,25 @@ export default (state, action) => {
       return {
         ...state,
       };
+      case EMAIL_SENT:
+         return {
+        ...state,
+      };
+      case EMAIL_FAIL : 
+      return {
+
+        ...state
+      };
+      case PASSWORD_CHANGED : 
+      return {
+
+        ...state
+      };
+      case PASSWORD_CHANGED_FAIL : 
+      return {
+
+        ...state
+      }
 
     default:
       return state;

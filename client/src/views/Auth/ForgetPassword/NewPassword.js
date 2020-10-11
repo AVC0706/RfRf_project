@@ -12,12 +12,13 @@ import { UserOutlined, KeyOutlined } from "@ant-design/icons";
 import UserContext from "../../../context/user/userContext";
 import SecondNav from "../../../components/navbars/header/altHeader";
 import { Link } from "react-router-dom";
+import Password from "antd/lib/input/Password";
 function NewPassword(props) {
     const [user, setuser] = useState({
-        email: "",
         password: "",
     })
     const { email } = user;
+    const userContext = useContext(UserContext);
     const onChange = (e) => {
         setuser({
             ...user,
@@ -26,6 +27,7 @@ function NewPassword(props) {
     };
     const handleSubmit = () => {
         //HandleSubmit;
+        userContext.resetPass(user, props.match.params.id)
     };
     return (
         <>
@@ -51,23 +53,6 @@ function NewPassword(props) {
                                         }}
                                     >
                                         <Form.Item
-                                            name="email id"
-                                            rules={[
-                                                {
-                                                    type: "email",
-                                                    message: "Please input valid Email ID:",
-                                                },
-                                            ]}
-                                        >
-
-                                            <Input
-                                                name="email"
-                                                value={email}
-                                                prefix={<UserOutlined className="site-form-item-icon" />}
-                                                placeholder="Email ID"
-                                            />
-                                        </Form.Item>
-                                        <Form.Item
                                             name="pass"
                                             label="Password"
                                             hasFeedback
@@ -80,32 +65,9 @@ function NewPassword(props) {
                                         >
                                             <Input.Password
                                                 name="password"
-                                                value={password}
+                                                 value={Password}
                                                 onChange={onChange}
                                             />
-                                        </Form.Item>
-                                        <Form.Item
-                                            name="confirm"
-                                            label="Confirm Password"
-                                            hasFeedback
-                                            rules={[
-                                                {
-                                                    required: true,
-                                                    message: "Please confirm your password!",
-                                                },
-                                                () => ({
-                                                    validator(rule, value) {
-                                                        if (!value || password === value) {
-                                                            return Promise.resolve();
-                                                        }
-                                                        return Promise.reject(
-                                                            "The two passwords that you entered do not match!"
-                                                        );
-                                                    },
-                                                }),
-                                            ]}
-                                        >
-                                            <Input.Password onChange={onChange} />
                                         </Form.Item>
                                         <Form.Item>
                                             <Button

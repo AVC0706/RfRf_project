@@ -16,6 +16,7 @@ function ForgetPassword(props) {
     const [user, setuser] = useState({
         email: "",
     })
+    const userContext = useContext(UserContext);
     const { email } = user;
     const onChange = (e) => {
         setuser({
@@ -24,7 +25,8 @@ function ForgetPassword(props) {
         });
     };
     const handleSubmit = () => {
-        //HandleSubmit;
+        userContext.forgetPass(user);
+        console.log(user)
     };
     return (
         <>
@@ -63,6 +65,7 @@ function ForgetPassword(props) {
                                             <Input
                                                 name="email"
                                                 value={email}
+                                                onChange={onChange}
                                                 prefix={<UserOutlined className="site-form-item-icon" />}
                                                 placeholder="Email ID"
                                             />
@@ -91,4 +94,4 @@ function ForgetPassword(props) {
     )
 }
 
-export default ForgetPassword
+export default ForgetPassword;

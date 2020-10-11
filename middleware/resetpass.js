@@ -2,8 +2,8 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 const mailgun = require("mailgun-js")
-const DOMAIN = "sandboxae230cfa138a443a8857ca7526e79f09.mailgun.org";
-const mg = mailgun({apiKey: "ec1ed583d02dac91eccb8d44309a9f94-0d2e38f7-74e17e3b", domain: DOMAIN});
+const DOMAIN = "sandboxc9f391a9186b4328b48e9600aeecdbb3.mailgun.org";
+const mg = mailgun({apiKey:"44d0409ec0646f52a3ef325cb2feed4e-0d2e38f7-6dd8cb4b", domain: DOMAIN});
 const _ = require("lodash");
 
 
@@ -19,6 +19,7 @@ const _ = require("lodash");
 const sendResetMail=  (req,res) => {
     //start
     const {email} = req.body;
+    console.log(email)
     User.findOne({email},(err,user)=> {
         if(err || !user) {
             return res.status(400).json({error: "User with this email does not exist"});
@@ -26,12 +27,10 @@ const sendResetMail=  (req,res) => {
         const token = jwt.sign({_id: user._id},"kalemaam",{expiresIn: '20m'});
         const link = `http://localhost:3000/reset-pass/${token}`
         const data = {
-            from: "Mailgun Sandbox <postmaster@sandboxae230cfa138a443a8857ca7526e79f09.mailgun.org>",
+            from: 'noreply@hello.com',
             to: email,
             subject: "Password change request",
-            html: `Hi ${user.name} \n 
-            Please click on the following <a href=${link}>Link</a> to reset your password. \n\n 
-           If you did not request this, please ignore this email and your password will remain unchanged.\n`
+            text: `${link}`
         };
 
         return user.updateOne({resetPasswordToken: token},function (err, success){
@@ -41,9 +40,10 @@ const sendResetMail=  (req,res) => {
                 
     mg.messages().send(data, function (error, body) {
         if(error) {
-            return res.json({
+            return res.status(400).json({
                 error: "message error"
             })
+            console.log(body)
         }
         return res.json({message: "email is sent to you"});
     });
@@ -55,19 +55,20 @@ const sendResetMail=  (req,res) => {
 };
 
 const resetPassword = (req,res) => {
-    const {newPass} = req.body;
+    const {password} = req.body;
+    console.log(password);
     const resetPasswordToken = req.params.id;
     if(resetPasswordToken) {
         jwt.verify(resetPasswordToken,"kalemaam", function (error,success) {
             if(error) {
-                return res.status(401).json({error: "Incorrect tokrn or it is expired"});                
+                return res.status(401).json({error: "Incorrect token or it is expired"});                
             }
             User.findOne({resetPasswordToken}, (err,user)=> {
                 if(err || !user) {
                     return res.status(400).json({error: "User with this token does not exist"});                    
                 }
                 const obj = {
-                    password: newPass,
+                    password: password,
                     resetPasswordToken: ''
                 }
                 user = _.extend(user,obj);
