@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto")
 
 const UserSchema = mongoose.Schema({
   name: {
@@ -54,6 +55,10 @@ const UserSchema = mongoose.Schema({
     role : String
   }],
 
+  resetPasswordToken: {
+    data: String,
+    default: '',
+  },
 
 });
 
@@ -72,5 +77,10 @@ UserSchema.pre("remove", async function (next) {
   await Member.deleteMany({ user_id: user._id });
   next();
 });
+
+// userSchema.methods.generateResetPasswordToken = function(){
+//   this.resetPasswordToken = crypto.randomBytes(20).toString('hex');
+//   this.resetPasswordExpires = Date.now() + 3600000 // 1 hour;
+// };
 
 module.exports = mongoose.model("user", UserSchema);

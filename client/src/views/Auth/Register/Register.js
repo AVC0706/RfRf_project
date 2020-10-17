@@ -28,6 +28,8 @@ function Register(props) {
     console.log(states)
   }, [])
 
+
+
   useEffect(() => {
     getAllAoi();
     children = [];
@@ -73,6 +75,23 @@ function Register(props) {
       aoi: e,
     });
   };
+
+  const onChangeState = (e) => {
+    console.log(e);
+    setuser({
+      ...user,
+      state: e,
+      district: null
+    });
+  }
+
+  const onChangeDistrict = (e) => {
+    console.log(e);
+    setuser({
+      ...user,
+      district: e,
+    });
+  }
 
   const onSubmit = () => {
     userContext.register(user);
@@ -216,22 +235,7 @@ function Register(props) {
                   onChange={onChange}
                 />
               </Form.Item>
-              <Form.Item
-                name="district_name"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your District!",
-                  },
-                ]}
-                label="District"
-              > <Input
-                  name="district"
-                  value={district}
-                  onChange={onChange}
-                  label="District"
-                />
-              </Form.Item>
+
               <Form.Item
                 name="city_name"
                 rules={[
@@ -259,7 +263,49 @@ function Register(props) {
                 ]}
                 label="State"
               >
-                <Input name="state" value={state} onChange={onChange} />
+                <Select
+                  mode="single"
+                  style={{ width: '100%' }}
+                  placeholder="Please select state"
+                  onChange={onChangeState}
+                >
+                  {states.map(state => {
+                    return (
+                      <Option key={state}>{state}</Option>
+                    )
+                  })}
+                </Select>
+                {/* <Input name="state" value={state} onChange={onChange} /> */}
+              </Form.Item>
+              <Form.Item
+                name="district_name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your District!",
+                  },
+                ]}
+                label="District"
+              >
+                <Select
+                  value={user.district}
+                  mode="single"
+                  style={{ width: '100%' }}
+                  placeholder="Please select state"
+                  onChange={onChangeDistrict}
+                >
+                  {user.state && districts[user.state].map(district => {
+                    return (
+                      <Option key={district}>{district}</Option>
+                    )
+                  })}
+                </Select>
+                {/* <Input
+                  name="district"
+                  value={district}
+                  onChange={onChange}
+                  label="District"
+                /> */}
               </Form.Item>
               <Form.Item
                 name="country_name"
