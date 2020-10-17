@@ -3,19 +3,20 @@ import { Card, Row, Col, Button, Badge, Tabs, Descriptions } from "antd";
 import DataTable from "../../components/dashboard/DataTable";
 import axios from "axios";
 import UserContext from "../../context/user/userContext";
+import Avatar from "antd/lib/avatar/avatar";
 
 const { TabPane } = Tabs;
 
 function UserProfile(props) {
-    //start
+  //start
 
-    const userContext = useContext(UserContext);
+  const userContext = useContext(UserContext);
 
 
   useEffect(() => {
-      if(userContext.user){
-    getUser();
-}
+    if (userContext.user){
+      getUser();
+    }
   }, [userContext.isAuth]);
 
   const [user, setuser] = useState({
@@ -34,12 +35,12 @@ function UserProfile(props) {
   const { name, image, city, district, state, country } = user;
 
   const getUser = () => {
-      console.log(props)
+    console.log(props)
     axios
       .get(`http://localhost:5000/api/user/profile/${props.match.params.id}`)
       .then((res) => {
         if (res.status === 200) {
-            console.log(res.data.user)
+          console.log(res.data.user)
           setuser(res.data.user);
         }
       })
@@ -51,12 +52,11 @@ function UserProfile(props) {
   return (
     <>
       <Row>
-        <Col md={4}>
-          <Card style={{ padding: "2em", margin: "2em" }} cover={image}></Card>
+        <Col md={2}>
+
         </Col>
-        <Col md={16} style={{ margin: "3em" }}>
+        <Col md={20}>
           <Card
-            title={name}
             extra={
               <Button
                 style={{ marginTop: "0px", float: "right" }}
@@ -68,6 +68,10 @@ function UserProfile(props) {
             headStyle={{ fontSize: "250%" }}
           >
             <Row>
+              <Avatar
+                size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
+              />
+              <h1>{name}</h1>
               <Col md={24}>
                 <Descriptions title="User Info" bordered>
                   <Descriptions.Item label="City">{city}</Descriptions.Item>
@@ -89,7 +93,7 @@ function UserProfile(props) {
             </Row>
           </Card>
         </Col>
-        <Col md={4} xs={2} />
+        <Col md={2} />
       </Row>
     </>
   );
