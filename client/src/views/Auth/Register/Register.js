@@ -34,9 +34,9 @@ function Register(props) {
     getAllAoi();
     children = [];
 
-    // const { adminType } = props;
-    // console.log(adminType);
-    // setuser({ ...user, admin: adminType });
+    const { adminType } = props;
+    console.log(adminType);
+    setuser({ ...user, admin: adminType });
 
     // eslint-disable-next-line
   }, []);

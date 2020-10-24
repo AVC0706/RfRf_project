@@ -249,6 +249,32 @@ function MandalProfile(props) {
               >
                 Edit Profile
             </Button>
+              <Card>
+                <Row>
+                  <Col span={8}><h1>Approve Mandal?</h1></Col>
+                  <Col span={8} />
+                  <Col span={8}>
+                    <Button
+                      style={{ float: "right", margin: "0px 5px 0px 5px" }}
+                      type="primary"
+                      danger
+                      size='large'
+                    >
+                      No
+                </Button>
+                    <Button
+                      style={{ margin: "0px 5px 0px 5px", float: "right", backgroundColor: "#38BC3D", color: "white" }}
+                      size='large'
+
+                    >
+                      Yes
+                </Button>
+                  </Col>
+
+
+                </Row>
+
+              </Card>
               {/*----------- MEMBERS ---------*/}
               <Tabs>
                 <TabPane tab="Mandal Information" key="mandalInfo">
@@ -265,7 +291,8 @@ function MandalProfile(props) {
                           {members}
                         </Descriptions.Item>
                         <Descriptions.Item label="Approval">
-                          <Badge status="success" text="Approved" />
+                          {getMandal.districtApproved ? (<Badge status="success" text="Approved" />) : (<Badge status="error" text="Not Approved" />)}
+
                         </Descriptions.Item>
                       </Descriptions>
                       <Card>
@@ -275,7 +302,7 @@ function MandalProfile(props) {
                     </Col>
                     <Col span={2}></Col>
                     <Col span={6}>
-                      <MemberList></MemberList>
+                      <MemberList members={getMembers()}></MemberList>
                       <Button
                         type="primary"
                         shape="round"
@@ -297,7 +324,7 @@ function MandalProfile(props) {
                   </Row>
 
                 </TabPane>
-                <TabPane tab="Meeting Information" key="meetingInfo">
+                {getMandal.districtApproved === true ? (<><TabPane tab="Meeting Information" key="meetingInfo">
                   <Card>
                     <h1>Past Meeting Details</h1>
                   </Card>
@@ -323,8 +350,8 @@ function MandalProfile(props) {
                   <h1>Past Meetings</h1>
                   <MeetingTable meetings={meeting} deleteMeet={deleteMeet} addMom={addmom} ></MeetingTable>
                 </TabPane>
+                </>) : (<><TabPane tab="Meeting Information" disabled key="meetingInfo"></TabPane></>)}
               </Tabs>
-
             </Card>
           </div>
 

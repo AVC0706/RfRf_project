@@ -4,6 +4,7 @@ import DataTable from "../../components/dashboard/DataTable";
 import axios from "axios";
 import UserContext from "../../context/user/userContext";
 import Avatar from "antd/lib/avatar/avatar";
+import MandalTable from "../../components/dashboard/MandalTable";
 
 const { TabPane } = Tabs;
 
@@ -86,7 +87,7 @@ function UserProfile(props) {
               <Col md={24}>
                 <Tabs>
                   <TabPane tab="Mandals" key="Mandals">
-                    <DataTable></DataTable>
+                    <MandalTable />
                   </TabPane>
                 </Tabs>
               </Col>

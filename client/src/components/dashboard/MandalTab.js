@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Tabs } from "antd";
 import MandalTable from "./MandalTable";
 import DataTable from "./DataTable";
+import MandalApprovalTable from "./MandalApprovalTable";
 const { TabPane } = Tabs;
 
 function MandalTab() {
@@ -11,8 +12,11 @@ function MandalTab() {
   const { tab } = mandalPanel;
   return (
     <Tabs defaultActiveKey={tab}>
-      <TabPane tab="Mandal" key="Mandal">
-        <DataTable></DataTable>
+      <TabPane tab = "Pending Mandals" key = "PendingMandals">
+        <MandalApprovalTable></MandalApprovalTable>
+      </TabPane>
+      <TabPane tab="Approved Mandals" key="ApprovedMandal">
+        <MandalTable></MandalTable>
       </TabPane>
     </Tabs>
   );
