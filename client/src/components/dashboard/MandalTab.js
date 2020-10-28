@@ -79,14 +79,17 @@ function MandalTab() {
     <Tabs defaultActiveKey={tab}>
 
 
+  {user.admin.toLowerCase() !== "state" ? (
+              <TabPane tab="Pending Mandals" key="PendingMandals">
+              {loading ? (
+                <Spin size="large" />
+              ) : (
+                  <MandalApprovalTable mandals={falseMandal}></MandalApprovalTable>
+                )}
+            </TabPane>
+      ) : null}
 
-      <TabPane tab="Pending Mandals" key="PendingMandals">
-        {loading ? (
-          <Spin size="large" />
-        ) : (
-            <MandalApprovalTable mandals={falseMandal}></MandalApprovalTable>
-          )}
-      </TabPane>
+
 
 
 
