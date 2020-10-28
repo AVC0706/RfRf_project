@@ -122,7 +122,7 @@ function AdminTab() {
           {loading ? (
             <Spin size="large" />
           ) : (
-            <DataTable users={districtAdmin} deleteUser={deleteUser} />
+            <DataTable users={districtAdmin} deleteUser={deleteUser} adminType={'district'}/>
           )}
         </TabPane>
       ) : null}
@@ -133,7 +133,7 @@ function AdminTab() {
           {loading ? (
             <Spin size="large" />
           ) : (
-            <DataTable users={cityAdmin} deleteUser={deleteUser} />
+            <DataTable users={cityAdmin} deleteUser={deleteUser} adminType={'city'} />
           )}
         </TabPane>
       ) : null}
@@ -144,7 +144,7 @@ function AdminTab() {
         {loading ? (
           <Spin size="large" />
         ) : (
-          <DataTable users={normalUsers} deleteUser={deleteUser} />
+          <DataTable users={normalUsers} deleteUser={deleteUser} adminType={'null'}/>
         )}
       </TabPane>
     </Tabs>

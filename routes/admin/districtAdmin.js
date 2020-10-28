@@ -33,13 +33,13 @@ const router = express.Router();
 router.get("/getMandals/:approve", isAdmin, async (req, res) => {
     //start
 
-    if( req.user.admin !== 'district' ){
-        return res.status(401).send( { msg : "Not Authorised" } )
+    if (req.user.admin !== 'district') {
+        return res.status(401).send({ msg: "Not Authorised" })
     }
 
     try {
-        const mandals = await Mandal.find({ districtApproved:req.params.approve,cityApproved: true , district: req.user.district});
-        
+        const mandals = await Mandal.find({ districtApproved: req.params.approve, cityApproved: true, district: req.user.district });
+
         if (!mandals) {
             return res.status(204).json({ msg: "No data found" })
         }
@@ -60,12 +60,12 @@ router.get("/getMandals/:approve", isAdmin, async (req, res) => {
 router.get("/getFalseMandals", isAdmin, async (req, res) => {
     //start
 
-    if( req.user.admin !== 'district' ){
-        return res.status(401).send( { msg : "Not Authorised" } )
+    if (req.user.admin !== 'district') {
+        return res.status(401).send({ msg: "Not Authorised" })
     }
 
     try {
-        const mandals = await Mandal.find({ districtApproved: false, district: req.user.district , cityApproved : true});
+        const mandals = await Mandal.find({ districtApproved: false, district: req.user.district, cityApproved: true });
 
         if (!mandals) {
             return res.status(204).json({ msg: "No data found" })
@@ -85,21 +85,21 @@ router.get("/getFalseMandals", isAdmin, async (req, res) => {
 //Approve Mandal
 router.put("/approveMandal/:id", isAdmin, async (req, res) => {
     //start
-    
-    if( req.user.admin !== 'district' ){
-        return res.status(401).send( { msg : "Not Authorised" } )
+
+    if (req.user.admin !== 'district') {
+        return res.status(401).send({ msg: "Not Authorised" })
     }
 
     try {
-        const mandal = await Mandal.findById( req.params.id )  
+        const mandal = await Mandal.findById(req.params.id)
 
         if (!mandal) {
             return res.status(204).json({ msg: "No data found" })
         }
 
-        const user = await User.findById( mandal.leader_id )  
+        const user = await User.findById(mandal.leader_id)
 
-        if(!user){
+        if (!user) {
             return res.status(204).json({ msg: "No user found" })
         }
 
@@ -109,9 +109,9 @@ router.put("/approveMandal/:id", isAdmin, async (req, res) => {
 
         await mandal.save()
         await user.save
-        
-        
-        res.status(200).send({ mandal , msg: "Mandal Approved by districtAdmin" });
+
+
+        res.status(200).send({ mandal, msg: "Mandal Approved by districtAdmin" });
 
         //end
     } catch (e) {
@@ -130,15 +130,15 @@ router.put("/approveMandal/:id", isAdmin, async (req, res) => {
 router.get("/getDistrictUsers", isAdmin, async (req, res) => {
     //start
 
-    if( req.user.admin !== 'district' ){
-        return res.status(401).send( { msg : "Not Authorised" } )
+    if (req.user.admin !== 'district') {
+        return res.status(401).send({ msg: "Not Authorised" })
     }
 
     try {
         const users = await User.find({ district: req.user.district });
 
         if (!users) {
-            return res.status(204).json({ msg: "No data found"})
+            return res.status(204).json({ msg: "No data found" })
         }
 
         res.status(200).send({ users, msg: "All state user data" });
@@ -158,13 +158,13 @@ router.put("/makeBsmMember/:id", isAdmin, async (req, res) => {
     //start
 
 
-    if( req.user.admin !== 'district' ){
-        return res.status(401).send( { msg : "Not Authorised" } )
+    if (req.user.admin !== 'district') {
+        return res.status(401).send({ msg: "Not Authorised" })
     }
 
 
     try {
-        const user = await User.findOne({_id: req.params.id })  
+        const user = await User.findOne({ _id: req.params.id })
 
         if (!user) {
             return res.status(203).json({ msg: "No data found" })
@@ -175,7 +175,7 @@ router.put("/makeBsmMember/:id", isAdmin, async (req, res) => {
         await user.save()
 
 
-        res.status(200).send({ user , msg: "Mandal Approved" });
+        res.status(200).send({ user, msg: "Mandal Approved" });
 
         //end
     } catch (e) {

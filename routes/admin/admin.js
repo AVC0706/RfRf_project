@@ -1,8 +1,8 @@
 const express = require("express");
 const User = require("../../models/user");
 const Mandal = require("../../models/mandal");
-const AOI = require("../../models/aoi");
 const { isAdmin } = require("../../middleware/auth");
+
 
 const router = express.Router();
 
@@ -46,7 +46,7 @@ router.delete("/deleteUser/:id", isAdmin, async (req, res) => {
   }
 });
 
-//Get all city user
+//Get all user
 router.get("/getAdmins/:admin", isAdmin, async (req, res) => {
   //start
 
@@ -81,6 +81,51 @@ router.get("/getAdmins/:admin", isAdmin, async (req, res) => {
     }
 
     res.status(200).send({ users, msg: "All state user data" });
+
+    //end
+  } catch (e) {
+    console.error(e.message);
+    res.status(500).send("Server Error");
+  }
+  //end
+});
+
+
+//Get all city user
+router.get("/getMandals/", isAdmin, async (req, res) => {
+  //start
+
+  if (req.user.admin === "null") {
+    return res.status(401).send({ msg: "Not Authorised" });
+  }
+  
+  try {
+    let mandals = null;
+    if (req.user.admin === "state") {
+      mandals = await Mandal.find({
+        state: req.user.state,
+        districtApproved: true
+      });
+    } else if (req.user.admin === "district") {
+      mandals = await Mandal.find({
+        state: req.user.state,
+        district: req.user.district,
+        districtApproved: true
+      });
+    } else if (req.user.admin === "city") {
+      mandals = await Mandal.find({
+        state: req.user.state,
+        district: req.user.district,
+        city: req.user.city,
+        districtApproved: true
+      });
+    }
+
+    if (!mandals) {
+      return res.status(204).json({ msg: "No data found" });
+    }
+
+    res.status(200).send({ mandals, msg: "All state user data" });
 
     //end
   } catch (e) {
