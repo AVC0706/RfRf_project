@@ -1,45 +1,44 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Row, Col, Button, Badge, Tabs, Descriptions } from "antd";
+import { Card, Row, Col, Button, Badge, Tabs, Descriptions, Tag } from "antd";
 import DataTable from "../../components/dashboard/DataTable";
 import axios from "axios";
 import UserContext from "../../context/user/userContext";
+import Avatar from "antd/lib/avatar/avatar";
+import MandalTable from "../../components/dashboard/MandalTable";
 
 const { TabPane } = Tabs;
 
 function UserProfile(props) {
-    //start
+  //start
 
-    const userContext = useContext(UserContext);
+  const userContext = useContext(UserContext);
 
 
   useEffect(() => {
-      if(userContext.user){
-    getUser();
-}
+    if (userContext.user) {
+      getUser();
+    }
   }, [userContext.isAuth]);
 
   const [user, setuser] = useState({
     name: "User Name",
-    image: (
-      <img
-        alt="example"
-        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-      />
-    ),
     city: "",
     district: "",
     state: "",
     country: "",
+    qualification: "",
+    created_at: null,
+    aoi: [],
   });
-  const { name, image, city, district, state, country } = user;
+  const { name, city, district, state, country, qualification, created_at, aoi } = user;
 
   const getUser = () => {
-      console.log(props)
+    console.log(props)
     axios
       .get(`http://localhost:5000/api/user/profile/${props.match.params.id}`)
       .then((res) => {
         if (res.status === 200) {
-            console.log(res.data.user)
+          console.log(res.data.user)
           setuser(res.data.user);
         }
       })
@@ -51,12 +50,13 @@ function UserProfile(props) {
   return (
     <>
       <Row>
-        <Col md={4}>
-          <Card style={{ padding: "2em", margin: "2em" }} cover={image}></Card>
+        <Col md={2}>
+
         </Col>
-        <Col md={16} style={{ margin: "3em" }}>
+        <Col md={20} style={{ backgroundColor: '#fcac44', height: '100vh' }}>
           <Card
             title={name}
+            style={{ margin: "10px" }}
             extra={
               <Button
                 style={{ marginTop: "0px", float: "right" }}
@@ -68,6 +68,7 @@ function UserProfile(props) {
             headStyle={{ fontSize: "250%" }}
           >
             <Row>
+              
               <Col md={24}>
                 <Descriptions title="User Info" bordered>
                   <Descriptions.Item label="City">{city}</Descriptions.Item>
@@ -75,6 +76,9 @@ function UserProfile(props) {
                   <Descriptions.Item label="District">
                     {district}
                   </Descriptions.Item>
+                  <Descriptions.Item label="Qualification">{qualification}</Descriptions.Item>
+                  <Descriptions.Item label="Joined At">{created_at}</Descriptions.Item>
+                  <Descriptions.Item label="Area of Interest"><Tag>Area of Interest</Tag></Descriptions.Item>
                 </Descriptions>
               </Col>
             </Row>
@@ -82,14 +86,14 @@ function UserProfile(props) {
               <Col md={24}>
                 <Tabs>
                   <TabPane tab="Mandals" key="Mandals">
-                    <DataTable></DataTable>
+                    <MandalTable />
                   </TabPane>
                 </Tabs>
               </Col>
             </Row>
           </Card>
         </Col>
-        <Col md={4} xs={2} />
+        <Col md={2} />
       </Row>
     </>
   );

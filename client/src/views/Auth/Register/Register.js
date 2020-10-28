@@ -34,9 +34,9 @@ function Register(props) {
     getAllAoi();
     children = [];
 
-    // const { adminType } = props;
-    // console.log(adminType);
-    // setuser({ ...user, admin: adminType });
+    const { adminType } = props;
+    console.log(adminType);
+    setuser({ ...user, admin: adminType });
 
     // eslint-disable-next-line
   }, []);
@@ -138,10 +138,7 @@ function Register(props) {
     <>
       <Row>
         <br></br>
-        <Col lg={8} md={2} sm={1}>
-          {/* <Button onClick={()=> props.history.push('/')} size="large" style={{backgroundColor:'',margin:"0px 0px 0px 30px",borderColor:"#fcac44"}}shape="round"><p style={{fontSize:'18px', color:"#fcac44"}}>Home</p></Button> */}
-        </Col>
-        <Col lg={10} md={10} sm={12}>
+        <Col>
           <Card className="register-card" style={{ backgroundColor: '#f7d3a6', marginTop: '10%' }}>
             <h1 style={{ textAlign: 'center' }}>User Register</h1>
             <h4 style={{ textAlign: 'center' }}>Please enter your E-mail and Password</h4>
@@ -351,7 +348,6 @@ function Register(props) {
           </center> */}
           </Card>
         </Col>
-        <Col lg={8} md={2} sm={1} />
       </Row>
 
     </>

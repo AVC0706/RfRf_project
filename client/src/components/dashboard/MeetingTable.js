@@ -5,12 +5,9 @@ import { Popconfirm } from "antd";
 import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
 import axios from "axios";
 import MeetingDetails from "../profiles/MeetingDetails";
-
+import AddMOM from "../forms/AddMOM";
 
 const MeetingTable = (props) => {
-  
-  
-
   const onDeleteButton = (e, text, record) => {
     e.preventDefault();
     console.log(record);
@@ -49,7 +46,8 @@ const MeetingTable = (props) => {
       render: (text, record) => (
         <Space size="middle">
           
-          <MeetingDetails meeting={record} addMOM={props}></MeetingDetails>
+          <MeetingDetails meeting={record}></MeetingDetails>
+          <AddMOM meeting={record} addMoM={props}></AddMOM>
           <Popconfirm
             title="Are you sure？"
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}

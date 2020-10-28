@@ -17,7 +17,7 @@ function NewPassword(props) {
         email: "",
         password: "",
     })
-    const { email } = user;
+    const { email, password } = user;
     const onChange = (e) => {
         setuser({
             ...user,
@@ -29,7 +29,6 @@ function NewPassword(props) {
     };
     return (
         <>
-            {/* <SecondNav></SecondNav>
             <Row>
                 <Col lg={2} md={2} xs={2} />
                 <Col lg={20} md={10} xs={20} >
@@ -37,7 +36,7 @@ function NewPassword(props) {
                         <br></br>
                         <Row>
                             <Col lg={8} md={2} xs={2}>
-                                <Button onClick={() => props.history.push('/')} size="large" style={{ backgroundColor: '', margin: "0px 0px 0px 30px", borderColor: "#fcac44" }} shape="round"><p style={{ fontSize: '18px', color: "#fcac44" }}>Home</p></Button>
+                                
                             </Col>
                             <Col lg={8}
                             ><Card className="login-card" style={{ backgroundColor: '#f7d3a6' }}>
@@ -126,7 +125,7 @@ function NewPassword(props) {
                     </div>
                 </Col>
                 <Col lg={2} md={2} sm={1} xs={2} />
-            </Row> */}
+            </Row>
         </>
     )
 }

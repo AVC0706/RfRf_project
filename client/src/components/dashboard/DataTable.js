@@ -3,9 +3,11 @@ import "antd/dist/antd.css";
 import { Button, Table, Space, Input } from "antd";
 import { Popconfirm } from "antd";
 import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
+import Modal from "antd/lib/modal/Modal";
+import Register from "../../views/Auth/Register/Register";
 
 const DataTable = (props) => {
-  const style = 
+  const style =
   {
     boxShadow: '0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 3px 6px 0 rgba(0, 0, 0, 0.19)',
     margin: '2em'
@@ -87,8 +89,9 @@ const DataTable = (props) => {
     columns: baseColumns,
     // props.users: props.users,
     searchText: "",
+    modalVisible: false
   });
-  const { filterTable, columns, searchText } = state;
+  const { filterTable, columns, searchText ,modalVisible } = state;
   const search = (value) => {
     setstate({
       ...state,
@@ -123,6 +126,8 @@ const DataTable = (props) => {
   };
   return (
     <>
+      <Button onClick={()=>setstate({...state,modalVisible:true})}>Add Admin</Button>
+      <Modal visible={modalVisible}  onCancel={()=>setstate({...state,modalVisible:false})}><Register></Register></Modal>
       <Input.Search
         placeholder="Search"
         value={searchText}
@@ -133,7 +138,7 @@ const DataTable = (props) => {
       <Table
         columns={columns}
         dataSource={filterTable === null ? props.users : filterTable}
-        style = {style}
+        style={style}
       >
         {" "}
       </Table>

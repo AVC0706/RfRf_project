@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import { Button, Table, Space, Input, Modal } from "antd";
-import AddMOM from "../forms/AddMOM";
+
 
 function MeetingDetails(props) {
     
@@ -18,11 +18,12 @@ function MeetingDetails(props) {
                 onCancel={() => { setmeetingVisible({modalVisible:false}) }}
             >
                 <h1>{props.meeting.name}</h1>
+                <hr></hr>
                 <h4>Held at: {props.meeting.date}</h4>
                 <h3>MOM:</h3>
                 <h4>mom {props.meeting.mom}</h4>
                 <h4>Attached Document <a href={props.meeting.pdf_link}>Click Here</a></h4>
-                <AddMOM meeting={props.meeting} addMoM={props.addMoM}></AddMOM>
+                
 
             </Modal>
 

@@ -61,7 +61,7 @@ router.post("/addAoi", isAdmin, async (req, res) => {
 
 //-------Mandal----------
 
-//Get all mandal for City Admin { approve : True }
+//Get all mandal for City Admin { approve }
 router.get("/getMandals/:approve", isAdmin, async (req, res) => {
   //start
 

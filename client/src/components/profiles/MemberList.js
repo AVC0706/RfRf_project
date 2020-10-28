@@ -1,30 +1,18 @@
 import React from 'react'
 import { List, Avatar } from 'antd';
-function MemberList() {
-    const data = [
-        {
-            title: 'Member 1',
-        },
-        {
-            title: 'Member 2',
-        },
-        {
-            title: 'Member 3',
-        },
-        {
-            title: 'Member 4!p ',
-        },
-    ];
+import { UserOutlined } from '@ant-design/icons';
+import { Link } from "react-router-dom";
+function MemberList(props) {
     return (
         <List
             itemLayout="horizontal"
-            dataSource={data}
+            dataSource={props.members}
             renderItem={item => (
                 <List.Item>
                     <List.Item.Meta
-                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                        title={<a href="https://ant.design">{item.title}</a>}
-                        description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                        avatar={<Avatar style={{ backgroundColor: '#fcac44' }} icon={<UserOutlined />} />}
+                        title={<Link to={`/userProfile/${item.id}`}>{item.name}</Link>}
+                        al         description={"Located at "+item.city+","+item.state+". This member is a "+item.qualification}
                     />
                 </List.Item>
             )}

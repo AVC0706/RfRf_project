@@ -110,7 +110,7 @@ function MandalRegister(props) {
     district: "",
     city: "",
     state: "",
-    country: "",
+    country: "India",
     aoi: [],
   });
   const { name, district, city, state, country, aoi } = mandal;

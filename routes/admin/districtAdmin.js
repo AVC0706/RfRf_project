@@ -30,7 +30,7 @@ const router = express.Router();
 //-------Mandal----------
 
 //Get all mandal for District Admin { approve : True }
-router.get("/getMandals", isAdmin, async (req, res) => {
+router.get("/getMandals/:approve", isAdmin, async (req, res) => {
     //start
 
     if( req.user.admin !== 'district' ){
@@ -38,8 +38,8 @@ router.get("/getMandals", isAdmin, async (req, res) => {
     }
 
     try {
-        const mandals = await Mandal.find({ cityApproved: true , district: req.user.district});
-
+        const mandals = await Mandal.find({ districtApproved:req.params.approve,cityApproved: true , district: req.user.district});
+        
         if (!mandals) {
             return res.status(204).json({ msg: "No data found" })
         }
