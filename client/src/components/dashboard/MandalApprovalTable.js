@@ -15,40 +15,6 @@ const MandalApprovalTable = (props) => {
   const userContext = useContext(UserContext);
   const { user } = userContext;
 
-  
-
-  const getMandals = () => {
-
-    if(user.admin.toLowerCase() === "district"){
-      axios
-      .get("http://localhost:5000/api/admin/getAdmins/district")
-      .then((res) => {
-        if (res.status === 200) {
-          setMandals(res.data);
-        }
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    } 
-
-    else if(user.admin.toLowerCase() === "city"){
-      axios
-      .get("http://localhost:5000/api/admin/getAdmins/district")
-      .then((res) => {
-        if (res.status === 200) {
-          setMandals(res.data);
-        }
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    } 
-
-  
-  };
 
 
   const baseColumns = [
@@ -134,7 +100,7 @@ const MandalApprovalTable = (props) => {
   const onClick = (e, text, record) => {
     // e.preventDefault();
     console.log(record);
-    props.deleteUser(record._id, record.admin);
+    // props.deleteUser(record._id, record.admin);
 
     function onChange(pagination, filters, sorter, extra) {
       console.log("params", pagination, filters, sorter, extra);
