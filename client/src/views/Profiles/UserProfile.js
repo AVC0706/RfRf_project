@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Row, Col, Button, Badge, Tabs, Descriptions } from "antd";
+import { Card, Row, Col, Button, Badge, Tabs, Descriptions, Tag } from "antd";
 import DataTable from "../../components/dashboard/DataTable";
 import axios from "axios";
 import UserContext from "../../context/user/userContext";
@@ -15,25 +15,22 @@ function UserProfile(props) {
 
 
   useEffect(() => {
-    if (userContext.user){
+    if (userContext.user) {
       getUser();
     }
   }, [userContext.isAuth]);
 
   const [user, setuser] = useState({
     name: "User Name",
-    image: (
-      <img
-        alt="example"
-        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-      />
-    ),
     city: "",
     district: "",
     state: "",
     country: "",
+    qualification: "",
+    created_at: null,
+    aoi: [],
   });
-  const { name, image, city, district, state, country } = user;
+  const { name, city, district, state, country, qualification, created_at, aoi } = user;
 
   const getUser = () => {
     console.log(props)
@@ -56,8 +53,10 @@ function UserProfile(props) {
         <Col md={2}>
 
         </Col>
-        <Col md={20}>
+        <Col md={20} style={{ backgroundColor: '#fcac44', height: '100vh' }}>
           <Card
+            title={name}
+            style={{ margin: "10px" }}
             extra={
               <Button
                 style={{ marginTop: "0px", float: "right" }}
@@ -69,10 +68,7 @@ function UserProfile(props) {
             headStyle={{ fontSize: "250%" }}
           >
             <Row>
-              <Avatar
-                size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 }}
-              />
-              <h1>{name}</h1>
+              
               <Col md={24}>
                 <Descriptions title="User Info" bordered>
                   <Descriptions.Item label="City">{city}</Descriptions.Item>
@@ -80,6 +76,9 @@ function UserProfile(props) {
                   <Descriptions.Item label="District">
                     {district}
                   </Descriptions.Item>
+                  <Descriptions.Item label="Qualification">{qualification}</Descriptions.Item>
+                  <Descriptions.Item label="Joined At">{created_at}</Descriptions.Item>
+                  <Descriptions.Item label="Area of Interest"><Tag>Area of Interest</Tag></Descriptions.Item>
                 </Descriptions>
               </Col>
             </Row>

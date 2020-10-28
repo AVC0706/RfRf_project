@@ -49,8 +49,9 @@ router.post("/createMandal", isAdmin, async (req, res) => {
 router.get("/getMandal/:id", isAdmin, async (req, res) => {
   try {
     const mandal = await Mandal.findById({ _id: req.params.id });
-
-    res.status(200).json({  mandal });
+    let role = 'admin'
+    const adminUser = await User.findOne({"mandals.mandal_id": req.params.id , "mandals.role": role }) 
+    res.status(200).json({  mandal, adminUser });
   } catch (e) {
     res.status(400).send(e);
   }
