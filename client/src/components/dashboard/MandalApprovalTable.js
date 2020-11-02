@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "antd/dist/antd.css";
 import { Button, Table, Space, Input } from "antd";
 import { Popconfirm } from "antd";
+import axios from "axios";
 import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
-import Modal from "antd/lib/modal/Modal";
-import Register from "../../views/Auth/Register/Register";
+import UserContext from "../../context/user/userContext";
 
-const DataTable = (props) => {
-  const style =
-  {
-    boxShadow: '0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 3px 6px 0 rgba(0, 0, 0, 0.19)',
-    margin: '2em'
-  }
+
+const MandalApprovalTable = (props) => {
+
+  const [mandals, setMandals] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const userContext = useContext(UserContext);
+  const { user } = userContext;
+
+
+
   const baseColumns = [
     {
       title: "Name",
@@ -25,24 +30,16 @@ const DataTable = (props) => {
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
+      title: "Admin",
+      dataIndex: "admin",
+      key: "admin",
       sorter: (a, b) => {
-        return a.email.localeCompare(b.email);
+        return a.admin.localeCompare(b.admin);
       },
       sortDirections: ["descend", "ascend", "descend"],
       render: (text) => <a>{text}</a>,
     },
-    {
-      title: "State",
-      dataIndex: "state",
-      key: "state",
-      sorter: (a, b) => {
-        return a.state.localeCompare(b.state);
-      },
-      sortDirections: ["descend", "ascend", "descend"],
-    },
+
     {
       title: "District",
       dataIndex: "district",
@@ -52,31 +49,29 @@ const DataTable = (props) => {
       },
       sortDirections: ["descend", "ascend", "descend"],
     },
-    {
-      title: "City",
-      dataIndex: "city",
-      key: "city",
-      sorter: (a, b) => {
-        return a.city.localeCompare(b.city);
-      },
-      sortDirections: ["descend", "ascend", "descend"],
-    },
+
     {
       title: "Actions",
       key: "actions",
       render: (text, record) => (
         <Space size="middle">
-          <Button type="primary" onClick={(e) => onViewButton(e, record)}>
-            View
-          </Button>
-
+          <Button type="primary">View</Button>
           <Popconfirm
-            title="Are you sure？"
+            title="Are you sure you want to approve this mandal？"
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}
-            onConfirm={(e) => onDeleteButton(e, text, record)}
+            // onConfirm={(e) => onClick(e, text, record)}
+          >
+            <Button type="primary" style={{color:"white" ,backgroundColor:"#38BC3D"}}>
+              Accept
+            </Button>
+          </Popconfirm>
+          <Popconfirm
+            title="Are you sure you want to reject this mandal？"
+            icon={<QuestionCircleOutlined style={{ color: "red" }} />}
+            // onConfirm={(e) => onClick(e, text, record)}
           >
             <Button type="primary" danger>
-              Delete
+              Reject
             </Button>
           </Popconfirm>
         </Space>
@@ -87,47 +82,38 @@ const DataTable = (props) => {
   const [state, setstate] = useState({
     filterTable: null,
     columns: baseColumns,
-    // props.users: props.users,
+    baseData: props.mandals,
     searchText: "",
-    modalVisible: false
   });
-  const { filterTable, columns, searchText ,modalVisible } = state;
+  const { baseData, filterTable, columns, searchText } = state;
   const search = (value) => {
     setstate({
       ...state,
       searchText: value,
-      filterTable: props.users.filter((o) =>
+      filterTable: baseData.filter((o) =>
         Object.keys(o).some((k) =>
           String(o[k]).toLowerCase().includes(value.toLowerCase())
         )
       ),
     });
   };
-  const onDeleteButton = (e, text, record) => {
-    e.preventDefault();
+  const onClick = (e, text, record) => {
+    // e.preventDefault();
     console.log(record);
-    props.deleteUser(record._id, record.admin);
+    // props.deleteUser(record._id, record.admin);
 
     function onChange(pagination, filters, sorter, extra) {
       console.log("params", pagination, filters, sorter, extra);
     }
   };
-
-  const onViewButton = (e, record) => {
-    e.preventDefault();
-    // props.history.push('/userProfile')
-  };
-
   const onChange = (e) => {
-    // if (e.value === "") {
-    //   setstate({ ...state, filterTable: null });
-    // }
+    if (e.value === "") {
+      setstate({ ...state, filterTable: null, baseData: props.mandals});
+    }
     setstate({ ...state, searchText: e.value });
   };
   return (
     <>
-      <Button onClick={()=>setstate({...state,modalVisible:true})}>Add Admin</Button>
-      <Modal visible={modalVisible}  onCancel={()=>setstate({...state,modalVisible:false})}><Register adminType={props.adminType}></Register></Modal>
       <Input.Search
         placeholder="Search"
         value={searchText}
@@ -137,12 +123,11 @@ const DataTable = (props) => {
       ></Input.Search>
       <Table
         columns={columns}
-        dataSource={filterTable === null ? props.users : filterTable}
-        style={style}
+        dataSource={filterTable == null ? baseData : filterTable}
       >
         {" "}
       </Table>
     </>
   );
 };
-export default DataTable;
+export default MandalApprovalTable;

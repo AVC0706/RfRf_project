@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import SecondNav from "./components/navbars/header/altHeader";
 import Navbar from "./components/navbars/header/header";
 import 'primeicons/primeicons.css';
+import footerBar from "./components/navbars/footer/footer";
 
 function App() {
   const userContext = useContext(UserContext);
@@ -23,6 +24,7 @@ function App() {
       <Router>
         <Navbar></Navbar>
         <Routes />
+        <footerBar></footerBar>
       </Router>
     </div>
   );

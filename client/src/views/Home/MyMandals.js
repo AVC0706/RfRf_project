@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Row, Col, Button, Skeleton, Layout } from "antd";
+import { Card, Row, Col, List, Skeleton, Layout } from "antd";
 
 import UserContext from "../../context/user/userContext";
 import axios from "axios";
 import Navbar from "../../components/navbars/header/header";
+import Meta from "antd/lib/card/Meta";
 const { Content } = Layout;
 function MyMandal(props) {
   //start
@@ -40,21 +41,37 @@ function MyMandal(props) {
         <Col span={20}>
           <Layout>
             <Content>
-              <Row>
+              <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                <Col
+                  span={6}
+                  className="gutter-row"
+                  style={{padding:'2em'}}
+                >
+                  <center>
+                    <Card style={{ width: '80%', height: 250 }} hoverable={true} onClick={() => {
+                      props.history.push("/mandalRegister");
+                    }} >
+
+                      <center> <h1><b>Add Mandal</b></h1> <img style={{ width: '60%', alignItems: 'center' }} alt="example" src="assets/images/add.png" /></center>
+                    </Card>
+                  </center>
+
+                </Col>
                 {mandals ? (
                   mandals.map((mandal) => (
                     <Col
-                      xs={{ span: 5, offset: 1 }}
-                      lg={{ span: 4, offset: 2 }}
-                      style={{ padding: "2em", margin: "2em" }}
+                      span={6}
+                      className="gutter-row"
+                      style={{padding:'2em'}}
                     >
                       <div
                         key={mandal._id}
                         onClick={() => { props.history.push(`/mandalProfile/${mandal.mandal_id}`) }}
                       >
-                        <Card style={{ width: 300, height: 250 }} hoverable={true}>
+                        <center><Card style={{ width: '80%', height: 250 }} hoverable={true}>
                           <h1 style={{ textAlign: 'center' }}>{mandal.name} </h1>
-                        </Card>{" "}
+                        </Card></center>
+
                       </div>
                     </Col>
                   ))
@@ -62,21 +79,7 @@ function MyMandal(props) {
                     <Skeleton />
                   )}
 
-                <Col
-                  xs={{ span: 5, offset: 1 }}
-                  lg={{ span: 4, offset: 2 }}
-                  style={{ padding: "2em", margin: "2em" }}
-                >
-                  <div
-                  >
-                    <Card style={{ width: 300, height: 250 }} hoverable={true} onClick={() => {
-                    props.history.push("/mandalRegister");
-                  }}>
-                      <h1 style={{ textAlign: 'center' }}>Add Mandal</h1>
-                      
-                    </Card>{" "}
-                  </div>
-                </Col>
+
               </Row>
 
             </Content>
