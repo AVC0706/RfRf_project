@@ -31,7 +31,7 @@ function MandalTab() {
 
     if (user.admin.toLowerCase() === "district") {
       axios
-        .get(`http://localhost:5000/api/districtAdmin/getMandals/${false}`)
+        .get(process.env.REACT_APP_SERVER_URL + `/districtAdmin/getMandals/${false}`)
         .then((res) => {
           if (res.status === 200) {
             setFalseMandal(res.data.mandals);
@@ -45,7 +45,7 @@ function MandalTab() {
 
     else if (user.admin.toLowerCase() === "city") {
       axios
-        .get(`http://localhost:5000/api/cityAdmin/getMandals/${false}`)
+        .get(process.env.REACT_APP_SERVER_URL + `/cityAdmin/getMandals/${false}`)
         .then((res) => {
           if (res.status === 200) {
             setFalseMandal(res.data.mandals);
@@ -62,7 +62,7 @@ function MandalTab() {
 
   const getApprovedMandals = () => {
     axios
-      .get("http://localhost:5000/api/admin/getMandals")
+      .get(process.env.REACT_APP_SERVER_URL + "/admin/getMandals")
       .then((res) => {
         if (res.status === 200) {
           setApprovedMandal(res.data.mandals);
@@ -74,6 +74,28 @@ function MandalTab() {
       });
   }
 
+  // const approveMandal = (mandal) => {
+  //   if (userContext.user.admin === 'district' && mandal.districtApproved === false) {
+  //     axios.put(
+  //       process.env.REACT_APP_SERVER_URL + `/districtAdmin/approveMandal/${props.match.params.id}`,
+  //       mandal
+  //     ).then((res) => {
+  //       console.log(res.data.msg , res.data.mandal);
+  //     }).catch((e) => console.log(e));
+  //   }
+  //   else if (userContext.user.admin === 'city' && mandal.cityApproved === false) {
+  //     axios.put(
+  //       process.env.REACT_APP_SERVER_URL + `/cityAdmin/approveMandal/${props.match.params.id}`,
+  //       mandal
+  //     ).then((res) => {
+  //       console.log(res.data.msg , res.data.mandal);
+  //     }).catch((e) => console.log(e));
+  //   }
+  //   else {
+  //     console.log("Can't approve");
+  //   }
+
+  // };
 
   return (
     <Tabs defaultActiveKey={tab}>
@@ -84,7 +106,7 @@ function MandalTab() {
               {loading ? (
                 <Spin size="large" />
               ) : (
-                  <MandalApprovalTable mandals={falseMandal}></MandalApprovalTable>
+                  <MandalApprovalTable mandals={falseMandal} ></MandalApprovalTable>
                 )}
             </TabPane>
       ) : null}

@@ -91,7 +91,7 @@ function MandalRegister(props) {
     };
 
     axios.post(
-      "http://localhost:5000/api/mandal/createMandal",
+      process.env.REACT_APP_SERVER_URL + "/mandal/createMandal",
       mandal,
       config
     ).then(res => {

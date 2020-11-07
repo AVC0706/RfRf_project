@@ -71,7 +71,7 @@ function MandalProfile(props) {
     console.log(props);
     axios
       .get(
-        `http://localhost:5000/api/mandal/getMandal/${props.match.params.id}`
+        process.env.REACT_APP_SERVER_URL + `/mandal/getMandal/${props.match.params.id}`
       )
       .then((res) => {
         if (res.status === 200) {
@@ -91,7 +91,7 @@ function MandalProfile(props) {
     console.log(props);
     axios
       .get(
-        `http://localhost:5000/api/mandal/getMembers/${props.match.params.id}`
+        process.env.REACT_APP_SERVER_URL + `/mandal/getMembers/${props.match.params.id}`
       )
       .then((res) => {
         if (res.status === 200) {
@@ -105,7 +105,7 @@ function MandalProfile(props) {
   };
   const getMeetings = () => {
     axios
-      .get(`http://localhost:5000/api/meeting/getmeeting/${props.match.params.id}`)
+      .get(process.env.REACT_APP_SERVER_URL + `/meeting/getmeeting/${props.match.params.id}`)
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data);
@@ -131,7 +131,7 @@ function MandalProfile(props) {
     };
     axios
       .post(
-        "http://localhost:5000/api/mandalAdmin/addMember",
+        process.env.REACT_APP_SERVER_URL + "/mandalAdmin/addMember",
         {
           user,
           mandal_id: props.match.params.id,
@@ -159,7 +159,7 @@ function MandalProfile(props) {
     };
 
     axios.post(
-      `http://localhost:5000/api/meeting/createmeeting/${props.match.params.id}`,
+      process.env.REACT_APP_SERVER_URL + `/meeting/createmeeting/${props.match.params.id}`,
       meeting,
       config
     ).then(res => {
@@ -179,7 +179,7 @@ function MandalProfile(props) {
     setLoading(true);
 
     axios
-      .delete(`http://localhost:5000/api/meeting/deletemeeting/${id}`)
+      .delete(process.env.REACT_APP_SERVER_URL + `/meeting/deletemeeting/${id}`)
       .then((res) => {
         if (res.status === 200) {
           getMeetings();
@@ -203,7 +203,7 @@ function MandalProfile(props) {
         "Content-Type": "application/json",
       }
     };
-    axios.put(`http://localhost:5000/api/meeting/addmom/${id}`, meet, config)
+    axios.put(process.env.REACT_APP_SERVER_URL + `/meeting/addmom/${id}`, meet, config)
       .then(res => {
         console.log(res.data);
         console.log('success');
@@ -212,21 +212,22 @@ function MandalProfile(props) {
       })
 
   };
+  
   const approveMandal = () => {
     if (userContext.user.admin === 'district' && mandal.districtApproved === false) {
       axios.put(
-        `http://localhost:5000/api/districtAdmin/approveMandal/${props.match.params.id}`,
+        process.env.REACT_APP_SERVER_URL + `/districtAdmin/approveMandal/${props.match.params.id}`,
         mandal
       ).then((res) => {
-        console.log("Mandal Approved");
+        console.log(res.data.msg , res.data.mandal);
       }).catch((e) => console.log(e));
     }
     else if (userContext.user.admin === 'city' && mandal.cityApproved === false) {
       axios.put(
-        `http://localhost:5000/api/cityAdmin/approveMandal/${props.match.params.id}`,
+        process.env.REACT_APP_SERVER_URL + `/cityAdmin/approveMandal/${props.match.params.id}`,
         mandal
       ).then((res) => {
-        console.log("Mandal Approved");
+        console.log(res.data.msg , res.data.mandal);
       }).catch((e) => console.log(e));
     }
     else {

@@ -35,7 +35,7 @@ function UserProfile(props) {
   const getUser = () => {
     console.log(props)
     axios
-      .get(`http://localhost:5000/api/user/profile/${props.match.params.id}`)
+      .get(process.env.REACT_APP_SERVER_URL + `/user/profile/${props.match.params.id}`)
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data.user)
