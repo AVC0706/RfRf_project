@@ -5,10 +5,11 @@ import { Popconfirm } from "antd";
 import axios from "axios";
 import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
 import UserContext from "../../context/user/userContext";
+import {useHistory} from 'react-router-dom';
 
 
 const MandalApprovalTable = (props) => {
-
+  const history = useHistory();
   const [mandals, setMandals] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -16,7 +17,10 @@ const MandalApprovalTable = (props) => {
   const { user } = userContext;
 
 
-
+  const onClickView = (record) =>
+  {
+    history.push(`/mandalProfile/${record._id}`);
+  }
   const baseColumns = [
     {
       title: "Name",
@@ -24,7 +28,13 @@ const MandalApprovalTable = (props) => {
       key: "name",
       defaultSortOrder: "descend",
       sorter: (a, b) => {
-        return a.name.localeCompare(b.name);
+        try
+        {
+          return a.name.localeCompare(b.name);
+        }
+        catch{
+
+        }
       },
       sortDirections: ["descend", "ascend", "descend"],
       render: (text) => <a>{text}</a>,
@@ -34,7 +44,11 @@ const MandalApprovalTable = (props) => {
       dataIndex: "admin",
       key: "admin",
       sorter: (a, b) => {
-        return a.admin.localeCompare(b.admin);
+        if(a.name !== null)
+        {
+          return a.admin.localeCompare(b.admin);
+        }
+        
       },
       sortDirections: ["descend", "ascend", "descend"],
       render: (text) => <a>{text}</a>,
@@ -55,7 +69,7 @@ const MandalApprovalTable = (props) => {
       key: "actions",
       render: (text, record) => (
         <Space size="middle">
-          <Button type="primary">View</Button>
+          <Button type="primary" onClick={() => onClickView(record)}>View</Button>
           <Popconfirm
             title="Are you sure you want to approve this mandal？"
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}
@@ -123,7 +137,7 @@ const MandalApprovalTable = (props) => {
       ></Input.Search>
       <Table
         columns={columns}
-        dataSource={filterTable == null ? baseData : filterTable}
+        dataSource={filterTable == null ? props.mandals : filterTable}
       >
         {" "}
       </Table>

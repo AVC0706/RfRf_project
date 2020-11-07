@@ -12,6 +12,8 @@ import MyMandal from "./views/Home/MyMandals";
 import ForgetPassword from "./views/Auth/ForgetPassword/ForgetPassword";
 import MandalNetwork from "./views/Home/MandalNetwork";
 import NewPassword from "./views/Auth/ForgetPassword/NewPassword";
+import MeetingArchive from "./views/Home/MeetingArchive";
+import Publications from "./views/Home/Publications";
 
 class Routes extends React.Component {
   render() {
@@ -28,7 +30,8 @@ class Routes extends React.Component {
         <Route path="/userProfile/:id" component={ UserProfile } />
         <Route path="/mandalNetwork" component={MandalNetwork}/>
         <Route path="/newPassword" component={NewPassword}/>
-
+        <Route path="/meetingArchives" component={MeetingArchive}/>
+        <Route path="/publications" component={Publications} />
       </Switch>
     );
   }

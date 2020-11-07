@@ -31,7 +31,7 @@ function MandalTab() {
 
     if (user.admin.toLowerCase() === "district") {
       axios
-        .get(`http://localhost:5000/api/admin/districtAdmin/getMandals/${false}`)
+        .get(`http://localhost:5000/api/districtAdmin/getMandals/${false}`)
         .then((res) => {
           if (res.status === 200) {
             setFalseMandal(res.data.mandals);
@@ -45,7 +45,7 @@ function MandalTab() {
 
     else if (user.admin.toLowerCase() === "city") {
       axios
-        .get(`http://localhost:5000/api/admin/cityAdmin/getMandals/${false}`)
+        .get(`http://localhost:5000/api/cityAdmin/getMandals/${false}`)
         .then((res) => {
           if (res.status === 200) {
             setFalseMandal(res.data.mandals);

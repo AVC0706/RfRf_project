@@ -43,8 +43,8 @@ function Navbar() {
           </Col>
         </Row>
 
-        <Header style={{ backgroundColor: '#d6d6d6', height: '60px' }}></Header>
-        <Header style={{ backgroundColor: '#ffac42' }}>
+        <Header style={{ backgroundColor: '#d6d6d6', height: '64px' }}></Header>
+        <Header style={{ backgroundColor: '#ffac42', height: '66px'}}>
           {userContext.isAuth === true && userContext.user ?
             (
               <>{location.pathname === '/dashboard' ? (<><Menu
@@ -86,10 +86,10 @@ function Navbar() {
                     </Menu.Item>
                   </SubMenu>
                   <Menu.Item key="4">
-                    <Link to="/">Meeting Archives</Link>
+                    <Link to="/meetingArchives">Meeting Archives</Link>
                   </Menu.Item>
                   <Menu.Item key="5">
-                    <Link to="/">Publications</Link>
+                    <Link to="/publications">Publications</Link>
                   </Menu.Item>
                   <Menu.Item key="6">
                     <Link to="/">Contact Us</Link>
@@ -116,10 +116,6 @@ function Navbar() {
 
                 </Menu>
               </>)}</>
-
-
-
-
                 ) : (
               <>
                   <Menu
@@ -141,11 +137,8 @@ function Navbar() {
                         <Link to="/mandalNetwork">Mandal Network Details</Link>
                       </Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="4">
-                      <Link to="/">Meeting Archives</Link>
-                    </Menu.Item>
                     <Menu.Item key="5">
-                      <Link to="/">Publications</Link>
+                      <Link to="/publications">Publications</Link>
                     </Menu.Item>
                     <Menu.Item key="6">
                       <Link to="/">Contact Us</Link>
@@ -154,7 +147,6 @@ function Navbar() {
                       <Link to="/login">Login</Link>
                     </Menu.Item>
                   </Menu>
-
                 </>
             )}
         </Header>

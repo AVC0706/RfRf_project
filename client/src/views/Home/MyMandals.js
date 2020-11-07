@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Row, Col, List, Skeleton, Layout } from "antd";
+import { Card, Row, Col, Skeleton, Layout } from "antd";
 
 import UserContext from "../../context/user/userContext";
 import axios from "axios";
-import Navbar from "../../components/navbars/header/header";
-import Meta from "antd/lib/card/Meta";
 const { Content } = Layout;
 function MyMandal(props) {
   //start

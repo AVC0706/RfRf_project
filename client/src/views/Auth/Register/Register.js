@@ -7,14 +7,10 @@ import {
   Row,
   Col,
   Card,
-  message,
   Select,
-  Divider,
 } from "antd";
 import "./Register.css";
 import UserContext from "../../../context/user/userContext";
-import SecondNav from "../../../components/navbars/header/altHeader";
-import axios from "axios"
 import { districts, states } from "./Mock";
 const { Option } = Select;
 

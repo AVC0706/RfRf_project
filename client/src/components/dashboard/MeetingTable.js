@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
-import { Button, Table, Space, Input, Modal } from "antd";
+import { Button, Table, Space, Input } from "antd";
 import { Popconfirm } from "antd";
-import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
-import axios from "axios";
+import { QuestionCircleOutlined } from "@ant-design/icons";
 import MeetingDetails from "../profiles/MeetingDetails";
 import AddMOM from "../forms/AddMOM";
 
