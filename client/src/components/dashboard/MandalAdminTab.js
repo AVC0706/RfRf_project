@@ -23,7 +23,7 @@ function MandalAdminTab() {
   }, []);
   const getNormalUsers = () => {
     axios
-      .get("http://localhost:5000/api/admin/getAdmins/null")
+      .get(process.env.REACT_APP_SERVER_URL + "/admin/getAdmins/null")
       .then((res) => {
         if (res.status === 200) {
           setNormalUsers(res.data.users);

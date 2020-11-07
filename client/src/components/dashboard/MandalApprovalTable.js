@@ -59,7 +59,7 @@ const MandalApprovalTable = (props) => {
           <Popconfirm
             title="Are you sure you want to approve this mandal？"
             icon={<QuestionCircleOutlined style={{ color: "red" }} />}
-            // onConfirm={(e) => onClick(e, text, record)}
+            // onConfirm={props.approveMandal(record)}
           >
             <Button type="primary" style={{color:"white" ,backgroundColor:"#38BC3D"}}>
               Accept
