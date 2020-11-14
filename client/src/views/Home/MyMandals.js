@@ -21,7 +21,7 @@ function MyMandal(props) {
 
   const getMandals = () => {
     axios
-      .get("http://localhost:5000/api/user/myMandals")
+      .get(process.env.REACT_APP_SERVER_URL + "/user/myMandals")
       .then((res) => {
         if (res.status === 200) {
           console.log(res.data.user);

@@ -42,7 +42,7 @@ const UserState = (props) => {
     }
 
     try {
-      const res = await axios.get("http://localhost:5000/api/auth/isAuth");
+      const res = await axios.get(process.env.REACT_APP_SERVER_URL + "/auth/isAuth");
       dispatch({
         type: USER_LOADED,
         payload: res.data,
@@ -64,7 +64,7 @@ const UserState = (props) => {
       },
     };
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", formData, config);
+      const res = await axios.post(process.env.REACT_APP_SERVER_URL + "/auth/register", formData, config);
       // console.log("this is admin status:" + res.data.superadmin.admin);
 
       dispatch({
@@ -89,7 +89,7 @@ const UserState = (props) => {
     };
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        process.env.REACT_APP_SERVER_URL + "/auth/login",
         formData,
         config
       );
@@ -175,7 +175,7 @@ const UserState = (props) => {
     //   },
     // };
     try {
-      const res = await axios.get("http://localhost:5000/api/aoi/getAllAoi");
+      const res = await axios.get(process.env.REACT_APP_SERVER_URL + "/aoi/getAllAoi");
       // console.log("this is admin status:" + res.data.superadmin.admin);
 
       dispatch({
