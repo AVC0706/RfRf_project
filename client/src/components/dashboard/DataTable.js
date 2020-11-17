@@ -91,7 +91,7 @@ const DataTable = (props) => {
     searchText: "",
     modalVisible: false
   });
-  const { filterTable, columns, searchText ,modalVisible } = state;
+  const { filterTable, columns, searchText, modalVisible } = state;
   const search = (value) => {
     setstate({
       ...state,
@@ -126,8 +126,8 @@ const DataTable = (props) => {
   };
   return (
     <>
-      <Button onClick={()=>setstate({...state,modalVisible:true})}>Add Admin</Button>
-      <Modal visible={modalVisible}  onCancel={()=>setstate({...state,modalVisible:false})}><Register adminType={props.adminType}></Register></Modal>
+      {props.adminType != 'null' && <Button onClick={() => setstate({ ...state, modalVisible: true })}>Add Admin</Button>}
+      <Modal visible={modalVisible} onCancel={() => setstate({ ...state, modalVisible: false })}><Register adminType={props.adminType}></Register></Modal>
       <Input.Search
         placeholder="Search"
         value={searchText}

@@ -7,14 +7,10 @@ import {
   Row,
   Col,
   Card,
-  message,
   Select,
-  Divider,
 } from "antd";
 import "./Register.css";
 import UserContext from "../../../context/user/userContext";
-import SecondNav from "../../../components/navbars/header/altHeader";
-import axios from "axios"
 import { districts, states } from "./Mock";
 const { Option } = Select;
 
@@ -24,18 +20,11 @@ function Register(props) {
   const { Aoi, getAllAoi } = userContext;
 
   useEffect(() => {
-    console.log(districts)
-    console.log(states)
-  }, [])
-
-
-
-  useEffect(() => {
     getAllAoi();
     children = [];
 
     const { adminType } = props;
-    console.log(adminType);
+    console.log(props.adminType);
     setuser({ ...user, admin: adminType });
 
     // eslint-disable-next-line
@@ -95,9 +84,9 @@ function Register(props) {
 
   const onSubmit = () => {
     userContext.register(user);
-    userContext.login(user, props.history);
-    props.history.push("/");
     console.log(user);
+    console.log(user.admin);
+    console.log(props.adminType);
   };
 
   const [user, setuser] = useState({

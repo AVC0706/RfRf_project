@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Card, Row, Col, Button, Badge, Tabs, Descriptions, Statistic, Modal, message, Tag } from "antd";
+import { Card, Row, Col, Button, Tabs, Descriptions, Statistic, Modal, message, Tag } from "antd";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import {
   CheckCircleOutlined,
@@ -341,7 +341,7 @@ function MandalProfile(props) {
                   </Row>
 
                 </TabPane>
-                {mandal.districtApproved === true ? (<><TabPane tab="Meeting Information" key="meetingInfo">
+                {mandal.districtApproved === true ? (<TabPane tab="Meeting Information" key="meetingInfo">
                   <Card>
                     <h1>Past Meeting Details</h1>
                   </Card>
@@ -366,8 +366,7 @@ function MandalProfile(props) {
                   <br></br>
                   <h1>Past Meetings</h1>
                   <MeetingTable meetings={meeting} deleteMeet={deleteMeet} addMom={addmom} ></MeetingTable>
-                </TabPane>
-                </>) : (<><TabPane tab="Meeting Information" disabled key="meetingInfo"></TabPane></>)}
+                </TabPane>) : (<TabPane tab="Meeting Information" disabled key="meetingInfo"></TabPane>)}
               </Tabs>
             </Card>
           </div>
