@@ -11,6 +11,7 @@ function Navbar() {
   const layout = {
     float: "right",
     backgroundColor: "#ffac42",
+    borderBottom:"0px"
   };
   const subMenuStyle = {
     backgroundColor: "#ffac42",
