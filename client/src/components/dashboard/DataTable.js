@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "antd/dist/antd.css";
-import { Button, Table, Space, Input } from "antd";
+import { Button, Table, Space, Input,Row,Col } from "antd";
 import { Popconfirm } from "antd";
 import { QuestionCircleOutlined, SearchOutlined } from "@ant-design/icons";
 import Modal from "antd/lib/modal/Modal";
@@ -126,15 +126,21 @@ const DataTable = (props) => {
   };
   return (
     <>
-      {props.adminType != 'null' && <Button onClick={() => setstate({ ...state, modalVisible: true })}>Add Admin</Button>}
-      <Modal visible={modalVisible} onCancel={() => setstate({ ...state, modalVisible: false })}><Register adminType={props.adminType}></Register></Modal>
-      <Input.Search
+    <Row>
+      <Col span = {18}><Input.Search
         placeholder="Search"
         value={searchText}
         onChange={onChange}
         enterButton
         onSearch={search}
-      ></Input.Search>
+        style={{marginLeft: '2em'}}
+      ></Input.Search></Col>
+      <Col span = {6}>{props.adminType != 'null' && <Button type="primary"style={{float:"right",marginRight:"2em"}}onClick={() => setstate({ ...state, modalVisible: true })}>Add Admin</Button>}
+      <Modal visible={modalVisible} footer={null} onCancel={() => setstate({ ...state, modalVisible: false })}><Register state={state} setState={setstate} adminType={props.adminType}></Register></Modal></Col>
+    
+      
+    </Row>
+      
       <Table
         columns={columns}
         dataSource={filterTable === null ? props.users : filterTable}

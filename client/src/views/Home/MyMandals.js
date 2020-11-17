@@ -40,27 +40,29 @@ function MyMandal(props) {
           <Layout>
             <Content>
               <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                <Col
-                  span={6}
-                  className="gutter-row"
-                  style={{padding:'2em'}}
-                >
-                  <center>
-                    <Card style={{ width: '80%', height: 250 }} hoverable={true} onClick={() => {
-                      props.history.push("/mandalRegister");
-                    }} >
+                {userContext.user && userContext.user.admin != 'null' &&
+                  <Col
+                    span={6}
+                    className="gutter-row"
+                    style={{ padding: '2em' }}
+                  >
+                    <center>
+                      <Card style={{ width: '80%', height: 250 }} hoverable={true} onClick={() => {
+                        props.history.push("/mandalRegister");
+                      }} >
 
-                      <center> <h1><b>Add Mandal</b></h1> <img style={{ width: '60%', alignItems: 'center' }} alt="example" src="assets/images/add.png" /></center>
-                    </Card>
-                  </center>
+                        <center> <h1><b>Add Mandal</b></h1> <img style={{ width: '60%', alignItems: 'center' }} alt="example" src="assets/images/add.png" /></center>
+                      </Card>
+                    </center>
 
-                </Col>
+                  </Col>}
+
                 {mandals ? (
                   mandals.map((mandal) => (
                     <Col
                       span={6}
                       className="gutter-row"
-                      style={{padding:'2em'}}
+                      style={{ padding: '2em' }}
                     >
                       <div
                         key={mandal._id}

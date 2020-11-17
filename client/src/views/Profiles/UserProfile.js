@@ -5,7 +5,6 @@ import axios from "axios";
 import UserContext from "../../context/user/userContext";
 import Avatar from "antd/lib/avatar/avatar";
 import MandalTable from "../../components/dashboard/MandalTable";
-
 const { TabPane } = Tabs;
 
 function UserProfile(props) {
@@ -30,7 +29,7 @@ function UserProfile(props) {
     created_at: null,
     aoi: [],
   });
-  const { name, city, district, state, country, qualification, created_at, aoi } = user;
+  const { name, city, district, state, qualification, created_at, aoi } = user;
 
   const getUser = () => {
     console.log(props)
@@ -68,7 +67,7 @@ function UserProfile(props) {
             headStyle={{ fontSize: "250%" }}
           >
             <Row>
-              
+
               <Col md={24}>
                 <Descriptions title="User Info" bordered>
                   <Descriptions.Item label="City">{city}</Descriptions.Item>
@@ -77,7 +76,7 @@ function UserProfile(props) {
                     {district}
                   </Descriptions.Item>
                   <Descriptions.Item label="Qualification">{qualification}</Descriptions.Item>
-                  <Descriptions.Item label="Joined At">{created_at}</Descriptions.Item>
+                  <Descriptions.Item label="Joined At"></Descriptions.Item>
                   <Descriptions.Item label="Area of Interest"><Tag>Area of Interest</Tag></Descriptions.Item>
                 </Descriptions>
               </Col>

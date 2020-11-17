@@ -46,7 +46,7 @@ function MandalProfile(props) {
     addMembers_visible: false,
     addMeeting_visible: false,
     members: 0,
-    aoi:[]
+    aoi: []
   });
   const {
     name,
@@ -212,14 +212,14 @@ function MandalProfile(props) {
       })
 
   };
-  
+
   const approveMandal = () => {
     if (userContext.user.admin === 'district' && mandal.districtApproved === false) {
       axios.put(
         process.env.REACT_APP_SERVER_URL + `/districtAdmin/approveMandal/${props.match.params.id}`,
         mandal
       ).then((res) => {
-        console.log(res.data.msg , res.data.mandal);
+        console.log(res.data.msg, res.data.mandal);
       }).catch((e) => console.log(e));
     }
     else if (userContext.user.admin === 'city' && mandal.cityApproved === false) {
@@ -227,7 +227,7 @@ function MandalProfile(props) {
         process.env.REACT_APP_SERVER_URL + `/cityAdmin/approveMandal/${props.match.params.id}`,
         mandal
       ).then((res) => {
-        console.log(res.data.msg , res.data.mandal);
+        console.log(res.data.msg, res.data.mandal);
       }).catch((e) => console.log(e));
     }
     else {
@@ -250,7 +250,7 @@ function MandalProfile(props) {
 
               }
               headStyle={{ fontSize: "250%" }}
-            > {userContext.user.admin === "district" || userContext.user.admin === "state" || userContext.user.admin === "city" ? <Row>
+            > {(userContext.user.admin === "district" || userContext.user.admin === "state" || userContext.user.admin === "city") && userContext.user ? <Row>
 
               <Button
                 style={{ marginTop: "0px", float: "right" }}
@@ -258,30 +258,27 @@ function MandalProfile(props) {
               >
                 Edit Profile
          </Button>
-              <hr></hr>
+              <br></br>
+              <br></br>
             </Row> : <></>}
-              {(userContext.user.admin === 'district' && mandal.districtApproved === false) || (userContext.user.admin === 'city' && mandal.cityApproved === false) ? <Row>
-                <Card>
-                  <Col span={4}><h1>Approve Mandal?</h1></Col>
-                  <Col span={14}></Col>
-                  <Col span={4}><Button
-                    style={{ float: "right", margin: "0px 5px 0px 5px" }}
+              {((userContext.user.admin === 'district' && mandal.districtApproved === false) || (userContext.user.admin === 'city' && mandal.cityApproved === false)) && userContext.user ?
+                <Row ><Card title={<h1>Approve Mandal?</h1>}  style={{height:0}} extra={<>
+                  <Button
+                    style={{backgroundColor:"#32a852",color:"white",margin:"1em"}}
+                    size='large'
+                    onClick={approveMandal}
+                  >
+                    Yes
+            </Button>
+                  <Button
                     type="primary"
                     danger
                     size='large'
                   >
                     No
-                </Button>
-                    <Button
-                      style={{ margin: "0px 5px 0px 5px", float: "right", backgroundColor: "#38BC3D", color: "white" }}
-                      size='large'
-                      onClick={approveMandal}
-                    >
-                      Yes
-                </Button></Col>
-
-
-                </Card></Row> : <></>}
+            </Button></>} style={{ width: "100%" }}>
+                </Card>
+                </Row> : <></>}
 
 
               {/*----------- MEMBERS ---------*/}
@@ -313,7 +310,7 @@ function MandalProfile(props) {
 
                       <Card>
                         <p>Area of interests: </p>
-                        {aoi ? (aoi.map((aoi_item) => (<Tag>{aoi_item.name}</Tag>))): (<></>)}
+                        {aoi ? (aoi.map((aoi_item) => (<Tag>{aoi_item.name}</Tag>))) : (<></>)}
                       </Card>
 
                     </Col>
