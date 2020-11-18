@@ -1,112 +1,109 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Form, Select, Upload, Button, message, Tabs, Descriptions, Modal, Input } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
+import React, {useState} from "react";
+import {Button, Form, Input, message, Modal, Select, Upload} from "antd";
+import {InboxOutlined} from "@ant-design/icons";
 
 const {Option} = Select;
-const { Dragger } = Upload;
+const {Dragger} = Upload;
 export default function AddMOM(props) {
-    const [addMOM,setAddMOM] = useState({
-        addMOM_visible : false,
-    tags:[],
-    mom:"",
+    const [addMOM, setAddMOM] = useState({
+        addMOM_visible: false,
+        tags: [],
+        mom: "",
     });
-    const {addMOM_visible,mom,tags} = addMOM;
-    const hideAddMOM = () =>
-    {
-        setAddMOM({...addMOM,addMOM_visible:false});
+    const {addMOM_visible, mom, tags} = addMOM;
+    const hideAddMOM = () => {
+        setAddMOM({...addMOM, addMOM_visible: false});
     };
     const onChangeMOMTags = (e) => {
-        setAddMOM({ ...addMOM, tags: e });
+        setAddMOM({...addMOM, tags: e});
     };
-    const onAddMOM = () =>
-    {
-      console.log(props.meeting._id)
-      props.addMoM(props.meeting._id,addMOM);
-        setAddMOM({...addMOM,addMOM_visible:false});
+    const onAddMOM = () => {
+        console.log(props.meeting._id)
+        props.addMoM(props.meeting._id, addMOM);
+        setAddMOM({...addMOM, addMOM_visible: false});
     };
-    const showAddMOM = () =>
-    {
-        setAddMOM({...addMOM,addMOM_visible:true});
+    const showAddMOM = () => {
+        setAddMOM({...addMOM, addMOM_visible: true});
     };
     const onChange = (e) => {
-      setAddMOM({ ...addMOM, [e.target.name]: e.target.value });
-  };
+        setAddMOM({...addMOM, [e.target.name]: e.target.value});
+    };
     const uploader = {
         name: "file",
         multiple: true,
         action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
         onChange(info) {
-          const { status } = info.file;
-          if (status !== "uploading") {
-            console.log(info.file, info.fileList);
-          }
-          if (status === "done") {
-            message.success(`${info.file.name} file uploaded successfully.`);
-          } else if (status === "error") {
-            message.error(`${info.file.name} file upload failed.`);
-          }
+            const {status} = info.file;
+            if (status !== "uploading") {
+                console.log(info.file, info.fileList);
+            }
+            if (status === "done") {
+                message.success(`${info.file.name} file uploaded successfully.`);
+            } else if (status === "error") {
+                message.error(`${info.file.name} file upload failed.`);
+            }
         },
-      };
+    };
     return (
         <>
             <Button type="primary" onClick={showAddMOM}>
                 Add MOM
-        
-        </Button>
-        
-          
-        <Modal
-                      title={"Add MOM"}
-                      visible={addMOM_visible}
-                      footer={null}
-                      onCancel={hideAddMOM}
-                    >
-                        <Form name="addMOM">
-                <Form.Item>
-                    <Form.Item name="tags" label="MOM Tags">
-                        <Select
-                            mode="multiple"
-                            style={{ width: '100%' }}
-                            placeholder="Please select"
-                            onChange={onChangeMOMTags}
-                        >
-                            <Option key = "tags">Put tag here</Option>
-                                                         </Select>
+
+            </Button>
+
+
+            <Modal
+                title={"Add MOM"}
+                visible={addMOM_visible}
+                footer={null}
+                onCancel={hideAddMOM}
+            >
+                <Form name="addMOM">
+                    <Form.Item>
+                        <Form.Item name="tags" label="MOM Tags">
+                            <Select
+                                mode="multiple"
+                                style={{width: '100%'}}
+                                placeholder="Please select"
+                                onChange={onChangeMOMTags}
+                            >
+                                <Option key="tags">Put tag here</Option>
+                            </Select>
+                        </Form.Item>
                     </Form.Item>
-                </Form.Item>
-                <Form.Item>
-                <Form.Item
-            name="mom"
-            label="mom"
-            
-          >
-            <Input name="mom" value={mom} onChange={onChange} />
-          </Form.Item>
-                </Form.Item>
-                <Form.Item><br></br>
-          <Dragger {...uploader}>
-            <p className="ant-upload-drag-icon">
-              <InboxOutlined />
-            </p>
-            <p className="ant-upload-text">
-              Click or drag file to this area to upload
-            </p>
-            <p className="ant-upload-hint">
-              Support for a single or bulk upload. Strictly prohibit from
-              uploading company data or other band files
-            </p>
-          </Dragger></Form.Item>
-          <br></br>
-          <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="register-form-button"
-                    onClick={onAddMOM}
-                >
-                    Add MOM
-          </Button>
-            </Form>
-                    </Modal>
+                    <Form.Item>
+                        <Form.Item
+                            name="mom"
+                            label="mom"
+
+                        >
+                            <Input name="mom" value={mom} onChange={onChange}/>
+                        </Form.Item>
+                    </Form.Item>
+                    <Form.Item><br></br>
+                        <Dragger {...uploader}>
+                            <p className="ant-upload-drag-icon">
+                                <InboxOutlined/>
+                            </p>
+                            <p className="ant-upload-text">
+                                Click or drag file to this area to upload
+                            </p>
+                            <p className="ant-upload-hint">
+                                Support for a single or bulk upload. Strictly prohibit from
+                                uploading company data or other band files
+                            </p>
+                        </Dragger></Form.Item>
+                    <br></br>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="register-form-button"
+                        onClick={onAddMOM}
+                    >
+                        Add MOM
+                    </Button>
+                </Form>
+            </Modal>
         </>
     )
 }

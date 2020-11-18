@@ -6,12 +6,12 @@ import * as serviceWorker from "./serviceWorker";
 import UserState from "./context/user/UserState";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <UserState>
-      <App />
-    </UserState>
-  </React.StrictMode>,
-  document.getElementById("root")
+    <React.StrictMode>
+        <UserState>
+            <App/>
+        </UserState>
+    </React.StrictMode>,
+    document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

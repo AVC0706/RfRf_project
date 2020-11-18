@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
-import { Col, Layout, Menu, Row ,Button} from "antd";
+import React from "react";
+import {Col, Layout, Menu, Row} from "antd";
 import {useHistory} from 'react-router-dom';
-const { Header } = Layout;
-const { SubMenu } = Menu;
+
+const {Header} = Layout;
+const {SubMenu} = Menu;
 
 const SecondNav = () => {
     const history = useHistory();
@@ -15,17 +16,17 @@ const SecondNav = () => {
     };
     return (
         <Row>
-            <Col span={2} />
+            <Col span={2}/>
             <Col span={20}>
                 <Row>
                     <img
                         src="assets\images\banner.png"
-                        style={{ width:'100%' ,height:'180px'}}></img>
-                    
+                        style={{width: '100%', height: '180px'}}></img>
+
                 </Row>
 
             </Col>
-            <Col span={2} />
+            <Col span={2}/>
         </Row>
     )
 };

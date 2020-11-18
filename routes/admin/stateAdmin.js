@@ -1,7 +1,7 @@
 const express = require("express");
 const User = require("../../models/user");
 const Mandal = require("../../models/mandal")
-const { isAdmin } = require("../../middleware/auth")
+const {isAdmin} = require("../../middleware/auth")
 
 
 const router = express.Router();
@@ -26,25 +26,24 @@ const router = express.Router();
 //------Functions------
 
 
-
 //-------Mandal----------
 
 //Get all mandal for State Admin { approve : True }
 router.get("/getMandals", isAdmin, async (req, res) => {
     //start
 
-    if( req.user.admin !== 'state' ){
-        return res.status(401).send( { msg : "Not Authorised" } )
+    if (req.user.admin !== 'state') {
+        return res.status(401).send({msg: "Not Authorised"})
     }
 
     try {
-        const mandals = await Mandal.find({ cityApproved: true , districtAdmin: true , state: req.user.state });
+        const mandals = await Mandal.find({cityApproved: true, districtAdmin: true, state: req.user.state});
 
         if (!mandals) {
-            return res.status(204).json({ msg: "No data found" })
+            return res.status(204).json({msg: "No data found"})
         }
 
-        res.status(200).send({ mandals, msg: "All state mandal data" });
+        res.status(200).send({mandals, msg: "All state mandal data"});
 
         //end
     } catch (e) {
@@ -55,25 +54,24 @@ router.get("/getMandals", isAdmin, async (req, res) => {
 });
 
 
-
-//Get all district mandal for State Admin 
+//Get all district mandal for State Admin
 router.get("/getDistrictMandals/:district", isAdmin, async (req, res) => {
     //start
 
-    if( req.user.admin !== 'state' ){
-        return res.status(401).send( { msg : "Not Authorised" } )
+    if (req.user.admin !== 'state') {
+        return res.status(401).send({msg: "Not Authorised"})
     }
 
     try {
 
 
-        const mandals = await Mandal.find({ cityApproved: true , districtApproved: true , district: req.params.district });
+        const mandals = await Mandal.find({cityApproved: true, districtApproved: true, district: req.params.district});
 
         if (!mandals) {
-            return res.status(204).json({ msg: "No data found" })
+            return res.status(204).json({msg: "No data found"})
         }
 
-        res.status(200).send({ mandals, msg: "All state mandal data" });
+        res.status(200).send({mandals, msg: "All state mandal data"});
 
         //end
     } catch (e) {
@@ -82,9 +80,6 @@ router.get("/getDistrictMandals/:district", isAdmin, async (req, res) => {
     }
     //end
 });
-
-
-
 
 
 //-------User----------
@@ -116,18 +111,15 @@ router.get("/getDistrictMandals/:district", isAdmin, async (req, res) => {
 // });
 
 
-
-
-
 //Make user District admin0
 router.put("/makeDistrictAdmin/:id", isAdmin, async (req, res) => {
     //start
 
     try {
-        const user = await User.findOne({_id: req.params.id })  
+        const user = await User.findOne({_id: req.params.id})
 
         if (!user) {
-            return res.status(203).json({ msg: "No data found" })
+            return res.status(203).json({msg: "No data found"})
         }
 
         user.admin = "district"
@@ -135,7 +127,7 @@ router.put("/makeDistrictAdmin/:id", isAdmin, async (req, res) => {
         await user.save()
 
 
-        res.status(200).send({ user , msg: "Mandal Approved" });
+        res.status(200).send({user, msg: "Mandal Approved"});
 
         //end
     } catch (e) {
@@ -150,15 +142,15 @@ router.put("/makeDistrictAdmin/:id", isAdmin, async (req, res) => {
 //Delete Admin users
 router.delete("/deleteAdmin/:id", isAdmin, async (req, res) => {
     //start
-    
+
     try {
-        const user = await User.findOneAndDelete( { _id: req.params.id } )  
+        const user = await User.findOneAndDelete({_id: req.params.id})
 
         if (!user) {
-            return res.status(204).json({ msg: "No data found" })
+            return res.status(204).json({msg: "No data found"})
         }
 
-        res.status(200).send({ user , msg: "Admin Deleted" });
+        res.status(200).send({user, msg: "Admin Deleted"});
 
         //end
     } catch (e) {
@@ -167,8 +159,6 @@ router.delete("/deleteAdmin/:id", isAdmin, async (req, res) => {
         //end
     }
 });
-
-
 
 
 module.exports = router;

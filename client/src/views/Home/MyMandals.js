@@ -1,46 +1,48 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Card, Row, Col, Skeleton, Layout } from "antd";
+import React, {useContext, useEffect, useState} from "react";
+import {Card, Col, Layout, Row, Skeleton} from "antd";
 
 import UserContext from "../../context/user/userContext";
 import axios from "axios";
-const { Content } = Layout;
+
+const {Content} = Layout;
+
 function MyMandal(props) {
-  //start
+    //start
 
-  const userContext = useContext(UserContext);
+    const userContext = useContext(UserContext);
 
-  useEffect(() => {
-    if (userContext.user) {
-      getMandals();
-    }
-  }, [userContext.isAuth]);
-
-  const [mandals, setMandals] = useState([]);
-
-  const getMandals = () => {
-    axios
-      .get(process.env.REACT_APP_SERVER_URL + "/user/myMandals")
-      .then((res) => {
-        if (res.status === 200) {
-          console.log(res.data.user);
-          setMandals(res.data.user.mandals);
-          console.log(mandals);
+    useEffect(() => {
+        if (userContext.user) {
+            getMandals();
         }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    }, [userContext.isAuth]);
 
-  return (
-    <>
-      <Row>
-        <Col span={2}></Col>
-        <Col span={20}>
-          <Layout>
-            <Content>
-              <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                {userContext.user && userContext.user.admin != 'null' &&
+    const [mandals, setMandals] = useState([]);
+
+    const getMandals = () => {
+        axios
+            .get(process.env.REACT_APP_SERVER_URL + "/user/myMandals")
+            .then((res) => {
+                if (res.status === 200) {
+                    console.log(res.data.user);
+                    setMandals(res.data.user.mandals);
+                    console.log(mandals);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+
+    return (
+        <>
+            <Row>
+                <Col span={2}></Col>
+                <Col span={20}>
+                    <Layout>
+                        <Content>
+                            <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
+                                {userContext.user && userContext.user.admin != 'null' &&
                   <Col
                     span={6}
                     className="gutter-row"
@@ -72,23 +74,23 @@ function MyMandal(props) {
                           <h1 style={{ textAlign: 'center' }}>{mandal.name} </h1>
                         </Card></center>
 
-                      </div>
-                    </Col>
-                  ))
-                ) : (
-                    <Skeleton />
-                  )}
+                                            </div>
+                                        </Col>
+                                    ))
+                                ) : (
+                                    <Skeleton/>
+                                )}
 
 
-              </Row>
+                            </Row>
 
-            </Content>
-          </Layout>
-        </Col>
+                        </Content>
+                    </Layout>
+                </Col>
 
-      </Row>
-    </>
-  );
+            </Row>
+        </>
+    );
 }
 
 export default MyMandal;
