@@ -3,20 +3,20 @@ const config = require("config");
 const db = config.get("mongoURI");
 
 const connectDB = async () => {
-  try {
-    await mongoose.connect(db, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-      useUnifiedTopology: true,
-    });
+    try {
+        await mongoose.connect(db, {
+            useNewUrlParser: true,
+            useCreateIndex: true,
+            useFindAndModify: false,
+            useUnifiedTopology: true,
+        });
 
-    console.log("MongoAtlas Connected");
-  } catch (e) {
-    console.error(e.message);
-  }
+        console.log("MongoAtlas Connected");
+    } catch (e) {
+        console.error(e.message);
+    }
 };
 
 module.exports = connectDB;
 
-  // "mongoURI": "mongodb://localhost:27017/RF-RFmandal",
+// "mongoURI": "mongodb://localhost:27017/RF-RFmandal",
