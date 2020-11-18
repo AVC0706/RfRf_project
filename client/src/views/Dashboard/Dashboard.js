@@ -1,24 +1,22 @@
-import React, { useContext } from "react";
-import classes from "./Dashboard.module.css";
+import React, {useContext} from "react";
 import UserContext from "../../context/user/userContext";
 import DashboardView from "../../components/dashboard/Dashboard";
-import { Col, Row } from "antd";
-import Navbar from "../../components/navbars/header/header";
+import {Col, Row} from "antd";
 
 const Dashboard = (props) => {
-  const userContext = useContext(UserContext);
-  return (
-    <><Row>
-      <Col span={2} />
-      <Col span={20}>{userContext.user && userContext.user.admin.toLowerCase() !== "null" ? (
-        <DashboardView />
-      ) : (
-          <p>You are not a admin.</p>
-        )}</Col>
-      <Col span={2} />
-    </Row></>
+    const userContext = useContext(UserContext);
+    return (
+        <><Row>
+            <Col span={2}/>
+            <Col span={20}>{userContext.user && userContext.user.admin.toLowerCase() !== "null" ? (
+                <DashboardView/>
+            ) : (
+                <p>You are not a admin.</p>
+            )}</Col>
+            <Col span={2}/>
+        </Row></>
 
-  );
+    );
 };
 
 export default Dashboard;

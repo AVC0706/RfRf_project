@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
-import { Form, Input, Button, Select,DatePicker } from "antd";
-const { Option } = Select;
+import React, {useState} from 'react';
+import {Button, DatePicker, Form, Input, Select} from "antd";
+
+const {Option} = Select;
+
 function AddMeeting(props) {
     const [meeting, setmeeting] = useState({
         name: "",
         agenda: "",
-        date:"",
+        date: "",
     });
-    const { name, agenda ,date} = meeting;
+    const {name, agenda, date} = meeting;
     const onChange = (e) => {
-        setmeeting({ ...meeting, [e.target.name]: e.target.value });
+        setmeeting({...meeting, [e.target.name]: e.target.value});
     };
-    const onChangeDate = (date,dateString) =>
-    {
-        setmeeting({...meeting,date: dateString});
+    const onChangeDate = (date, dateString) => {
+        setmeeting({...meeting, date: dateString});
     };
     const onAddMeeting = () => {
         props.addMeeting(meeting);
-        
+
     }
     return (
         <div>
@@ -40,8 +41,8 @@ function AddMeeting(props) {
                     <Input name="agenda" value={agenda} onChange={onChange}></Input>
                 </Form.Item>
                 <Form.Item name="Date"
-                    label="Date">
-                        <DatePicker onChange={onChangeDate} />
+                           label="Date">
+                    <DatePicker onChange={onChangeDate}/>
                 </Form.Item>
                 <Button
                     type="primary"
@@ -50,7 +51,7 @@ function AddMeeting(props) {
                     onClick={onAddMeeting}
                 >
                     Add Meeting
-          </Button>
+                </Button>
             </Form>
         </div>
     )
