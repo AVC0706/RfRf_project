@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {Layout, Menu} from "antd";
-import MandalTab from "./MandalTab.js";
-import AdminTab from "./AdminTab.js";
-import MandalAdminTab from "./MandalAdminTab.js";
+import MandalTab from "./MandalTab.jsx";
+import AdminTab from "./AdminTab.jsx";
+import MandalAdminTab from "./MandalAdminTab.jsx";
 
 const {Sider, Content} = Layout;
 

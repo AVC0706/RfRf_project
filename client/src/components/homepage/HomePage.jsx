@@ -23,22 +23,22 @@ const HomePage = () => {
                     <div className="carousel">
                         <Carousel autoplay>
                             <div>
-                                <img src="assets\images\1-2.jpg" style={contentStyle}/>
+                                <img src="assets/images/1-2.jpg" style={contentStyle} alt={''}/>
                             </div>
                             <div>
-                                <img src="assets\images\2-1.jpg" style={contentStyle}/>
+                                <img src="assets/images/2-1.jpg" style={contentStyle} alt={''}/>
                             </div>
                             <div>
-                                <img src="assets\images\3-1.jpg" style={contentStyle}/>
+                                <img src="assets/images/3-1.jpg" style={contentStyle} alt={''}/>
                             </div>
                             <div>
-                                <img src="assets\images\h1.jpeg" style={contentStyle}/>
+                                <img src="assets/images/h1.jpeg" style={contentStyle} alt={''}/>
                             </div>
                             <div>
-                                <img src="assets\images\h2.jpeg" style={contentStyle}/>
+                                <img src="assets/images/h2.jpeg" style={contentStyle} alt={''}/>
                             </div>
                             <div>
-                                <img src="assets\images\h3.jpeg" style={contentStyle}/>
+                                <img src="assets/images/h3.jpeg" style={contentStyle} alt={''}/>
                             </div>
                         </Carousel>
                     </div>

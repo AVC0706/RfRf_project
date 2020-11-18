@@ -28,7 +28,7 @@ function UserProfile(props) {
         created_at: null,
         aoi: [],
     });
-    const {name, city, district, state, country, qualification, created_at, aoi} = user;
+    const {name, city, district, state, qualification, created_at, aoi} = user;
 
     const getUser = () => {
         console.log(props)

@@ -34,18 +34,19 @@ function Navbar() {
                             src="assets\images\logo_BSM.png"
                             height="128px"
                             style={logo_style}
-                        />
+                            alt={''}/>
                     </Col>
                     <Col lg={4}>
                         <img
                             src="assets\images\text.png"
                             height="50px"
                             style={text_logo_style}
-                        />
+                            alt={''}/>
+
                     </Col>
                 </Row>
 
-                <Header style={{backgroundColor: '#d6d6d6', height: '60px'}}></Header>
+                <Header style={{backgroundColor: '#d6d6d6', height: '60px'}}/>
                 <Header style={{backgroundColor: '#ffac42'}}>
                     {userContext.isAuth === true && userContext.user ?
                         (
@@ -99,7 +100,7 @@ function Navbar() {
                                     <SubMenu icon={<Avatar size={60}>
                                         {userContext.user.name.charAt(0)}
                                     </Avatar>}>
-                                        {userContext.user.admin != "null" &&
+                                        {userContext.user.admin !== "null" &&
                                         <Menu.Item key='10'><Link to='/dashboard'>Dashboard</Link></Menu.Item>}
                                         <Menu.Item key="7">
                                             <Link to="/myMandals">

@@ -21,9 +21,9 @@ function App() {
     return (
         <div>
             <Router>
-                <Navbar></Navbar>
+                <Navbar/>
                 <Routes/>
-                <footerBar></footerBar>
+                <footerBar/>
             </Router>
         </div>
     );

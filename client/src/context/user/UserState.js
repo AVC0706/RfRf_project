@@ -22,7 +22,6 @@ const UserState = (props) => {
         user: null,
         isAuth: false,
         allusers: null,
-        user: null,
         Aoi: []
     };
 
@@ -62,7 +61,7 @@ const UserState = (props) => {
             },
         };
         try {
-            const res = await axios.post(process.env.REACT_APP_SERVER_URL + "/auth/register", formData, config);
+            await axios.post(process.env.REACT_APP_SERVER_URL + "/auth/register", formData, config);
             // console.log("this is admin status:" + res.data.superadmin.admin);
 
             dispatch({

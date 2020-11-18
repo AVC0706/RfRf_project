@@ -106,15 +106,14 @@ function Register(props) {
         password,
         qualification,
         city,
-        district,
-        state,
+        // district,
+        // state,
         country,
-        aoi,
+        // aoi,
     } = user;
 
-    const grid = {};
-
-    let children = [];
+    let children;
+    children = [];
     if (Aoi !== undefined) {
         for (let i = 0; i < Aoi.length; i++) {
             children.push(<Option key={Aoi[i].name}>{Aoi[i].name}</Option>);
