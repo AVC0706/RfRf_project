@@ -1,6 +1,6 @@
-import { Table, Input, Button, Space, Row, Col } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
-import React, { useState } from 'react'
+import {Button, Col, Input, Row, Space, Table} from 'antd';
+import {SearchOutlined} from '@ant-design/icons';
+import React, {useState} from 'react'
 
 function Publications() {
     const [publication, setpublication] = useState(
@@ -9,10 +9,10 @@ function Publications() {
             searchedColumn: '',
         }
     )
-    const { searchText, searchedColumn } = publication;
+    const {searchText, searchedColumn} = publication;
     const getColumnSearchProps = dataIndex => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-            <div style={{ padding: 8 }}>
+        filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
+            <div style={{padding: 8}}>
                 <Input
                     ref={node => {
                         this.searchInput = node;
@@ -21,25 +21,25 @@ function Publications() {
                     value={selectedKeys[0]}
                     onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                     onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    style={{ width: 188, marginBottom: 8, display: 'block' }}
+                    style={{width: 188, marginBottom: 8, display: 'block'}}
                 />
                 <Space>
                     <Button
                         type="primary"
                         onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                        icon={<SearchOutlined />}
+                        icon={<SearchOutlined/>}
                         size="small"
-                        style={{ width: 90 }}
+                        style={{width: 90}}
                     >
                         Search
-                  </Button>
-                    <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+                    </Button>
+                    <Button onClick={() => handleReset(clearFilters)} size="small" style={{width: 90}}>
                         Reset
-                  </Button>
+                    </Button>
                 </Space>
             </div>
         ),
-        filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+        filterIcon: filtered => <SearchOutlined style={{color: filtered ? '#1890ff' : undefined}}/>,
         onFilter: (value, record) =>
             record[dataIndex]
                 ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
@@ -53,8 +53,8 @@ function Publications() {
             searchedColumn === dataIndex ? (
                 <></>
             ) : (
-                    text
-                ),
+                text
+            ),
     });
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -66,7 +66,7 @@ function Publications() {
 
     const handleReset = clearFilters => {
         clearFilters();
-        setpublication({ searchText: '' });
+        setpublication({searchText: ''});
     };
     const columns = [
         {
@@ -95,11 +95,11 @@ function Publications() {
     return (
         <div>
             <Row>
-                <Col span={2} />
+                <Col span={2}/>
                 <Col span={20}>
-                    <Table columns={columns} />
+                    <Table columns={columns}/>
                 </Col>
-                <Col span={2} />
+                <Col span={2}/>
 
             </Row>
         </div>

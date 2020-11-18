@@ -256,26 +256,26 @@ function MandalProfile(props) {
                                     Edit Profile
                                 </Button>
                                 <br></br>
-              <br></br>
+                                <br></br>
                             </Row> : <></>}
                             {((userContext.user.admin === 'district' && mandal.districtApproved === false) || (userContext.user.admin === 'city' && mandal.cityApproved === false)) && userContext.user ?
-                                    <Row ><Card title={<h1>Approve Mandal?</h1>}  style={{height:0}} extra={<>
-                                        <Button
-                    style={{backgroundColor:"#32a852",color:"white",margin:"1em"}}
-                    size='large'
-                    onClick={approveMandal}
-                  >
-                    Yes
-            </Button>
-                  <Button
-                    type="primary"
-                    danger
-                    size='large'
-                  >
-                                            No
-            </Button></>} style={{ width: "100%" }}>
-                </Card>
-                </Row> : <></>}
+                                <Row><Card title={<h1>Approve Mandal?</h1>} style={{height: 0}} extra={<>
+                                    <Button
+                                        style={{backgroundColor: "#32a852", color: "white", margin: "1em"}}
+                                        size='large'
+                                        onClick={approveMandal}
+                                    >
+                                        Yes
+                                    </Button>
+                                    <Button
+                                        type="primary"
+                                        danger
+                                        size='large'
+                                    >
+                                        No
+                                    </Button></>} style={{width: "100%"}}>
+                                </Card>
+                                </Row> : <></>}
 
 
                             {/*----------- MEMBERS ---------*/}
@@ -337,32 +337,35 @@ function MandalProfile(props) {
                                     </Row>
 
                                 </TabPane>
-                                {mandal.districtApproved === true ? (<TabPane tab="Meeting Information" key="meetingInfo">
-                  <Card>
-                    <h1>Past Meeting Details</h1>
-                  </Card>
-                  <Button
-                    type="primary"
-                    shape="round"
-                    size="large"
-                    icon={<AiOutlineUserAdd></AiOutlineUserAdd>}
-                    onClick={showAddMeeting}
-                  >
-                    Add Meeting
-                    </Button>
-                  <Modal
-                    title="Add Members"
-                    visible={addMeeting_visible}
-                    footer={null}
-                    onCancel={hideAddMeetings}
-                  >
-                    <AddMeeting addMeeting={AddMeetings}></AddMeeting>
-                  </Modal>
-                  <br></br>
-                  <br></br>
-                  <h1>Past Meetings</h1>
-                  <MeetingTable meetings={meeting} deleteMeet={deleteMeet} addMom={addmom} ></MeetingTable>
-                </TabPane>) : (<TabPane tab="Meeting Information" disabled key="meetingInfo"></TabPane>)}
+                                {mandal.districtApproved === true ? (
+                                    <TabPane tab="Meeting Information" key="meetingInfo">
+                                        <Card>
+                                            <h1>Past Meeting Details</h1>
+                                        </Card>
+                                        <Button
+                                            type="primary"
+                                            shape="round"
+                                            size="large"
+                                            icon={<AiOutlineUserAdd></AiOutlineUserAdd>}
+                                            onClick={showAddMeeting}
+                                        >
+                                            Add Meeting
+                                        </Button>
+                                        <Modal
+                                            title="Add Members"
+                                            visible={addMeeting_visible}
+                                            footer={null}
+                                            onCancel={hideAddMeetings}
+                                        >
+                                            <AddMeeting addMeeting={AddMeetings}></AddMeeting>
+                                        </Modal>
+                                        <br></br>
+                                        <br></br>
+                                        <h1>Past Meetings</h1>
+                                        <MeetingTable meetings={meeting} deleteMeet={deleteMeet}
+                                                      addMom={addmom}></MeetingTable>
+                                    </TabPane>) : (
+                                    <TabPane tab="Meeting Information" disabled key="meetingInfo"></TabPane>)}
                             </Tabs>
                         </Card>
                     </div>

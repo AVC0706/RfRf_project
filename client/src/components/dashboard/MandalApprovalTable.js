@@ -3,7 +3,6 @@ import "antd/dist/antd.css";
 import {Button, Input, Popconfirm, Space, Table} from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
 import UserContext from "../../context/user/userContext";
-import {useHistory} from 'react-router-dom';
 
 
 const MandalApprovalTable = (props) => {
@@ -15,42 +14,38 @@ const MandalApprovalTable = (props) => {
     const {user} = userContext;
 
 
-  const onClickView = (record) =>
-  {
-    history.push(`/mandalProfile/${record._id}`);
-  }
-  const baseColumns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      defaultSortOrder: "descend",
-      sorter: (a, b) => {
-        try
+    const onClickView = (record) => {
+        history.push(`/mandalProfile/${record._id}`);
+    }
+    const baseColumns = [
         {
-          return a.name.localeCompare(b.name);
-        }
-        catch{
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
+            defaultSortOrder: "descend",
+            sorter: (a, b) => {
+                try {
+                    return a.name.localeCompare(b.name);
+                } catch {
 
-        }
-      },
-      sortDirections: ["descend", "ascend", "descend"],
-      render: (text) => <a>{text}</a>,
-    },
-    {
-      title: "Admin",
-      dataIndex: "admin",
-      key: "admin",
-      sorter: (a, b) => {
-        if(a.name !== null)
+                }
+            },
+            sortDirections: ["descend", "ascend", "descend"],
+            render: (text) => <a>{text}</a>,
+        },
         {
-          return a.admin.localeCompare(b.admin);
-        }
+            title: "Admin",
+            dataIndex: "admin",
+            key: "admin",
+            sorter: (a, b) => {
+                if (a.name !== null) {
+                    return a.admin.localeCompare(b.admin);
+                }
 
-      },
-      sortDirections: ["descend", "ascend", "descend"],
-      render: (text) => <a>{text}</a>,
-    },
+            },
+            sortDirections: ["descend", "ascend", "descend"],
+            render: (text) => <a>{text}</a>,
+        },
 
         {
             title: "District",

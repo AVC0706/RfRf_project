@@ -29,8 +29,8 @@ class Routes extends React.Component {
                 <Route path="/userProfile/:id" component={UserProfile}/>
                 <Route path="/mandalNetwork" component={MandalNetwork}/>
                 <Route path="/newPassword" component={NewPassword}/>
-        <Route path="/meetingArchives" component={MeetingArchive}/>
-        <Route path="/publications" component={Publications} />
+                <Route path="/meetingArchives" component={MeetingArchive}/>
+                <Route path="/publications" component={Publications}/>
             </Switch>
         );
     }

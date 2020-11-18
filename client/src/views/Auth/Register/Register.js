@@ -83,10 +83,10 @@ function Register(props) {
 
     const onSubmit = () => {
         userContext.register(user);
-        props.setState({...props.state,modalVisible:false});
+        props.setState({...props.state, modalVisible: false});
         console.log(user);
         console.log(user.admin);
-    console.log(props.adminType);
+        console.log(props.adminType);
     };
 
     const [user, setuser] = useState({

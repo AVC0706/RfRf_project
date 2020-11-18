@@ -3,6 +3,7 @@ import {Button, Card, Col, Descriptions, Row, Tabs, Tag} from "antd";
 import axios from "axios";
 import UserContext from "../../context/user/userContext";
 import MandalTable from "../../components/dashboard/MandalTable";
+
 const {TabPane} = Tabs;
 
 function UserProfile(props) {
