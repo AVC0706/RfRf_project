@@ -77,8 +77,6 @@ function MandalProfile(props) {
                     console.log(res.data);
                     setAdminUser(res.data.adminUser)
                     setmandal(res.data.mandal)
-
-
                 }
             })
             .catch((err) => {
@@ -148,6 +146,7 @@ function MandalProfile(props) {
             });
         setmandal({...mandal, addMembers_visible: false});
     };
+
     const AddMeetings = (meeting) => {
         console.log(meeting);
         const config = {
@@ -212,18 +211,19 @@ function MandalProfile(props) {
 
     const approveMandal = () => {
         if (userContext.user.admin === 'district' && mandal.districtApproved === false) {
-            axios.put(
-                process.env.REACT_APP_SERVER_URL + `/districtAdmin/approveMandal/${props.match.params.id}`,
-                mandal
+            axios.patch(
+                process.env.REACT_APP_SERVER_URL + `/districtAdmin/approveMandal/${props.match.params.id}`
             ).then((res) => {
                 console.log(res.data.msg, res.data.mandal);
+                setmandal(res.data.mandal)
+
             }).catch((e) => console.log(e));
         } else if (userContext.user.admin === 'city' && mandal.cityApproved === false) {
-            axios.put(
-                process.env.REACT_APP_SERVER_URL + `/cityAdmin/approveMandal/${props.match.params.id}`,
-                mandal
+            axios.patch(
+                process.env.REACT_APP_SERVER_URL + `/cityAdmin/approveMandal/${props.match.params.id}`
             ).then((res) => {
                 console.log(res.data.msg, res.data.mandal);
+                setmandal(res.data.mandal)
             }).catch((e) => console.log(e));
         } else {
             console.log("Can't approve");
@@ -246,7 +246,7 @@ function MandalProfile(props) {
 
                             }
                             headStyle={{fontSize: "250%"}}
-                        > {(userContext.user.admin === "district" || userContext.user.admin === "state" || userContext.user.admin === "city") && userContext.user ?
+                        > {(userContext.user.admin === "district" || userContext.user.admin === "state" || userContext.user.admin === "mandal" || userContext.user.admin === "city") && userContext.user ?
                             <Row>
 
                                 <Button
@@ -259,21 +259,23 @@ function MandalProfile(props) {
                                 <br></br>
                             </Row> : <></>}
                             {((userContext.user.admin === 'district' && mandal.districtApproved === false) || (userContext.user.admin === 'city' && mandal.cityApproved === false)) && userContext.user ?
-                                <Row><Card title={<h1>Approve Mandal?</h1>} style={{height: 0}} extra={<>
-                                    <Button
-                                        style={{backgroundColor: "#32a852", color: "white", margin: "1em"}}
-                                        size='large'
-                                        onClick={approveMandal}
-                                    >
-                                        Yes
-                                    </Button>
-                                    <Button
-                                        type="primary"
-                                        danger
-                                        size='large'
-                                    >
-                                        No
-                                    </Button></>} style={{width: "100%"}}>
+                                <Row><Card title={<h1>Approve Mandal?</h1>} style={{height: 0}} extra={
+                                    <>
+                                        <Button
+                                            style={{backgroundColor: "#32a852", color: "white", margin: "1em"}}
+                                            size='large'
+                                            onClick={approveMandal}
+                                        >
+                                            Yes
+                                        </Button>
+                                        <Button
+                                            type="primary"
+                                            danger
+                                            size='large'
+                                        >
+                                            No
+                                        </Button>
+                                    </>} style={{width: "100%"}}>
                                 </Card>
                                 </Row> : <></>}
 
