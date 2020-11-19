@@ -1,5 +1,6 @@
 import React from 'react'
-import { OrganizationChart } from 'primereact/organizationchart';
+import {OrganizationChart} from 'primereact/organizationchart';
+
 function MandalNetwork() {
     const data = [{
         label: 'Country Lead',

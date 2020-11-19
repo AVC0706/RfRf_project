@@ -8,7 +8,7 @@ const app = express();
 connectDB();
 
 //MiddleWare
-app.use(express.json({ extended: false }));
+app.use(express.json({extended: false}));
 app.use(cors());
 
 // app.use("/", (req, res) => {

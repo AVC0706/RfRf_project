@@ -16,10 +16,9 @@ const _ = require("lodash");
 //     return schema.validate(data);
 // };
 
-const sendResetMail=  (req,res) => {
+const sendResetMail = (req, res) => {
     //start
     const {email} = req.body;
-    console.log(email)
     User.findOne({email},(err,user)=> {
         if(err || !user) {
             return res.status(400).json({error: "User with this email does not exist"});
@@ -33,20 +32,19 @@ const sendResetMail=  (req,res) => {
             text: `${link}`
         };
 
-        return user.updateOne({resetPasswordToken: token},function (err, success){
-            if(err) {
+        return user.updateOne({resetPasswordToken: token}, function (err, success) {
+            if (err) {
                 return res.status(400).json({error: "reset password link error"});
             } else {
-                
-    mg.messages().send(data, function (error, body) {
-        if(error) {
-            return res.status(400).json({
-                error: "message error"
-            })
-            console.log(body)
-        }
-        return res.json({message: "email is sent to you"});
-    });
+
+                mg.messages().send(data, function (error, body) {
+                    if (error) {
+                        return res.json({
+                            error: "message error"
+                        })
+                    }
+                    return res.json({message: "email is sent to you"});
+                });
             }
         })
     })
@@ -56,26 +54,24 @@ const sendResetMail=  (req,res) => {
 
 const resetPassword = (req,res) => {
     const {password} = req.body;
-    console.log(password);
     const resetPasswordToken = req.params.id;
     if(resetPasswordToken) {
         jwt.verify(resetPasswordToken,process.env.MAILGUN_SECRET, function (error,success) {
             if(error) {
                 return res.status(401).json({error: "Incorrect token or it is expired"});                
             }
-            User.findOne({resetPasswordToken}, (err,user)=> {
-                if(err || !user) {
-                    return res.status(400).json({error: "User with this token does not exist"});                    
+            User.findOne({resetPasswordToken}, (err, user) => {
+                if (err || !user) {
+                    return res.status(400).json({error: "User with this token does not exist"});
                 }
                 const obj = {
                     password: password,
                     resetPasswordToken: ''
                 }
-                user = _.extend(user,obj);
-                console.log(user)
-                user.save((err,result)=> {
-                    if(err) {
-                        return res.status(400).json({error:"reset password error"});
+                user = _.extend(user, obj);
+                user.save((err, result) => {
+                    if (err) {
+                        return res.status(400).json({error: "reset password error"});
                     } else {
                         return res.status(200).send({message: "your password has been changed"})
                     }
@@ -83,10 +79,9 @@ const resetPassword = (req,res) => {
             })
 
 
-
         })
     } else {
-        return res.status(401).json({error:"Authentication error"});
+        return res.status(401).json({error: "Authentication error"});
     }
 }
 

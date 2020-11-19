@@ -1,4 +1,3 @@
-
 //AOI
 export const AOI_SUCCESS = "AOI_SUCCESS";
 export const AOI_FAIL = "AOI_FAIL";

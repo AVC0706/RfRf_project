@@ -1,13 +1,13 @@
-import React,{useState} from 'react'
-import { Button, Table, Space, Input, Modal } from "antd";
+import React, {useState} from 'react'
+import {Button, Modal} from "antd";
 
 
 function MeetingDetails(props) {
-    
-    const [meetingVisible, setmeetingVisible] = useState({modalVisible:false});
-    const { modalVisible } = meetingVisible;
+
+    const [meetingVisible, setmeetingVisible] = useState({modalVisible: false});
+    const {modalVisible} = meetingVisible;
     const handleView = () => {
-        setmeetingVisible({ ...meetingVisible, modalVisible: true })
+        setmeetingVisible({...meetingVisible, modalVisible: true})
     };
     return (
         <div>
@@ -15,7 +15,9 @@ function MeetingDetails(props) {
             <Modal
 
                 visible={modalVisible}
-                onCancel={() => { setmeetingVisible({modalVisible:false}) }}
+                onCancel={() => {
+                    setmeetingVisible({modalVisible: false})
+                }}
             >
                 <h1>{props.meeting.name}</h1>
                 <hr></hr>
@@ -23,7 +25,7 @@ function MeetingDetails(props) {
                 <h3>MOM:</h3>
                 <h4>mom {props.meeting.mom}</h4>
                 <h4>Attached Document <a href={props.meeting.pdf_link}>Click Here</a></h4>
-                
+
 
             </Modal>
 
