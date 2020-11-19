@@ -10,6 +10,9 @@ export default function AddMOM(props) {
     tags:[],
     mom:"",
     });
+    const [momFiles, setMomFiles] = useState({
+      selectedFile: null
+    })
     const {addMOM_visible,mom,tags} = addMOM;
     const hideAddMOM = () =>
     {
@@ -42,6 +45,7 @@ export default function AddMOM(props) {
           }
           if (status === "done") {
             message.success(`${info.file.name} file uploaded successfully.`);
+            
           } else if (status === "error") {
             message.error(`${info.file.name} file upload failed.`);
           }

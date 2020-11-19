@@ -3,10 +3,14 @@ const express = require("express");
 const Document = require("../models/Document");
 const multer = require("multer");
 let AWS = require("aws-sdk");
+const {isAdmin,isAuth} = require("../middleware/auth");
+
+let storage = multer.memoryStorage();
+let upload = multer({ storage: storage });
 
 // Route to get a single existing GO data (needed for the Edit functionality)
-router.route("/:id").get((req, res, next) => {
-    DOCUMENT.findById(req.params.id, (err, go) => {
+router.get("/:id",isAuth,(req, res, next) => {
+    Document.findById(req.params.id, (err, go) => {
       if (err) {
         return next(err);
       }
@@ -14,9 +18,9 @@ router.route("/:id").get((req, res, next) => {
     });
   });
 
-  // route to upload a pdf document file
+  // route to upload a pdf Document file
 // In upload.single("file") - the name inside the single-quote is the name of the field that is going to be uploaded.
-router.post("/upload", upload.single("file"), function(req, res) {
+router.post("/upload/:id", upload.single("file"),isAdmin, function(req, res) {
     const file = req.file;
     const s3FileURL = process.env.AWS_Uploaded_File_URL_LINK;
   
@@ -45,15 +49,16 @@ router.post("/upload", upload.single("file"), function(req, res) {
       } else {
         res.send({ data });
         var newFileUploaded = {
-          description: req.body.description,
           fileLink: s3FileURL + file.originalname,
-          s3_key: params.Key
+          s3_key: params.Key,
+          meeting_id: req.params.id,
         };
-        var document = new DOCUMENT(newFileUploaded);
-        document.save(function(error, newFile) {
+        var Document = new Document(newFileUploaded);
+        Document.save(function(error, newFile) {
           if (error) {
             throw error;
           }
+          res.json("upload successfully")
         });
       }
     });

@@ -2,8 +2,8 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 const mailgun = require("mailgun-js")
-const DOMAIN = "sandboxc9f391a9186b4328b48e9600aeecdbb3.mailgun.org";
-const mg = mailgun({apiKey:"44d0409ec0646f52a3ef325cb2feed4e-0d2e38f7-6dd8cb4b", domain: DOMAIN});
+const DOMAIN = process.env.DOMAIN_KEY;
+const mg = mailgun({apiKey:process.env.MAILGUN_API_KEY, domain: DOMAIN});
 const _ = require("lodash");
 
 
@@ -24,7 +24,7 @@ const sendResetMail=  (req,res) => {
         if(err || !user) {
             return res.status(400).json({error: "User with this email does not exist"});
         }
-        const token = jwt.sign({_id: user._id},"kalemaam",{expiresIn: '20m'});
+        const token = jwt.sign({_id: user._id},process.env.MAILGUN_SECRET,{expiresIn: '20m'});
         const link = `http://localhost:3000/reset-pass/${token}`
         const data = {
             from: 'noreply@hello.com',
@@ -59,7 +59,7 @@ const resetPassword = (req,res) => {
     console.log(password);
     const resetPasswordToken = req.params.id;
     if(resetPasswordToken) {
-        jwt.verify(resetPasswordToken,"kalemaam", function (error,success) {
+        jwt.verify(resetPasswordToken,process.env.MAILGUN_SECRET, function (error,success) {
             if(error) {
                 return res.status(401).json({error: "Incorrect token or it is expired"});                
             }
