@@ -15,7 +15,7 @@ const MandalApprovalTable = (props) => {
 
 
     const onClickView = (record) => {
-        history.push(`/mandalProfile/${record._id}`);
+        props.history.push(`/mandalProfile/${record._id}`);
     }
     const baseColumns = [
         {

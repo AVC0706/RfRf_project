@@ -60,7 +60,7 @@ router.get("/getMandals/:approve", isAdmin, async (req, res) => {
 
 
 //Approve Mandal
-router.put("/approveMandal/:id", isAdmin, async (req, res) => {
+router.patch("/approveMandal/:id", isAdmin, async (req, res) => {
     //start
 
     if (req.user.admin !== 'district') {
