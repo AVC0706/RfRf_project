@@ -4,15 +4,19 @@ import UserContext from "./userContext";
 import UserReducer from "./userReducer";
 
 import {
-    AOI_FAIL,
-    AOI_SUCCESS,
-    AUTH_ERROR,
-    LOGIN_FAIL,
-    LOGIN_SUCCESS,
-    LOGOUT,
-    REGISTER_FAIL,
-    REGISTER_SUCCESS,
-    USER_LOADED,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  AOI_SUCCESS,
+  AOI_FAIL,
+  LOGOUT,
+  EMAIL_SENT,
+  PASSWORD_CHANGED,
+  EMAIL_FAIL,
+  PASSWORD_CHANGED_FAIL
 } from "../type";
 import setAuthToken from "../../utils/setAuthToken";
 
@@ -116,7 +120,56 @@ const UserState = (props) => {
     //-----------Logout----------
     const logout = () => dispatch({type: LOGOUT});
 
+  //forgot password
+  const forgetPass = async (formData) => {
 
+    const config = {
+      header: {
+        "Content-Type": "application/json"
+      }
+    };
+    try {
+      const res = await axios.put(`http://localhost:5000/api/user/forget-pass`,formData,config)
+      dispatch({
+        type: EMAIL_SENT,
+        payload:res.data
+      })
+
+      console.log("email sent");
+    } catch(e) {
+      dispatch({
+        type: EMAIL_FAIL,
+        payload: e.response
+      });
+      console.log("email sent failed")
+    }
+    
+  }
+
+  const resetPass = async (formData,id) => {
+    console.log(formData);
+    console.log(id);
+    const config = {
+      header: {
+        "Content-Type": "application/json"
+      }
+    };
+
+    try {
+      const res = await axios.put(`http://localhost:5000/api/user/reset-pass/${id}`,formData,config)
+      dispatch({
+        type: PASSWORD_CHANGED,
+        payload: res.data
+      })
+      console.log("password changed");
+    } catch(e) {
+      dispatch ({
+        type: PASSWORD_CHANGED_FAIL,
+        payload: e.response
+      })
+      console.log(e.response)
+    }
+  }
 //-----GetAllAoi------
     const getAllAoi = async () => {
         // const config = {
