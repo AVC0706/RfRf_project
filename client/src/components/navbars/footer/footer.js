@@ -1,10 +1,13 @@
+import { Row } from 'antd'
 import React from 'react'
 
 function footerBar() {
     return (
-        <div>
-            <center><p>Footer</p></center>
-        </div>
+        <Row>
+            <center>
+                QUICK LINKS
+            </center>
+        </Row>
     )
 }
 
