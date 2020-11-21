@@ -220,18 +220,18 @@ function MandalProfile(props) {
 
     const approveMandal = () => {
         if (userContext.user.admin === 'district' && mandal.districtApproved === false) {
-            axios.put(
-                process.env.REACT_APP_SERVER_URL + `/districtAdmin/approveMandal/${props.match.params.id}`,
-                mandal
+            axios.patch(
+                process.env.REACT_APP_SERVER_URL + `/districtAdmin/approveMandal/${props.match.params.id}`
             ).then((res) => {
                 console.log(res.data.msg, res.data.mandal);
+                setmandal(res.data.mandal);
             }).catch((e) => console.log(e));
         } else if (userContext.user.admin === 'city' && mandal.cityApproved === false) {
-            axios.put(
-                process.env.REACT_APP_SERVER_URL + `/cityAdmin/approveMandal/${props.match.params.id}`,
-                mandal
+            axios.patch(
+                process.env.REACT_APP_SERVER_URL + `/cityAdmin/approveMandal/${props.match.params.id}`
             ).then((res) => {
                 console.log(res.data.msg, res.data.mandal);
+                setmandal(res.data.mandal);
             }).catch((e) => console.log(e));
         } else {
             console.log("Can't approve");

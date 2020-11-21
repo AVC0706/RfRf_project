@@ -77,8 +77,6 @@ function AddMember(props) {
 
     const [user, setuser] = useState({
         name: "",
-        email: "",
-        password: "",
         qualification: "",
         city: "",
         state: "",
@@ -88,8 +86,6 @@ function AddMember(props) {
     });
     const {
         name,
-        email,
-        password,
         qualification,
         city,
         state,
@@ -129,59 +125,6 @@ function AddMember(props) {
                     ]}
                 >
                     <Input name="name" value={name} onChange={onChange} />
-                </Form.Item>
-                <Form.Item
-                    name="email id"
-                    label="E-mail ID"
-                    rules={[
-                        {
-                            type: "email",
-                            required: true,
-                            message: "Please input your Email ID!",
-                        },
-                    ]}
-                >
-                    <Input name="email" value={email} onChange={onChange} />
-                </Form.Item>
-                <Form.Item
-                    name="pass"
-                    label="Password"
-                    hasFeedback
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please input your password!",
-                        },
-                    ]}
-                >
-                    <Input.Password
-                        name="password"
-                        value={password}
-                        onChange={onChange}
-                    />
-                </Form.Item>
-                <Form.Item
-                    name="confirm"
-                    label="Confirm Password"
-                    hasFeedback
-                    rules={[
-                        {
-                            required: true,
-                            message: "Please confirm your password!",
-                        },
-                        () => ({
-                            validator(rule, value) {
-                                if (!value || password === value) {
-                                    return Promise.resolve();
-                                }
-                                return Promise.reject(
-                                    "The two passwords that you entered do not match!"
-                                );
-                            },
-                        }),
-                    ]}
-                >
-                    <Input.Password onChange={onChange} />
                 </Form.Item>
                 <Form.Item
                     name="qualif"
