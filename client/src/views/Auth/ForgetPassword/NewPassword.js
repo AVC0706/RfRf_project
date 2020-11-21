@@ -4,10 +4,11 @@ import {UserOutlined} from "@ant-design/icons";
 
 function NewPassword(props) {
     const [user, setuser] = useState({
-        email: "",
         password: "",
     })
-    const {email, password} = user;
+    const { email } = user;
+    const userContext = useContext(UserContext);
+    const { email, password } = user;
     const onChange = (e) => {
         setuser({
             ...user,
@@ -16,6 +17,7 @@ function NewPassword(props) {
     };
     const handleSubmit = () => {
         //HandleSubmit;
+        userContext.resetPass(user, props.match.params.id)
     };
     return (
         <>

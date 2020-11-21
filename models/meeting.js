@@ -21,9 +21,6 @@ const MeetingSchema = mongoose.Schema({
         type: String
     },
     tags: [String],
-    pdf_link: {
-        type: String
-    }
 })
 
 const Meeting = mongoose.model("meeting", MeetingSchema);

@@ -6,7 +6,8 @@ function ForgetPassword(props) {
     const [user, setuser] = useState({
         email: "",
     })
-    const {email} = user;
+    const userContext = useContext(UserContext);
+    const { email } = user;
     const onChange = (e) => {
         setuser({
             ...user,
@@ -14,7 +15,8 @@ function ForgetPassword(props) {
         });
     };
     const handleSubmit = () => {
-        //HandleSubmit;
+        userContext.forgetPass(user);
+        console.log(user)
     };
     return (
         <>
@@ -84,4 +86,4 @@ function ForgetPassword(props) {
     )
 }
 
-export default ForgetPassword
+export default ForgetPassword;
