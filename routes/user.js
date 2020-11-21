@@ -32,7 +32,7 @@ router.get("/myMandals", isAuth, async (req, res) => {
 
 router.patch("/updateProfile", isAuth, async (req, res) => {
     let updates = Object.keys(req.body)
-    let allowed = ['name', 'email', 'mobile', 'city', 'district', 'state', 'country', 'qualification']
+    let allowed = ['name', 'email', 'city', 'district', 'state', 'country', 'qualification']
     const isValid = updates.every((update) => allowed.includes(update))
     if (!isValid) {
         return res.status(400).send({

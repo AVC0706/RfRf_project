@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useContext, useState} from "react";
 import {Button, Card, Col, Form, Input, Row,} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import UserContext from "../../../context/user/userContext";
@@ -8,7 +8,7 @@ function ForgetPassword(props) {
         email: "",
     })
     const userContext = useContext(UserContext);
-    const { email } = user;
+    const {email} = user;
     const onChange = (e) => {
         setuser({
             ...user,

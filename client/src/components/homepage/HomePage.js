@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Carousel, Col, Row } from "antd";
+import {Card, Carousel, Col, Row} from "antd";
 import "./HomePage.css";
 
 const contentStyle = {
@@ -11,34 +11,34 @@ const contentStyle = {
     background: "#364d79",
 };
 
-const { Meta } = Card;
+const {Meta} = Card;
 
 const HomePage = () => {
     return (
         <>
             {/* <Navbar></Navbar> */}
             <Row>
-                <Col span={2} />
+                <Col span={2}/>
                 <Col span={20}>
                     <div className="carousel">
                         <Carousel autoplay>
                             <div>
-                                <img src="assets\images\1-2.jpg" style={contentStyle} />
+                                <img src="assets\images\1-2.jpg" style={contentStyle}/>
                             </div>
                             <div>
-                                <img src="assets\images\2-1.jpg" style={contentStyle} />
+                                <img src="assets\images\2-1.jpg" style={contentStyle}/>
                             </div>
                             <div>
-                                <img src="assets\images\3-1.jpg" style={contentStyle} />
+                                <img src="assets\images\3-1.jpg" style={contentStyle}/>
                             </div>
                             <div>
-                                <img src="assets\images\h1.jpeg" style={contentStyle} />
+                                <img src="assets\images\h1.jpeg" style={contentStyle}/>
                             </div>
                             <div>
-                                <img src="assets\images\h2.jpeg" style={contentStyle} />
+                                <img src="assets\images\h2.jpeg" style={contentStyle}/>
                             </div>
                             <div>
-                                <img src="assets\images\h3.jpeg" style={contentStyle} />
+                                <img src="assets\images\h3.jpeg" style={contentStyle}/>
                             </div>
                         </Carousel>
                     </div>
@@ -47,7 +47,9 @@ const HomePage = () => {
                             <Col span={12}>
                                 <h2>LATEST NEWS</h2>
                                 <p className="info">
-                                    Bharatiya Shikshan Mandal’s General Body Meet was virtually organized on 25 and 26 July 2020. Two resolutions on the challenges of online education and education for self-reliant Bharat were passed in this two-day meeting to revolutionise and promote
+                                    Bharatiya Shikshan Mandal’s General Body Meet was virtually organized on 25 and 26
+                                    July 2020. Two resolutions on the challenges of online education and education for
+                                    self-reliant Bharat were passed in this two-day meeting to revolutionise and promote
                                 </p>
                             </Col>
 
@@ -55,7 +57,8 @@ const HomePage = () => {
                                 <h2>LATEST ARTICLES</h2>
                                 <p className="info">
                                     राष्ट्रीय शिक्षा नीति
-                                    विष्णुपुराण में कहा गया है - तत् कर्म यन्न बंधाय सा विद्या या विमुक्तये। आया साया परं कर्म विद्यान्या शिल्प नैपुणम्।।
+                                    विष्णुपुराण में कहा गया है - तत् कर्म यन्न बंधाय सा विद्या या विमुक्तये। आया साया
+                                    परं कर्म विद्यान्या शिल्प नैपुणम्।।
                                 </p>
                             </Col>
                         </Row>
@@ -184,7 +187,7 @@ const HomePage = () => {
                     </div> */}
                     ////#endregion
                 </Col>
-                <Col span={2} />
+                <Col span={2}/>
             </Row></>
 
     );

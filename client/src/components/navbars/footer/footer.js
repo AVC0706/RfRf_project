@@ -1,4 +1,4 @@
-import { Row } from 'antd'
+import {Row} from 'antd'
 import React from 'react'
 
 function footerBar() {
