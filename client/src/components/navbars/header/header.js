@@ -1,10 +1,10 @@
-import React, {useContext} from "react";
-import {Avatar, Col, Layout, Menu, Row} from "antd";
-import {Link, useLocation} from "react-router-dom";
-import UserContext from "../../../context/user/userContext";
+import React, { useContext } from "react";
+import { Avatar, Col, Layout, Menu, Row } from "antd";
+import { Link, useLocation } from "react-router-dom";
+import UserContext from "../..=/../context/user/userContext";
 
-const {Header} = Layout;
-const {SubMenu} = Menu;
+const { Header } = Layout;
+const { SubMenu } = Menu;
 
 function Navbar() {
     const userContext = useContext(UserContext);
@@ -12,6 +12,7 @@ function Navbar() {
     const layout = {
         float: "right",
         backgroundColor: "#ffac42",
+        borderBottom: "0px",
     };
     const subMenuStyle = {
         backgroundColor: "#ffac42",
@@ -26,7 +27,7 @@ function Navbar() {
     };
     return (
         <Row>
-            <Col span={2}/>
+            <Col span={2} />
             <Col span={20}>
                 <Row>
                     <Col lg={2}>
@@ -45,8 +46,8 @@ function Navbar() {
                     </Col>
                 </Row>
 
-                <Header style={{backgroundColor: '#d6d6d6', height: '60px'}}></Header>
-                <Header style={{backgroundColor: '#ffac42'}}>
+                <Header style={{ backgroundColor: '#d6d6d6', height: '64px' }}></Header>
+                <Header style={{ backgroundColor: '#ffac42', height: '66px' }}>
                     {userContext.isAuth === true && userContext.user ?
                         (
                             <>{location.pathname === '/dashboard' ? (<><Menu
@@ -84,14 +85,13 @@ function Navbar() {
                                         <Menu.Item key="a1">
                                             <Link to="/">National Executive Committee</Link>
                                         </Menu.Item><Menu.Item key="a2">
-                                        <Link to="/mandalNetwork">Mandal Network Details</Link>
-                                    </Menu.Item>
+                                            <Link to="/mandalNetwork">Mandal Network Details</Link>
+                                        </Menu.Item>
                                     </SubMenu>
                                     <Menu.Item key="4">
-                                        <Link to="/">Meeting Archives</Link>
-                                    </Menu.Item>
+                                        <Link to="/meetingArchives">Meeting Archives</Link>                                    </Menu.Item>
                                     <Menu.Item key="5">
-                                        <Link to="/">Publications</Link>
+                                        <Link to="/publications">Publications</Link>
                                     </Menu.Item>
                                     <Menu.Item key="6">
                                         <Link to="/">Contact Us</Link>
@@ -99,8 +99,8 @@ function Navbar() {
                                     <SubMenu icon={<Avatar size={60}>
                                         {userContext.user.name.charAt(0)}
                                     </Avatar>}>
-                                        {userContext.user.admin !== "null" &&
-                                        <Menu.Item key='10'><Link to='/dashboard'>Dashboard</Link></Menu.Item>}
+                                        {userContext.user.admin != "null" &&
+                                            <Menu.Item key='10'><Link to='/dashboard'>Dashboard</Link></Menu.Item>}
                                         <Menu.Item key="7">
                                             <Link to="/myMandals">
                                                 My Mandals
@@ -139,15 +139,11 @@ function Navbar() {
                                         <Menu.Item key="a1">
                                             <Link to="/">National Executive Committee</Link>
                                         </Menu.Item><Menu.Item key="a2">
-                                        <Link to="/mandalNetwork">Mandal Network Details</Link>
-                                    </Menu.Item>
+                                            <Link to="/mandalNetwork">Mandal Network Details</Link>
+                                        </Menu.Item>
                                     </SubMenu>
-                                    <Menu.Item key="4">
-                                        <Link to="/">Meeting Archives</Link>
-                                    </Menu.Item>
                                     <Menu.Item key="5">
-                                        <Link to="/">Publications</Link>
-                                    </Menu.Item>
+                                        <Link to="/publications">Publications</Link>                                    </Menu.Item>
                                     <Menu.Item key="6">
                                         <Link to="/">Contact Us</Link>
                                     </Menu.Item>
@@ -160,7 +156,7 @@ function Navbar() {
                         )}
                 </Header>
             </Col>
-            <Col span={2}/>
+            <Col span={2} />
         </Row>
     );
 }

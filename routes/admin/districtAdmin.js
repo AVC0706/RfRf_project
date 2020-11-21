@@ -73,16 +73,9 @@ router.patch("/approveMandal/:id", isAdmin, async (req, res) => {
         if (!mandal) {
             return res.status(204).json({msg: "No data found"})
         }
-
-        if (!user) {
-            return res.status(204).json({msg: "No user found"})
-        }
-
-
         mandal.districtApproved = true
 
         await mandal.save()
-
 
         res.status(200).send({mandal, msg: "Mandal Approved by districtAdmin"});
 

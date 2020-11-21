@@ -1,15 +1,16 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Button, Card, Col, Descriptions, message, Modal, Row, Statistic, Tabs, Tag} from "antd";
-import {AiOutlineUserAdd} from "react-icons/ai";
-import {CheckCircleOutlined, CloseCircleOutlined,} from '@ant-design/icons';
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Card, Col, Descriptions, message, Modal, Row, Statistic, Tabs, Tag } from "antd";
+import { AiOutlineUserAdd } from "react-icons/ai";
+import { CheckCircleOutlined, CloseCircleOutlined, } from '@ant-design/icons';
 import UserContext from "../../context/user/userContext";
 import axios from "axios";
 import MeetingTable from "../../components/dashboard/MeetingTable";
 import AddMember from "../../components/forms/AddMember";
 import AddMeeting from "../../components/forms/AddMeeting";
 import MemberList from "../../components/profiles/MemberList";
+import EditMandal from "../../components/forms/EditMandal";
 
-const {TabPane} = Tabs;
+const { TabPane } = Tabs;
 
 function MandalProfile(props) {
 
@@ -44,6 +45,7 @@ function MandalProfile(props) {
         districtApproved: false,
         addMembers_visible: false,
         addMeeting_visible: false,
+        editMandal_visible: false,
         members: 0,
         aoi: []
     });
@@ -55,16 +57,27 @@ function MandalProfile(props) {
         state,
         addMeeting_visible,
         addMembers_visible,
-        districtApproved,
-        cityApproved,
+        editMandal_visible,
         aoi,
         members,
     } = mandal;
     const showAddMembers = () => {
-        setmandal({...mandal, addMembers_visible: true});
+        setmandal({ ...mandal, addMembers_visible: true });
     };
     const showAddMeeting = () => {
-        setmandal({...mandal, addMeeting_visible: true});
+        setmandal({ ...mandal, addMeeting_visible: true });
+    };
+    const showEditMandal = () => {
+        setmandal({ ...mandal, editMandal_visible: true });
+    };
+    const hideAddMembers = () => {
+        setmandal({ ...mandal, addMembers_visible: false });
+    };
+    const hideAddMeetings = () => {
+        setmandal({ ...mandal, addMeeting_visible: false });
+    };
+    const hideEditMandal = () => {
+        setmandal({ ...mandal, editMandal_visible: false });
     };
     const getMandal = () => {
         console.log(props);
@@ -77,6 +90,8 @@ function MandalProfile(props) {
                     console.log(res.data);
                     setAdminUser(res.data.adminUser)
                     setmandal(res.data.mandal)
+
+
                 }
             })
             .catch((err) => {
@@ -112,12 +127,7 @@ function MandalProfile(props) {
                 console.log(err);
             });
     };
-    const hideAddMembers = (e) => {
-        setmandal({...mandal, addMembers_visible: false});
-    };
-    const hideAddMeetings = () => {
-        setmandal({...mandal, addMeeting_visible: false});
-    };
+    
     const AddMembers = (user) => {
         console.log(user);
         const config = {
@@ -144,9 +154,8 @@ function MandalProfile(props) {
             .catch((e) => {
                 console.log(e);
             });
-        setmandal({...mandal, addMembers_visible: false});
+        setmandal({ ...mandal, addMembers_visible: false });
     };
-
     const AddMeetings = (meeting) => {
         console.log(meeting);
         const config = {
@@ -166,11 +175,11 @@ function MandalProfile(props) {
         }).catch(e => {
             console.log(e)
         })
-        setmandal({...mandal, addMeeting_visible: false})
+        setmandal({ ...mandal, addMeeting_visible: false })
     };
     const deleteMeet = (id, name) => {
         const key = "updatable";
-        message.loading({content: "Deleting...", key});
+        message.loading({ content: "Deleting...", key });
 
         console.log("deleteteD0");
         setLoading(true);
@@ -184,7 +193,7 @@ function MandalProfile(props) {
                     getMeetings();
                 }
 
-                message.success({content: "User Deleted !!", key, duration: 3});
+                message.success({ content: "User Deleted !!", key, duration: 3 });
 
                 setLoading(false);
             })
@@ -204,8 +213,8 @@ function MandalProfile(props) {
                 console.log(res.data);
                 console.log('success');
             }).catch(err => {
-            console.log(err)
-        })
+                console.log(err)
+            })
 
     };
 
@@ -215,15 +224,14 @@ function MandalProfile(props) {
                 process.env.REACT_APP_SERVER_URL + `/districtAdmin/approveMandal/${props.match.params.id}`
             ).then((res) => {
                 console.log(res.data.msg, res.data.mandal);
-                setmandal(res.data.mandal)
-
+                setmandal(res.data.mandal);
             }).catch((e) => console.log(e));
         } else if (userContext.user.admin === 'city' && mandal.cityApproved === false) {
             axios.patch(
                 process.env.REACT_APP_SERVER_URL + `/cityAdmin/approveMandal/${props.match.params.id}`
             ).then((res) => {
                 console.log(res.data.msg, res.data.mandal);
-                setmandal(res.data.mandal)
+                setmandal(res.data.mandal);
             }).catch((e) => console.log(e));
         } else {
             console.log("Can't approve");
@@ -234,48 +242,53 @@ function MandalProfile(props) {
         <>
             {/* <Navbar></Navbar> */}
             <Row>
-                <Col span={2}/>
-                <Col span={20} style={{backgroundColor: '#fcac44', height: '100vh'}}>
+                <Col span={2} />
+                <Col span={20} style={{ backgroundColor: '#fcac44', height: '100vh' }}>
                     <div>
                         <Card
                             title={name}
-                            style={{margin: "10px"}}
+                            style={{ margin: "10px" }}
                             extra={<><br></br><Statistic title="Next Scheduled Meeting"
-                                                         value="10th Feb 2020"></Statistic>
+                                value="10th Feb 2020"></Statistic>
                             </>
 
                             }
-                            headStyle={{fontSize: "250%"}}
-                        > {(userContext.user.admin === "district" || userContext.user.admin === "state" || userContext.user.admin === "mandal" || userContext.user.admin === "city") && userContext.user ?
+                            headStyle={{ fontSize: "250%" }}
+                        > {(userContext.user.admin === "district" || userContext.user.admin === "state" || userContext.user.admin === "city") && userContext.user ?
                             <Row>
 
                                 <Button
-                                    style={{marginTop: "0px", float: "right"}}
+                                    style={{ marginTop: "0px", float: "right" }}
                                     type="primary"
+                                    onClick={showEditMandal}
                                 >
                                     Edit Profile
                                 </Button>
-                                <br></br>
-                                <br></br>
+                                <Modal
+                                    title="Edit Mandal"
+                                    visible={editMandal_visible}
+                                    footer={null}
+                                    onCancel={hideEditMandal}>
+                                        <EditMandal hideEditMandal={hideEditMandal} mandalID={props.match.params.id}></EditMandal>
+                                </Modal>
                             </Row> : <></>}
+                            <Row><br></br></Row>
                             {((userContext.user.admin === 'district' && mandal.districtApproved === false) || (userContext.user.admin === 'city' && mandal.cityApproved === false)) && userContext.user ?
-                                <Row><Card title={<h1>Approve Mandal?</h1>} style={{height: 0}} extra={
-                                    <>
-                                        <Button
-                                            style={{backgroundColor: "#32a852", color: "white", margin: "1em"}}
-                                            size='large'
-                                            onClick={approveMandal}
-                                        >
-                                            Yes
-                                        </Button>
-                                        <Button
-                                            type="primary"
-                                            danger
-                                            size='large'
-                                        >
-                                            No
-                                        </Button>
-                                    </>} style={{width: "100%"}}>
+                                <Row><Card title={<h1>Approve Mandal?</h1>} style={{ height: 0 }} extra={<>
+                                    <Button
+                                        style={{ backgroundColor: "#32a852", color: "white", margin: "1em" }}
+                                        size='large'
+                                        onClick={approveMandal}
+                                    >
+                                        Yes
+                                    </Button>
+                                    <Button
+                                        type="primary"
+                                        danger
+                                        size='large'
+                                    >
+                                        No
+                                    </Button></>} style={{ width: "100%" }}>
                                 </Card>
                                 </Row> : <></>}
 
@@ -299,10 +312,10 @@ function MandalProfile(props) {
                                                 </Descriptions.Item>
                                                 <Descriptions.Item label="Approval">
                                                     {mandal.districtApproved ? (
-                                                            <Tag icon={<CheckCircleOutlined/>} color="success">
-                                                                Approved
-                                                            </Tag>) :
-                                                        (<Tag icon={<CloseCircleOutlined/>} color="error">
+                                                        <Tag icon={<CheckCircleOutlined />} color="success">
+                                                            Approved
+                                                        </Tag>) :
+                                                        (<Tag icon={<CloseCircleOutlined />} color="error">
                                                             Not Approved
                                                         </Tag>)}
 
@@ -365,15 +378,15 @@ function MandalProfile(props) {
                                         <br></br>
                                         <h1>Past Meetings</h1>
                                         <MeetingTable meetings={meeting} deleteMeet={deleteMeet}
-                                                      addMom={addmom}></MeetingTable>
+                                            addMom={addmom}></MeetingTable>
                                     </TabPane>) : (
-                                    <TabPane tab="Meeting Information" disabled key="meetingInfo"></TabPane>)}
+                                        <TabPane tab="Meeting Information" disabled key="meetingInfo"></TabPane>)}
                             </Tabs>
                         </Card>
                     </div>
 
                 </Col>
-                <Col span={2}/>
+                <Col span={2} />
             </Row>
         </>
     );

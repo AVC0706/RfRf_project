@@ -22,7 +22,6 @@ function ForgetPassword(props) {
     };
     return (
         <>
-            <SecondNav></SecondNav>
             <Row>
                 <Col lg={2} md={2} xs={2}/>
                 <Col lg={20} md={10} xs={20}>
