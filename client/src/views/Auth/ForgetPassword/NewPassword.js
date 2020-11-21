@@ -1,14 +1,14 @@
-import React, {useState} from "react";
+import React, {useState,useContext} from "react";
 import {Button, Card, Col, Form, Input, Row,} from "antd";
 import {UserOutlined} from "@ant-design/icons";
-
+import UserContext from "../../../context/user/userContext";
 function NewPassword(props) {
     const [user, setuser] = useState({
-        password: "",
+        email: "",
+        password: ""
     })
-    const { email } = user;
     const userContext = useContext(UserContext);
-    const { email, password } = user;
+    const {email, password } = user;
     const onChange = (e) => {
         setuser({
             ...user,

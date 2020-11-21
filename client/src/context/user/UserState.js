@@ -208,7 +208,10 @@ const UserState = (props) => {
                 register,
                 loadUser,
                 logout,
-                getAllAoi
+                getAllAoi,
+                forgetPass,
+                resetPass
+
             }}
         >
             {props.children}
