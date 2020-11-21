@@ -2,10 +2,11 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 const mailgun = require("mailgun-js")
+require("dotenv").config();
+
 const DOMAIN = process.env.DOMAIN_KEY;
 const mg = mailgun({apiKey:process.env.MAILGUN_API_KEY, domain: DOMAIN});
 const _ = require("lodash");
-
 
 // function validateRecover(data) {
 //     const schema = Joi.object({
