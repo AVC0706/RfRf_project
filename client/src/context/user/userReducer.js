@@ -1,17 +1,16 @@
 import {
-  REGISTER_SUCCESS,
-  REGISTER_FAIL,
-  USER_LOADED,
-  AUTH_ERROR,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  AOI_SUCCESS,
-  AOI_FAIL,
-  EMAIL_SENT,
-  PASSWORD_CHANGED,
-  EMAIL_FAIL,
-  PASSWORD_CHANGED_FAIL
+    AOI_FAIL,
+    AOI_SUCCESS,
+    AUTH_ERROR,
+    EMAIL_FAIL,
+    EMAIL_SENT,
+    LOGIN_FAIL,
+    LOGIN_SUCCESS,
+    LOGOUT,
+    PASSWORD_CHANGED,
+    PASSWORD_CHANGED_FAIL,
+    REGISTER_FAIL,
+    USER_LOADED
 } from "../type";
 
 export default (state, action) => {
@@ -61,29 +60,29 @@ export default (state, action) => {
                 user: null,
             };
 
-    case REGISTER_FAIL:
-      return {
-        ...state,
-      };
-      case EMAIL_SENT:
-         return {
-        ...state,
-      };
-      case EMAIL_FAIL : 
-      return {
+        case REGISTER_FAIL:
+            return {
+                ...state,
+            };
+        case EMAIL_SENT:
+            return {
+                ...state,
+            };
+        case EMAIL_FAIL :
+            return {
 
-        ...state
-      };
-      case PASSWORD_CHANGED : 
-      return {
+                ...state
+            };
+        case PASSWORD_CHANGED :
+            return {
 
-        ...state
-      };
-      case PASSWORD_CHANGED_FAIL : 
-      return {
+                ...state
+            };
+        case PASSWORD_CHANGED_FAIL :
+            return {
 
-        ...state
-      }
+                ...state
+            }
 
         case REGISTER_FAIL:
             return {

@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "antd/dist/antd.css";
-import { Button, Form, Input, Row, Select, } from "antd";
+import {Button, Form, Input, Row, Select,} from "antd";
 
 import axios from "axios";
 import UserContext from "../../context/user/userContext";
-import { districts, states } from "./Mock";
+import {districts, states} from "./Mock";
 
-const { Option } = Select;
+const {Option} = Select;
 
 function EditMandal(props) {
     const userContext = useContext(UserContext);
 
-    const { Aoi, getAllAoi } = userContext;
+    const {Aoi, getAllAoi} = userContext;
     const [mandal, setmandal] = useState({
         name: "",
         district: "",
@@ -20,7 +20,7 @@ function EditMandal(props) {
         country: "India",
         aoi: [],
     });
-    const { name, district, city, state, country, aoi } = mandal;
+    const {name, district, city, state, country, aoi} = mandal;
     useEffect(() => {
         if (userContext.user) {
             getMandal();
@@ -98,6 +98,15 @@ function EditMandal(props) {
     };
 
     const onSubmit = () => {
+
+        axios.patch(process.env.REACT_APP_SERVER_URL + `/api/user/updateMandalProfile/${props.mandalID}`)
+            .then((res) => {
+                console.log(res.data)
+            })
+            .catch((error) => {
+                console.log(error.data)
+            })
+
         props.hideEditMandal();
     };
     let children = [];
@@ -129,7 +138,7 @@ function EditMandal(props) {
                             },
                         ]}
                     >
-                        <Input name="name" value={name} onChange={onChange} />
+                        <Input name="name" value={name} onChange={onChange}/>
                     </Form.Item>
 
                     <Form.Item
@@ -161,7 +170,7 @@ function EditMandal(props) {
                     >
                         <Select
                             mode="single"
-                            style={{ width: '100%' }}
+                            style={{width: '100%'}}
                             placeholder="Please select state"
                             onChange={onChangeState}
                             value={state}
@@ -187,7 +196,7 @@ function EditMandal(props) {
                         <Select
                             value={mandal.district}
                             mode="single"
-                            style={{ width: '100%' }}
+                            style={{width: '100%'}}
                             placeholder="Please select state"
                             onChange={onChangeDistrict}
                         >
@@ -200,7 +209,7 @@ function EditMandal(props) {
                     <Form.Item label="Area of Interest">
                         <Select
                             mode="multiple"
-                            style={{ width: "100%" }}
+                            style={{width: "100%"}}
                             placeholder="Please select"
                             onChange={onChangeAOI}
                             required
@@ -217,7 +226,7 @@ function EditMandal(props) {
                     onClick={onSubmit}
                 >
                     Save
-                                    </Button>
+                </Button>
             </Row>
         </>
 

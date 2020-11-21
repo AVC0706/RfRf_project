@@ -26,15 +26,7 @@ router.post("/createMandal", isAdmin, async (req, res) => {
             },
         );
 
-        // user.mandals.push({
-        //   mandal_id: mandal._id,
-        //   name: mandal.name,
-        //   role: "admin",
-        // });
-        // console.log(user);
 
-        // users= await user.save;
-        // console.log(users)
         await mandal.save();
 
 
@@ -86,5 +78,26 @@ router.delete("/deleteMandal/:id", isAdmin, async (req, res) => {
         res.status(400).send(e);
     }
 });
+
+
+router.patch("/updateMandalProfile/:id", isAdmin, async (req, res) => {
+    let updates = Object.keys(req.body)
+    let allowed = ['name', 'city', 'district', 'state']
+    const isValid = updates.every((update) => allowed.includes(update))
+    if (!isValid) {
+        return res.status(400).send({
+            error: "not allowed"
+        })
+    }
+    try {
+
+        let mandal = Mandal.findById(req.params.id)
+        updates.forEach((update) => mandal[update] = req.body[update])
+        await mandal.save()
+        res.status(200).json({mandal})
+    } catch (e) {
+        res.status(500).send(e)
+    }
+})
 
 module.exports = router;
