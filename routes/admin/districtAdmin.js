@@ -138,7 +138,6 @@ router.put("/makeBsmMember/:id", isAdmin, async (req, res) => {
 
         await user.save()
 
-
         res.status(200).send({user, msg: "Mandal Approved"});
 
         //end

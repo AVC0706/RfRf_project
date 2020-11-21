@@ -1,4 +1,4 @@
-import React, {useState,useContext} from "react";
+import React, {useContext, useState} from "react";
 import {Button, Card, Col, Form, Input, Row,} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import UserContext from "../../../context/user/userContext";
@@ -8,7 +8,7 @@ function NewPassword(props) {
         password: "",
     })
     const userContext = useContext(UserContext);
-    const { email, password } = user;
+    const {email, password} = user;
     const onChange = (e) => {
         setuser({
             ...user,
@@ -25,7 +25,7 @@ function NewPassword(props) {
                 <Col lg={2} md={2} xs={2}/>
                 <Col lg={20} md={10} xs={20}>
                     <div style={{backgroundColor: '#fcac44', height: '100vh'}}>
-                        <br></br>
+                        <br/>
                         <Row>
                             <Col lg={8} md={2} xs={2}>
 
