@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
 import {Button, DatePicker, Form, Input, Select} from "antd";
 
-const {Option} = Select;
-
 function AddMeeting(props) {
     const [meeting, setmeeting] = useState({
         name: "",

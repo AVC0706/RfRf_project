@@ -107,13 +107,8 @@ function Register(props) {
         password,
         qualification,
         city,
-        district,
-        state,
         country,
-        aoi,
     } = user;
-
-    const grid = {};
 
     let children = [];
     if (Aoi !== undefined) {

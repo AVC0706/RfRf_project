@@ -1,4 +1,4 @@
-import React, {useState,useContext} from "react";
+import React, {useState, useContext} from "react";
 import {Button, Card, Col, Form, Input, Row,} from "antd";
 import {UserOutlined} from "@ant-design/icons";
 import SecondNav from "../../../components/navbars/header/altHeader";
@@ -22,7 +22,6 @@ function ForgetPassword(props) {
     };
     return (
         <>
-            <SecondNav></SecondNav>
             <Row>
                 <Col lg={2} md={2} xs={2}/>
                 <Col lg={20} md={10} xs={20}>

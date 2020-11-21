@@ -3,19 +3,18 @@ import "antd/dist/antd.css";
 import {Button, Input, Popconfirm, Space, Table} from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
 import UserContext from "../../context/user/userContext";
+import {useHistory} from 'react-router-dom';
 
 
 const MandalApprovalTable = (props) => {
 
     const [mandals, setMandals] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const history = useHistory();
     const userContext = useContext(UserContext);
     const {user} = userContext;
-
-
     const onClickView = (record) => {
-        props.history.push(`/mandalProfile/${record._id}`);
+        history.push(`/mandalProfile/${record._id}`);
     }
     const baseColumns = [
         {
@@ -31,7 +30,7 @@ const MandalApprovalTable = (props) => {
                 }
             },
             sortDirections: ["descend", "ascend", "descend"],
-            render: (text) => <a>{text}</a>,
+            render: (text) => <p>{text}</p>,
         },
         {
             title: "Admin",
