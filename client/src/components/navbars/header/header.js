@@ -99,7 +99,7 @@ function Navbar() {
                                     <SubMenu icon={<Avatar size={60}>
                                         {userContext.user.name.charAt(0)}
                                     </Avatar>}>
-                                        {userContext.user.admin != "null" &&
+                                        {userContext.user.admin !== "null" &&
                                         <Menu.Item key='10'><Link to='/dashboard'>Dashboard</Link></Menu.Item>}
                                         <Menu.Item key="7">
                                             <Link to="/myMandals">
