@@ -1,14 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "antd/dist/antd.css";
-import { Button, Form, Input, message, Select} from "antd";
+import {Button, Form, Input, Select} from "antd";
 import UserContext from "../../context/user/userContext";
+import axios from "axios";
 
-const { Option } = Select;
+const {Option} = Select;
 
 function AddMember(props) {
     const userContext = useContext(UserContext);
 
-    const { Aoi, getAllAoi } = userContext;
+    const {Aoi, getAllAoi} = userContext;
 
     useEffect(() => {
         getAllAoi();
@@ -40,22 +41,7 @@ function AddMember(props) {
             range: "${label} must be between ${min} and ${max}",
         },
     };
-    const uploader = {
-        name: "file",
-        multiple: true,
-        action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-        onChange(info) {
-            const { status } = info.file;
-            if (status !== "uploading") {
-                console.log(info.file, info.fileList);
-            }
-            if (status === "done") {
-                message.success(`${info.file.name} file uploaded successfully.`);
-            } else if (status === "error") {
-                message.error(`${info.file.name} file upload failed.`);
-            }
-        },
-    };
+
     const onChange = (e) => {
         setuser({
             ...user,
@@ -72,6 +58,15 @@ function AddMember(props) {
     };
 
     const onSubmit = () => {
+
+        axios.patch(process.env.REACT_APP_SERVER_URL + '/api/user/updateProfile')
+            .then((res) => {
+                console.log(res.data)
+            })
+            .catch((error) => {
+                console.log(error.data)
+            })
+
         props.hideEditMember();
     };
 
@@ -112,7 +107,7 @@ function AddMember(props) {
                     remember: true,
                 }}
                 validateMessages={validateMessages}
-            //   onFinish={onFinish}
+                //   onFinish={onFinish}
             >
                 <Form.Item
                     name="name-item"
@@ -124,7 +119,7 @@ function AddMember(props) {
                         },
                     ]}
                 >
-                    <Input name="name" value={name} onChange={onChange} />
+                    <Input name="name" value={name} onChange={onChange}/>
                 </Form.Item>
                 <Form.Item
                     name="qualif"
@@ -152,7 +147,7 @@ function AddMember(props) {
                     ]}
                     label="City"
                 >
-                    <Input name="city" value={city} onChange={onChange} label="City" />
+                    <Input name="city" value={city} onChange={onChange} label="City"/>
                 </Form.Item>
                 <Form.Item
                     name="state_name"
@@ -164,7 +159,7 @@ function AddMember(props) {
                     ]}
                     label="State"
                 >
-                    <Input name="state" value={state} onChange={onChange} />
+                    <Input name="state" value={state} onChange={onChange}/>
                 </Form.Item>
                 <Form.Item
                     name="country_name"
@@ -176,13 +171,13 @@ function AddMember(props) {
                     ]}
                     label="Country"
                 >
-                    <Input name="country" value={country} onChange={onChange} />
+                    <Input name="country" value={country} onChange={onChange}/>
                 </Form.Item>
 
                 <Form.Item label="Area of Interest">
                     <Select
                         mode="multiple"
-                        style={{ width: "100%" }}
+                        style={{width: "100%"}}
                         placeholder="Please select"
                         onChange={onChangeAOI}
                     >
@@ -196,7 +191,7 @@ function AddMember(props) {
                     onClick={onSubmit}
                 >
                     Save
-               </Button>
+                </Button>
             </Form>
         </>
     );
