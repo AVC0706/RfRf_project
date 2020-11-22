@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Button, Card, Col, Form, Input, Row} from "antd";
+import {Button, Card, Col, Form, Input, message, Row} from "antd";
 import "./Login.css";
 import {KeyOutlined, UserOutlined} from "@ant-design/icons";
 import UserContext from "../../../context/user/userContext";
@@ -24,11 +24,11 @@ const Login = (props) => {
 
 
     const onFinish = (values) => {
-        console.log("Success:", values);
+        
     };
 
-    const onFinishFailed = (errorInfo) => {
-        console.log("Failed:", errorInfo);
+    const onFinishFailed = () => {
+       
     };
 
     const [user, setuser] = useState({
@@ -47,7 +47,14 @@ const Login = (props) => {
 
     const handleSubmit = () => {
         userContext.login(user, props.history);
-        console.log(user);
+        if(userContext.user)
+        {
+            message.success("Logged in.",7);
+        }
+        else
+        {
+            message.error("Login Failed. Please Check your credentials",7);
+        }
         // props.history.push('/stateAdmin')
     };
 

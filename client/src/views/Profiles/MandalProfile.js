@@ -127,7 +127,7 @@ function MandalProfile(props) {
                 console.log(err);
             });
     };
-    
+
     const AddMembers = (user) => {
         console.log(user);
         const config = {
@@ -254,7 +254,7 @@ function MandalProfile(props) {
 
                             }
                             headStyle={{ fontSize: "250%" }}
-                        > {(userContext.user.admin === "district" || userContext.user.admin === "state" || userContext.user.admin === "city") && userContext.user ?
+                        >{userContext.user ? <>{(userContext.user.admin === "district" || userContext.user.admin === "state" || userContext.user.admin === "city") && userContext.user ?
                             <Row>
 
                                 <Button
@@ -269,10 +269,9 @@ function MandalProfile(props) {
                                     visible={editMandal_visible}
                                     footer={null}
                                     onCancel={hideEditMandal}>
-                                        <EditMandal hideEditMandal={hideEditMandal} mandalID={props.match.params.id}></EditMandal>
+                                    <EditMandal hideEditMandal={hideEditMandal} mandalID={props.match.params.id}></EditMandal>
                                 </Modal>
-                            </Row> : <></>}
-                            <Row><br></br></Row>
+                            </Row> : <></>}<Row><br></br></Row>
                             {((userContext.user.admin === 'district' && mandal.districtApproved === false) || (userContext.user.admin === 'city' && mandal.cityApproved === false)) && userContext.user ?
                                 <Row><Card title={<h1>Approve Mandal?</h1>} style={{ height: 0 }} extra={<>
                                     <Button
@@ -290,7 +289,7 @@ function MandalProfile(props) {
                                         No
                                     </Button></>} style={{ width: "100%" }}>
                                 </Card>
-                                </Row> : <></>}
+                                </Row> : <></>}</> : <></>}
 
 
                             {/*----------- MEMBERS ---------*/}

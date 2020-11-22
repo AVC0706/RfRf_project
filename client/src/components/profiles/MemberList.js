@@ -12,7 +12,7 @@ function MemberList(props) {
                 <List.Item>
                     <List.Item.Meta
                         avatar={<Avatar style={{backgroundColor: '#fcac44'}} icon={<UserOutlined/>}/>}
-                        title={<Link to={`/userProfile/${item.id}`}>{item.name}</Link>}
+                        title={item.name}
                         al
                         description={"Located at " + item.city + "," + item.state + ". This member is a " + item.qualification}
                     />
