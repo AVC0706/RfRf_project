@@ -92,7 +92,15 @@ function UserProfile(props) {
                                         {district}
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Qualification">{qualification}</Descriptions.Item>
-                                    {/*<Descriptions.Item label="Joined At">{created_at.getDate()}</Descriptions.Item>*/}
+
+                                    <Descriptions.Item label="Joined At">
+                                        {{
+                                            if(created_at) {
+                                                created_at.getDate();
+                                            }
+                                        }}
+                                    </Descriptions.Item>
+
                                     <Descriptions.Item label="Area of Interest"><Tag>Area of
                                         Interest</Tag></Descriptions.Item>
                                 </Descriptions>
