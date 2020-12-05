@@ -94,5 +94,20 @@ router.put("/uploadPDF", isAdmin, async (req, res) => {
         res.status(500).send({msg: "server error"});
     }
 })
+
+router.get("/nextMeeting/:id", isAuth, async (req, res) => {
+
+    try {
+        const meeting = await Meeting.findOne({mandal_id: req.params.id}).sort({date: 1})
+        console.log(meeting)
+        res.status(200).send({meeting})
+
+    } catch (e) {
+        res.status(500).send({msg: "server error"});
+    }
+
+})
+
+
 module.exports = router
 

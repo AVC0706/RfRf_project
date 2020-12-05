@@ -114,7 +114,7 @@ const DataTable = (props) => {
 
     const onViewButton = (e, record) => {
         e.preventDefault();
-        // props.history.push('/userProfile')
+        props.redirect(record._id)
     };
 
     const onChange = (e) => {

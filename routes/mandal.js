@@ -26,9 +26,7 @@ router.post("/createMandal", isAdmin, async (req, res) => {
             },
         );
 
-
         await mandal.save();
-
 
         res
             .status(200)

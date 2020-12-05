@@ -6,7 +6,7 @@ import UserContext from "../../context/user/userContext";
 
 const {TabPane} = Tabs;
 
-function AdminTab() {
+function AdminTab(props) {
     const [adminPanel, setadminPanel] = useState({
         tab: "City",
     });
@@ -117,6 +117,7 @@ function AdminTab() {
             });
     };
 
+
     return (
         <Tabs defaultActiveKey={[tab]}>
             {user.admin.toLowerCase() === "state" ? (
@@ -124,7 +125,8 @@ function AdminTab() {
                     {loading ? (
                         <Spin size="large"/>
                     ) : (
-                        <DataTable users={districtAdmin} deleteUser={deleteUser} adminType={'district'}/>
+                        <DataTable users={districtAdmin} redirect={props.redirect} deleteUser={deleteUser}
+                                   adminType={'district'}/>
                     )}
                 </TabPane>
             ) : null}
@@ -135,7 +137,8 @@ function AdminTab() {
                     {loading ? (
                         <Spin size="large"/>
                     ) : (
-                        <DataTable users={cityAdmin} deleteUser={deleteUser} adminType={'city'}/>
+                        <DataTable users={cityAdmin} redirect={props.redirect} deleteUser={deleteUser}
+                                   adminType={'city'}/>
                     )}
                 </TabPane>
             ) : null}
@@ -145,7 +148,8 @@ function AdminTab() {
                 {loading ? (
                     <Spin size="large"/>
                 ) : (
-                    <DataTable users={normalUsers} deleteUser={deleteUser} adminType={'null'}/>
+                    <DataTable users={normalUsers} redirect={props.redirect} deleteUser={deleteUser}
+                               adminType={'null'}/>
                 )}
             </TabPane>
         </Tabs>

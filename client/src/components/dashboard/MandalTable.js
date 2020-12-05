@@ -43,8 +43,9 @@ const MandalTable = (props) => {
             key: "actions",
             render: (text, record) => (
                 <Space size="middle">
-                    <Button type="primary">View</Button>
-
+                    <Button type="primary" onClick={(e) => onViewButton(e, record)}>
+                        View
+                    </Button>
                     <Popconfirm
                         title="Are you sure？"
                         icon={<QuestionCircleOutlined style={{color: "red"}}/>}
@@ -87,6 +88,10 @@ const MandalTable = (props) => {
             console.log("params", pagination, filters, sorter, extra);
         }
     };
+    const onViewButton = (e, record) => {
+        e.preventDefault();
+        props.redirect(record._id)
+    };
     const onChange = (e) => {
         if (e.value === "") {
             setstate({...state, filterTable: null, baseData: props.mandals});
@@ -101,7 +106,7 @@ const MandalTable = (props) => {
                 onChange={onChange}
                 enterButton
                 onSearch={search}
-            ></Input.Search>
+            />
             <Table
                 columns={columns}
                 dataSource={filterTable == null ? baseData : filterTable}
