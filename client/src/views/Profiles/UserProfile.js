@@ -42,7 +42,7 @@ function UserProfile(props) {
     const getUser = () => {
         console.log(props)
         axios
-            .get(process.env.REACT_APP_SERVER_URL + `/user/profile/${props.match.params.id}`)
+            .get(`${process.env.REACT_APP_SERVER_URL}/user/profile/${props.match.params.id}`)
             .then((res) => {
                 if (res.status === 200) {
                     console.log(res.data.user)
@@ -66,7 +66,7 @@ function UserProfile(props) {
                         style={{margin: "10px"}}
                         extra=
                             {
-                                userContext.user && userContext.user.admin != "null" ? <Button
+                                userContext.user && userContext.user.admin !== "null" ? <Button
                                     style={{marginTop: "0px", float: "right"}}
                                     type="primary"
                                     onClick={showEditMember}
@@ -93,13 +93,12 @@ function UserProfile(props) {
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Qualification">{qualification}</Descriptions.Item>
 
-                                    <Descriptions.Item label="Joined At">
-                                        {{
-                                            if(created_at) {
-                                                created_at.getDate();
-                                            }
-                                        }}
-                                    </Descriptions.Item>
+                                    {/*<Descriptions.Item label="Joined At">*/}
+                                    {/*    {*/}
+                                    {/*            created_at.getDate()*/}
+
+                                    {/*    }*/}
+                                    {/*</Descriptions.Item>*/}
 
                                     <Descriptions.Item label="Area of Interest"><Tag>Area of
                                         Interest</Tag></Descriptions.Item>

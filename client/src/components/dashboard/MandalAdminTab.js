@@ -9,7 +9,7 @@ import axios from "axios";
 const {TabPane} = Tabs;
 
 
-function MandalAdminTab() {
+function MandalAdminTab(props) {
     const userContext = useContext(UserContext);
     const {user} = userContext;
     const [loading, setLoading] = useState(true);
@@ -37,12 +37,12 @@ function MandalAdminTab() {
     const [normalUsers, setNormalUsers] = useState([]);
     return (
         <Tabs defaultActiveKey={tab}>
-            <TabPane tab="Existing Admins" key="Existing"><MandalTable></MandalTable></TabPane>
+            <TabPane tab="Existing Admins" key="Existing"><MandalTable redirect={props.redirect}/></TabPane>
             <TabPane tab="Add New Mandal Admin" key="New">
                 <Row>
                     <Col/>
                     <Col>
-                        <Register></Register>
+                        <Register/>
                     </Col>
                     <Col/>
                 </Row>

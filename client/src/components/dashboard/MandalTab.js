@@ -7,7 +7,7 @@ import UserContext from "../../context/user/userContext";
 
 const {TabPane} = Tabs;
 
-function MandalTab() {
+function MandalTab(props) {
 
     const userContext = useContext(UserContext);
     const {user} = userContext;
@@ -104,7 +104,7 @@ function MandalTab() {
                     {loading ? (
                         <Spin size="large"/>
                     ) : (
-                        <MandalApprovalTable mandals={falseMandal}></MandalApprovalTable>
+                        <MandalApprovalTable mandals={falseMandal} redirect={props.redirect}></MandalApprovalTable>
                     )}
                 </TabPane>
             ) : null}
@@ -114,7 +114,7 @@ function MandalTab() {
                 {loading ? (
                     <Spin size="large"/>
                 ) : (
-                    <MandalTable mandals={approvedMandal}></MandalTable>
+                    <MandalTable mandals={approvedMandal} redirect={props.redirect}></MandalTable>
                 )}
             </TabPane>
 

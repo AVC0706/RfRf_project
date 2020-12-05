@@ -6,7 +6,7 @@ import MandalAdminTab from "./MandalAdminTab.js";
 
 const {Sider, Content} = Layout;
 
-function Dashboard() {
+function Dashboard(props) {
     const [dashBoard, setdashBoard] = useState({
         tab: "Admins",
     });
@@ -14,6 +14,8 @@ function Dashboard() {
     const onChange = (e) => {
         setdashBoard({...dashBoard, tab: e.key});
     };
+
+
 
     return (
         <Layout style={{minHeight: "92vh"}}>
@@ -27,9 +29,9 @@ function Dashboard() {
                 </Sider>
                 <Layout style={{padding: "0 24px 24px"}}>
                     <Content>
-                        {tab === "Mandals" && <MandalTab></MandalTab>}
-                        {tab === "Admins" && <AdminTab></AdminTab>}
-                        {tab === "Mandal Admins" && <MandalAdminTab></MandalAdminTab>}
+                        {tab === "Mandals" && <MandalTab redirect={props.redirectMandal}/>}
+                        {tab === "Admins" && <AdminTab redirect={props.redirectUser}/>}
+                        {tab === "Mandal Admins" && <MandalAdminTab redirect={props.redirectUser} />}
                     </Content>
                 </Layout>
             </Layout>
