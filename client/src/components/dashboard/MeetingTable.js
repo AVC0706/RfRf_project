@@ -45,7 +45,7 @@ const MeetingTable = (props) => {
                 <Space size="middle">
 
                     <MeetingDetails meeting={record}></MeetingDetails>
-                    <AddMOM meeting={record} addMoM={props}></AddMOM>
+                    <AddMOM meeting={record} addMoM={props.addMom}></AddMOM>
                     <Popconfirm
                         title="Are you sure？"
                         icon={<QuestionCircleOutlined style={{color: "red"}}/>}
