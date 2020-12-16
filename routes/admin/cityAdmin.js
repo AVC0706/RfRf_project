@@ -71,7 +71,7 @@ router.get("/getMandals/:approve", isAdmin, async (req, res) => {
     try {
         const mandals = await Mandal.find({
             cityApproved: req.params.approve,
-            // city: req.user.city,
+            city: req.user.city,
         });
 
         if (!mandals) {

@@ -95,11 +95,25 @@ router.put("/uploadPDF", isAdmin, async (req, res) => {
     }
 })
 
-router.get("/nextMeeting/:id", isAuth, async (req, res) => {
+router.get("/nextMeeting/:id", async (req, res) => {
 
     try {
-        const meeting = await Meeting.findOne({mandal_id: req.params.id}).sort({date: 1})
-        console.log(meeting)
+        const meeting = await Meeting.findOne({mandal_id: req.params.id}).sort({date: -1})
+        if(meeting.date < Date.now)
+        {
+            return res.status(404).send(null);
+        }
+        res.status(200).send({meeting})
+    } catch (e) {
+        res.status(500).send({msg: "server error"});
+    }
+
+})
+router.get("/previousMeeting/:id", async (req, res) => {
+
+    try {
+        const meeting = await Meeting.find({mandal_id: req.params.id}).sort({date: -1})
+        console.log(meeting[1])
         res.status(200).send({meeting})
 
     } catch (e) {

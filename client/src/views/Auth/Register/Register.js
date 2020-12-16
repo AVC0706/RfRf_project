@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import "antd/dist/antd.css";
-import {Button, Card, Col, Form, Input, Row, Select,} from "antd";
+import {Button, Card, Col, Form, Input, message, Row, Select,} from "antd";
 import "./Register.css";
 import UserContext from "../../../context/user/userContext";
 import {districts, states} from "./Mock";
@@ -83,7 +83,8 @@ function Register(props) {
 
     const onSubmit = () => {
         userContext.register(user);
-        props.setState({...props.state, modalVisible: false});
+        //props.setState({...props.state, modalVisible: false});
+        message.success("User Created");
         console.log(user);
         console.log(user.admin);
         console.log(props.adminType);
@@ -109,7 +110,6 @@ function Register(props) {
         city,
         country,
     } = user;
-
     let children = [];
     if (Aoi !== undefined) {
         for (let i = 0; i < Aoi.length; i++) {

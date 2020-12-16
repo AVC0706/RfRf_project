@@ -1,12 +1,12 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Button, Card, Col, Descriptions, Row, Tabs, Tag} from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Card, Col, Descriptions, Row, Tabs, Tag } from "antd";
 import axios from "axios";
 import UserContext from "../../context/user/userContext";
 import MandalTable from "../../components/dashboard/MandalTable";
 import Modal from "antd/lib/modal/Modal";
 import EditMember from "../../components/forms/EditMember";
 
-const {TabPane} = Tabs;
+const { TabPane } = Tabs;
 
 function UserProfile(props) {
     //start
@@ -32,12 +32,12 @@ function UserProfile(props) {
         aoi: [],
     });
     const showEditMember = () => {
-        setuser({...user, editMember_visible: true});
+        setuser({ ...user, editMember_visible: true });
     };
     const hideEditMember = () => {
-        setuser({...user, editMember_visible: false});
+        setuser({ ...user, editMember_visible: false });
     };
-    const {name, city, district, state, qualification, created_at, aoi, editMember_visible} = user;
+    const { name, city, district, state, qualification, created_at, aoi, editMember_visible } = user;
 
     const getUser = () => {
         console.log(props)
@@ -60,22 +60,22 @@ function UserProfile(props) {
                 <Col md={2}>
 
                 </Col>
-                <Col md={20} style={{backgroundColor: '#fcac44', height: '100vh'}}>
+                <Col md={20} style={{ backgroundColor: '#fcac44', height: '100vh' }}>
                     <Card
                         title={name}
-                        style={{margin: "10px"}}
+                        style={{ margin: "10px" }}
                         extra=
-                            {
-                                userContext.user && userContext.user.admin !== "null" ? <Button
-                                    style={{marginTop: "0px", float: "right"}}
-                                    type="primary"
-                                    onClick={showEditMember}
-                                >
-                                    Edit Profile
+                        {
+                            userContext.user && userContext.user.admin !== "null" ? <Button
+                                style={{ marginTop: "0px", float: "right" }}
+                                type="primary"
+                                onClick={showEditMember}
+                            >
+                                Edit Profile
                                 </Button> : <></>
-                            }
+                        }
 
-                        headStyle={{fontSize: "250%"}}
+                        headStyle={{ fontSize: "250%" }}
                     >
                         <Modal
                             title="Edit Member Information"
@@ -93,15 +93,14 @@ function UserProfile(props) {
                                     </Descriptions.Item>
                                     <Descriptions.Item label="Qualification">{qualification}</Descriptions.Item>
 
-                                    {/*<Descriptions.Item label="Joined At">*/}
-                                    {/*    {*/}
-                                    {/*            created_at.getDate()*/}
-
-                                    {/*    }*/}
-                                    {/*</Descriptions.Item>*/}
-
-                                    <Descriptions.Item label="Area of Interest"><Tag>Area of
-                                        Interest</Tag></Descriptions.Item>
+                                    <Descriptions.Item label="Joined At">
+                                       {created_at ?  <>{created_at}</> : <></> }
+                                    </Descriptions.Item>
+                                    <Descriptions.Item label="Area of Interest">{aoi !== [] ? <>{aoi.map((item) => 
+                                    (
+                                       <Tag>{item}</Tag>
+                                    ))}</>: <>No Area of Intrests</>}
+                                    </Descriptions.Item>
                                 </Descriptions>
                             </Col>
                         </Row>
@@ -109,14 +108,14 @@ function UserProfile(props) {
                             <Col md={24}>
                                 <Tabs>
                                     <TabPane tab="Mandals" key="Mandals">
-                                        <MandalTable/>
+                                        <MandalTable />
                                     </TabPane>
                                 </Tabs>
                             </Col>
                         </Row>
                     </Card>
                 </Col>
-                <Col md={2}/>
+                <Col md={2} />
             </Row>
         </>
     );

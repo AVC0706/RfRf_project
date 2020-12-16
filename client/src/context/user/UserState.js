@@ -1,4 +1,4 @@
-import React, {useReducer} from "react";
+import React, { useReducer } from "react";
 import axios from "axios";
 import UserContext from "./userContext";
 import UserReducer from "./userReducer";
@@ -19,6 +19,7 @@ import {
     USER_LOADED
 } from "../type";
 import setAuthToken from "../../utils/setAuthToken";
+import { message } from "antd";
 
 const UserState = (props) => {
     const initialState = {
@@ -54,6 +55,7 @@ const UserState = (props) => {
             dispatch({
                 type: AUTH_ERROR,
             });
+
         }
     };
 
@@ -95,29 +97,24 @@ const UserState = (props) => {
                 formData,
                 config
             );
-            // console.log("this is admin status:" + res.data.superadmin.admin);
-
             dispatch({
                 type: LOGIN_SUCCESS,
                 payload: res.data,
             });
-            console.log("login success");
             // router.push({
             //   path: "http://localhost:5000/stateAdmin",
             // });
             loadUser();
-        } catch (e) {
-            console.log(e.response, "dasda");
+        }
+        catch (e) {
             dispatch({
-                type: LOGIN_FAIL,
-                payload: e.response,
+                type: LOGIN_FAIL
             });
-            console.log("login fail");
+            message.error("Login Failed");
         }
     };
-
     //-----------Logout----------
-    const logout = () => dispatch({type: LOGOUT});
+    const logout = () => dispatch({ type: LOGOUT });
 
     //forgot password
     const forgetPass = async (formData) => {
@@ -169,7 +166,7 @@ const UserState = (props) => {
             console.log(e.response)
         }
     }
-//-----GetAllAoi------
+    //-----GetAllAoi------
     const getAllAoi = async () => {
         // const config = {
         //   header: {

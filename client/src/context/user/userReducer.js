@@ -45,7 +45,6 @@ export default (state, action) => {
         case AUTH_ERROR:
             return {
                 ...state,
-                ...action.payload,
                 token: null,
                 user: null,
                 isAuth: false,

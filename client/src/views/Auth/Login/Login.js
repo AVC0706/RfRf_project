@@ -13,22 +13,26 @@ const Login = (props) => {
     //Route User according to Admin Status
     useEffect(() => {
         if (isAuth && userContext.user !== null) {
-
+            message.success("Logged in!",7);
             if (userContext.user.admin.toLowerCase() !== 'null') {
+               
                 props.history.push('/dashboard')
             }
-
+            else
+            {
+                props.history.push('/myMandals')
+            }
         }
         // eslint-disable-next-line
     }, [isAuth, userContext.user]);
 
 
-    const onFinish = (values) => {
-        
+    const onFinish = () => {
+        userContext.login(user, props.history);
     };
 
     const onFinishFailed = () => {
-       
+       message.error("Login Failed");
     };
 
     const [user, setuser] = useState({
@@ -46,15 +50,7 @@ const Login = (props) => {
     };
 
     const handleSubmit = () => {
-        userContext.login(user, props.history);
-        if(userContext.user)
-        {
-            message.success("Logged in.",7);
-        }
-        else
-        {
-            message.error("Login Failed. Please Check your credentials",7);
-        }
+        
         // props.history.push('/stateAdmin')
     };
 
@@ -126,7 +122,7 @@ const Login = (props) => {
                                             <Button
                                                 type="primary"
                                                 htmlType="submit"
-                                                onClick={handleSubmit}
+                                                // onClick={handleSubmit}
                                                 className="login-form-button"
                                                 style={{background: "#FF8F00", borderColor: "#FF8F00"}}
                                             >

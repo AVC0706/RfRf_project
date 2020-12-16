@@ -276,7 +276,7 @@ function MandalProfile(props) {
 
                                 </Modal>
                             </Row> : <></>}<Row><br></br></Row>
-                            {((userContext.user.admin === 'district' && mandal.districtApproved === false) || (userContext.user.admin === 'city' && mandal.cityApproved === false)) && userContext.user ?
+                            {((userContext.user.admin === 'district' &&  mandal.cityApproved=== true && mandal.districtApproved === false) || (userContext.user.admin === 'city' && mandal.cityApproved === false)) && userContext.user ?
                                 <Row><Card title={<h1>Approve Mandal?</h1>} style={{height: 0}} extra={<>
                                     <Button
                                         style={{backgroundColor: "#32a852", color: "white", margin: "1em"}}
@@ -321,13 +321,12 @@ function MandalProfile(props) {
                                                         (<Tag icon={<CloseCircleOutlined/>} color="error">
                                                             Not Approved
                                                         </Tag>)}
-
                                                 </Descriptions.Item>
                                             </Descriptions>
 
                                             <Card>
                                                 <p>Area of interests: </p>
-                                                {aoi ? (aoi.map((aoi_item) => (<Tag>{aoi_item.name}</Tag>))) : (<></>)}
+                                                {aoi ? (aoi.map((aoi_item) => (<Tag>{aoi_item}</Tag>))) : (<></>)}
                                             </Card>
 
                                         </Col>
