@@ -36,7 +36,9 @@ app.use("/api/admin", require("./routes/admin/admin"));
 //----------Mandal-------------
 app.use("/api/mandal", require("./routes/mandal"));
 //----------Meeting------------
-app.use("/api/meeting", require("./routes/meeting"))
+app.use("/api/meeting", require("./routes/meeting"));
+//-------aws upload -----------
+app.use("/api/document",require("./routes/fileUpload"));
 
 // Serve static assets in production 
 // if (process.env.NODE_ENV === "production") {

@@ -1,65 +1,56 @@
 require("dotenv").config();
 const express = require("express");
 const Document = require("../models/Document");
-const multer = require("multer");
-let AWS = require("aws-sdk");
+// const multer = require("multer");
+let aws = require("aws-sdk");
 const {isAdmin, isAuth} = require("../middleware/auth");
+const { Router } = require("express")
+const router = Router();
+const s3Bucket = process.env.AWS_BUCKET_NAME
 
-let storage = multer.memoryStorage();
-let upload = multer({storage: storage});
-
-// Route to get a single existing GO data (needed for the Edit functionality)
-router.get("/:id", isAuth, (req, res, next) => {
-    Document.findById(req.params.id, (err, go) => {
-        if (err) {
-            return next(err);
-        }
-        res.json(go);
-    });
+router.post("/uploadfile",isAdmin,async(req,res)=> {
+    try {
+        console.log(req.body);
+        const {filename,filetype} = req.body;
+        console.log(filename);
+        console.log(filetype);
+        const s3 = new aws.S3({
+            AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+            AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+            signatureVersion: 'v4',
+            region: process.env.AWS_REGION
+        });
+    
+        const s3Params = {
+            Bucket:s3Bucket ,
+            Key: filename,
+            Expires: 60,
+            ContentType: filetype,
+            ACL: 'public-read',
+          };    
+          const signedRequest = await s3.getSignedUrl('putObject', s3Params);
+          const url = `https://${s3Bucket}.s3.amazonaws.com/${filename}`;
+          console.log(url);
+          res.json({signedRequest,url})
+    } catch(e) {
+        res.status(400).json({msg:"error occured upload failed"})
+    }
 });
 
-// route to upload a pdf Document file
-// In upload.single("file") - the name inside the single-quote is the name of the field that is going to be uploaded.
-router.post("/upload/:id", upload.single("file"), isAdmin, function (req, res) {
-    const file = req.file;
-    const s3FileURL = process.env.AWS_Uploaded_File_URL_LINK;
+router.post("/addindb/:id",isAuth,async (req,res)=> {
+    try {
+        const {signedRequest,url} = req.body;
+        const meeting_id = req.params.id;
+        const document = new Document({
+            signedRequest,
+            url,
+            meeting_id
+        });
+        await document.save();
+        res.json({msg:"document added in db"});
+    } catch(e) {
+        res.status(400).json({msg:"error while updating the db"});
+    }
+})
 
-    let s3bucket = new AWS.S3({
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        region: process.env.AWS_REGION
-    });
-
-    console.log(process.env.AWS_ACCESS_KEY_ID);
-    console.log(process.env.AWS_SECRET_ACCESS_KEY);
-
-    //Where you want to store your file
-
-    var params = {
-        Bucket: process.env.AWS_BUCKET_NAME,
-        Key: file.originalname,
-        Body: file.buffer,
-        ContentType: file.mimetype,
-        ACL: "public-read"
-    };
-
-    s3bucket.upload(params, function (err, data) {
-        if (err) {
-            res.status(500).json({error: true, Message: err});
-        } else {
-            res.send({data});
-            var newFileUploaded = {
-                fileLink: s3FileURL + file.originalname,
-                s3_key: params.Key,
-                meeting_id: req.params.id,
-            };
-            var Document = new Document(newFileUploaded);
-            Document.save(function (error, newFile) {
-                if (error) {
-                    throw error;
-                }
-                res.json("upload successfully")
-            });
-        }
-    });
-});
+module.exports = router;
