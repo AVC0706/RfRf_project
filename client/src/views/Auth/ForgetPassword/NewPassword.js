@@ -5,7 +5,8 @@ import UserContext from "../../../context/user/userContext";
 
 function NewPassword(props) {
     const [user, setuser] = useState({
-        password: "",
+        email: "",
+        password: ""
     })
     const userContext = useContext(UserContext);
     const {email, password} = user;

@@ -20,6 +20,9 @@ const MeetingSchema = mongoose.Schema({
     agenda: {
         type: String
     },
+    meeting_url: {
+        type: String
+    },
     tags: [String],
 })
 

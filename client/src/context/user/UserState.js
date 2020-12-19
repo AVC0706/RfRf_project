@@ -205,7 +205,9 @@ const UserState = (props) => {
                 loadUser,
                 logout,
                 getAllAoi,
+                forgetPass,
                 resetPass
+
             }}
         >
             {props.children}
