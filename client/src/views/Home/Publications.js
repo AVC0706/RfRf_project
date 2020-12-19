@@ -1,86 +1,22 @@
-import {Button, Col, Input, Row, Space, Table} from 'antd';
-import {SearchOutlined} from '@ant-design/icons';
-import React, {useState} from 'react'
-
+import { Button, Card, Col, Input, Row, Space, Table } from 'antd';
+import React, { useState,useContext } from 'react'
+import Modal from 'antd/lib/modal/Modal';
+import AddPublication from '../../components/forms/AddPublication';
+import UserContext from '../../context/user/userContext';
 function Publications() {
-    const [publication, setpublication] = useState(
-        {
-            searchText: '',
-            searchedColumn: '',
-        }
-    )
-    const {searchText, searchedColumn} = publication;
-    const getColumnSearchProps = dataIndex => ({
-        filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
-            <div style={{padding: 8}}>
-                <Input
-                    ref={node => {
-                        this.searchInput = node;
-                    }}
-                    placeholder={`Search ${dataIndex}`}
-                    value={selectedKeys[0]}
-                    onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                    onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    style={{width: 188, marginBottom: 8, display: 'block'}}
-                />
-                <Space>
-                    <Button
-                        type="primary"
-                        onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                        icon={<SearchOutlined/>}
-                        size="small"
-                        style={{width: 90}}
-                    >
-                        Search
-                    </Button>
-                    <Button onClick={() => handleReset(clearFilters)} size="small" style={{width: 90}}>
-                        Reset
-                    </Button>
-                </Space>
-            </div>
-        ),
-        filterIcon: filtered => <SearchOutlined style={{color: filtered ? '#1890ff' : undefined}}/>,
-        onFilter: (value, record) =>
-            record[dataIndex]
-                ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
-                : '',
-        onFilterDropdownVisibleChange: visible => {
-            if (visible) {
-                setTimeout(() => this.searchInput.select(), 100);
-            }
-        },
-        render: text =>
-            searchedColumn === dataIndex ? (
-                <></>
-            ) : (
-                text
-            ),
-    });
-    const handleSearch = (selectedKeys, confirm, dataIndex) => {
-        confirm();
-        setpublication({
-            searchText: selectedKeys[0],
-            searchedColumn: dataIndex,
-        });
-    };
+    const userContext = useContext(UserContext);
 
-    const handleReset = clearFilters => {
-        clearFilters();
-        setpublication({searchText: ''});
-    };
-    const columns = [
+    const baseColumns = [
         {
             title: 'Publication',
             dataIndex: 'name',
             key: 'name',
             width: '30%',
-            ...getColumnSearchProps('name'),
         },
         {
             title: 'Author',
             dataIndex: 'author',
             key: 'author',
-            ...getColumnSearchProps('mandal'),
         },
         {
             title: "Actions",
@@ -92,14 +28,71 @@ function Publications() {
             )
         }
     ];
+    const [publication, setpublication] = useState(
+        {
+            searchText: '',
+            searchedColumn: '',
+        }
+    )
+    const [state, setState] = useState(
+        {
+            modalVisible: false,
+            filterTable: null,
+            columns: baseColumns,
+            //baseData: props.mandals,
+            searchText: "",
+        }
+    );
+    const { modalVisible, baseData, filterTable, columns, searchText } = state;
+
+    const search = (value) => {
+        setState({
+            ...state,
+            searchText: value,
+            filterTable: baseData.filter((o) =>
+                Object.keys(o).some((k) =>
+                    String(o[k]).toLowerCase().includes(value.toLowerCase())
+                )
+            ),
+        });
+    };
+    const showAddPublication = () => {
+        setState({ modalVisible: true });
+    };
+    const onChange = (e) => {
+        if (e.value === "") {
+            setState({
+                ...state, filterTable: null, //baseData: props.mandals
+            });
+        }
+        setState({ ...state, searchText: e.value });
+    };
     return (
-        <div>
+        <div >
             <Row>
-                <Col span={2}/>
+                <Col span={2} />
                 <Col span={20}>
-                    <Table columns={columns}/>
+                    <Card title={<h1>Publications</h1>} extra={userContext.user && userContext.user.admin !== 'null' &&
+                        <Button
+                            onClick={showAddPublication}
+                            type='primary'>
+                            Add Publication</Button>
+                    }>
+                        <Modal visible={modalVisible} onCancel={() => { setState({ modalVisible: false }) }} footer={null}>
+                            <AddPublication />
+                        </Modal>
+                        <Input.Search
+                            placeholder="Search"
+                            value={searchText}
+                            onChange={onChange}
+                            enterButton
+                            onSearch={search}
+                        />
+                        <Table style={{ marginTop: '.5%' }} columns={columns} dataSource={filterTable == null ? baseData : filterTable} />
+                    </Card>
+
                 </Col>
-                <Col span={2}/>
+                <Col span={2} />
 
             </Row>
         </div>

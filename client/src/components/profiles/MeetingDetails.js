@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Button, Modal} from "antd";
+import {Button, Divider, Modal} from "antd";
 
 
 function MeetingDetails(props) {
@@ -20,10 +20,9 @@ function MeetingDetails(props) {
                 }}
             >
                 <h1>{props.meeting.name}</h1>
-                <hr></hr>
+                <Divider />
                 <h4>Held at: {props.meeting.date}</h4>
-                <h3>MOM:</h3>
-                <h4>mom {props.meeting.mom}</h4>
+                <h3>Meeting Agenda: {props.meeting.agenda}</h3>
                 <h4>Attached Document <a href={props.meeting.pdf_link}>Click Here</a></h4>
 
 

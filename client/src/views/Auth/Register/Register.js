@@ -117,7 +117,6 @@ function Register(props) {
         }
         console.log(children);
     }
-
     return (
         <>
             <Row>
