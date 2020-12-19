@@ -54,9 +54,8 @@ router.get("/getMandal/:id", isAdmin, async (req, res) => {
 //getAllMembers
 router.get("/getMembers/:id", isAuth, async (req, res) => {
     try {
-        console.log(req.params.id)
         const members = await User.find({"mandals.mandal_id": req.params.id});
-        console.log(members)
+        
         res.status(200).json({members});
     } catch (e) {
         res.status(500).send(e);

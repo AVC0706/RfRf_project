@@ -113,7 +113,6 @@ router.get("/previousMeeting/:id", async (req, res) => {
 
     try {
         const meeting = await Meeting.find({mandal_id: req.params.id}).sort({date: -1})
-        console.log(meeting[1])
         res.status(200).send({meeting})
 
     } catch (e) {

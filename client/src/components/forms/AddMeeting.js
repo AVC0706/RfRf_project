@@ -5,14 +5,14 @@ function AddMeeting(props) {
     const [meeting, setmeeting] = useState({
         name: "",
         agenda: "",
-        date: "",
+        date: null,
     });
     const {name, agenda, date} = meeting;
     const onChange = (e) => {
         setmeeting({...meeting, [e.target.name]: e.target.value});
     };
-    const onChangeDate = (date, dateString) => {
-        setmeeting({...meeting, date: dateString});
+    const onChangeDate = (date) => {
+        setmeeting({...meeting, date: date});
     };
     const onAddMeeting = () => {
         props.addMeeting(meeting);
@@ -20,12 +20,12 @@ function AddMeeting(props) {
     }
     return (
         <div>
-            <Form name="addMeeting">
+            <Form name="addMeeting" onFinish={onAddMeeting}>
                 <Form.Item
                     name="name"
                     label="Meeting Name"
                     rules={[{
-                        required: true, message: "Please input meeting name",
+                        required: true, message: "Please input a meeting name!",
                     }]}
                 >
                     <Input name="name" value={name} onChange={onChange}></Input>
@@ -34,19 +34,21 @@ function AddMeeting(props) {
                     name="agenda"
                     label="Agenda"
                     rules={[{
-                        required: true, message: "Please input agenda",
+                        required: true, message: "Please input Agenda!",
                     }]}>
                     <Input name="agenda" value={agenda} onChange={onChange}></Input>
                 </Form.Item>
                 <Form.Item name="Date"
-                           label="Date">
-                    <DatePicker onChange={onChangeDate}/>
+                           label="Date"
+                           rules={[{
+                            required: true, message: "Please input Date!",
+                        }]}>
+                    <DatePicker name="date" value={date} onChange={onChangeDate}/>
                 </Form.Item>
                 <Button
                     type="primary"
                     htmlType="submit"
                     className="register-form-button"
-                    onClick={onAddMeeting}
                 >
                     Add Meeting
                 </Button>

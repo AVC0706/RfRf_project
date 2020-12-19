@@ -42,7 +42,7 @@ function MyMandal(props) {
                     <Layout>
                         <Content>
                             <Row gutter={{xs: 8, sm: 16, md: 24, lg: 32}}>
-                                {userContext.user && userContext.user.admin != 'null' &&
+                                {userContext.user && userContext.user.admin !== 'null' &&
                                 <Col
                                     span={6}
                                     className="gutter-row"
