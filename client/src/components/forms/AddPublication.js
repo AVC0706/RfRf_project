@@ -1,19 +1,60 @@
 import React, {useState} from 'react';
 import {Button, Form, Input} from "antd";
-
+import Dropzone from "react-dropzone";
+import moment from "moment";
+import axios from "axios"
 function AddPublication(props) {
     const [Publication, setPublication] = useState({
-        name: "",
-        author: "",
+        file: null
     });
-    const {name, author} = Publication;
+    const [pub,setPub] = useState({
+        name:"",
+        author:""
+    })
+    const {name, author} = pub;
     const onChange = (e) => {
-        setPublication({...Publication, [e.target.name]: e.target.value});
+        setPub({...pub, [e.target.name]: e.target.value});
     };
-    const onAddPublication = () => {
-        //Add Publication Code
+    const formatFilename = filename => {
+        const date = moment().format("YYYYMMDD");
+        const randomString = Math.random()
+            .toString(36)
+            .substring(2, 7);
+        const cleanFileName = filename.toLowerCase().replace(/[^a-z0-9]/g, "-");
+        const newFilename = `publication/${date}-${randomString}-${cleanFileName}`;
+        return newFilename.substring(0, 60);
+    };
+    const onAddPublication = async () => {
+        const {  file } = Publication;
+        const {name, author} = pub;
+        const filename = formatFilename(file.name);
+        const filetype = file.type;
+        console.log(filename);
+        console.log(filetype);
+        const config = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+        const options = {
+            headers: {
+                "Content-Type": file.type
+            }
+        };
+        const response = await axios.post(`http://localhost:5000/api/document/uploadfile`,{filename,filetype},config);
+        console.log(response);
+        const { signedRequest, url } = response.data;
+        await axios.put(signedRequest, file, options);
+        console.log("not going down");
+        console.log(name,author)
+        const res = await axios.post(`http://localhost:5000/api/document/addindbpub`, { name,author,signedRequest, url }, config);
+        alert(res);
+    };
 
-    }
+    const onDrop = async (files) => {
+        setPublication({ file: files[0] });
+    };
+    console.log(pub);
     return (
         <div>
             <br></br>
@@ -34,6 +75,18 @@ function AddPublication(props) {
                         required: true, message: "Please input Author!",
                     }]}>
                     <Input name="author" value={author} onChange={onChange}></Input>
+                </Form.Item>
+                <Form.Item>
+                <Dropzone onDrop={onDrop}>
+                            {({ getRootProps, getInputProps }) => (
+                                <section>
+                                    <div {...getRootProps()}>
+                                        <input {...getInputProps()} />
+                                        <p>Drag 'n' drop some files here, or click to select files</p>
+                                    </div>
+                                </section>
+                            )}
+                        </Dropzone>
                 </Form.Item>
                 <Button
                     type="primary"

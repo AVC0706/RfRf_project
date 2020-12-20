@@ -3,8 +3,10 @@ const express = require("express");
 const Document = require("../models/Document");
 // const multer = require("multer");
 let aws = require("aws-sdk");
+const Publication = require("../models/publication");
 const {isAdmin, isAuth} = require("../middleware/auth");
-const { Router } = require("express")
+const { Router } = require("express");
+const auth = require("../middleware/auth");
 const router = Router();
 const s3Bucket = process.env.AWS_BUCKET_NAME
 
@@ -53,4 +55,20 @@ router.post("/addindb/:id",isAuth,async (req,res)=> {
     }
 })
 
+router.post("/addindbpub",isAdmin,async (req,res)=> {
+    try {
+        const {name,author,signedRequest,url} = req.body;
+        console.log(name,author);
+        const document = new Publication({
+            name,
+            author,
+            signedRequest,
+            url,
+        });
+        await document.save();
+        res.json({msg:"document added in db"});
+    } catch(e) {
+        res.status(400).json({msg:"error while updating the db"});
+    }
+})
 module.exports = router;

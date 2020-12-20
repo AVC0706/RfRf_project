@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
-import Dropzone, { styles } from "react-dropzone";
+import Dropzone from "react-dropzone";
 import { Button, Form, Input, Modal, Select, Upload } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import axios from "axios"
