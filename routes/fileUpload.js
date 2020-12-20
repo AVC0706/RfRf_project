@@ -70,5 +70,26 @@ router.post("/addindbpub",isAdmin,async (req,res)=> {
     } catch(e) {
         res.status(400).json({msg:"error while updating the db"});
     }
+});
+
+router.get("/getmomurl/:id",isAuth,async(req,res)=> {
+    try {
+        const momobject = await Document.findOne({meeting_id: req.params.id});
+        res.json(momobject.url);
+    } catch(e) {
+        res.status(400).json({msg:"some error"});
+    }
 })
+
+router.get("/getpublication",isAuth,async(req,res)=> {
+    try {
+        const pubobject = await Document.find({});
+        console.log(pubobject);
+        res.json(pubobject)
+    } catch(e) {
+        res.status(400).json({msg:"some error"});
+    }
+})
+
+
 module.exports = router;

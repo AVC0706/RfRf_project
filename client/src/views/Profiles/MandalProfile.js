@@ -20,6 +20,7 @@ function MandalProfile(props) {
     const [mandalMembers, setmembers] = useState([]);
     const [adminUser, setAdminUser] = useState(null);
     const [previousMeeting, setPreviousMeeting] = useState({});
+    const [momurl,setMomurl] = useState({});
     useEffect(() => {
         if (userContext.user) {
             getMandal();
@@ -83,9 +84,16 @@ function MandalProfile(props) {
         axios.get(process.env.REACT_APP_SERVER_URL + `/meeting/previousMeeting/${props.match.params.id}`)
             .then((res) => {
                 if (res.status === 200) {
-                    console.log(res.data);
+                    console.log(res.data.meeting[1]._id);
                     setPreviousMeeting(res.data.meeting[1]);
                 }
+                axios.get(process.env.REACT_APP_SERVER_URL + `/document/getmomurl/${res.data.meeting[1]._id}`).then((result)=>{
+                    if(result.status === 200) {
+                        setMomurl(result.data);
+                    }
+                }).catch((e)=> {
+                    console.log(e.message);
+                })
             })
             .catch((err) => {
                 console.log(err);
@@ -249,6 +257,7 @@ function MandalProfile(props) {
         }
 
     };
+
     return (
         <>
             {/* <Navbar></Navbar> */}
@@ -369,7 +378,7 @@ function MandalProfile(props) {
                                             <>
                                             <h2>Meeting Name: {previousMeeting.name}</h2>
                                             <h3>Meeting Agenda: {previousMeeting.agenda}</h3>
-                                            <h3>Meeting MOM: <a href={previousMeeting.pdf_link}>Click Here</a></h3>
+                                            <h3>Meeting MOM: <a href={momurl} target="__blank">Click Here</a></h3>
                                             </>}
                                             
                                         </Card>
