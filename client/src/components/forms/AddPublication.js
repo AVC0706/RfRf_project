@@ -54,7 +54,6 @@ function AddPublication(props) {
     const onDrop = async (files) => {
         setPublication({ file: files[0] });
     };
-    console.log(pub);
     return (
         <div>
             <br></br>

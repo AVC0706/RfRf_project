@@ -1,29 +1,53 @@
 import { Button, Card, Col, Input, Row, Space, Table } from 'antd';
-import React, { useState,useContext } from 'react'
+import React, { useState,useContext, useEffect } from 'react'
 import Modal from 'antd/lib/modal/Modal';
 import AddPublication from '../../components/forms/AddPublication';
 import UserContext from '../../context/user/userContext';
+import axios from "axios";
 function Publications() {
     const userContext = useContext(UserContext);
+    // const [pub,setPub] = useContext({});
+    // useEffect(() => {
+    //     if (userContext.user) {
+    //         getpub();
+    //     }
+
+
+    // }, [userContext.isAuth]);
+    // const getpub = () => {
+    //     axios.get(process.env.REACT_APP_SERVER_URL + `/document/getpublication`)
+    //     .then((res)=> {
+    //         if(res.status === 200) {
+    //             res.data.forEach(element => {
+    //                 console.log(element);
+    //                 setPub(element);
+    //             });
+    //         }
+    //     }).catch(e=> {
+    //         console.log(e.message);
+    //     })
+    // }
 
     const baseColumns = [
         {
-            title: 'Publication',
+            title: 'Publication Name',
             dataIndex: 'name',
             key: 'name',
             width: '30%',
+            render: (text) => <a>{text}</a>
         },
         {
             title: 'Author',
             dataIndex: 'author',
             key: 'author',
+            render: (text) => <a>{text}</a>
         },
         {
             title: "Actions",
             key: 'actions',
-            render: () => (
+            render: (text,record) => (
                 <Space size="middle">
-                    <Button type="primary">View</Button>
+                    <Button type="primary" href={text}>View</Button>
                 </Space>
             )
         }
