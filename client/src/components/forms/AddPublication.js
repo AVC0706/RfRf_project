@@ -41,13 +41,13 @@ function AddPublication(props) {
                 "Content-Type": file.type
             }
         };
-        const response = await axios.post(`http://localhost:5000/api/document/uploadfile`,{filename,filetype},config);
+        const response = await axios.post(process.env.REACT_APP_SERVER_URL+`/document/uploadfile`,{filename,filetype},config);
         console.log(response);
         const { signedRequest, url } = response.data;
         await axios.put(signedRequest, file, options);
         console.log("not going down");
         console.log(name,author)
-        const res = await axios.post(`http://localhost:5000/api/document/addindbpub`, { name,author,signedRequest, url }, config);
+        const res = await axios.post( process.env.REACT_APP_SERVER_URL +`/document/addindbpub`, { name,author,signedRequest, url }, config);
         alert(res);
     };
 
