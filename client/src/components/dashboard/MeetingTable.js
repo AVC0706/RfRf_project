@@ -4,7 +4,7 @@ import {Button, Input, Popconfirm, Space, Table} from "antd";
 import {QuestionCircleOutlined} from "@ant-design/icons";
 import MeetingDetails from "../profiles/MeetingDetails";
 import AddMOM from "../forms/AddMOM";
-import axios from "axios";
+
 const MeetingTable = (props) => {
     const onDeleteButton = (e, text, record) => {
         e.preventDefault();

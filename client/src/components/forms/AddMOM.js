@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import moment from "moment";
 import Dropzone from "react-dropzone";
-import { Button, Form, Input, Modal, Select, Upload } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
+import {Button, Form, Input, Modal, Select, Upload} from "antd";
 import axios from "axios"
-const { Option } = Select;
-const { Dragger } = Upload;
+
+const {Option} = Select;
+const {Dragger} = Upload;
 export default function AddMOM(props) {
     const [addMOM, setAddMOM] = useState({
         addMOM_visible: false,
@@ -16,12 +16,12 @@ export default function AddMOM(props) {
         name: "",
         file: null
     })
-    const { addMOM_visible, mom, tags } = addMOM;
+    const {addMOM_visible, mom, tags} = addMOM;
     const hideAddMOM = () => {
-        setAddMOM({ ...addMOM, addMOM_visible: false });
+        setAddMOM({...addMOM, addMOM_visible: false});
     };
     const onChangeMOMTags = (e) => {
-        setAddMOM({ ...addMOM, tags: e });
+        setAddMOM({...addMOM, tags: e});
     };
     const formatFilename = filename => {
         const date = moment().format("YYYYMMDD");
@@ -35,7 +35,7 @@ export default function AddMOM(props) {
     const onAddMOM = async () => {
         console.log(props.meeting._id)
         props.addMoM(props.meeting._id, addMOM);
-        const { name, file } = files;
+        const {name, file} = files;
         const filename = formatFilename(file.name);
         const filetype = file.type;
         console.log(filename);
@@ -50,23 +50,29 @@ export default function AddMOM(props) {
                 "Content-Type": file.type
             }
         };
-        const response = await axios.post(process.env.REACT_APP_SERVER_URL +`/document/uploadfile`,{filename,filetype},config);
+        const response = await axios.post(process.env.REACT_APP_SERVER_URL + `/document/uploadfile`, {
+            filename,
+            filetype
+        }, config);
         console.log(response);
-        const { signedRequest, url } = response.data;
+        const {signedRequest, url} = response.data;
         await axios.put(signedRequest, file, options);
         console.log("not going down");
-        const res = await axios.post( process.env.REACT_APP_SERVER_URL +`/document/addindb/${props.meeting._id}`, { signedRequest, url }, config);
+        const res = await axios.post(process.env.REACT_APP_SERVER_URL + `/document/addindb/${props.meeting._id}`, {
+            signedRequest,
+            url
+        }, config);
         alert(res);
-        setAddMOM({ ...addMOM, addMOM_visible: false });
+        setAddMOM({...addMOM, addMOM_visible: false});
     };
     const showAddMOM = () => {
-        setAddMOM({ ...addMOM, addMOM_visible: true });
+        setAddMOM({...addMOM, addMOM_visible: true});
     };
     const onChange = (e) => {
-        setAddMOM({ ...addMOM, [e.target.name]: e.target.value });
+        setAddMOM({...addMOM, [e.target.name]: e.target.value});
     };
     const onDrop = async (files) => {
-        setFiles({ file: files[0] });
+        setFiles({file: files[0]});
     };
     return (
         <>
@@ -87,7 +93,7 @@ export default function AddMOM(props) {
                         <Form.Item name="tags" label="MOM Tags">
                             <Select
                                 mode="multiple"
-                                style={{ width: '100%' }}
+                                style={{width: '100%'}}
                                 placeholder="Please select"
                                 onChange={onChangeMOMTags}
                             >
@@ -101,12 +107,12 @@ export default function AddMOM(props) {
                             label="mom"
 
                         >
-                            <Input name="mom" value={mom} onChange={onChange} />
+                            <Input name="mom" value={mom} onChange={onChange}/>
                         </Form.Item>
                     </Form.Item>
                     <Form.Item><br></br>
                         <Dropzone onDrop={onDrop}>
-                            {({ getRootProps, getInputProps }) => (
+                            {({getRootProps, getInputProps}) => (
                                 <section>
                                     <div {...getRootProps()}>
                                         <input {...getInputProps()} />

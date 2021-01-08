@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Button, Col, Input,Card, Row, Space, Table } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import React, {useState} from 'react';
+import {Button, Card, Col, Input, Row, Space, Table} from 'antd';
+import {SearchOutlined} from '@ant-design/icons';
 
 function MeetingArchive() {
     const [archive, setarchive] = useState(
@@ -9,11 +9,11 @@ function MeetingArchive() {
             searchedColumn: '',
         }
     )
-    const { searchText, searchedColumn } = archive;
+    const {searchText, searchedColumn} = archive;
     const data = [];
     const getColumnSearchProps = dataIndex => ({
-        filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
-            <div style={{ padding: 8 }}>
+        filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
+            <div style={{padding: 8}}>
                 <Input
                     ref={node => {
                         this.searchInput = node;
@@ -22,25 +22,25 @@ function MeetingArchive() {
                     value={selectedKeys[0]}
                     onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                     onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                    style={{ width: 188, marginBottom: 8, display: 'block' }}
+                    style={{width: 188, marginBottom: 8, display: 'block'}}
                 />
                 <Space>
                     <Button
                         type="primary"
                         onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
-                        icon={<SearchOutlined />}
+                        icon={<SearchOutlined/>}
                         size="small"
-                        style={{ width: 90 }}
+                        style={{width: 90}}
                     >
                         Search
                     </Button>
-                    <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+                    <Button onClick={() => handleReset(clearFilters)} size="small" style={{width: 90}}>
                         Reset
                     </Button>
                 </Space>
             </div>
         ),
-        filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+        filterIcon: filtered => <SearchOutlined style={{color: filtered ? '#1890ff' : undefined}}/>,
         onFilter: (value, record) =>
             record[dataIndex]
                 ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
@@ -54,8 +54,8 @@ function MeetingArchive() {
             searchedColumn === dataIndex ? (
                 <></>
             ) : (
-                    text
-                ),
+                text
+            ),
     });
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
         confirm();
@@ -67,7 +67,7 @@ function MeetingArchive() {
 
     const handleReset = clearFilters => {
         clearFilters();
-        setarchive({ searchText: '' });
+        setarchive({searchText: ''});
     };
     const columns = [
         {
@@ -115,13 +115,13 @@ function MeetingArchive() {
     return (
         <div>
             <Row>
-                <Col span={2} />
+                <Col span={2}/>
                 <Col span={20}>
                     <Card title={<h1>Meeting Archive</h1>}>
-                        <Table columns={columns} dataSource={data} />
+                        <Table columns={columns} dataSource={data}/>
                     </Card>
                 </Col>
-                <Col span={2} />
+                <Col span={2}/>
 
             </Row>
 

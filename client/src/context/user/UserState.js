@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, {useReducer} from "react";
 import axios from "axios";
 import UserContext from "./userContext";
 import UserReducer from "./userReducer";
@@ -19,7 +19,7 @@ import {
     USER_LOADED
 } from "../type";
 import setAuthToken from "../../utils/setAuthToken";
-import { message } from "antd";
+import {message} from "antd";
 
 const UserState = (props) => {
     const initialState = {
@@ -105,8 +105,7 @@ const UserState = (props) => {
             //   path: "http://localhost:5000/stateAdmin",
             // });
             loadUser();
-        }
-        catch (e) {
+        } catch (e) {
             dispatch({
                 type: LOGIN_FAIL
             });
@@ -114,7 +113,7 @@ const UserState = (props) => {
         }
     };
     //-----------Logout----------
-    const logout = () => dispatch({ type: LOGOUT });
+    const logout = () => dispatch({type: LOGOUT});
 
     //forgot password
     const forgetPass = async (formData) => {

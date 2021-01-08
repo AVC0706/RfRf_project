@@ -1,7 +1,6 @@
-
-import React, { useContext } from "react";
-import { Avatar, Col, Layout, Menu, Row } from "antd";
-import { Link, useLocation } from "react-router-dom";
+import React, {useContext} from "react";
+import {Avatar, Col, Layout, Menu, Row} from "antd";
+import {Link, useLocation} from "react-router-dom";
 import UserContext from "../../../context/user/userContext";
 
 const {Header} = Layout;

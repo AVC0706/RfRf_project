@@ -16,7 +16,6 @@ function Dashboard(props) {
     };
 
 
-
     return (
         <Layout style={{minHeight: "92vh"}}>
             <Layout>
@@ -31,7 +30,7 @@ function Dashboard(props) {
                     <Content>
                         {tab === "Mandals" && <MandalTab redirect={props.redirectMandal}/>}
                         {tab === "Admins" && <AdminTab redirect={props.redirectUser}/>}
-                        {tab === "Mandal Admins" && <MandalAdminTab redirect={props.redirectUser} />}
+                        {tab === "Mandal Admins" && <MandalAdminTab redirect={props.redirectUser}/>}
                     </Content>
                 </Layout>
             </Layout>
