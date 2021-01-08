@@ -269,7 +269,7 @@ function MandalProfile(props) {
                             title={name}
                             style={{ margin: "10px" }}
                             extra={<><br></br><Statistic title="Next Scheduled Meeting"
-                                value="10th Feb 2020"></Statistic>
+                                value="10th Jan 2021"></Statistic>
                             </>
 
                             }
