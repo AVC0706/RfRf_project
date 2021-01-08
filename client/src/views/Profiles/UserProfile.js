@@ -47,8 +47,7 @@ function UserProfile(props) {
                 if (res.status === 200) {
                     console.log(res.data.user);
                     console.log(typeof(res.data.user.created_at));
-                    var date = new Date(res.data.user.created_at);
-                    console.log(typeof(date),date)
+                    res.data.user.created_at = new Date(res.data.user.created_at);
                     setuser(res.data.user);
                 }
             })
