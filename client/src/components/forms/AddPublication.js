@@ -3,13 +3,14 @@ import {Button, Form, Input} from "antd";
 import Dropzone from "react-dropzone";
 import moment from "moment";
 import axios from "axios"
+
 function AddPublication(props) {
     const [Publication, setPublication] = useState({
         file: null
     });
-    const [pub,setPub] = useState({
-        name:"",
-        author:""
+    const [pub, setPub] = useState({
+        name: "",
+        author: ""
     })
     const {name, author} = pub;
     const onChange = (e) => {
@@ -25,7 +26,7 @@ function AddPublication(props) {
         return newFilename.substring(0, 60);
     };
     const onAddPublication = async () => {
-        const {  file } = Publication;
+        const {file} = Publication;
         const {name, author} = pub;
         const filename = formatFilename(file.name);
         const filetype = file.type;
@@ -41,22 +42,30 @@ function AddPublication(props) {
                 "Content-Type": file.type
             }
         };
-        const response = await axios.post(process.env.REACT_APP_SERVER_URL+`/document/uploadfile`,{filename,filetype},config);
+        const response = await axios.post(process.env.REACT_APP_SERVER_URL + `/document/uploadfile`, {
+            filename,
+            filetype
+        }, config);
         console.log(response);
-        const { signedRequest, url } = response.data;
+        const {signedRequest, url} = response.data;
         await axios.put(signedRequest, file, options);
         console.log("not going down");
-        console.log(name,author)
-        const res = await axios.post( process.env.REACT_APP_SERVER_URL +`/document/addindbpub`, { name,author,signedRequest, url }, config);
+        console.log(name, author)
+        const res = await axios.post(process.env.REACT_APP_SERVER_URL + `/document/addindbpub`, {
+            name,
+            author,
+            signedRequest,
+            url
+        }, config);
         alert(res);
     };
 
     const onDrop = async (files) => {
-        setPublication({ file: files[0] });
+        setPublication({file: files[0]});
     };
     return (
         <div>
-            <br></br>
+            <br/>
             <Form name="addPublication" onFinish={onAddPublication}>
                 <Form.Item
                     name="name"
@@ -76,16 +85,16 @@ function AddPublication(props) {
                     <Input name="author" value={author} onChange={onChange}></Input>
                 </Form.Item>
                 <Form.Item>
-                <Dropzone onDrop={onDrop}>
-                            {({ getRootProps, getInputProps }) => (
-                                <section>
-                                    <div {...getRootProps()}>
-                                        <input {...getInputProps()} />
-                                        <p>Drag 'n' drop some files here, or click to select files</p>
-                                    </div>
-                                </section>
-                            )}
-                        </Dropzone>
+                    <Dropzone onDrop={onDrop}>
+                        {({getRootProps, getInputProps}) => (
+                            <section>
+                                <div {...getRootProps()}>
+                                    <input {...getInputProps()} />
+                                    <p>Drag 'n' drop some files here, or click to select files</p>
+                                </div>
+                            </section>
+                        )}
+                    </Dropzone>
                 </Form.Item>
                 <Button
                     type="primary"

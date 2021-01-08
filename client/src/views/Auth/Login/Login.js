@@ -13,13 +13,11 @@ const Login = (props) => {
     //Route User according to Admin Status
     useEffect(() => {
         if (isAuth && userContext.user !== null) {
-            message.success("Logged in!",7);
+            message.success("Logged in!", 7);
             if (userContext.user.admin.toLowerCase() !== 'null') {
-               
+
                 props.history.push('/dashboard')
-            }
-            else
-            {
+            } else {
                 props.history.push('/myMandals')
             }
         }
@@ -32,7 +30,7 @@ const Login = (props) => {
     };
 
     const onFinishFailed = () => {
-       message.error("Login Failed");
+        message.error("Login Failed");
     };
 
     const [user, setuser] = useState({
@@ -50,7 +48,7 @@ const Login = (props) => {
     };
 
     const handleSubmit = () => {
-        
+
         // props.history.push('/stateAdmin')
     };
 

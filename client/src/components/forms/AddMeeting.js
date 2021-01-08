@@ -41,8 +41,8 @@ function AddMeeting(props) {
                 <Form.Item name="Date"
                            label="Date"
                            rules={[{
-                            required: true, message: "Please input Date!",
-                        }]}>
+                               required: true, message: "Please input Date!",
+                           }]}>
                     <DatePicker name="date" value={date} onChange={onChangeDate}/>
                 </Form.Item>
                 <Button
