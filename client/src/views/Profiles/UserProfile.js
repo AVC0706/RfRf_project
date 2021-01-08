@@ -45,7 +45,10 @@ function UserProfile(props) {
             .get(`${process.env.REACT_APP_SERVER_URL}/user/profile/${props.match.params.id}`)
             .then((res) => {
                 if (res.status === 200) {
-                    console.log(res.data.user)
+                    console.log(res.data.user);
+                    console.log(typeof(res.data.user.created_at));
+                    var date = new Date(res.data.user.created_at);
+                    console.log(typeof(date),date)
                     setuser(res.data.user);
                 }
             })

@@ -26,7 +26,7 @@ const MeetingTable = (props) => {
                 return a.name.localeCompare(b.name);
             },
             sortDirections: ["descend", "ascend", "descend"],
-            render: (text) => <a>{text}</a>,
+            render: (text) => <p>{text}</p>,
         },
         {
             title: "Agenda",
@@ -36,7 +36,7 @@ const MeetingTable = (props) => {
                 return a.email.localeCompare(b.email);
             },
             sortDirections: ["descend", "ascend", "descend"],
-            render: (text) => <a>{text}</a>,
+            render: (text) => <p>{text}</p>,
         },
         {
             title: "Actions",
