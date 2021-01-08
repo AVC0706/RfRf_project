@@ -1,32 +1,33 @@
-import { Button, Card, Col, Input, Row, Space, Table } from 'antd';
-import React, { useState,useContext, useEffect } from 'react'
+import {Button, Card, Col, Input, Row, Space, Table} from 'antd';
+import React, {useContext, useEffect, useState} from 'react'
 import Modal from 'antd/lib/modal/Modal';
 import AddPublication from '../../components/forms/AddPublication';
 import UserContext from '../../context/user/userContext';
 import axios from "axios";
+
 function Publications() {
+
     const userContext = useContext(UserContext);
-    // const [pub,setPub] = useContext({});
-    // useEffect(() => {
-    //     if (userContext.user) {
-    //         getpub();
-    //     }
 
+    const [pub, setPub] = useState([]);
+    useEffect(() => {
+        if (userContext.user) {
+            getpub();
+        }
 
-    // }, [userContext.isAuth]);
-    // const getpub = () => {
-    //     axios.get(process.env.REACT_APP_SERVER_URL + `/document/getpublication`)
-    //     .then((res)=> {
-    //         if(res.status === 200) {
-    //             res.data.forEach(element => {
-    //                 console.log(element);
-    //                 setPub(element);
-    //             });
-    //         }
-    //     }).catch(e=> {
-    //         console.log(e.message);
-    //     })
-    // }
+    }, [userContext.isAuth]);
+
+    const getpub = () => {
+        axios.get(process.env.REACT_APP_SERVER_URL + `/document/getpublication`)
+            .then((res) => {
+                if (res.status === 200) {
+                    console.log(res.data, 'dsaaaaaaaaaaaaaaaaaaa')
+                    setPub(res.data)
+                }
+            }).catch(e => {
+            console.log(e.message);
+        })
+    }
 
     const baseColumns = [
         {
@@ -34,46 +35,43 @@ function Publications() {
             dataIndex: 'name',
             key: 'name',
             width: '30%',
-            render: (text) => <a>{text}</a>
+            render: (text) => <b>{text}</b>
         },
         {
             title: 'Author',
             dataIndex: 'author',
             key: 'author',
-            render: (text) => <a>{text}</a>
+            render: (text) => <b>{text}</b>
         },
         {
             title: "Actions",
             key: 'actions',
-            render: (text,record) => (
+            render: (text, record) => (
                 <Space size="middle">
-                    <Button type="primary" href={text}>View</Button>
+                    <Button type="primary" onClick={() => {
+                        window.open(record.url)
+                    }}>View</Button>
                 </Space>
             )
         }
     ];
-    const [publication, setpublication] = useState(
-        {
-            searchText: '',
-            searchedColumn: '',
-        }
-    )
+    const [publication, setpublication] = useState({})
+
     const [state, setState] = useState(
         {
             modalVisible: false,
             filterTable: null,
             columns: baseColumns,
-            //baseData: props.mandals,
             searchText: "",
         }
     );
-    const { modalVisible, baseData, filterTable, columns, searchText } = state;
+    const {modalVisible, baseData, filterTable, columns, searchText} = state;
 
     const search = (value) => {
         setState({
             ...state,
             searchText: value,
-            filterTable: baseData.filter((o) =>
+            filterTable: pub.filter((o) =>
                 Object.keys(o).some((k) =>
                     String(o[k]).toLowerCase().includes(value.toLowerCase())
                 )
@@ -81,7 +79,7 @@ function Publications() {
         });
     };
     const showAddPublication = () => {
-        setState({ modalVisible: true });
+        setState({modalVisible: true});
     };
     const onChange = (e) => {
         if (e.value === "") {
@@ -89,21 +87,23 @@ function Publications() {
                 ...state, filterTable: null, //baseData: props.mandals
             });
         }
-        setState({ ...state, searchText: e.value });
+        setState({...state, searchText: e.value});
     };
     return (
-        <div >
+        <div>
             <Row>
-                <Col span={2} />
+                <Col span={2}/>
                 <Col span={20}>
                     <Card title={<h1>Publications</h1>} extra={userContext.user && userContext.user.admin !== 'null' &&
-                        <Button
-                            onClick={showAddPublication}
-                            type='primary'>
-                            Add Publication</Button>
+                    <Button
+                        onClick={showAddPublication}
+                        type='primary'>
+                        Add Publication</Button>
                     }>
-                        <Modal visible={modalVisible} onCancel={() => { setState({ modalVisible: false }) }} footer={null}>
-                            <AddPublication />
+                        <Modal visible={modalVisible} onCancel={() => {
+                            setState({modalVisible: false})
+                        }} footer={null}>
+                            <AddPublication/>
                         </Modal>
                         <Input.Search
                             placeholder="Search"
@@ -112,11 +112,12 @@ function Publications() {
                             enterButton
                             onSearch={search}
                         />
-                        <Table style={{ marginTop: '.5%' }} columns={columns} dataSource={filterTable == null ? baseData : filterTable} />
+                        <Table style={{marginTop: '.5%'}} columns={columns}
+                               dataSource={filterTable == null ? pub : filterTable}/>
                     </Card>
 
                 </Col>
-                <Col span={2} />
+                <Col span={2}/>
 
             </Row>
         </div>

@@ -99,8 +99,7 @@ router.get("/nextMeeting/:id", async (req, res) => {
 
     try {
         const meeting = await Meeting.findOne({mandal_id: req.params.id}).sort({date: -1})
-        if(meeting.date < Date.now)
-        {
+        if (meeting.date < Date.now) {
             return res.status(404).send(null);
         }
         res.status(200).send({meeting})
