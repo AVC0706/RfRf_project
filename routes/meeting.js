@@ -55,9 +55,24 @@ router.get("/getmeeting/:id", async (req, res) => {
 
 });
 
+//get all meetings
+router.get("/getAllMeetings", async (req, res) => {
+
+    try {
+        const meeting = await Meeting.find({});
+        console.log(meeting[0].mandal_id.name)
+        res.status(200).send(meeting);
+    } catch (e) {
+        console.error(e.message);
+        res.status(500).json({msg: "Server Error"});
+    }
+
+});
+
+
 //delete meeting
 router.delete("/deletemeeting/:id", isAdmin, async (req, res) => {
-
+    
     try {
         const meeting = await Meeting.findOneAndDelete({_id: req.params.id});
         if (!meeting) {

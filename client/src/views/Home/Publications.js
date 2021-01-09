@@ -21,7 +21,6 @@ function Publications() {
         axios.get(process.env.REACT_APP_SERVER_URL + `/document/getpublication`)
             .then((res) => {
                 if (res.status === 200) {
-                    console.log(res.data, 'dsaaaaaaaaaaaaaaaaaaa')
                     setPub(res.data)
                 }
             }).catch(e => {

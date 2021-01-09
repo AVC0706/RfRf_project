@@ -33,7 +33,7 @@ const MeetingTable = (props) => {
             dataIndex: "agenda",
             key: "agenda",
             sorter: (a, b) => {
-                return a.email.localeCompare(b.email);
+                return a.agenda.localeCompare(b.agenda);
             },
             sortDirections: ["descend", "ascend", "descend"],
             render: (text) => <p>{text}</p>,
@@ -43,7 +43,6 @@ const MeetingTable = (props) => {
             key: "actions",
             render: (text, record) => (
                 <Space size="middle">
-
                     <MeetingDetails meeting={record}></MeetingDetails>
                     <AddMOM meeting={record} addMoM={props.addMom}></AddMOM>
                     <Popconfirm

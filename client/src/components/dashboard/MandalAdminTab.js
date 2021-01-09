@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Col, Row, Tabs} from "antd";
-import MandalTable from "./MandalTable";
 import Register from "../../views/Auth/Register/Register";
 import UserContext from "../../context/user/userContext";
 
 import axios from "axios";
+import DataTable from "./DataTable";
 
 const {TabPane} = Tabs;
 
@@ -17,14 +17,15 @@ function MandalAdminTab(props) {
         tab: "Existing",
     });
     useEffect(() => {
-        getNormalUsers();
+        getMandalAdmins();
     }, []);
-    const getNormalUsers = () => {
+
+    const getMandalAdmins = () => {
         axios
-            .get(process.env.REACT_APP_SERVER_URL + "/admin/getAdmins/null")
+            .get(process.env.REACT_APP_SERVER_URL + "/admin/getAdmins/mandal")
             .then((res) => {
                 if (res.status === 200) {
-                    setNormalUsers(res.data.users);
+                    setmandalAdmins(res.data.users);
                     setLoading(false);
                 }
             })
@@ -34,19 +35,11 @@ function MandalAdminTab(props) {
     };
 
     const {tab} = mandalPanel;
-    const [normalUsers, setNormalUsers] = useState([]);
+    const [mandalAdmins, setmandalAdmins] = useState([]);
     return (
         <Tabs defaultActiveKey={tab}>
-            <TabPane tab="Existing Admins" key="Existing"><MandalTable redirect={props.redirect}/></TabPane>
-            <TabPane tab="Add New Mandal Admin" key="New">
-                <Row>
-                    <Col/>
-                    <Col>
-                        <Register/>
-                    </Col>
-                    <Col/>
-                </Row>
-            </TabPane>
+            <TabPane tab="Existing Admins" key="Existing"><DataTable redirect={props.redirect} users={mandalAdmins} adminType={'mandal'} /></TabPane>
+            
         </Tabs>
     );
 }
