@@ -26,24 +26,23 @@ const MeetingTable = (props) => {
                 return a.name.localeCompare(b.name);
             },
             sortDirections: ["descend", "ascend", "descend"],
-            render: (text) => <a>{text}</a>,
+            render: (text) => <p>{text}</p>,
         },
         {
             title: "Agenda",
             dataIndex: "agenda",
             key: "agenda",
             sorter: (a, b) => {
-                return a.email.localeCompare(b.email);
+                return a.agenda.localeCompare(b.agenda);
             },
             sortDirections: ["descend", "ascend", "descend"],
-            render: (text) => <a>{text}</a>,
+            render: (text) => <p>{text}</p>,
         },
         {
             title: "Actions",
             key: "actions",
             render: (text, record) => (
                 <Space size="middle">
-
                     <MeetingDetails meeting={record}></MeetingDetails>
                     <AddMOM meeting={record} addMoM={props.addMom}></AddMOM>
                     <Popconfirm

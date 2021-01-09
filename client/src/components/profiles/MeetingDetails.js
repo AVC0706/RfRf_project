@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react'
 import {Button, Divider, Modal} from "antd";
 import axios from "axios";
 import UserContext from "../../context/user/userContext";
+import { date } from 'joi';
 
 
 function MeetingDetails(props) {
@@ -16,10 +17,9 @@ function MeetingDetails(props) {
         if (userContext.user) {
             geturl();
         }
-
+        props.meeting.date = new Date(props.meeting.date).toDateString();
 
     }, [userContext.isAuth]);
-
     const geturl = () => {
         axios.get(process.env.REACT_APP_SERVER_URL + `/document/getmomurl/${props.meeting._id}`)
             .then((res) => {

@@ -40,7 +40,7 @@ router.post("/createMandal", isAdmin, async (req, res) => {
 
 
 //mandal/:id
-router.get("/getMandal/:id", isAdmin, async (req, res) => {
+router.get("/getMandal/:id", isAuth,async (req, res) => {
     try {
         const mandal = await Mandal.findById({_id: req.params.id});
         let role = 'admin'

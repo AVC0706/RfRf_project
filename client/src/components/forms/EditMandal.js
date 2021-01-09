@@ -97,8 +97,7 @@ function EditMandal(props) {
         });
     };
 
-    const onSubmit = () => {
-
+    const onSubmit = () => {    
         axios.patch(process.env.REACT_APP_SERVER_URL + `/api/user/updateMandalProfile/${props.mandalID}`)
             .then((res) => {
                 console.log(res.data)
