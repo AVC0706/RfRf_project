@@ -54,7 +54,6 @@ function Publications() {
             )
         }
     ];
-    const [publication, setpublication] = useState({})
 
     const [state, setState] = useState(
         {
