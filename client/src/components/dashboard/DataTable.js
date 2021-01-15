@@ -1,16 +1,16 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "antd/dist/antd.css";
-import {Button, Input, Popconfirm, Space, Table} from "antd";
-import {QuestionCircleOutlined, UserAddOutlined} from "@ant-design/icons";
+import { Button, Input, Popconfirm, Space, Table } from "antd";
+import { QuestionCircleOutlined, UserAddOutlined } from "@ant-design/icons";
 import Modal from "antd/lib/modal/Modal";
 import Register from "../../views/Auth/Register/Register";
 
 const DataTable = (props) => {
     const style =
-        {
-            boxShadow: '0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 3px 6px 0 rgba(0, 0, 0, 0.19)',
-            margin: '2em'
-        }
+    {
+        boxShadow: '0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 3px 6px 0 rgba(0, 0, 0, 0.19)',
+        margin: '2em'
+    }
     const baseColumns = [
         {
             title: "Name",
@@ -71,7 +71,7 @@ const DataTable = (props) => {
 
                     <Popconfirm
                         title="Are you sure？"
-                        icon={<QuestionCircleOutlined style={{color: "red"}}/>}
+                        icon={<QuestionCircleOutlined style={{ color: "red" }} />}
                         onConfirm={(e) => onDeleteButton(e, text, record)}
                     >
                         <Button type="primary" danger>
@@ -90,7 +90,7 @@ const DataTable = (props) => {
         searchText: "",
         modalVisible: false
     });
-    const {filterTable, columns, searchText, modalVisible} = state;
+    const { filterTable, columns, searchText, modalVisible } = state;
     const search = (value) => {
         setstate({
             ...state,
@@ -121,38 +121,38 @@ const DataTable = (props) => {
         // if (e.value === "") {
         //   setstate({ ...state, filterTable: null });
         // }
-        setstate({...state, searchText: e.value});
+        setstate({ ...state, searchText: e.value });
     };
     return (
         <>
-
             <Modal footer={null} visible={modalVisible}
-                   onCancel={() => setstate({...state, modalVisible: false})}><Register
-                adminType={props.adminType}></Register></Modal>
+                onCancel={() => setstate({ ...state, modalVisible: false })}><Register
+                    adminType={props.adminType}></Register></Modal>
+            {props.adminType !== 'null' ?
+                    <Button type='primary' size='large' style={{ float: "left", margin: '0 2em' }}
+                        onClick={() => setstate({ ...state, modalVisible: true })}><UserAddOutlined />Add
+                        Admin</Button> :
+                    <Button type='primary' size='large' style={{ float: "left", margin: '0 2em' }}
+                        onClick={() => setstate({ ...state, modalVisible: true })}><UserAddOutlined />Add
+                        User</Button>
+            }
             <Input.Search
                 placeholder="Search"
                 value={searchText}
                 onChange={onChange}
                 enterButton
                 onSearch={search}
-                style={{width: '95.8%', marginLeft: '2em'}}
+                style={{ width: '30%', float: 'right', marginLeft: '2em', marginBottom: '1em', marginRight: '1.9em' }}
             />
             <Table
                 columns={columns}
                 dataSource={filterTable === null ? props.users : filterTable}
                 style={style}
-                pagination={{pageSize: 10}}
+                pagination={{ pageSize: 10 }}
             >
                 {" "}
             </Table>
-            {
-                props.adminType !== 'null' ?
-                    <Button type='primary' size='large' style={{float: "right", margin: '0 2em'}}
-                            onClick={() => setstate({...state, modalVisible: true})}><UserAddOutlined/>Add
-                        Admin</Button> :
-                    <Button type='primary' size='large' style={{float: "right", margin: '0 2em'}}
-                            onClick={() => setstate({...state, modalVisible: true})}><UserAddOutlined/>Add
-                        User</Button>}
+
         </>
     );
 };
